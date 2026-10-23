@@ -48,7 +48,8 @@ test('G 页标题简化、两行按钮图标文字对齐，设置居中且没有
     const bounds = range.getBoundingClientRect(); return { icon: icon.x, left: bounds.left, right: bounds.right };
   }));
   expect(alignment[0].icon).toBeCloseTo(alignment[1].icon, 1); expect(alignment[0].left).toBeCloseTo(alignment[1].left, 1); expect(alignment[0].right).toBeCloseTo(alignment[1].right, 1);
-  expect(requests).toEqual([]); await picture(page, info, 'g-page');
+  expect(requests.map((url) => new URL(url).pathname).sort()).toEqual(['/asserts/gifts/date-candy.png', '/asserts/gifts/halvamazd.png']);
+  await expect(page.locator('.birthday-offering, img[src*="/asserts/gifts/"]')).toHaveCount(0); await picture(page, info, 'g-page');
   await openSettings(page); const panel = page.getByRole('dialog', { name: '设置', exact: true });
   await expect(panel).toBeVisible(); await expect(panel.getByRole('heading', { name: '设置' })).toHaveCSS('text-align', 'center');
   await expect(panel.locator('.eyebrow, .journal-tools, .dialogue-archive, .secret-form')).toHaveCount(0);

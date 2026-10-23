@@ -4,7 +4,7 @@
 
 ## 快速开始
 
-当前准备 GitHub / Cloudflare 测试发布：`public/` 与生成清单必须上传，`asserts/` 仅上传构建所需的 `对白整合.md`；本地其余原素材完整保留。`.gitignore` 不会替浏览器拖拽上传过滤文件，请按 [部署清单](docs/DEPLOYMENT.md) 操作，不要上传 node_modules / artifacts / 原始大视频。
+当前准备 GitHub / Cloudflare 测试发布：`public/` 与生成清单必须上传，`asserts/` 仅上传构建所需的 `对白整合.md` 和 `生日贺图/信与回复.md`；本地其余原素材完整保留。`.gitignore` 不会替浏览器拖拽上传过滤文件，请按 [部署清单](docs/DEPLOYMENT.md) 操作，不要上传 node_modules / artifacts / 原始大视频。
 
 使用 Node.js **22.12+**（建议 Node 24）和 npm。当前目录就是项目根目录，不需要再进入子文件夹。
 
@@ -52,7 +52,7 @@ npm run release:audit
 - 成长 / 服务器日期达标且旧段全序列结束后，覆盖所选转场插图再换景：AB～EF 每组两张随机，FG 单张，每轮预选并保存、刷新不重抽。两档 WebP 按屏幕只取一种，开场只下载六张已选图的一种规格，失败后仍保留空闲补取下一张；等比 cover 铺满屏幕、不留白，CD2 左裁后仍右对齐。七元素在原下侧正中覆盖图片，保留长停 / 大跳及末枚唯一 1.1 秒正中停顿；插图和新景双确认，失败白底兜底，见 [阶段加载页](docs/STAGE_LOADING.md)。
 - 网站图标使用 `asserts/icon.png` 的 128 px 透明派生 PNG；纳西妲草纹气泡继续使用 `asserts/dialog.jpg` 原字节，其他主题不新增图片。十四张图片原稿约 40.71 MB，二十五项发布图片约 3.41 MB（约减少 91.6%，不是整站体积或 F Spine 总量）；原图不改，详见 [图片与加载策略](docs/PAGE_ASSETS.md)。
 - A～F 各自音乐已接入，G 保持无音乐。六首原 MP3 保留，192 kb/s AAC 发布副本合计从 30.13 MB 降至 17.85 MB（约减少 40.8%），仅按当前场景流式加载；进入 / 换曲先留白 8 秒、曲终留白 12 秒，再渐入，同曲循环并渐出。首次需真实手势授权，后台 / 面板暂停且保留位置；右上角素材音乐按钮仅实际播放时旋转，右上角设置直接打开，设置不再显示手记 / 口令 / 归档；音乐音量 0 即静音，留白 / 加载 / 缓冲时按钮统一提示「兰那罗们正在练嗓...」，内部仍区分真实状态，详见 [音乐与字体](docs/AUDIO_AND_FONTS.md)。
-- 全站使用 `asserts/字体/原神0.87.ttf` 的同字形 WOFF2，常用包约 189 KB，罕见字扩展按需加载，不把整份 7 MB TTF 放进首屏。中英文、数字、输入与气泡统一，姓名加粗、正文两行与自然停顿保持。
+- 全站使用 `asserts/字体/原神0.87.ttf` 的同字形 WOFF2，常用包 197,136 B，罕见字扩展按需加载，不把整份 7 MB TTF 放进首屏。中英文、数字、输入与气泡统一，姓名加粗、正文两行与自然停顿保持。
 - 生产环境只以服务器确认的时间授予日期权限，不因浏览器设备日期或未来存档提前开放。边界临近自动重新校时，超时 / 断网后重试；状态和手动重试只放在设置内。
 - 点击树干、枝叶或使用键盘 Enter / 空格触发自动气泡，拖动树体只控制镜头。命中跟随实际生长中的树干 / 枝叶，透明 SVG 空白、光晕及未显现叶片不截获点击，不再用整张视口或加宽透明路径挡住兰那罗。气泡播放时仍可收露、浇灌、打开设置与观树。
 - 原稿 371 句 / 31 池已接入，保留唯一编号，仅开发测试气泡角落显示，生产 / 读屏不显示。统一随机无放回、耗尽再开新轮、刷新保持。浇灌互斥抽来访 0.10、剧情 0.07（每段两次）、机制 0.04（每段一次）、其余常态；树点击不来访。来访每次一句，取代本次树回应，详见 [全流程对白](docs/DIALOGUE_SYSTEM.md)。
@@ -102,6 +102,10 @@ npm run release:audit
 
 ## 数据与素材修改
 
+G 祝福按钮上方新增四封生日来信：随机轻晃、原位启封展开，复用 3.0 的原书底 / 叶形箭头 / 菱形导航；左贺图右邮件和回复，四年循环、键盘 / 滑动切换，退出收信回到最初位置。背景保持 G，阅读期间暂停对白和闲置计时，不写自动对白已读 / 祝福。2026 图片及正文仍占位。压缩副本约 1.45 MB（原输入约 38.33 MB），只下载一档、只展示当前图，详见 [生日来信](docs/BIRTHDAY_MAIL.md)。
+
+替换来信正文运行 `npm run assets:birthday-mail`；换贺图运行 `npm run assets:birthday-art`，再更新字体、启动清单并验证。生产构建自动解析新邮件原稿，故上传时必须携带 `asserts/生日贺图/信与回复.md`。
+
 本轮已校正前次过严的 60% 均衡假设：优先保证两段完整显示，允许一行与两行搭配；只排除不足 6 字量或比例不足 1:3 的悬殊拆法。全部对白最多两段，不沿逗号 / 破折号 / 省略号硬切，不改原文和编号；核查与示例见 [两行容量复核](docs/DIALOGUE_LAYOUT_AUDIT.md)，实际验证见 [测试记录](docs/TEST_PLAN.md)。
 
 | 需求 | 修改入口 |
@@ -118,6 +122,7 @@ npm run release:audit
 | 交互音效、独立混音 / 音量、来源与发布副本 | `src/game/core/SoundManager.ts`、`src/data/sounds.ts`、`npm run assets:sfx`、`docs/INTERACTION_AUDIO.md` |
 | 直接设置入口、音乐音量 / 静音与暂停续播 | `src/components/Settings.tsx`、`src/app/App.tsx`、`src/game/core/GameController.ts` |
 | 全站字体、常用 / 扩展分包与生成 | `asserts/字体/原神0.87.ttf`、`src/styles/fonts.css`、`npm run assets:fonts` |
+| G 四年生日来信、原位开合 / 翻页、原稿与贺图生成 | `src/components/BirthdayMailBook.tsx`、`src/game/birthday-mail/`、`asserts/生日贺图/信与回复.md`、`npm run assets:birthday-art` |
 | 旧存档口令兼容（无玩家入口） | `src/data/secrets.ts` |
 | 本地素材登记与来源 | `src/data/assets.ts` |
 | 每次打开网页的技能揭幕、时长与弹跳轨迹 | `src/game/opening/choreography.ts`、`src/components/OpeningReveal.tsx` |

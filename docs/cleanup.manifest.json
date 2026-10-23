@@ -1,5 +1,10 @@
 {
   "date": "2026-10-23",
+  "birthdayMailFontRefresh": {
+    "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-8a08ef06cfff.woff2", "public/asserts/fonts/irminsul-extended-ea69559e4ac4.woff2"],
+    "reason": "生日来信新增字符后重新分包，仅移除已无引用的两个旧发布哈希字体，原 TTF 与全部 asserts 保留。",
+    "currentBytes": { "common": 197136, "extended": 3323448 }
+  },
   "protected": "asserts/ 下全部素材原样保留；不删除来源、工具链、校准数据及可能复用的截图。",
   "removed": [
     {

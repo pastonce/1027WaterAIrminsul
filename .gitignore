@@ -11,6 +11,9 @@
 /docs/screenshots/
 /asserts/*
 !/asserts/对白整合.md
+!/asserts/生日贺图/
+/asserts/生日贺图/*
+!/asserts/生日贺图/信与回复.md
 .env
 .env.*
 !.env.example

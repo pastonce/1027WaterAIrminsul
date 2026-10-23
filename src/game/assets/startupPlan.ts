@@ -7,6 +7,7 @@ import { getLoadingArt, loadingArtSource, LOADING_ICON } from '../../data/stageL
 import type { GameSave } from '../../types/game';
 import { backgroundQuality } from '../backgrounds/policy';
 import soundAssets from '../../data/sounds.generated.json' with { type: 'json' };
+import { BIRTHDAY_LETTERS, MAIL_ASSETS, birthdayArt } from '../../data/birthdayMail';
 
 export interface StartupAsset { url: string; bytes: number }
 export interface StartupPlan { id: string; files: StartupAsset[]; dynamic: boolean; characterRuntime?: boolean; bytes: number }
@@ -14,6 +15,8 @@ export interface StartupPlan { id: string; files: StartupAsset[]; dynamic: boole
 export function startupPlan(choices: GameSave['loadingArtChoices'], width: number, height: number, density: number, reduced: boolean): StartupPlan {
   const compact = backgroundQuality(width, height, density).compact;
   const urls = new Set<string>([ASSETS.dreamBackground.src, ASSETS.realityBackground.src, ASSETS.nahida.src, ASSETS.icon.src, FONT_ASSETS.common, DENDRO_ICON.src, E_SKILL_PATTERN.texture, NAHIDA_DIALOGUE_BACKGROUND, MUSIC_ASSETS.button, LOADING_ICON, '/asserts/gifts/date-candy.png', '/asserts/gifts/halvamazd.png', ...Object.values(EXPRESSION_ASSETS), ...Object.values(soundAssets).map((asset) => asset.src)]);
+  [MAIL_ASSETS.book, MAIL_ASSETS.arrow, MAIL_ASSETS.arrowHover, MAIL_ASSETS.point, MAIL_ASSETS.pointActive].forEach((url) => urls.add(url));
+  BIRTHDAY_LETTERS.forEach((letter) => { const art = birthdayArt(letter.year, height <= 600 || width <= 900); if (art) urls.add(art); });
   for (const asset of Object.values(CHARACTER_ASSETS)) {
     if (asset.poster) urls.add(asset.poster);
     [asset.json, asset.atlas, asset.texture].forEach((url) => urls.add(url));

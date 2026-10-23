@@ -48,7 +48,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   const cameraRef = useRef<CameraActions | null>(null);
   const reality = state.stage === 'G' && !state.reviewStage;
   const ready = state.mode === 'idle';
-  const panelOpen = introSettings || state.mode === 'journal' || state.mode === 'settings';
+  const panelOpen = introSettings || state.mode === 'journal' || state.mode === 'settings' || state.mode === 'mail';
   const wakingCover = state.stageLoading && needsWakingReveal(state.stageLoading.from, state.stageLoading.to, state.save.sceneStage);
   const inputBlocked = Boolean(state.stageLoading || state.waking) || panelOpen;
   const musicStage = state.reviewStage ?? (state.stage === 'G' ? null : state.stage as DreamStageId);
@@ -76,7 +76,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
 
   const configureSound = (snapshot: GameSnapshot) => sound.configure({
     volume: snapshot.save.settings.sound ? snapshot.save.settings.soundVolume : 0,
-    paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'ending', 'waking'].includes(snapshot.mode),
+    paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'mail', 'ending', 'waking'].includes(snapshot.mode),
     transitioning: Boolean(snapshot.stageLoading),
     scope: snapshot.stageLoading ? `loading-${snapshot.stageLoading.id}` : `${snapshot.reviewStage ?? snapshot.stage}-${snapshot.reviewStage ? 'review' : 'play'}`,
   });
@@ -85,7 +85,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   useEffect(() => game.subscribeSound((kind) => { configureSound(game.getSnapshot()); void sound.play(kind); }), [game, opening, hidden, portraitBlocked]);
 
   useLayoutEffect(() => {
-    music.configure({ stage: state.mode === 'intro' ? null : musicStage, enabled: state.save.settings.music, volume: state.save.settings.musicVolume, paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'loading', 'ending', 'waking'].includes(state.mode), immediate: hidden || portraitBlocked || opening });
+    music.configure({ stage: state.mode === 'intro' ? null : musicStage, enabled: state.save.settings.music, volume: state.save.settings.musicVolume, paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'mail', 'loading', 'ending', 'waking'].includes(state.mode), immediate: hidden || portraitBlocked || opening });
   }, [music, musicStage, state.save.settings.music, state.save.settings.musicVolume, state.mode, opening, hidden, portraitBlocked]);
 
   useLayoutEffect(() => { game.setSystemReducedMotion(systemReduced); }, [game, systemReduced]);
@@ -141,8 +141,8 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   return <OpeningReveal active={opening} reduced={reduced} paused={hidden || portraitBlocked} plan={openingPlan} onComplete={() => setOpening(false)}><div className={`game-app ${reduced ? 'reduced-motion' : ''} ${state.mode === 'ending' ? 'is-awakening' : ''}`} data-testing={testing} onPointerDownCapture={(event) => { game.activity(); unlockMusic(event.target); }} onClickCapture={(event) => { game.activity(); unlockMusic(event.target); }} onKeyDownCapture={(event) => { if (!event.repeat) { game.activity(); unlockMusic(event.target); } }}>
     <div className="game-content" inert={inputBlocked} aria-hidden={inputBlocked || undefined}>
     {state.mode === 'intro' ? <><IntroScene message={state.message} onEnter={() => game.enterDream()} onSettings={() => setIntroSettings(true)}/>{introSettings && <Settings game={game} state={state} timeSync={timeSync} testing={testing} redeem={redeem} onClose={() => setIntroSettings(false)}/>}</> : <>
-      {reality ? <RealityScene game={game} state={state} reduced={reduced} testing={testing}/> : <DreamTreeScene game={game} state={state} reduced={reduced} cameraRef={cameraRef} testing={testing}/>}
-      <header className="game-header">
+      {reality ? <RealityScene game={game} state={state} reduced={reduced} testing={testing} suspended={opening || hidden || portraitBlocked}/> : <DreamTreeScene game={game} state={state} reduced={reduced} cameraRef={cameraRef} testing={testing}/>}
+      <header className="game-header" data-mail-open={state.mode === 'mail'}>
         <div className="game-brand"><Icon name="leaf" size={26}/><div><span><span>浇灌一棵世界树</span><BuildMarker/></span><small>WATER AN IRMINSUL</small></div></div>
         <div className="header-actions">
           {!reality && <div key={state.dewFeedbackRevision} className={`dew-counter ${state.save.dew === GAME_RULES.dewCapacity ? 'is-full' : ''} ${state.dewFeedback ? 'dew-feedback' : ''}`} data-feedback={state.dewFeedback ?? undefined} aria-label={`梦露 ${state.save.dew} / ${GAME_RULES.dewCapacity}`}>

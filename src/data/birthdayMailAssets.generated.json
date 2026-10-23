@@ -1,0 +1,22 @@
+{
+  "art": {
+    "2023": {
+      "compact": "/asserts/birthday-mail/2023-768-5e7fdba86239.webp",
+      "full": "/asserts/birthday-mail/2023-1280-a3bc4f110972.webp"
+    },
+    "2024": {
+      "compact": "/asserts/birthday-mail/2024-768-125b723baeea.webp",
+      "full": "/asserts/birthday-mail/2024-1280-8e80f7ce7d86.webp"
+    },
+    "2025": {
+      "compact": "/asserts/birthday-mail/2025-768-37b06e432a16.webp",
+      "full": "/asserts/birthday-mail/2025-1280-d61b9c0131c8.webp"
+    },
+    "2026": null
+  },
+  "book": "/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp",
+  "arrow": "/asserts/birthday-mail/arrow-118-3c246f7b99a8.webp",
+  "arrowHover": "/asserts/birthday-mail/arrowHover-118-8e04d9170939.webp",
+  "point": "/asserts/birthday-mail/point-66-14a4be2a832f.webp",
+  "pointActive": "/asserts/birthday-mail/pointActive-66-dd45f0f24441.webp"
+}

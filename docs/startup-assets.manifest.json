@@ -1,5 +1,5 @@
 {
-  "revision": "29fdad02f8565d5d",
+  "revision": "9547c3dedb7288c0",
   "files": [
     {
       "url": "/asserts/backgrounds/canopy/bg.png",
@@ -887,6 +887,61 @@
       "sha256": "b56ccbacd1bdacd4d803f09a5234477c8f5a06c17301887552fb22d1a8ac32dc"
     },
     {
+      "url": "/asserts/birthday-mail/2023-1280-a3bc4f110972.webp",
+      "bytes": 281146,
+      "sha256": "a3bc4f110972b2b359a29936642944b9e39152183202cabe9603d7f53d29a3ed"
+    },
+    {
+      "url": "/asserts/birthday-mail/2023-768-5e7fdba86239.webp",
+      "bytes": 126202,
+      "sha256": "5e7fdba86239be49706f4fe52ee53e16c0e63d543ac178d20e293ff6f9a770f5"
+    },
+    {
+      "url": "/asserts/birthday-mail/2024-1280-8e80f7ce7d86.webp",
+      "bytes": 298510,
+      "sha256": "8e80f7ce7d8678bcea6df33eb656422f915115c6d4c882bad03cafc6a974b8eb"
+    },
+    {
+      "url": "/asserts/birthday-mail/2024-768-125b723baeea.webp",
+      "bytes": 137182,
+      "sha256": "125b723baeeaabdd363fbdf3a121ae1918284fa061d7daab93d5d7c2d21601d3"
+    },
+    {
+      "url": "/asserts/birthday-mail/2025-1280-d61b9c0131c8.webp",
+      "bytes": 264824,
+      "sha256": "d61b9c0131c877afde91be80d3695e7478c710d29dc896d6df068d0f2ed14c06"
+    },
+    {
+      "url": "/asserts/birthday-mail/2025-768-37b06e432a16.webp",
+      "bytes": 137114,
+      "sha256": "37b06e432a16c6e0180bbf671b0140ac457d0a22e486e4b00b512bdd20824bfe"
+    },
+    {
+      "url": "/asserts/birthday-mail/arrow-118-3c246f7b99a8.webp",
+      "bytes": 15368,
+      "sha256": "3c246f7b99a85c46ef8e2dedcb64e8be0e755d409ffaf39ab65827760362f583"
+    },
+    {
+      "url": "/asserts/birthday-mail/arrowHover-118-8e04d9170939.webp",
+      "bytes": 16246,
+      "sha256": "8e04d9170939bbe07854bb82e7f1b2392ed751f305ea0a8a874e6f3ce92183f3"
+    },
+    {
+      "url": "/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp",
+      "bytes": 163782,
+      "sha256": "1c6ef6e5fb144bde488eb71120687c561ac083e945c778bb01b944c6421267ae"
+    },
+    {
+      "url": "/asserts/birthday-mail/point-66-14a4be2a832f.webp",
+      "bytes": 5626,
+      "sha256": "14a4be2a832f991d735e4ebdce3aa76bd2938d5bf79e054ea555a0c0c10f6124"
+    },
+    {
+      "url": "/asserts/birthday-mail/pointActive-66-dd45f0f24441.webp",
+      "bytes": 6328,
+      "sha256": "dd45f0f2444116548fd3e0713119ce545daffdaeb6b939d9299f53cff18ba037"
+    },
+    {
       "url": "/asserts/characters/dream/shouye_caoshen.atlas",
       "bytes": 2571,
       "sha256": "56a26da69fc7d29865f82f2974d2338a853cb3f7876e7c0fab39f33b2ea42239"
@@ -982,14 +1037,14 @@
       "sha256": "5e1379064253bb564b391af8d89cd72177d0dc33d2edd273d9afa2c3dbec1cf7"
     },
     {
-      "url": "/asserts/fonts/irminsul-common-8a08ef06cfff.woff2",
-      "bytes": 188704,
-      "sha256": "8a08ef06cfffd546417c5f3dd299b34d2f3bd2edb438c131729d4cba8efadea7"
+      "url": "/asserts/fonts/irminsul-common-6e9856747a43.woff2",
+      "bytes": 197136,
+      "sha256": "6e9856747a43e95fc0afd7d3b6a501726eec51a034ecdbc8234f6495ce08dce8"
     },
     {
-      "url": "/asserts/fonts/irminsul-extended-ea69559e4ac4.woff2",
-      "bytes": 3331764,
-      "sha256": "ea69559e4ac468fb8faee96199fd2f5358eeb5470955344644f5085ca752d1c9"
+      "url": "/asserts/fonts/irminsul-extended-80dcd02e11c1.woff2",
+      "bytes": 3323448,
+      "sha256": "80dcd02e11c1e4b16e633070fe1e9fe53c299490c54428ae8c09f406a5525594"
     },
     {
       "url": "/asserts/gifts/date-candy.png",

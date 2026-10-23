@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "reference": "https://webstatic.mihoyo.com/ys/event/e20220814prev/index.html",
+  "inputs": [
+    {
+      "file": "asserts/生日贺图/23.png",
+      "bytes": 12359614,
+      "sha256": "756eff8e6776e99885dbbaa841c8434598c32ba26304c66d66e4599fd66856f6",
+      "width": 3583,
+      "height": 3583
+    },
+    {
+      "file": "asserts/生日贺图/24.png",
+      "bytes": 18492900,
+      "sha256": "db6405c6ec603bfe0b16bff572f8b91ab26a699f142f7cd5db4551b36158e393",
+      "width": 3583,
+      "height": 3583
+    },
+    {
+      "file": "asserts/生日贺图/25.png",
+      "bytes": 7288100,
+      "sha256": "277c05aabf768de9855ed17c286c642ca5688bd812ba8762b206bd8f44474f69",
+      "width": 3000,
+      "height": 3000
+    },
+    {
+      "file": "asserts/生日贺图/26.png",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "placeholder": true
+    },
+    {
+      "file": "asserts/3.0/_other_resources/book_bg.93a06b3e.png",
+      "bytes": 142659,
+      "sha256": "d368c484ba5dec2439eeed259d749801420a1b2f9f347c921ef706b5a05e47ac",
+      "width": 1103,
+      "height": 677
+    },
+    {
+      "file": "asserts/reference-supplements/birthday-mail/arrow.png",
+      "bytes": 16562,
+      "sha256": "56317aa27525fd29fa2e80b0ab300a2822f4ef396b26a3f90bc727955ab5abcf",
+      "width": 118,
+      "height": 114,
+      "url": "https://webstatic.mihoyo.com/upload/static-resource/2022/08/08/82aca37e7353f1e5226b20deddb3e76b_5260178833428137342.png"
+    },
+    {
+      "file": "asserts/reference-supplements/birthday-mail/arrow-hover.png",
+      "bytes": 17845,
+      "sha256": "1ae03239568b7c0772be5d815daaeff0d6350b40cff1d9e509c4c108c35996ed",
+      "width": 118,
+      "height": 114,
+      "url": "https://webstatic.mihoyo.com/upload/static-resource/2022/08/08/8c14aeaa672c05733f437bee0d4e921a_4856927836271920421.png"
+    },
+    {
+      "file": "asserts/reference-supplements/birthday-mail/point.png",
+      "bytes": 5334,
+      "sha256": "bb20cce0b05daff6149c25bfc07caea9d3601784e884bd9a8dbc2a78789baaf5",
+      "width": 66,
+      "height": 66,
+      "url": "https://webstatic.mihoyo.com/upload/static-resource/2022/08/08/ea38d12f9c9090deda3b27657427578f_8679499811700261961.png"
+    },
+    {
+      "file": "asserts/reference-supplements/birthday-mail/point-active.png",
+      "bytes": 5986,
+      "sha256": "4a50113e95fe86c4529bb485d3b6c8b502013e9dddc127cf14fc2ef746fdc2bd",
+      "width": 66,
+      "height": 66,
+      "url": "https://webstatic.mihoyo.com/upload/static-resource/2022/08/08/4c9abe79d083bedcf9d8218d5482003c_5582781450020130201.png"
+    }
+  ],
+  "files": [
+    {
+      "file": "public/asserts/birthday-mail/2023-768-5e7fdba86239.webp",
+      "src": "/asserts/birthday-mail/2023-768-5e7fdba86239.webp",
+      "bytes": 126202,
+      "sha256": "5e7fdba86239be49706f4fe52ee53e16c0e63d543ac178d20e293ff6f9a770f5",
+      "width": 768,
+      "height": 768,
+      "source": "asserts/生日贺图/23.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/2023-1280-a3bc4f110972.webp",
+      "src": "/asserts/birthday-mail/2023-1280-a3bc4f110972.webp",
+      "bytes": 281146,
+      "sha256": "a3bc4f110972b2b359a29936642944b9e39152183202cabe9603d7f53d29a3ed",
+      "width": 1280,
+      "height": 1280,
+      "source": "asserts/生日贺图/23.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/2024-768-125b723baeea.webp",
+      "src": "/asserts/birthday-mail/2024-768-125b723baeea.webp",
+      "bytes": 137182,
+      "sha256": "125b723baeeaabdd363fbdf3a121ae1918284fa061d7daab93d5d7c2d21601d3",
+      "width": 768,
+      "height": 768,
+      "source": "asserts/生日贺图/24.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/2024-1280-8e80f7ce7d86.webp",
+      "src": "/asserts/birthday-mail/2024-1280-8e80f7ce7d86.webp",
+      "bytes": 298510,
+      "sha256": "8e80f7ce7d8678bcea6df33eb656422f915115c6d4c882bad03cafc6a974b8eb",
+      "width": 1280,
+      "height": 1280,
+      "source": "asserts/生日贺图/24.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/2025-768-37b06e432a16.webp",
+      "src": "/asserts/birthday-mail/2025-768-37b06e432a16.webp",
+      "bytes": 137114,
+      "sha256": "37b06e432a16c6e0180bbf671b0140ac457d0a22e486e4b00b512bdd20824bfe",
+      "width": 768,
+      "height": 768,
+      "source": "asserts/生日贺图/25.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/2025-1280-d61b9c0131c8.webp",
+      "src": "/asserts/birthday-mail/2025-1280-d61b9c0131c8.webp",
+      "bytes": 264824,
+      "sha256": "d61b9c0131c877afde91be80d3695e7478c710d29dc896d6df068d0f2ed14c06",
+      "width": 1280,
+      "height": 1280,
+      "source": "asserts/生日贺图/25.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp",
+      "src": "/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp",
+      "bytes": 163782,
+      "sha256": "1c6ef6e5fb144bde488eb71120687c561ac083e945c778bb01b944c6421267ae",
+      "width": 1103,
+      "height": 677,
+      "source": "asserts/3.0/_other_resources/book_bg.93a06b3e.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/arrow-118-3c246f7b99a8.webp",
+      "src": "/asserts/birthday-mail/arrow-118-3c246f7b99a8.webp",
+      "bytes": 15368,
+      "sha256": "3c246f7b99a85c46ef8e2dedcb64e8be0e755d409ffaf39ab65827760362f583",
+      "width": 118,
+      "height": 114,
+      "source": "asserts/reference-supplements/birthday-mail/arrow.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/arrowHover-118-8e04d9170939.webp",
+      "src": "/asserts/birthday-mail/arrowHover-118-8e04d9170939.webp",
+      "bytes": 16246,
+      "sha256": "8e04d9170939bbe07854bb82e7f1b2392ed751f305ea0a8a874e6f3ce92183f3",
+      "width": 118,
+      "height": 114,
+      "source": "asserts/reference-supplements/birthday-mail/arrow-hover.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/point-66-14a4be2a832f.webp",
+      "src": "/asserts/birthday-mail/point-66-14a4be2a832f.webp",
+      "bytes": 5626,
+      "sha256": "14a4be2a832f991d735e4ebdce3aa76bd2938d5bf79e054ea555a0c0c10f6124",
+      "width": 66,
+      "height": 66,
+      "source": "asserts/reference-supplements/birthday-mail/point.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/pointActive-66-dd45f0f24441.webp",
+      "src": "/asserts/birthday-mail/pointActive-66-dd45f0f24441.webp",
+      "bytes": 6328,
+      "sha256": "dd45f0f2444116548fd3e0713119ce545daffdaeb6b939d9299f53cff18ba037",
+      "width": 66,
+      "height": 66,
+      "source": "asserts/reference-supplements/birthday-mail/point-active.png"
+    }
+  ],
+  "sourceBytes": 38329000,
+  "publishedBytes": 1452328
+}

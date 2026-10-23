@@ -141,7 +141,7 @@ export class GameController {
   private syncExpressions() {
     const state = this.snapshot;
     const inactive = !this.active || !state.save.introSeen || Boolean(state.reviewStage) || ['intro', 'ending', 'loading', 'waking'].includes(state.mode) || state.stage === 'A' && !this.forestEntered;
-    const paused = this.suspended || state.presentationPaused || ['journal', 'settings'].includes(state.mode);
+    const paused = this.suspended || state.presentationPaused || ['journal', 'settings', 'mail'].includes(state.mode);
     this.expressions?.configure(inactive ? null : state.stage, !inactive && !paused && state.mode === 'idle' && !state.speech && !state.blessing, inactive || paused, Boolean(state.speech || state.blessing || ['watering', 'growing'].includes(state.mode)));
   }
 
@@ -223,12 +223,12 @@ export class GameController {
     this.heartbeat = null;
     this.cancelTimers();
     this.queue = [];
-    this.update({ event: null, dewParticles: [], rewardBursts: [], mode: ['watering', 'growing', 'ending', 'loading', 'waking'].includes(this.snapshot.mode) ? 'idle' : this.snapshot.mode });
+    this.update({ event: null, dewParticles: [], rewardBursts: [], mode: ['watering', 'growing', 'ending', 'loading', 'waking', 'mail'].includes(this.snapshot.mode) ? 'idle' : this.snapshot.mode });
     this.refreshProgress(true);
   }
 
   private syncPresentationPause() {
-    const presentationPaused = this.suspended || ['intro', 'journal', 'settings', 'loading', 'waking'].includes(this.snapshot.mode);
+    const presentationPaused = this.suspended || ['intro', 'journal', 'settings', 'mail', 'loading', 'waking'].includes(this.snapshot.mode);
     this.loading.setPaused(!this.active || this.suspended);
     this.waking.setPaused(!this.active || this.suspended);
     this.birthday.setPaused(!this.active || presentationPaused);
@@ -811,6 +811,14 @@ export class GameController {
     this.reconcile();
   }
 
+  openBirthdayMail() {
+    const state = this.snapshot;
+    if (!this.active || this.suspended || state.stage !== 'G' || state.reviewStage || state.mode !== 'idle' || state.stageLoading || state.waking || state.birthday || state.save.pendingDialogues.some((entry) => entry.kind === 'wish')) return false;
+    this.update({ mode: 'mail', message: '' });
+    this.syncPresentationPause();
+    return true;
+  }
+
   openPanel(panel: 'journal' | 'settings') {
     const mode = this.snapshot.mode;
     if (!['idle', 'watering', 'growing', 'journal', 'settings'].includes(mode)) return;
@@ -821,7 +829,7 @@ export class GameController {
   }
 
   closePanel() {
-    if (!['journal', 'settings'].includes(this.snapshot.mode)) return;
+    if (!['journal', 'settings', 'mail'].includes(this.snapshot.mode)) return;
     this.update({ mode: this.panelResumeMode, message: '' });
     this.panelResumeMode = 'idle';
     this.syncPresentationPause();

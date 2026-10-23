@@ -57,13 +57,13 @@ Function 不使用 Node 专属 API、密钥、数据库或额外绑定，返回 
 
 ## 上传清单
 
-`.gitignore` 已排除 node_modules、dist、artifacts、旧截图 / 工作缓存、环境密钥与原始大素材；仅放行 `asserts/对白整合.md` 供构建。**浏览器拖拽上传不会自动遵守 .gitignore**，推荐使用 GitHub Desktop 按忽略规则提交，或手动筛选下列内容。本轮不初始化 Git、不提交、不代上传。
+`.gitignore` 已排除 node_modules、dist、artifacts、旧截图 / 工作缓存、环境密钥与原始大素材；放行 `asserts/对白整合.md` 与 `asserts/生日贺图/信与回复.md` 供构建。**浏览器拖拽上传不会自动遵守 .gitignore**，推荐使用 GitHub Desktop 按忽略规则提交，或手动筛选下列内容。本轮不初始化 Git、不提交、不代上传。
 
-- 必须：`src/`、`public/`（含全部当前派生素材与 `_routes.json`）、`functions/`、`server/`、`scripts/`、`asserts/对白整合.md`。
+- 必须：`src/`、`public/`（含全部当前派生素材与 `_routes.json`）、`functions/`、`server/`、`scripts/`、`asserts/对白整合.md`、`asserts/生日贺图/信与回复.md`。G 书页依赖 public/asserts/birthday-mail/ 与对应生成 JSON / manifest，26 空图不发布为有效图片。
 - 必须：`package.json`、`package-lock.json`、`index.html`、`vite.config.ts`、`tsconfig.json`、`.node-version`、`.npmrc`；保留 `.gitignore`、`.gitattributes`、`.env.example`、AGENTS / README / project_prompt；上传docs（排除screenshots），其中JSON清单被类型检查引用。
 - `.gitattributes` 对原始 / 发布素材关闭换行转换，避免Git在JSON / atlas / 对白稿上改换行导致登记SHA失配；不会修改当前本地素材。
 - 保留测试源码 `tests/`、`e2e/` 和 Playwright 配置；原始素材校验测试需在本地恢复完整 asserts，Cloudflare只运行build，不运行这些素材回归。
-- 不上传：本地完整原始 asserts（除对白稿）、大视频、node_modules、dist、.asset-work、.npm-cache、artifacts、test-results、docs/screenshots、.env / .dev.vars。仅忽略上传，原素材没有删除。
+- 不上传：本地完整原始 asserts（除上述两份正文稿）、大视频、原始生日贺图 / 参考站源码、node_modules、dist、.asset-work、.npm-cache、artifacts、test-results、docs/screenshots、.env / .dev.vars。仅忽略上传，原素材没有删除。
 
 GitHub浏览器上传单文件上限25MiB，Pages Free单站20000文件、每文件25MiB；当前构建通过 `release:audit` 检查，最大文件约4.1MB，原始视频不在发布包。[GitHub限制](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)、[Pages限制](https://developers.cloudflare.com/pages/platform/limits/)
 

@@ -1,5 +1,11 @@
 # 工程架构 · 连续交互版
 
+## G 生日来信
+
+`RealityScene` 的四信封使用独立的可暂停轻晃计时器，不占用对白随机源。`GameController.openBirthdayMail()` 验证 G idle / 无祝福事务后进入临时 mail，统一挂起底层对白、表情和闲置；App 以普通 body Portal 书页承接输入，背景 inert。`BirthdayMailDirector` 的单 PausableTimer 管理启封 / 展开 / 淡换 / 回收 / 合封，它只接受真实后台 / 竖屏挂起，不把底层 mail 暂停误传给自己。
+
+来信文本由独立 MD 解析为生成 JSON，不进入自动对白池或 v2。书页 / 导航 / 当前设备单档贺图纳入压缩响应预载，仅当前一年 img 解码，书底使用原透明 PNG 的派生；无新增 Canvas / GL / RAF。退出 / 卸载取消回调，完整合封后恢复焦点 / 原句剩余时间，G 闲置从零 20 秒。源码、状态图式时序与素材清单见 BIRTHDAY_MAIL.md。
+
 ## 首屏展现
 
 首屏右上设置为局部面板开关，不改变GameController的intro权限或挂载未开放场景；校时自动恢复离开intro时清理开关。设置与正确代码反馈均Portal到body，反馈不受OpeningShell的隔离层压住。手机在开放前也能输入test，切入独立内存会话，不写正式存档；详见EASTER_EGGS.md。

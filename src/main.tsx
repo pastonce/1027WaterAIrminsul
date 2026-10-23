@@ -22,6 +22,7 @@ import './styles/waking.css';
 import './styles/birthday.css';
 import './styles/secrets.css';
 import './styles/media.css';
+import './styles/birthday-mail.css';
 
 class DreamBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
