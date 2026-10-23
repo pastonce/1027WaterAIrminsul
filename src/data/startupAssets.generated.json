@@ -1,5 +1,5 @@
 {
-  "revision": "06ec06b5224ea282",
+  "revision": "061e6b097b24f607",
   "files": {
     "/asserts/backgrounds/canopy/bg.png": 360596,
     "/asserts/backgrounds/canopy/close_bottle.atlas": 107,
@@ -208,8 +208,8 @@
     "/asserts/expressions/7-269605e1f34e.png": 119353,
     "/asserts/expressions/8-d1334a381d42.png": 131756,
     "/asserts/expressions/9-5e1379064253.png": 160353,
-    "/asserts/fonts/irminsul-common-b70cfed7eb90.woff2": 201756,
-    "/asserts/fonts/irminsul-extended-651c319b8e77.woff2": 3319240,
+    "/asserts/fonts/irminsul-common-04235d4a4865.woff2": 204828,
+    "/asserts/fonts/irminsul-extended-cd3f4e14f2fa.woff2": 3319916,
     "/asserts/gifts/date-candy.png": 1090545,
     "/asserts/gifts/halvamazd.png": 1229807,
     "/asserts/inhabitants/aranara/aranara_01/aranara_01.atlas": 1231,

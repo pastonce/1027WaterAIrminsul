@@ -216,6 +216,15 @@ export class SpeechDirector {
 
   restartLine() { if (this.playback && this.playback.phase !== 'fading') this.playPart(); }
 
+  interruptTree() {
+    if (!this.current || this.current.visit || this.current.anchor !== 'tree') return false;
+    this.timer.clear(); this.hold.clear(); this.expression.clear();
+    this.hovered = false;
+    this.current = null;
+    this.show(null);
+    return true;
+  }
+
   stop() {
     this.timer.clear();
     this.expression.clear();

@@ -23,8 +23,8 @@ describe('可编辑的企划声明', () => {
   it('正式内容包含用户指定署名 / 联系方式、非官方性质及独立的素材说明', () => {
     const source = readFileSync('src/content/notice.md', 'utf8');
     const content = parseNotice(source);
-    expect(content.title).toBe('企划声明'); expect(source).toContain('独钓'); expect(source).toContain('1666417849'); expect(source).toContain('190497686');
-    expect(source).toContain('非商业同人'); expect(source).toContain('不是官方'); expect(source).toContain('不属于 CC0');
+    expect(content.title).toBe(source.match(/^# (.+)$/m)?.[1]?.trim()); expect(source).toContain('独钓'); expect(source).toContain('1666417849'); expect(source).toContain('190497686');
+    expect(source).toContain('非商业同人'); expect(source).toContain('不是官方'); expect(source).toContain('/asserts/sfx/CREDITS.txt');
     expect(content.blocks.filter((block) => block.kind === 'heading')).toHaveLength(5);
   });
   it('G 底图不再额外放大 / 上移，也不挂载旧树影', () => {

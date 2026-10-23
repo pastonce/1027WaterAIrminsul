@@ -1,5 +1,7 @@
 # 本地预览、校时与发布
 
+公告收据 `irminsul.notice.seen.v1` 与 v2 独立，首次加载 / 揭幕完成后才自动显示，清网站数据才恢复首次状态。Birthday 使用按输入加载的小分块 / 私有内存进度，不依赖修改服务器、账号或数据库；正常校时 API 仍必须发布，不可用静态 JSON 替代。
+
 ## 声明正文更新
 
 公告 / 设置 / 全屏已统一绿色衬底。新增机制提示按用户决定留到下一轮，正常 `build` 通过 `dialogueRelease.ts` 保留旧池；不要手改生成 JSON 或绕过这个发布保护。解除方式见 DIALOGUE_RELEASE.md，当前原稿不删除、未实现提示中的新彩蛋。
@@ -8,7 +10,7 @@
 
 G 当前底图使用最小 cover、下沿优先，仍是同一压缩派生；每次整页重抽六组转场，不强制绕过有效 HTTP / CacheStorage，未修改服务器校时和成长存档权限。素材原作者 / 许可仍需负责人核对、尤其社区传送片段，声明页不会把来源记录冒充授权证明。
 
-本轮发布还需携带 `public/asserts/gifts/date-candy.png` 与 `public/asserts/gifts/halvamazd.png`（真正透明 PNG、开场只下载压缩文件、G 送礼才解码展示），资源 / 精确编辑提示词见 gift-assets.manifest.json。FG 加载后新增 8.4 秒黑屏 / 眨眼，G 展示收据延迟至醒来完成；祝福流程为 U / 送礼 / 彩雨同步 → N，详见 REALITY_CELEBRATION.md。仅本地完成验证，未代替用户发布。
+本轮发布还需携带 `public/asserts/gifts/date-candy.png` 与 `public/asserts/gifts/halvamazd.png`（真正透明 PNG、开场只下载压缩文件、G 送礼才解码展示），资源 / 精确编辑提示词见 gift-assets.manifest.json。FG 加载后新增 6 秒黑屏 / 眨眼，G 展示收据延迟至醒来完成；祝福流程为 U / 送礼 / 彩雨同步 → N，详见 REALITY_CELEBRATION.md。仅本地完成验证，未代替用户发布。
 
 仅在本地开发，没有登录或部署 Cloudflare。2026-10-18 来访 / 祝福开发恢复单元、生产构建与浏览器验证，最新结果见 TEST_PLAN.md；此前 C4 / C6 小轮跳测仅为历史。以下发布操作由负责人决定并手动执行。
 

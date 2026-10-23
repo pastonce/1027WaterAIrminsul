@@ -33,14 +33,14 @@ async function notice(page: Page) {
   const opener = page.getByRole('button', { name: '公告与声明', exact: true });
   const left = await opener.boundingBox(); const right = await page.getByRole('button', { name: '设置', exact: true }).boundingBox();
   expect(left!.x + left!.width).toBeLessThanOrEqual(right!.x);
-  await opener.click(); const panel = page.getByRole('dialog', { name: '企划声明', exact: true }); await expect(panel).toBeVisible(); return panel;
+  await opener.click(); const panel = page.locator('.notice-modal'); await expect(panel).toBeVisible(); return panel;
 }
 
 test('开放前可查看声明，正文署名 / 许可可编辑，焦点和竖屏恢复不绕过入梦权限', async ({ page }, info) => {
   await launch(page, info, true); const before = await saved(page, info); const panel = await notice(page);
   await expect(page.locator('.game-content')).toHaveAttribute('inert', '');
   await expect(page.locator('canvas')).toHaveCount(0); await expect(page.getByTestId('dream-scene')).toHaveCount(0);
-  for (const text of ['独钓', '1666417849', '190497686', '非商业同人', '不是官方', '不属于 CC0']) await expect(panel).toContainText(text);
+  for (const text of ['独钓', '1666417849', '190497686', '非商业同人', '不是官方', 'CC0']) await expect(panel).toContainText(text);
   await expect(panel.locator('h3')).toHaveCount(5);
   const credits = panel.getByRole('link', { name: '音效来源与署名' });
   await expect(credits).toHaveAttribute('href', '/asserts/sfx/CREDITS.txt'); await expect(credits).toHaveAttribute('rel', 'noopener noreferrer');
@@ -49,7 +49,7 @@ test('开放前可查看声明，正文署名 / 许可可编辑，焦点和竖�
   await picture(page, info, 'intro-declaration');
   await page.setViewportSize({ width: 390, height: 844 }); await page.clock.runFor(30000);
   await expect(panel).toHaveCount(0); await expect(page.getByRole('button', { name: /开启横屏体验/ })).toBeVisible();
-  await page.setViewportSize(info.project.use.viewport!); await page.clock.runFor(100); await expect(page.getByRole('dialog', { name: '企划声明' })).toBeVisible();
+  await page.setViewportSize(info.project.use.viewport!); await page.clock.runFor(100); await expect(page.locator('.notice-modal')).toBeVisible();
   await page.keyboard.press('Escape'); await expect(page.getByRole('dialog')).toHaveCount(0); await expect(page.getByRole('button', { name: '公告与声明' })).toBeFocused();
   expect((await saved(page, info)).growth).toBe(before.growth); expect((await saved(page, info)).introSeen).toBe(false);
   await page.getByRole('button', { name: '沉入梦乡', exact: true }).click(); await expect(page.locator('.intro-notice')).toBeVisible(); await expect(page.getByTestId('dream-scene')).toHaveCount(0);

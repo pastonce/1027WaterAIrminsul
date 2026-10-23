@@ -63,16 +63,16 @@ describe('持续交互与自动对白', () => {
     expect(game.getSnapshot().save.pendingWaterings).toEqual([]); game.stop();
   });
 
-  it('已有气泡时两次浇灌各保留一句，不覆盖当前对白', () => {
+  it('连续浇灌立即打断旧树对白，只保留最新回应', () => {
     const { game } = testGame({ dew: 13 }); startGame(game); game.talk();
     const original = game.getSnapshot().speech!.sequence;
-    game.water(); vi.advanceTimersByTime(1400); fillDew(game); game.water();
-    expect(game.getSnapshot().save.pendingWaterings).toHaveLength(3);
-    const sequences = new Set<number>();
-    game.subscribe(() => { const state = game.getSnapshot(); if (state.event?.type === 'watering' && state.speech && state.speech.sequence !== original) sequences.add(state.speech.sequence); });
+    game.water(); const first = game.getSnapshot().speech!.sequence; expect(first).toBeGreaterThan(original);
+    vi.advanceTimersByTime(1400); fillDew(game); game.water();
+    expect(game.getSnapshot().save.pendingWaterings).toHaveLength(1);
+    expect(game.getSnapshot().speech!.sequence).toBeGreaterThan(first);
+    expect(game.getSnapshot().speech!.entry.id).toBe(game.getSnapshot().save.pendingWaterings[0].dialogueId);
     advanceUntil(() => game.getSnapshot().mode === 'idle' && game.getSnapshot().event === null && game.getSnapshot().speech === null);
-    expect(sequences.size).toBe(2); expect(game.getSnapshot().save.pendingWaterings).toEqual([]);
-    expect(Math.min(...sequences)).toBeGreaterThan(original); game.stop();
+    expect(game.getSnapshot().save.pendingWaterings).toEqual([]); game.stop();
   });
 
   it('浇灌后立刻刷新会恢复已经抽选的对白，不再次扣费或重新随机', () => {

@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { OPENING_RULES } from '../src/game/opening/choreography';
 
-export async function finishOpening(page: Page, clocked = false) {
+export async function finishOpening(page: Page, clocked = false, dismissNotice = true) {
   const shell = page.locator('.opening-shell');
   await expect(shell).toHaveAttribute('data-opening-mode', /playing|fallback|complete/);
   const mode = await shell.getAttribute('data-opening-mode');
@@ -12,4 +12,9 @@ export async function finishOpening(page: Page, clocked = false) {
     for (let step = 0; step < 6 && await shell.getAttribute('data-opening') === 'true'; step++) await page.clock.runFor(1300);
   }
   await expect(shell).toHaveAttribute('data-opening', 'false', { timeout: 75000 });
+  if (dismissNotice) {
+    await expect(page.locator('.game-app')).toHaveAttribute('data-first-notice', 'complete');
+    const notice = page.locator('.notice-modal');
+    if (await notice.isVisible()) await page.keyboard.press('Escape');
+  }
 }

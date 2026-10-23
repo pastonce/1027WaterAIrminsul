@@ -1,4 +1,4 @@
-export const EASTER_CODES = ['aranara', 'nidaha', 'rainstorm', 'nahida', 'test'] as const;
+export const EASTER_CODES = ['aranara', 'nidaha', 'rainstorm', 'nahida', 'birthday', 'test'] as const;
 export type EasterCode = typeof EASTER_CODES[number];
 export const EASTER_RULES = { rainCount: 40, rainLifetimeMs: 180000, maximumQueuedVisits: 8, noticeMs: 2800 } as const;
 export function easterCode(value: string): EasterCode | null {

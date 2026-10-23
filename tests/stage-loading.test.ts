@@ -77,11 +77,11 @@ describe('对白后才覆盖、切换及持久化', () => {
     expect(game.water()).toBe(true); ready(game); expect(game.getSnapshot().speech?.entry.id).toBe('B3Z'); game.stop();
   });
 
-  it('已满时日期解锁仍等正在播放的树对白结束，不弹确认按钮', () => {
+  it('已满时日期解锁后的浇灌替换旧树句，仍等最新回应结束才换景', () => {
     const { game, clock } = testGame({ growth: 210, dew: 13, completedVisits: ['visit-A', 'visit-A-2'] }); startGame(game); game.talk();
     const line = game.getSnapshot().speech!.entry.id; clock.value = Date.parse(SCHEDULE[1].at); game.tick(); game.water();
-    expect(game.getSnapshot().speech?.entry.id).toBe(line); expect(game.getSnapshot().stageLoading).toBeNull(); expect(game.getSnapshot().stage).toBe('A');
-    until(() => game.getSnapshot().stageLoading !== null); expect(game.getSnapshot().save.playedDialogues).toContain(line); ready(game); game.stop();
+    const latest = game.getSnapshot().speech!.entry.id; expect(latest).not.toBe(line); expect(game.getSnapshot().stageLoading).toBeNull(); expect(game.getSnapshot().stage).toBe('A');
+    until(() => game.getSnapshot().stageLoading !== null); expect(game.getSnapshot().save.playedDialogues).toContain(latest); expect(game.getSnapshot().save.playedDialogues).not.toContain(line); ready(game); game.stop();
   });
 
   it('加载中刷新保留旧场景收据，重启不会重扣费、重赠或丢失转场', () => {

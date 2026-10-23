@@ -101,11 +101,11 @@ describe('逐字播放及自然停顿', () => {
 });
 
 describe('分段、悬停、淡出与事务完成', () => {
-  it('完整打字后停留 2800 ms，淡出 450 ms 后才完成序列', () => {
+  it('完整打字后停留 1400 ms，淡出 450 ms 后才完成序列', () => {
     const { director, state, read, finished } = setup(); director.start([entry], 'tree', finished);
     const typing = state.playback!.typingMs; vi.advanceTimersByTime(typing - 1); expect(state.playback?.phase).toBe('speaking');
     vi.advanceTimersByTime(1); expect(state.playback?.phase).toBe('holding'); expect(read).not.toHaveBeenCalled();
-    vi.advanceTimersByTime(2799); expect(state.playback?.phase).toBe('holding'); vi.advanceTimersByTime(1);
+    vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs - 1); expect(state.playback?.phase).toBe('holding'); vi.advanceTimersByTime(1);
     expect(state.playback?.phase).toBe('fading'); expect(read).toHaveBeenCalledExactlyOnceWith(entry); expect(finished).not.toHaveBeenCalled();
     vi.advanceTimersByTime(449); expect(finished).not.toHaveBeenCalled(); vi.advanceTimersByTime(1); expect(finished).toHaveBeenCalledOnce(); expect(state.playback).toBeNull();
   });
@@ -114,10 +114,10 @@ describe('分段、悬停、淡出与事务完成', () => {
     const line = { ...entry, text: '风吹过这里。树还在倾听。' }; const parts = ['风吹过这里。', '树还在倾听。'];
     director.start([line], 'nahida', finished, true); vi.advanceTimersByTime(PRESENTATION_RULES.arrivalMs);
     director.setSegments(state.playback!.sequence, parts); const sequence = state.playback!.sequence;
-    expect(state.playback?.text).toBe(parts[0]); vi.advanceTimersByTime(1499); expect(state.playback?.sequence).toBe(sequence);
+    expect(state.playback?.text).toBe(parts[0]); vi.advanceTimersByTime(PRESENTATION_RULES.segmentHoldMs - 1); expect(state.playback?.sequence).toBe(sequence);
     vi.advanceTimersByTime(1); expect(state.playback?.text).toBe(parts[1]); expect(state.playback?.entry.id).toBe(line.id);
     expect(read).not.toHaveBeenCalled(); expect(blessing).not.toHaveBeenCalled();
-    vi.advanceTimersByTime(2800); expect(read).toHaveBeenCalledOnce(); expect(blessing).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs); expect(read).toHaveBeenCalledOnce(); expect(blessing).not.toHaveBeenCalled();
     vi.advanceTimersByTime(450); expect(blessing).toHaveBeenCalledExactlyOnceWith('channel'); expect(finished).not.toHaveBeenCalled();
     vi.advanceTimersByTime(2400); expect(finished).toHaveBeenCalledOnce(); expect(blessing.mock.calls.map(([phase]) => phase)).toEqual(['channel', 'bloom', 'end']);
   });
@@ -125,15 +125,15 @@ describe('分段、悬停、淡出与事务完成', () => {
     const { director, state, finished } = setup(); director.start([entry], 'tree', finished);
     const sequence = state.playback!.sequence; director.setHovered(sequence, true);
     vi.advanceTimersByTime(state.playback!.typingMs + 20000); expect(state.playback?.phase).toBe('holding');
-    director.setHovered(sequence, false); vi.advanceTimersByTime(2000); director.setHovered(sequence, true); vi.advanceTimersByTime(20000);
-    director.setHovered(sequence, false); vi.advanceTimersByTime(2799); expect(state.playback?.phase).toBe('holding');
+    director.setHovered(sequence, false); vi.advanceTimersByTime(1000); director.setHovered(sequence, true); vi.advanceTimersByTime(20000);
+    director.setHovered(sequence, false); vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs - 1); expect(state.playback?.phase).toBe('holding');
     vi.advanceTimersByTime(1); expect(state.playback?.phase).toBe('fading'); vi.advanceTimersByTime(450); expect(finished).toHaveBeenCalledOnce();
   });
   it('淡出中悬停恢复可读状态，不重复记已读，也不提前完成', () => {
     const { director, state, read, finished } = setup(true); director.start([entry], 'tree', finished);
-    const sequence = state.playback!.sequence; vi.advanceTimersByTime(2900); expect(state.playback?.phase).toBe('fading');
+    const sequence = state.playback!.sequence; vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs + 100); expect(state.playback?.phase).toBe('fading');
     director.setHovered(sequence, true); vi.advanceTimersByTime(20000); expect(state.playback?.phase).toBe('holding'); expect(finished).not.toHaveBeenCalled();
-    director.setHovered(sequence, false); vi.advanceTimersByTime(3250); expect(read).toHaveBeenCalledOnce(); expect(finished).toHaveBeenCalledOnce();
+    director.setHovered(sequence, false); vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs + PRESENTATION_RULES.fadeMs); expect(read).toHaveBeenCalledOnce(); expect(finished).toHaveBeenCalledOnce();
   });
   it('全局暂停保持打字与停留余量，悬停离开后的新倒数同样暂停', () => {
     const { director, state, finished } = setup(); director.start([entry], 'tree', finished);
@@ -141,7 +141,7 @@ describe('分段、悬停、淡出与事务完成', () => {
     director.setPaused(false); vi.advanceTimersByTime(typing - 100); expect(state.playback?.phase).toBe('holding');
     const sequence = state.playback!.sequence; vi.advanceTimersByTime(1000); director.setHovered(sequence, true); director.setPaused(true);
     director.setHovered(sequence, false); vi.advanceTimersByTime(20000); expect(state.playback?.phase).toBe('holding');
-    director.setPaused(false); vi.advanceTimersByTime(3249); expect(finished).not.toHaveBeenCalled(); vi.advanceTimersByTime(1); expect(finished).toHaveBeenCalledOnce();
+    director.setPaused(false); vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs + PRESENTATION_RULES.fadeMs - 1); expect(finished).not.toHaveBeenCalled(); vi.advanceTimersByTime(1); expect(finished).toHaveBeenCalledOnce();
   });
   it('布局校验拒绝串句 / 空段 / 超两段，重复测量不重播，旧悬停不影响新段', () => {
     const { director, state, read } = setup(true); director.start([entry], 'tree', vi.fn()); const sequence = state.playback!.sequence;
@@ -149,13 +149,13 @@ describe('分段、悬停、淡出与事务完成', () => {
     expect(state.playback?.sequence).toBe(sequence);
     const parts = ['风，还在吗？', '我听见了。']; director.setSegments(sequence, parts); const first = state.playback!.sequence;
     director.setSegments(first, parts); expect(state.playback?.sequence).toBe(first);
-    vi.advanceTimersByTime(1500); director.setHovered(first, true); vi.advanceTimersByTime(2800);
+    vi.advanceTimersByTime(PRESENTATION_RULES.segmentHoldMs); director.setHovered(first, true); vi.advanceTimersByTime(PRESENTATION_RULES.minimumHoldMs);
     expect(state.playback?.phase).toBe('fading'); expect(read).toHaveBeenCalledOnce();
   });
   it('取消、停止与重播当前段不遗留定时器或提前记读', () => {
     const { director, state, read, finished } = setup(); director.start([entry], 'tree', finished);
     vi.advanceTimersByTime(100); const sequence = state.playback!.sequence; director.restartLine(); expect(state.playback!.sequence).toBeGreaterThan(sequence);
     director.stop(); vi.advanceTimersByTime(20000); expect(state.playback).toBeNull(); expect(read).not.toHaveBeenCalled(); expect(finished).not.toHaveBeenCalled(); expect(vi.getTimerCount()).toBe(0);
-    expect(dialogueTiming(entry, 35, false).durationMs).toBe(segmentTiming(entry.text, 35, 35, false).typingMs + 2800);
+    expect(dialogueTiming(entry, 35, false).durationMs).toBe(segmentTiming(entry.text, 35, 35, false).typingMs + PRESENTATION_RULES.minimumHoldMs);
   });
 });

@@ -1,17 +1,17 @@
 import type { StageId, WakingPhase } from '../../types/game';
 
 export const WAKING_SEQUENCE: readonly { phase: WakingPhase; durationMs: number }[] = [
-  { phase: 'black', durationMs: 800 },
-  { phase: 'first-opening', durationMs: 1000 },
-  { phase: 'first-hold', durationMs: 500 },
-  { phase: 'first-closing', durationMs: 600 },
-  { phase: 'first-closed', durationMs: 450 },
-  { phase: 'second-opening', durationMs: 1200 },
-  { phase: 'second-hold', durationMs: 650 },
-  { phase: 'second-closing', durationMs: 700 },
-  { phase: 'second-closed', durationMs: 450 },
-  { phase: 'final-opening', durationMs: 1800 },
-  { phase: 'settling', durationMs: 250 },
+  { phase: 'black', durationMs: 600 },
+  { phase: 'first-opening', durationMs: 700 },
+  { phase: 'first-hold', durationMs: 350 },
+  { phase: 'first-closing', durationMs: 450 },
+  { phase: 'first-closed', durationMs: 300 },
+  { phase: 'second-opening', durationMs: 850 },
+  { phase: 'second-hold', durationMs: 450 },
+  { phase: 'second-closing', durationMs: 500 },
+  { phase: 'second-closed', durationMs: 300 },
+  { phase: 'final-opening', durationMs: 1300 },
+  { phase: 'settling', durationMs: 200 },
 ];
 
 export const WAKING_REDUCED_MS = 650;

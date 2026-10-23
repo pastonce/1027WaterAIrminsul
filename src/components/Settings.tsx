@@ -7,7 +7,7 @@ import type { ServerClock } from '../game/time/ServerClock';
 import { SecretInput } from './SecretInput';
 import type { EasterCode } from '../game/secrets/codes';
 
-export function Settings({ game, state, timeSync, testing = false, redeem, onClose }: { game: GameController; state: GameSnapshot; timeSync?: ServerClock; testing?: boolean; redeem?: (code: EasterCode) => Promise<boolean>; onClose?: () => void }) {
+export function Settings({ game, state, timeSync, testing = false, previewing = false, redeem, onClose }: { game: GameController; state: GameSnapshot; timeSync?: ServerClock; testing?: boolean; previewing?: boolean; redeem?: (code: EasterCode) => Promise<boolean>; onClose?: () => void }) {
   const [confirmReset, setConfirmReset] = useState(false);
   const close = onClose ?? (() => game.closePanel());
   const musicPercent = state.save.settings.music ? Math.round(state.save.settings.musicVolume * 100) : 0;
@@ -19,7 +19,7 @@ export function Settings({ game, state, timeSync, testing = false, redeem, onClo
     <label className="setting-row"><span>文字播放间隔<small>{state.save.settings.textSpeed} 毫秒，数值越小越快</small></span><input type="range" min="10" max="100" value={state.save.settings.textSpeed} onChange={(event) => game.setSettings({ textSpeed: Number(event.target.value) })}/></label>
     {timeSync && <TimeSyncStatus clock={timeSync}/>}
     {redeem && <SecretInput redeem={redeem}/>}
-    <p className="save-note">{testing ? '当前为本页临时测试，刷新后退出；正式存档不会被覆盖。' : state.saveStatus || '进度会自动保存在此浏览器中。清理浏览器数据会移除本地存档。'}</p>
+    <p className="save-note">{previewing ? '当前为本页生日预览，刷新后回到原进度；正式存档不会被覆盖。' : testing ? '当前为本页临时测试，刷新后退出；正式存档不会被覆盖。' : state.saveStatus || '进度会自动保存在此浏览器中。清理浏览器数据会移除本地存档。'}</p>
     <button className="text-button reset-button dream-reset-button" onClick={() => { if (confirmReset) { game.reset(); close(); } else setConfirmReset(true); }}>{confirmReset ? '再次点击，清除当前存档并重新入梦' : '开始下一轮梦的轮回'}</button>
   </Modal>;
 }

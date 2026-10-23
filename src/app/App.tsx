@@ -29,10 +29,11 @@ import type { DreamStageId, GameSnapshot } from '../types/game';
 import type { GameController } from '../game/core/GameController';
 import type { Clock } from '../game/time/TimeGateService';
 import type { ServerClock } from '../game/time/ServerClock';
+import { FirstVisitNotice } from '../game/notice/firstVisit';
 
 const DebugPanel = PUBLIC_TESTING ? lazy(() => import('../dev/DebugPanel')) : null;
 
-export function App({ game, clock, timeSync, testing = false, skipOpening = false, onTesting }: { game: GameController; clock: Clock; timeSync?: ServerClock; testing?: boolean; skipOpening?: boolean; onTesting?: () => Promise<boolean> }) {
+export function App({ game, clock, timeSync, testing = false, previewing = false, skipOpening = false, onTesting, onBirthday, firstNotice }: { game: GameController; clock: Clock; timeSync?: ServerClock; testing?: boolean; previewing?: boolean; skipOpening?: boolean; onTesting?: () => Promise<boolean>; onBirthday?: () => Promise<boolean>; firstNotice: FirstVisitNotice }) {
   const state = useSyncExternalStore(game.subscribe, game.getSnapshot);
   const systemReduced = useReducedMotion();
   const reduced = systemReduced || state.save.settings.reducedMotion;
@@ -41,6 +42,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   const [opening, setOpening] = useState(!skipOpening);
   const [openingPlan, setOpeningPlan] = useState<StartupPlan | null>(null);
   const [introPanel, setIntroPanel] = useState<'settings' | 'notice' | null>(null);
+  const [firstNoticePending, setFirstNoticePending] = useState(firstNotice.pending);
   const [secretNotice, setSecretNotice] = useState<{ text: string } | null>(testing ? { text: '本页测试已开启，刷新后回到原来的梦。' } : null);
   const noticeTimer = useRef(new PausableTimer());
   const [hidden, setHidden] = useState(document.hidden);
@@ -51,7 +53,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   const ready = state.mode === 'idle';
   const panelOpen = Boolean(introPanel) || state.mode === 'journal' || state.mode === 'settings' || state.mode === 'notice' || state.mode === 'mail';
   const wakingCover = state.stageLoading && needsWakingReveal(state.stageLoading.from, state.stageLoading.to, state.save.sceneStage);
-  const inputBlocked = Boolean(state.stageLoading || state.waking) || panelOpen;
+  const inputBlocked = Boolean(state.stageLoading || state.waking) || panelOpen || firstNoticePending;
   const musicStage = state.reviewStage ?? (state.stage === 'G' ? null : state.stage as DreamStageId);
 
   useLayoutEffect(() => {
@@ -63,6 +65,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   }, [game, opening, openingPlan, viewport.width, viewport.height, reduced, portraitBlocked]);
 
   const redeem = async (code: EasterCode) => {
+    if (code === 'birthday') return Boolean(onBirthday && await onBirthday());
     if (code === 'test') {
       if (!PUBLIC_TESTING || !onTesting || !await onTesting()) return false;
       setSecretNotice({ text: '本页测试已开启，刷新后回到原来的梦。' }); return true;
@@ -91,6 +94,14 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
 
   useLayoutEffect(() => { game.setSystemReducedMotion(systemReduced); }, [game, systemReduced]);
   useLayoutEffect(() => { if (state.mode !== 'intro') setIntroPanel(null); }, [state.mode]);
+  useLayoutEffect(() => {
+    if (!firstNoticePending || opening || hidden || portraitBlocked) return;
+    if (state.mode === 'intro') setIntroPanel('notice');
+    else if (['idle', 'watering', 'growing'].includes(state.mode)) game.openPanel('notice');
+    else return;
+    firstNotice.shown();
+    setFirstNoticePending(false);
+  }, [firstNotice, firstNoticePending, opening, hidden, portraitBlocked, state.mode, game]);
 
   const unlockMusic = (target: EventTarget | null) => {
     if (!opening && !hidden && !portraitBlocked && state.save.settings.sound) void sound.unlock();
@@ -123,11 +134,11 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
   }, [game, timeSync]);
 
   useLayoutEffect(() => {
-    const visibility = () => { setHidden(document.hidden); game.setSuspended(opening || document.hidden || portraitBlocked); };
+    const visibility = () => { setHidden(document.hidden); game.setSuspended(opening || firstNoticePending || document.hidden || portraitBlocked); };
     visibility();
     document.addEventListener('visibilitychange', visibility);
     return () => document.removeEventListener('visibilitychange', visibility);
-  }, [game, portraitBlocked, opening]);
+  }, [game, portraitBlocked, opening, firstNoticePending]);
 
   const fullScreen = async () => {
     try {
@@ -139,9 +150,9 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
     } catch { return; }
   };
 
-  return <OpeningReveal active={opening} reduced={reduced} paused={hidden || portraitBlocked} plan={openingPlan} onComplete={() => setOpening(false)}><div className={`game-app ${reduced ? 'reduced-motion' : ''} ${state.mode === 'ending' ? 'is-awakening' : ''}`} data-testing={testing} onPointerDownCapture={(event) => { game.activity(); unlockMusic(event.target); }} onClickCapture={(event) => { game.activity(); unlockMusic(event.target); }} onKeyDownCapture={(event) => { if (!event.repeat) { game.activity(); unlockMusic(event.target); } }}>
+  return <OpeningReveal active={opening} reduced={reduced} paused={hidden || portraitBlocked} plan={openingPlan} onComplete={() => setOpening(false)}><div className={`game-app ${reduced ? 'reduced-motion' : ''} ${state.mode === 'ending' ? 'is-awakening' : ''}`} data-testing={testing} data-previewing={previewing} data-first-notice={firstNoticePending ? 'pending' : 'complete'} onPointerDownCapture={(event) => { game.activity(); unlockMusic(event.target); }} onClickCapture={(event) => { game.activity(); unlockMusic(event.target); }} onKeyDownCapture={(event) => { if (!event.repeat) { game.activity(); unlockMusic(event.target); } }}>
     <div className="game-content" inert={inputBlocked} aria-hidden={inputBlocked || undefined}>
-    {state.mode === 'intro' ? <><IntroScene message={state.message} onEnter={() => game.enterDream()} onSettings={() => setIntroPanel('settings')} onNotice={() => setIntroPanel('notice')}/>{introPanel === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} redeem={redeem} onClose={() => setIntroPanel(null)}/>} {introPanel === 'notice' && <Notice reduced={reduced} onClose={() => setIntroPanel(null)}/>}</> : <>
+    {state.mode === 'intro' ? <><IntroScene message={state.message} onEnter={() => game.enterDream()} onSettings={() => setIntroPanel('settings')} onNotice={() => setIntroPanel('notice')}/>{introPanel === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem} onClose={() => setIntroPanel(null)}/>} {introPanel === 'notice' && <Notice reduced={reduced} onClose={() => setIntroPanel(null)}/>}</> : <>
       {reality ? <RealityScene game={game} state={state} reduced={reduced} testing={testing} suspended={opening || hidden || portraitBlocked}/> : <DreamTreeScene game={game} state={state} reduced={reduced} cameraRef={cameraRef} testing={testing}/>}
       <header className="game-header" data-mail-open={state.mode === 'mail'}>
         <div className="game-brand"><Icon name="leaf" size={26}/><div><span><span>浇灌一棵世界树</span><BuildMarker/></span><small>WATER AN IRMINSUL</small></div></div>
@@ -158,7 +169,7 @@ export function App({ game, clock, timeSync, testing = false, skipOpening = fals
       </header>
       {!reality && (state.reviewStage ? <button className="primary-button water-action" onClick={() => game.review(null)} aria-label="回到现实">回到现实<Icon name="arrow" size={19}/></button> : <button className={`primary-button water-action ${state.save.dew < GAME_RULES.wateringCost ? 'needs-dew' : ''}`} onClick={() => game.water()} disabled={!ready} aria-label="浇灌梦中的树"><Icon name="dew" size={22}/><span>浇灌</span></button>)}
       {state.saveStatus && <div className="save-warning" role="status">{state.saveStatus}</div>}
-      {state.mode === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} redeem={redeem}/>}
+      {state.mode === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem}/>}
       {state.mode === 'notice' && <Notice reduced={reduced} onClose={() => game.closePanel()}/>}
       <div className="awakening-light" aria-hidden="true"/>
     </>}

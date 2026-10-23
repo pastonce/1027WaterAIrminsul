@@ -37,8 +37,8 @@ function reload(context: ReturnType<typeof setup>) {
 }
 
 describe('梦醒三次睁眼', () => {
-  it('只对首次 F→G 启用，完整演出 8400ms 且每次可见范围递增', () => {
-    expect(WAKING_DURATION_MS).toBe(8400);
+  it('只对首次 F→G 启用，完整演出 6000ms 且每次可见范围递增', () => {
+    expect(WAKING_DURATION_MS).toBe(6000);
     expect(needsWakingReveal('F', 'G', 'F')).toBe(true);
     expect(needsWakingReveal('F', 'G', 'G')).toBe(false);
     expect(needsWakingReveal('E', 'F')).toBe(false);
@@ -55,7 +55,7 @@ describe('梦醒三次睁眼', () => {
     const director = new WakingDirector((value) => { frame = value; }, completed);
     director.start(1, false); vi.advanceTimersByTime(1100); expect(frame?.phase).toBe('first-opening');
     director.setPaused(true); vi.advanceTimersByTime(30000); expect(frame?.phase).toBe('first-opening');
-    director.setPaused(false); vi.advanceTimersByTime(699); expect(frame?.phase).toBe('first-opening');
+    director.setPaused(false); vi.advanceTimersByTime(199); expect(frame?.phase).toBe('first-opening');
     vi.advanceTimersByTime(1); expect(frame?.phase).toBe('first-hold');
     director.stop(); vi.advanceTimersByTime(10000); expect(completed).not.toHaveBeenCalled();
   });

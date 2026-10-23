@@ -4,6 +4,7 @@ import { mkdirSync, readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { DIALOGUE_ENTRIES } from '../src/data/dialogues';
 import { DIALOGUE_LAYOUT } from '../src/data/dialogueLayout';
+import { PRESENTATION_RULES } from '../src/data/presentation';
 import { stageFixture } from '../src/dev/fixtures';
 import type { GameSave, StageId } from '../src/types/game';
 import { finishOpening } from './opening-support';
@@ -60,7 +61,7 @@ test('树名加粗，短句始终保留两行高度，淡出期间仍可收露�
   else { expect(fontSize).toBe(14); expect(width).toBe(326); }
   await waitHolding(page); const holding = await layout(page); expect(holding.height).toBe(start.height);
   expect(holding.body).toBeCloseTo(holding.lineHeight * 2, 1); expect(holding.rows).toBeLessThanOrEqual(2); expect(holding.clipped).toBe(false);
-  await capture(page, info, 'tree'); await page.clock.runFor(2800);
+  await capture(page, info, 'tree'); await page.clock.runFor(PRESENTATION_RULES.minimumHoldMs);
   await expect(bubble(page)).toHaveAttribute('data-phase', 'fading'); expect((await layout(page)).height).toBe(start.height);
   await page.clock.runFor(200); const opacity = await bubble(page).evaluate((element) => Number(getComputedStyle(element).opacity));
   expect(opacity).toBeLessThan(1); expect(opacity).toBeGreaterThan(0);
@@ -79,22 +80,22 @@ test('长句按实际字体分成两段，所有段高度一致、均不超过�
     parts.push((await bubble(page).locator('.bubble-text .sr-only').textContent())!);
     const measured = await layout(page); expect(measured.height).toBe(height); expect(measured.rows).toBeLessThanOrEqual(2); expect(measured.clipped).toBe(false);
     await capture(page, info, `long-${index}`);
-    if (index < count) await page.clock.runFor(1500);
+    if (index < count) await page.clock.runFor(PRESENTATION_RULES.segmentHoldMs);
   }
   expect(parts.join('')).toBe(DIALOGUE_ENTRIES.G6N.text);
-  await page.clock.runFor(2799); await expect(bubble(page)).toHaveAttribute('data-phase', 'holding');
-  await page.clock.runFor(451); await expect(bubble(page)).toHaveCount(0);
+  await page.clock.runFor(PRESENTATION_RULES.minimumHoldMs - 100); await expect(bubble(page)).toHaveAttribute('data-phase', 'holding');
+  await page.clock.runFor(PRESENTATION_RULES.fadeMs + 100); await expect(bubble(page)).toHaveCount(0);
 });
 
 test('鼠标悬停保留对白，移开后重新停留完整时间，手机触摸不锁死', async ({ page }, info) => {
-  await launch(page, info); await waitHolding(page); await page.clock.runFor(2500);
+  await launch(page, info); await waitHolding(page); await page.clock.runFor(1000);
   const bounds = (await bubble(page).boundingBox())!; await page.mouse.move(bounds.x + 20, bounds.y + 20);
   await page.clock.runFor(6000); await expect(bubble(page)).toHaveAttribute('data-phase', 'holding');
-  await page.mouse.move(1, 1); await page.clock.runFor(2799); await expect(bubble(page)).toHaveAttribute('data-phase', 'holding');
+  await page.mouse.move(1, 1); await page.clock.runFor(PRESENTATION_RULES.minimumHoldMs - 1); await expect(bubble(page)).toHaveAttribute('data-phase', 'holding');
   await page.clock.runFor(451); await expect(bubble(page)).toHaveCount(0);
   await page.getByRole('button', { name: '梦中的树', exact: true }).press('Enter'); await waitHolding(page);
   if (info.project.use.hasTouch) { const touch = (await bubble(page).boundingBox())!; await page.touchscreen.tap(touch.x + 20, touch.y + 20); }
-  await page.clock.runFor(3250); await expect(bubble(page)).toHaveCount(0);
+  await page.clock.runFor(PRESENTATION_RULES.minimumHoldMs + PRESENTATION_RULES.fadeMs); await expect(bubble(page)).toHaveCount(0);
 });
 
 test('对白分段共用原 ID，长来访播完所有段后才施法祝福，缩窗不截字', async ({ page }, info) => {
@@ -106,9 +107,9 @@ test('对白分段共用原 ID，长来访播完所有段后才施法祝福，�
     await expect(bubble(page)).toHaveAttribute('data-segment', `${index}`); await waitHolding(page);
     const measured = await layout(page); expect(measured.rows).toBeLessThanOrEqual(2); expect(measured.clipped).toBe(false);
     expect((await save(page, info)).visitLines['visit-E'].read).toBe(false); await expect(page.locator('.dendro-blessing')).toHaveCount(0);
-    if (index < count) await page.clock.runFor(1500);
+    if (index < count) await page.clock.runFor(PRESENTATION_RULES.segmentHoldMs);
   }
-  await capture(page, info, 'visit-compact'); await page.clock.runFor(3250);
+  await capture(page, info, 'visit-compact'); await page.clock.runFor(PRESENTATION_RULES.minimumHoldMs + PRESENTATION_RULES.fadeMs);
   await expect(page.locator('.dendro-blessing')).toHaveAttribute('data-phase', 'channel');
   expect((await save(page, info)).visitLines['visit-E'].read).toBe(true);
   await page.clock.runFor(1500); expect((await save(page, info)).blessedVisits).toContain('visit-E');
@@ -142,7 +143,7 @@ test('参考句恰好两行，整套原文最多两段且每段不超过两行',
 test('实际打字在逗号轻停、问叹长停，段尾不额外加标点停顿', async ({ page }, info) => {
   await launch(page, info, 'G', { dialogueDecks: { 'G/reply': ['N06'] } });
   await page.getByRole('button', { name: '送上生日祝福', exact: true }).click();
-  await until(page, async () => await bubble(page).getAttribute('data-speaker') === 'nahida');
+  await until(page, async () => await bubble(page).count() > 0 && await bubble(page).getAttribute('data-speaker') === 'nahida');
   const text = bubble(page).locator('.bubble-text > [aria-hidden=true]');
   await until(page, async () => await text.textContent() === '呵呵，');
   await page.clock.runFor(100); await expect(text).toHaveText('呵呵，');

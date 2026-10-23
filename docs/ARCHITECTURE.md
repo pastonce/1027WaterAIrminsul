@@ -2,6 +2,12 @@
 
 ## 声明与每页选图
 
+`SessionHost` 持有 FirstVisitNotice，实际首访公告可见时才写独立收据；App 等开场资源 / 揭幕结束、前台横屏再开面板，在此之前挂起游戏。临时会话重挂共享收据，不因 test / Birthday 再自动弹出。正文标题来自 Markdown，手动铃铛和原 Modal 暂停 / 焦点 / 竖屏机制保持。
+
+Birthday 通过异步 session 工厂创建独立内存 SaveManager / 私有时钟，原 App 清理后以唯一 generation 重挂，初态已是 FG cover；原服务器 / 开发时钟及正式存档不写入。G 临时预览不显示额外调试工具，不改变普通阶段资格，详见 EASTER_EGGS.md。
+
+有效浇灌通过 `interruptTreeReplies` 清理旧树回应 / 普通欢迎 / 待机，并调用 SpeechDirector.interruptTree；只清当前打字 / 阅读 / 表情计时，不调旧完成 / 已读、不清已结束来访的 presence。新树句直接播放，动作仍用原 cultivation 时钟；角色 / 祝福和 opening / transition 事务受保护，期间只保留最新待播树句。无效浇灌不打断，抽签 / 资源结算不回退。
+
 `src/content/notice.md?raw` 经最小纯文本解析交给 Notice / 原 Modal，安全行内链接可参与焦点约束。首屏局部 `introPanel` 不改变日期权限；梦境 / 现实临时 `notice` 复用面板暂停、panelResumeMode 与剩余演出时钟，音乐 / 音效 / 表情同时暂停。关闭返回对应铃铛入口；无新持久字段、原生 dialog 或渲染上下文，见 NOTICE.md。
 
 `prepareOpeningAssets()` 每个控制器开场只重抽一次插图，忽略旧选择、提交合法 ID 后再生成本页下载计划；布局 / 后台恢复不重抽，刷新创建新控制器后重新抽。有效压缩响应缓存仍复用，未改变对白抽选、收据、成长或服务器门控。G 静态底图仅去额外缩放 / 位移并底部对齐最小 cover，A～F 镜头保持。
@@ -60,7 +66,7 @@ flowchart TD
 
 启动揭幕是两条游戏流程之外的页面生命周期门：`OpeningReveal` 保留实际 App / DOM，inert + aria-hidden 锁定输入，以 clip-path 方窗和源图案的 12 条 Web Animations 揭示页面，不缩放真实内容。App 的 layout effect 在 game.start 前设置 suspended；完成后解除，原待播 / 存档继续，不新增游戏模式或权限来源。正常 5800 ms、单印 2850 ms，图案缩小 20%、使用右上角四叶印从左屏外抛入，沿页面中线阻尼弹跳，第三次主触底后微弹三次再水平滚向中央、横竖对齐后在中央静停 600 ms 再分裂；后台动画 / 完成计时一起暂停，尺寸变化仅重设 keyframes；减少动态 / 缺图 / 900 ms 等待超时短淡入，API 失败可直接解锁。全部结束 / 卸载清理，不增画布 / GL / RAF，见 OPENING_ANIMATION.md。 横移 / 旋转共用一阶连续曲线，保留屏宽 16% / 27% / 34% 三处主落点；微弹期间保留水平动量，落稳直接滚动，不停车再加速。
 
-交互状态为 `intro / idle / watering / growing / ending / journal / settings / loading / waking`。普通循环仍为 `idle → watering → growing → idle`，对白与来访不占交互状态；仅真正换景在门槛 / 旧段队列结束后进入 loading，先覆盖再改 stage。getActiveStage 为资格、sceneStage 为持久展示收据，StageLoadingDirector 独立暂停进度及完成时钟；真实目标 / 有界回退就绪后释放，详见 STAGE_LOADING.md。 journal 仅兼容旧内部 API，不再渲染玩家手记。首次 F→G 在 loading 后由 WakingDirector 完成 8.4 秒眼睑遮罩，最后才提交 G sceneStage；BirthdayDirector 与原 U 同步送礼 / 彩雨，原 N 只等待未完演出余量，SpeechDirector.prepare 保持同一事务等待，见 REALITY_CELEBRATION.md。
+交互状态为 `intro / idle / watering / growing / ending / journal / settings / loading / waking`。普通循环仍为 `idle → watering → growing → idle`，对白与来访不占交互状态；仅真正换景在门槛 / 旧段队列结束后进入 loading，先覆盖再改 stage。getActiveStage 为资格、sceneStage 为持久展示收据，StageLoadingDirector 独立暂停进度及完成时钟；真实目标 / 有界回退就绪后释放，详见 STAGE_LOADING.md。 journal 仅兼容旧内部 API，不再渲染玩家手记。首次 F→G 在 loading 后由 WakingDirector 完成 6 秒眼睑遮罩，最后才提交 G sceneStage；BirthdayDirector 与原 U 同步送礼 / 彩雨，原 N 只等待未完演出余量，SpeechDirector.prepare 保持同一事务等待，见 REALITY_CELEBRATION.md。
 
 `SpeechDirector` 单独管理自动气泡、角色浮现 / 观察 / 离开和阅读完成回调。快照中的 `speech`、`companion` 与 `event` 是这一流程的呈现，不锁定收露、浇灌、镜头或面板。
 
@@ -88,7 +94,7 @@ flowchart TD
 
 TimeGateService.cap 为最新开放段原上限，未开下一段不减 1，初始 0、全部开放允许最终 1028。浇灌 / 显示按 min(服务器 cap, 当前段上限+1)，祝福不越所属段；资格 / 完成 / F 梦醒严格 >，等于不推进。转场句只在加载后播放，SaveManager 兼容旧已通关 1027，原 SCHEDULE 边界不改。
 
-浇灌先进入 watering，respondDream 按浇后成长选互斥类别；预约来访则把扣露 / 成长 / 次数、位置、visitLines 和剩余池一次写档，不创建本次树回应。其他类别将资源、配额、所选 ID 与 pendingWaterings 原子保存；旧待播保留，刷新不重扣 / 重抽，动画仍 600 / 800 ms，改用单个 PausableTimer。设置在 watering / growing 中可立即打开，panelResumeMode 只在首次开面板时保存；跨设置保持暂停，关闭恢复原模式和剩余时长，重置 / 日期撤销 / 停止清理，避免原 raw timeout 在面板中把模式写回 idle。设置采用 document.body 下的 React Portal 兼容弹层，不调用原生 dialog.showModal / open；背景 inert 与 aria-hidden，保留 Escape / Tab / 外侧关闭及焦点恢复，不受场景裁切 / 堆叠影响。竖屏隐藏弹层但保留面板状态，横屏恢复，转屏按钮始终可用。
+浇灌先进入 watering，respondDream 按浇后成长选互斥类别；预约来访则把扣露 / 成长 / 次数、位置、visitLines 和剩余池一次写档，不创建本次树回应。其他类别将资源、配额、所选 ID 与 pendingWaterings 原子保存；未被新浇灌替换的待播保留，刷新不重扣 / 重抽，动画仍 600 / 800 ms，改用单个 PausableTimer。设置在 watering / growing 中可立即打开，panelResumeMode 只在首次开面板时保存；跨设置保持暂停，关闭恢复原模式和剩余时长，重置 / 日期撤销 / 停止清理，避免原 raw timeout 在面板中把模式写回 idle。设置采用 document.body 下的 React Portal 兼容弹层，不调用原生 dialog.showModal / open；背景 inert 与 aria-hidden，保留 Escape / Tab / 外侧关闭及焦点恢复，不受场景裁切 / 堆叠影响。竖屏隐藏弹层但保留面板状态，横屏恢复，转屏按钮始终可用。
 
 每次花费 / 成长仍为 13。边界先记事实、stage 暂留旧景；服务器日期及旧段全序列结束后覆盖所选插图，再切新景。v2 的 loadingArtChoices 只存合法组内 ID，开场集中预载前预选、每次整页打开 / 刷新重新抽选，同页准备幂等；开场统一下载本次六张已选图的一种规格并复用有效缓存，StageArtPrefetcher 后续只空闲预取下一张单规格，可取消、不保存大图片对象。插图解码 / 有界回退和新景首帧分别确认，两者都完成后才推进 sceneStage 并解锁；不新增权限或确认，见 STAGE_LOADING.md、PAGE_ASSETS.md。
 
@@ -114,7 +120,7 @@ F 严格超过 1027（1028）且旧回应 / 来访 / 停留全部结束后，执
 
 每次树 / 现实角色点击都预约一句，不重置当前播放。梦境仍 60 秒闲置、G 改 20 秒，面板 / 后台 / 竖屏 / 加载暂停。G 的 wish 从预约到 U / N 两句及淡出全部完成均清空 idle timer；结束重启满 20 秒，不从点击祝福时计。刷新恢复 wish 同样抑制计时，开始祝福取消未播闲置。初入 opening 仅无档 A 页面播放，读档取消旧 opening 并改欢迎；不新增画布 / RAF。
 
-气泡正文固定两行，姓名加粗，树名「梦中的世界树？」。UI 测实际宽度 / 字体后将最多两段回传 director，校验拼接等于原句；不新增 ID / 配额 / 存档字段。仅句号 / 问号 / 叹号后选两段都能放下的最均衡方案，短句与悬殊短尾不拆，不使用第三段或任意字符兜底；段间不重新挂载气泡。ResizeObserver / 字体事件重排，纯逻辑有保守字宽回退，无新画布或 RAF。统一时间线改为标点语气 / 从句长度 / 有界语速分级，停前两字缓收、连续标点 / 引号原子显示、小数点不停，按下一步时间戳单次 timeout 更新，不再 32 ms 轮询；段尾不加额外标点等待；原字时长乘 1.18，段间 1500 ms、末段 2800 ms、淡出 450 ms，见 DIALOGUE_SYSTEM.md。
+气泡正文固定两行，姓名加粗，树名「梦中的世界树？」。UI 测实际宽度 / 字体后将最多两段回传 director，校验拼接等于原句；不新增 ID / 配额 / 存档字段。仅句号 / 问号 / 叹号后选两段都能放下的最均衡方案，短句与悬殊短尾不拆，不使用第三段或任意字符兜底；段间不重新挂载气泡。ResizeObserver / 字体事件重排，纯逻辑有保守字宽回退，无新画布或 RAF。统一时间线改为标点语气 / 从句长度 / 有界语速分级，停前两字缓收、连续标点 / 引号原子显示、小数点不停，按下一步时间戳单次 timeout 更新，不再 32 ms 轮询；段尾不加额外标点等待；原字时长乘 1.18，段间 750 ms、末段 1400 ms、淡出 450 ms，见 DIALOGUE_SYSTEM.md。
 
 悬停只暂停阅读，离开重计完整本段时长；淡出中可恢复可读，不重复已读回调。全局暂停同时影响打字 / 停留 / 淡出 / presence。设置、隐藏或竖屏期间保留当前段已播时长与剩余定时器，恢复后继续；修改语速 / 减少动态只重播当前段。末段停留结束记原 ID 已读，渐隐完成才派发后续祝福 / 换景；刷新恢复整句游标而非逐字进度。
 

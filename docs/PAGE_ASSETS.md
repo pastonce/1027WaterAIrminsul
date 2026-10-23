@@ -8,7 +8,7 @@
 
 ## 来源与派生
 
-本轮新增两种生日甜点透明 PNG，原图来自 asserts 根目录，内置 image_gen 去蓝底后保存在 public/asserts/gifts/；开场只下载压缩文件、G用户祝福送礼才解码展示，不纳入下述旧十四张 / 二十五项 page-art 统计。两图合计 2320352 B，真正 RGBA 透明；完整提示词、源 / 输出哈希见 gift-assets.manifest.json。G 的文案 / 对齐、独立送礼 / 彩雨及 FG 加载后的 8.4 秒梦醒见 REALITY_CELEBRATION.md，不重生成原背景 / Spine / 转场插图。
+本轮新增两种生日甜点透明 PNG，原图来自 asserts 根目录，内置 image_gen 去蓝底后保存在 public/asserts/gifts/；开场只下载压缩文件、G用户祝福送礼才解码展示，不纳入下述旧十四张 / 二十五项 page-art 统计。两图合计 2320352 B，真正 RGBA 透明；完整提示词、源 / 输出哈希见 gift-assets.manifest.json。G 的文案 / 对齐、独立送礼 / 彩雨及 FG 加载后的 6 秒梦醒见 REALITY_CELEBRATION.md，不重生成原背景 / Spine / 转场插图。
 
 保留 `asserts/阶段转场/` 的十一张原图，以及 `asserts/icon.png`、`asserts/background.png`、`asserts/dialog.jpg`。`npm run assets:page-art` 用本地浏览器离线解码、等比缩小和编码，不联网获取素材、不改原图；输入 / 输出尺寸、字节数与 SHA-256 登记在 `page-assets.manifest.json`，运行时精简映射在 `src/data/pageAssets.generated.json`。
 
@@ -60,6 +60,6 @@ npm run dev
 - 六次转场所选图合计：1280 档 **508958～770256 B**，1920 档 **872978～1376882 B**；范围来自五组随机差异、FG 固定，不含其他场景 / UI 图片或浏览器缓存命中。不是整站流量承诺。
 - 恢复后 F 上传背景纹理：桌面 1600×900 **35787968 B**，横屏 844×390 **32765120 B**，一个环境 Spine / 无额外平面；不是上轮静态图片的预算。不包括其他画布、浏览器解码缓存或整机内存，不能当作整页峰值。
 - 开场按当前设备集中下载背景 / 角色压缩文件、公共图与已选转场图；不提前创建未来场景 GL、解码全部图片或注册 Service Worker。依旧只有当前场景实例化 / 缩纹理 / 释放；G 只用一张静态派生底图。详见 STARTUP_ASSETS.md。
-- 未引入 Service Worker；新增仅本版本选定资源的 CacheStorage 压缩响应缓存，排除 HTML / API / BGM。A～F 音乐现已接入，仅手势授权 / 开关允许且留白到期时请求当前一首，单媒体流式播放，不批量预下载 / 解码音频，G 无音乐；配音和 PV 尚未接入。字体首屏仅预载201,756 B 常用 WOFF2，扩展罕见字按需。独立清单见 music-assets.manifest.json / font-assets.manifest.json，策略见 AUDIO_AND_FONTS.md；这两类不计入此前二十五项图片的 3.41 MB。不能据此声称已完成真机内存 / 帧率或弱网验收。
+- 未引入 Service Worker；新增仅本版本选定资源的 CacheStorage 压缩响应缓存，排除 HTML / API / BGM。A～F 音乐现已接入，仅手势授权 / 开关允许且留白到期时请求当前一首，单媒体流式播放，不批量预下载 / 解码音频，G 无音乐；配音和 PV 尚未接入。字体首屏仅预载204,828 B 常用 WOFF2，扩展罕见字按需。独立清单见 music-assets.manifest.json / font-assets.manifest.json，策略见 AUDIO_AND_FONTS.md；这两类不计入此前二十五项图片的 3.41 MB。不能据此声称已完成真机内存 / 帧率或弱网验收。
 
 验证的实际执行与失败修订记录统一见 `TEST_PLAN.md` 最新一节；本轮仅本地开发 / 构建，不代用户发布。

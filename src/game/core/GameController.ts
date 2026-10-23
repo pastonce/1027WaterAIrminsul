@@ -108,6 +108,11 @@ export class GameController {
   }
 
   getSnapshot = () => this.snapshot;
+  prepareBirthdayPreview() {
+    if (this.active || this.snapshot.stage !== 'F' || getActiveStage(this.snapshot.save, this.time) !== 'G') return;
+    this.welcomed = true;
+    this.beginStageLoading('G');
+  }
   prepareOpeningAssets() {
     if (this.openingAssetsPrepared) return;
     this.openingAssetsPrepared = true;
@@ -218,6 +223,7 @@ export class GameController {
   start() {
     if (this.active) return;
     this.active = true;
+    if (this.snapshot.stageLoading?.phase === 'cover') this.emitSound('transition');
     if (!this.suspended) this.restoringScene = false;
     this.heartbeat = setInterval(() => this.tick(), 1000);
     this.syncPresentationPause();
@@ -456,6 +462,24 @@ export class GameController {
     }
   }
 
+  private interruptTreeReplies() {
+    const save = this.snapshot.save;
+    const skippedDialogues = save.pendingDialogues.filter((pending) => pending.stage !== 'G' && (pending.kind === 'welcome' || pending.kind === 'idle'));
+    const skipped = new Set([...save.pendingWaterings.map((pending) => `watering-${pending.id}`), ...skippedDialogues.map((pending) => `dialogue-${pending.id}`)]);
+    if (this.snapshot.event && skipped.has(this.snapshot.event.id) && this.speech.interruptTree()) this.update({ event: null });
+    this.queue = this.queue.filter((event) => !skipped.has(event.id));
+    if (skipped.size) this.commit({ pendingWaterings: [], pendingDialogues: save.pendingDialogues.filter((pending) => !skipped.has(`dialogue-${pending.id}`)) });
+  }
+
+  private playWateringReply() {
+    if (this.snapshot.event || this.speech.busy) return;
+    const index = this.queue.findIndex((event) => event.type === 'watering' && event.stage === this.snapshot.stage);
+    const event = index < 0 ? undefined : this.queue.splice(index, 1)[0];
+    if (event?.type !== 'watering') return;
+    this.update({ event });
+    this.speech.start([event.dialogue], 'tree', () => this.completeEvent(event.id));
+  }
+
   private scheduleDew() {
     this.later(() => { this.spawnDew(); this.scheduleDew(); }, GAME_RULES.spawnMin + this.random() * (GAME_RULES.spawnMax - GAME_RULES.spawnMin));
   }
@@ -592,20 +616,24 @@ export class GameController {
     if (!result.ok) {
       if (result.reason === 'insufficient') this.signalDew('insufficient');
       else {
+        this.interruptTreeReplies();
         this.update({ mode: 'watering' });
         this.emitSound('water');
         this.respondDream(stage);
         this.enqueueWaterings();
+        this.playWateringReply();
         this.cultivation.schedule(() => { this.update({ mode: 'idle' }); this.reconcile(); }, this.duration(GAME_RULES.wateringMs));
       }
       return false;
     }
+    this.interruptTreeReplies();
     this.update({ mode: 'watering', message: '', dewFeedback: null });
     this.emitSound('water');
     const count = (this.snapshot.save.wateringCounts[stage] ?? 0) + 1;
     const watering = { growth: result.growth, dew: result.dew, wateringCounts: { ...this.snapshot.save.wateringCounts, [stage]: count } };
     this.respondDream(stage, watering);
     this.enqueueWaterings();
+    this.playWateringReply();
     this.refreshProgress();
     this.cultivation.schedule(() => {
       this.update({ mode: 'growing', growthRevision: this.snapshot.growthRevision + 1 });

@@ -1,3 +1,4 @@
+import { PRESENTATION_RULES } from '../src/data/presentation';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -113,7 +114,7 @@ describe('G 对白播放位置与单句一次表情', () => {
   });
   it('句中在对应字符实际显示时触发，跨显示段包含段间阅读停留', () => {
     const { state, expression } = speaking([{ mode: 'middle', offset: first.length + 3, choices: [4] }]);
-    vi.advanceTimersByTime(state.playback!.typingMs + 1500); expect(state.playback?.segment).toBe(1); expect(expression).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(state.playback!.typingMs + PRESENTATION_RULES.segmentHoldMs); expect(state.playback?.segment).toBe(1); expect(expression).not.toHaveBeenCalled();
     const target = state.playback!.reveal!.find((step) => step.end >= 3)!.at;
     vi.advanceTimersByTime(target - 1); expect(expression).not.toHaveBeenCalled(); vi.advanceTimersByTime(1); expect(expression).toHaveBeenCalledOnce();
   });
@@ -123,7 +124,7 @@ describe('G 对白播放位置与单句一次表情', () => {
   });
   it('句后在末段最后两字前触发，不等读完 / 淡出，也不提前到首段', () => {
     const { state, expression, read } = speaking([{ mode: 'after', offset: text.length, choices: [7] }]);
-    vi.advanceTimersByTime(state.playback!.typingMs + 1500); expect(expression).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(state.playback!.typingMs + PRESENTATION_RULES.segmentHoldMs); expect(expression).not.toHaveBeenCalled();
     const target = text.length - 2 - first.length; const at = state.playback!.reveal!.find((step) => step.end >= target)!.at;
     vi.advanceTimersByTime(at); expect(expression).toHaveBeenCalledOnce(); expect(read).not.toHaveBeenCalled(); expect(state.playback?.phase).toBe('speaking');
   });
@@ -136,7 +137,7 @@ describe('G 对白播放位置与单句一次表情', () => {
   });
   it('减少动态保持段落顺序，不因整句瞬时文字把末段表情提前到首段', () => {
     const { state, expression } = speaking([{ mode: 'after', offset: text.length, choices: [1] }], true);
-    expect(expression).not.toHaveBeenCalled(); vi.advanceTimersByTime(1500); expect(expression).toHaveBeenCalledOnce(); expect(state.playback?.segment).toBe(1);
+    expect(expression).not.toHaveBeenCalled(); vi.advanceTimersByTime(PRESENTATION_RULES.segmentHoldMs); expect(expression).toHaveBeenCalledOnce(); expect(state.playback?.segment).toBe(1);
   });
 });
 
