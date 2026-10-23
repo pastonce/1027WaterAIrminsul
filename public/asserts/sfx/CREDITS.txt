@@ -1,0 +1,33 @@
+Interaction sound sources (downloaded 2026-10-23)
+
+Water drop / water pour:
+Jan Schupke (Vehicle), Tinysized SFX Library. CC0 1.0.
+https://opengameart.org/content/fantasy-sound-effects-tinysized-sfx
+https://creativecommons.org/publicdomain/zero/1.0/
+Original archive members: sfx-cc0/water-drop-01.wav; sfx-cc0/water-pour-01.wav.
+
+Moving leaves:
+Augmentality (Brandon Morris), submitted by HaelDB. CC0 option selected.
+https://opengameart.org/content/random-sounds-samples
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Cute Cartoon Jump / Boing Jump:
+Boing Raw Copyright 2005 cfork <http://freesound.org/people/cfork/>
+Boing Jump Copyright 2012 Iwan Gabovitch <http://qubodup.net>
+https://opengameart.org/content/cute-cartoon-jump-sound-effect
+https://creativecommons.org/licenses/by/3.0/
+Changes: mono AAC-LC conversion, filtering, level adjustment and short fades.
+No endorsement by the original authors is implied.
+
+Genshin Teleport:
+Publicly downloadable clip uploaded by malakai1, labelled Genshin Teleport.
+https://www.myinstants.com/en/instant/genshin-teleport-81406/
+https://www.myinstants.com/media/sounds/genshin-teleport.mp3
+Genshin Impact / HoYoverse rights remain with their respective owners.
+The uploader supplies no separate redistribution license. This is not CC0,
+not an official asset download and not evidence of permission to publish.
+Confirm permission or replace this clip with an authorized source before release.
+Changes: mono AAC-LC conversion, filtering, level adjustment and short fades.
+
+Original downloads are retained unchanged. Derived, locally hosted game audio
+and hashes are documented in docs/sfx-assets.manifest.json.

@@ -1,0 +1,19 @@
+.expression-pop { position: absolute; z-index: 17; pointer-events: none; user-select: none; visibility: hidden; }
+.expression-pop[data-ready=true][data-placed=true]:not([data-paused=true]) { visibility: visible; }
+.expression-disc { position: relative; width: 100%; height: 100%; filter: drop-shadow(0 5px 8px #102f3459); opacity: 0; transform: scale(.3); }
+.expression-outline { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.expression-outline path { fill: #fff; stroke: #b0c995; stroke-width: 2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.expression-disc img { position: absolute; inset: 9%; width: 82%; height: 82%; object-fit: contain; pointer-events: none; }
+.expression-pop[data-ready=true] .expression-disc { animation: expression-pop var(--expression-duration) ease both; }
+.expression-pop[data-paused=true] .expression-disc { animation-play-state: paused !important; }
+.expression-pop[data-reduced=true][data-ready=true] .expression-disc { animation-name: expression-fade; animation-duration: var(--expression-duration) !important; transform: none; }
+@keyframes expression-pop {
+  0% { opacity: 0; transform: scale(.3) rotate(-10deg); }
+  11% { opacity: 1; transform: scale(1.07) rotate(9deg); }
+  20% { opacity: 1; transform: scale(.98) rotate(-6deg); }
+  29% { opacity: 1; transform: scale(1.02) rotate(3deg); }
+  38%, 82% { opacity: 1; transform: scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(-4px) scale(.96); }
+}
+@keyframes expression-fade { 0% { opacity: 0; } 10%, 82% { opacity: 1; } 100% { opacity: 0; } }
+@media (forced-colors: active) { .expression-disc { filter: none; } .expression-outline path { stroke: CanvasText; fill: Canvas; } }

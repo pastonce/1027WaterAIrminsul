@@ -1,0 +1,73 @@
+{
+  "loading": {
+    "AB1": {
+      "compact": "/asserts/loading/art/ab1-1280.af8d46114d50.webp",
+      "full": "/asserts/loading/art/ab1-1920.d191a25ce953.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "AB2": {
+      "compact": "/asserts/loading/art/ab2-1280.14d894444167.webp",
+      "full": "/asserts/loading/art/ab2-1920.dd01f87478c4.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "BC1": {
+      "compact": "/asserts/loading/art/bc1-1280.bf7dcbc8cc8c.webp",
+      "full": "/asserts/loading/art/bc1-1920.c0da9a4f2a49.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "BC2": {
+      "compact": "/asserts/loading/art/bc2-1280.35de2d5588ff.webp",
+      "full": "/asserts/loading/art/bc2-1920.0c3fa68efcc5.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "CD1": {
+      "compact": "/asserts/loading/art/cd1-1280.49e4d36a5173.webp",
+      "full": "/asserts/loading/art/cd1-1920.17b87f471a65.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "CD2": {
+      "compact": "/asserts/loading/art/cd2-1280.b90508a4b838.webp",
+      "full": "/asserts/loading/art/cd2-1920.bc8c8049478a.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": true
+    },
+    "DE1": {
+      "compact": "/asserts/loading/art/de1-1280.07b9cb28ad24.webp",
+      "full": "/asserts/loading/art/de1-1920.dd0ae0a56f63.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "DE2": {
+      "compact": "/asserts/loading/art/de2-1280.15a1469c545a.webp",
+      "full": "/asserts/loading/art/de2-1920.a2225957fa68.webp",
+      "aspect": 1.605351170568562,
+      "cropped": false
+    },
+    "EF1": {
+      "compact": "/asserts/loading/art/ef1-1280.ceadf0a771ab.webp",
+      "full": "/asserts/loading/art/ef1-1920.3f5bc14bc600.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "EF2": {
+      "compact": "/asserts/loading/art/ef2-1280.fca2fb5984c7.webp",
+      "full": "/asserts/loading/art/ef2-1920.f6f76fdc2d27.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    },
+    "FG1": {
+      "compact": "/asserts/loading/art/fg1-1280.b679078e0674.webp",
+      "full": "/asserts/loading/art/fg1-1920.7d8aadf281da.webp",
+      "aspect": 1.7777777777777777,
+      "cropped": false
+    }
+  },
+  "realityBackground": "/asserts/backgrounds/reality/realitybackground-1067.cb87856aa318.webp",
+  "dialogue": "/asserts/ui/dialogue-840.65991ba7011b.jpg",
+  "icon": "/asserts/ui/icon-128.30e0cb4524ea.png"
+}

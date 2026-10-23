@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "mode": "built-in image_gen / background-extraction",
+  "originalsPreserved": true,
+  "load": "G wish gifting only; browser cache reused",
+  "files": [
+    {
+      "id": "date-candy",
+      "source": "asserts/枣椰蜜糖.png",
+      "sourceBytes": 68942,
+      "sourceSha256": "c16899fdc859084a45ea930423a3d0064dd7e624802d5e710f9bb4cf96a16cf7",
+      "file": "public/asserts/gifts/date-candy.png",
+      "src": "/asserts/gifts/date-candy.png",
+      "bytes": 1090545,
+      "sha256": "8e7c0611931bd64856bad67aebb27c5732e403ae4ecaf3e29e4d9a7eb1649071",
+      "width": 1254,
+      "height": 1254,
+      "format": "RGBA PNG",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "prompt": "Use case: background-extraction. Edit target: the provided 220x220 game food illustration of 枣椰蜜糖, date-and-nut candy on a green oval plate. Remove ONLY the blue square patterned background and the floating star glints outside the plate. Preserve the original complete food, plate, nuts, honey details, illustration style, colors, perspective and clean illustrated outline as faithfully as possible; do not redesign or add anything. Center the full plate with a modest transparent margin. Output a single clean RGBA transparent-background cutout, no checkerboard, no solid backdrop, no text, no new shadow."
+    },
+    {
+      "id": "halvamazd",
+      "source": "asserts/哈瓦玛玛兹.png",
+      "sourceBytes": 69987,
+      "sourceSha256": "6bb2c3715f7701ef1c7fb32493c3912fd6968ff13c1aa9768a7af8b16e1ce6a9",
+      "file": "public/asserts/gifts/halvamazd.png",
+      "src": "/asserts/gifts/halvamazd.png",
+      "bytes": 1229807,
+      "sha256": "fab65dee6f50113d13f3531c07636fa73e878b13b5fb69888ceb4700db07a6b7",
+      "width": 1254,
+      "height": 1254,
+      "format": "RGBA PNG",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "prompt": "Use case: background-extraction. Edit target: the provided 220x220 game food illustration of 哈瓦玛玛兹, a green-and-ivory four-petal floral dessert with gold center on an ornate green plate. Remove ONLY the blue square patterned background. Preserve the original complete dessert, all plate handles and ornamental edges, leaf motifs, gold center, illustration style, colors, perspective and clean illustrated outline as faithfully as possible; do not redesign or add anything. Center the full plate with a modest transparent margin. Output a single clean RGBA transparent-background cutout, no checkerboard, no solid backdrop, no text, no new shadow."
+    }
+  ]
+}

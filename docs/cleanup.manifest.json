@@ -1,0 +1,376 @@
+{
+  "date": "2026-10-23",
+  "protected": "asserts/ 下全部素材原样保留；不删除来源、工具链、校准数据及可能复用的截图。",
+  "removed": [
+    {
+      "path": "src/components/Journal.tsx",
+      "reason": "旧玩家手记组件无任何导入，设置已完全替代。"
+    },
+    {
+      "path": "src/game/core/AssetManager.ts",
+      "reason": "未被调用的旧 Image 预载器，由 StartupLoader 统一替代。"
+    },
+    {
+      "path": ".asset-work/background-revision-tests.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/background-variant-e2e-focused.log",
+      "bytes": 4984,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/background-variant-e2e-full.log",
+      "bytes": 15360,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/background-variant-unit.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-all-unit-second.log",
+      "bytes": 13924,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-all-unit.log",
+      "bytes": 53664,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-browser-release.log",
+      "bytes": 9954,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-browser.log",
+      "bytes": 10541,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-build-final.log",
+      "bytes": 2525,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-build-release.log",
+      "bytes": 2525,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-build.log",
+      "bytes": 2525,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-flow-unit.log",
+      "bytes": 697,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-regression.log",
+      "bytes": 63276,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-unit-final.log",
+      "bytes": 12013,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/dialogue-unit-release.log",
+      "bytes": 12013,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-build-final.log",
+      "bytes": 913,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-build.log",
+      "bytes": 913,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-e2e-final.log",
+      "bytes": 23791,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-e2e-focused.log",
+      "bytes": 3652,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-typecheck-final.log",
+      "bytes": 417,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-unit-final.log",
+      "bytes": 12015,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-unit-focused.log",
+      "bytes": 18024,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/e-skill-sequence-unit.log",
+      "bytes": 12013,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/expressions-full-unit.log",
+      "bytes": 11801,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/expressions-unit.log",
+      "bytes": 781,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/hiding-calibration.log",
+      "bytes": 505,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/hiding-layers.log",
+      "bytes": 4007,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-build-final.log",
+      "bytes": 913,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-context.log",
+      "bytes": 1749,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-e2e-final.log",
+      "bytes": 18750,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-e2e-focused.log",
+      "bytes": 10634,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-e2e-full.log",
+      "bytes": 25136,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-gpu-debug.log",
+      "bytes": 4584,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-gpu.log",
+      "bytes": 1896,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-unit-final.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-unit-initial.log",
+      "bytes": 16333,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/inhabitants-unit.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-after.log",
+      "bytes": 3772,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-before.log",
+      "bytes": 3526,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-depth-e2e.log",
+      "bytes": 2385,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-depth-final.log",
+      "bytes": 2718,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-final-build.log",
+      "bytes": 913,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-final-e2e.log",
+      "bytes": 20027,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-final-typecheck.log",
+      "bytes": 417,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-final-unit.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-refine-e2e.log",
+      "bytes": 7562,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/interaction-refine-unit.log",
+      "bytes": 13223,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-build.log",
+      "bytes": 913,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-facing-typecheck.log",
+      "bytes": 203,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-final-e2e.log",
+      "bytes": 29016,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-focused-e2e.log",
+      "bytes": 9537,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-full-e2e.log",
+      "bytes": 6584,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-full-unit.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-tech-anchor.log",
+      "bytes": 2478,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-tech-focused.log",
+      "bytes": 10436,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-tech-pause.log",
+      "bytes": 2475,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-typecheck.log",
+      "bytes": 417,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-unit.log",
+      "bytes": 622,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/nahida-verified-e2e.log",
+      "bytes": 4714,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-final-build-hashes.log",
+      "bytes": 694,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-final-build.log",
+      "bytes": 913,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-final-e2e.log",
+      "bytes": 21264,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-final-typecheck.log",
+      "bytes": 417,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-final-unit.log",
+      "bytes": 12012,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-fix-calibration.log",
+      "bytes": 505,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-fix-e2e.log",
+      "bytes": 2661,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-fix-typecheck.log",
+      "bytes": 417,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/spot-fix-unit.log",
+      "bytes": 720,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": ".asset-work/unit-current.log",
+      "bytes": 11801,
+      "reason": "旧轮次生成的调试或验证日志；结果已有工程文档留档。"
+    },
+    {
+      "path": "public/asserts/fonts/irminsul-common-e339199fffc1.woff2",
+      "bytes": 187604,
+      "reason": "字体重生后不再被清单或CSS引用的旧发布子集。"
+    },
+    {
+      "path": "public/asserts/fonts/irminsul-extended-d2ca9b9ca936.woff2",
+      "bytes": 3332812,
+      "reason": "字体重生后不再被清单或CSS引用的旧发布子集。"
+    }
+  ],
+  "retained": [
+    "asserts/",
+    "public/asserts/ 当前清单资源",
+    "scripts/ 素材导出与验证工具",
+    ".asset-work/audio-tools/ 与校准 / 提取数据",
+    "docs/screenshots/ 与 artifacts/ 历史截图（忽略上传，非擅自删除）"
+  ]
+}

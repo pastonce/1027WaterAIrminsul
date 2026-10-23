@@ -1,0 +1,361 @@
+{
+  "version": "4.0.33",
+  "texture": "/asserts/effects/e-skill-frame.png",
+  "textureSize": [
+    1024,
+    640
+  ],
+  "viewBox": [
+    -352,
+    -352,
+    704,
+    704
+  ],
+  "sources": [
+    {
+      "file": "asserts/E技能素材/e_skill_frame.atlas",
+      "sha256": "c510a420c155c170df0edfad97087c062a8b0e118fa717232ccb8967bdbc09c8"
+    },
+    {
+      "file": "asserts/E技能素材/e_skill_frame.json",
+      "sha256": "322f9f332b1b196fb30eef89a6d5c82539bcd6c8dcc4797eac42125c7b1a44c0"
+    },
+    {
+      "file": "asserts/E技能素材/e_skill_frame.png",
+      "sha256": "98bb9de5b3471e2d6720f023ed01aaf35ae760a1fb787a14f90ec611f9029648"
+    }
+  ],
+  "omitted": [
+    "center_emblem"
+  ],
+  "pieces": [
+    {
+      "name": "corner_tl",
+      "region": [
+        434,
+        4,
+        180,
+        180
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -351.50003,
+        -348.5
+      ],
+      "showDelayMs": 100,
+      "showDurationMs": 400
+    },
+    {
+      "name": "corner_tr",
+      "region": [
+        620,
+        4,
+        180,
+        180
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        171.49998,
+        -348.5
+      ],
+      "showDelayMs": 150,
+      "showDurationMs": 400
+    },
+    {
+      "name": "corner_bl",
+      "region": [
+        806,
+        4,
+        180,
+        180
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -350.5,
+        169.5
+      ],
+      "showDelayMs": 250,
+      "showDurationMs": 400
+    },
+    {
+      "name": "corner_br",
+      "region": [
+        4,
+        310,
+        180,
+        180
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        171.5,
+        169.5
+      ],
+      "showDelayMs": 200,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_top_left",
+      "region": [
+        438,
+        310,
+        157,
+        56
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -233.50002,
+        -286.5
+      ],
+      "showDelayMs": 40,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_top_right",
+      "region": [
+        601,
+        310,
+        157,
+        56
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        76.49998,
+        -286.5
+      ],
+      "showDelayMs": 70,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_bottom_left",
+      "region": [
+        764,
+        310,
+        157,
+        56
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -232.49998,
+        231.5
+      ],
+      "showDelayMs": 190,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_bottom_right",
+      "region": [
+        4,
+        496,
+        157,
+        56
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        76.50001,
+        231.5
+      ],
+      "showDelayMs": 160,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_left_top",
+      "region": [
+        190,
+        310,
+        56,
+        157
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -288.5,
+        -230.5
+      ],
+      "showDelayMs": 250,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_left_bottom",
+      "region": [
+        252,
+        310,
+        56,
+        157
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -288.5,
+        74.5
+      ],
+      "showDelayMs": 220,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_right_top",
+      "region": [
+        314,
+        310,
+        56,
+        157
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        233.49998,
+        -230.5
+      ],
+      "showDelayMs": 100,
+      "showDurationMs": 400
+    },
+    {
+      "name": "chain_right_bottom",
+      "region": [
+        376,
+        310,
+        56,
+        157
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        233.5,
+        74.5
+      ],
+      "showDelayMs": 130,
+      "showDurationMs": 400
+    },
+    {
+      "name": "line_top",
+      "region": [
+        167,
+        496,
+        243,
+        56
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -121.50002,
+        -289.5
+      ],
+      "showDelayMs": 60,
+      "showDurationMs": 400
+    },
+    {
+      "name": "line_bottom",
+      "region": [
+        416,
+        496,
+        242,
+        56
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -120.49999,
+        232.5
+      ],
+      "showDelayMs": 140,
+      "showDurationMs": 400
+    },
+    {
+      "name": "line_left",
+      "region": [
+        310,
+        4,
+        56,
+        238
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        -288.5,
+        -118.5
+      ],
+      "showDelayMs": 180,
+      "showDurationMs": 400
+    },
+    {
+      "name": "line_right",
+      "region": [
+        372,
+        4,
+        56,
+        238
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        233.49998,
+        -118.5
+      ],
+      "showDelayMs": 100,
+      "showDurationMs": 400
+    }
+  ],
+  "openingCenter": {
+    "name": "center_emblem",
+    "region": [
+      4,
+      4,
+      300,
+      300
+    ],
+    "matrix": [
+      1,
+      0,
+      0,
+      1,
+      -149.50002,
+      -150.5
+    ],
+    "showDelayMs": 120,
+    "showDurationMs": 400
+  },
+  "openingWindow": {
+    "left": -260.5,
+    "top": -261.5,
+    "size": 522
+  }
+}

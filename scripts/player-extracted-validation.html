@@ -1,0 +1,43 @@
+<!doctype html><html><meta charset="utf-8"><style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+<canvas width="512" height="512"></canvas>
+<script src="../asserts/player-extracted/web/runtime/spine-player.js"></script>
+<script>
+(async()=>{
+  const manifest=await fetch('../asserts/player-extracted/manifest.json').then(r=>r.json());
+  const asset=manifest.assets.find(a=>a.id===new URLSearchParams(location.search).get('asset'));
+  const canvas=document.querySelector('canvas');
+  const context=new spine.ManagedWebGLRenderingContext(canvas,{alpha:true,premultipliedAlpha:false,antialias:true,preserveDrawingBuffer:true});
+  const renderer=new spine.SceneRenderer(canvas,context,false);
+  const side=Math.max(asset.bounds.width,asset.bounds.height);
+  renderer.camera.viewportWidth=renderer.camera.viewportHeight=side;
+  renderer.camera.position.set(asset.bounds.x+asset.bounds.width/2,asset.bounds.y+asset.bounds.height/2,0);renderer.camera.update();
+  async function load(stem){
+    const atlasUrl=new URL(stem+'.atlas',location.href);
+    const atlas=new spine.TextureAtlas(await fetch(atlasUrl).then(r=>r.text()));
+    for(const page of atlas.pages){const image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=new URL(page.name,atlasUrl).href});page.setTexture(new spine.GLTexture(context,image));}
+    const raw=await fetch(stem+'.json').then(r=>r.json());
+    const data=new spine.SkeletonJson(new spine.AtlasAttachmentLoader(atlas)).readSkeletonData(raw);
+    return {data,skeleton:new spine.Skeleton(data)};
+  }
+  const extracted=await load('../asserts/player-extracted/'+asset.folder+'/'+asset.name);
+  const source=await load('../asserts/player/'+asset.source.group+'/'+asset.source.group);
+  const selected=new Set(asset.source.slots);
+  function draw(time,original=false){
+    const layer=original?source:extracted,skeleton=layer.skeleton;
+    skeleton.setToSetupPose();
+    skeleton.x=original?asset.offset[0]:0;skeleton.y=original?asset.offset[1]:0;
+    layer.data.findAnimation(original?asset.source.prefix+'/'+asset.source.animation:'loop').apply(skeleton,-1,time,true,null,1,spine.MixBlend.replace,spine.MixDirection.mixIn);
+    skeleton.updateWorldTransform();
+    if(original)skeleton.drawOrder=skeleton.drawOrder.filter(slot=>selected.has(slot.data.name));
+    context.gl.viewport(0,0,512,512);context.gl.clearColor(0,0,0,0);context.gl.clear(context.gl.COLOR_BUFFER_BIT);
+    renderer.begin();renderer.drawSkeleton(skeleton,false);renderer.end();
+  }
+  function pixels(){const result=new Uint8Array(512*512*4);context.gl.readPixels(0,0,512,512,context.gl.RGBA,context.gl.UNSIGNED_BYTE,result);return result}
+  function diff(a,b){let sum=0,max=0,changed=0;for(let i=0;i<a.length;i+=4){let different=false;for(let c=0;c<4;c++){const delta=Math.abs(a[i+c]-b[i+c]);sum+=delta;max=Math.max(max,delta);different||=delta>2}changed+=different?1:0}return{mean:sum/a.length,max,changed}}
+  const comparisons=[];
+  for(const time of [0,0.5,1.25,asset.loopSeconds+0.125]){draw(time);const a=pixels();draw(time,true);comparisons.push({time,...diff(a,pixels())})}
+  draw(0);const first=pixels();draw(1.25);const motion=diff(first,pixels());
+  draw(0);
+  window.extractionValidation={ready:true,result:{id:asset.id,comparisons,motion,glError:context.gl.getError(),contextLost:context.gl.isContextLost()},snapshot:()=>canvas.toDataURL('image/png'),draw};
+})().catch(error=>{window.extractionValidation={error:String(error)};console.error(error)});
+</script></html>

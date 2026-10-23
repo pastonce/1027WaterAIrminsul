@@ -1,0 +1,1622 @@
+[
+  {
+    "stage": "A",
+    "slot": 0,
+    "name": "左高花叶",
+    "asset": "aranara_01",
+    "ratio": 0.2432,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 0,
+    "name": "左高花叶",
+    "asset": "aranara_02",
+    "ratio": 0.2769,
+    "horizontal": 70,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 0,
+    "name": "左高花叶",
+    "asset": "aranara_03",
+    "ratio": 0.2761,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 0,
+    "name": "左高花叶",
+    "asset": "aranara_04",
+    "ratio": 0.2856,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 0,
+    "name": "左高花叶",
+    "asset": "aranara_05",
+    "ratio": 0.2792,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 0,
+    "name": "左高花叶",
+    "asset": "aranara_06",
+    "ratio": 0.258,
+    "horizontal": 70,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "name": "右侧高花",
+    "asset": "aranara_01",
+    "ratio": 0.3094,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "name": "右侧高花",
+    "asset": "aranara_02",
+    "ratio": 0.3165,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "name": "右侧高花",
+    "asset": "aranara_03",
+    "ratio": 0.2596,
+    "horizontal": -35,
+    "vertical": -80
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "name": "右侧高花",
+    "asset": "aranara_04",
+    "ratio": 0.2936,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "name": "右侧高花",
+    "asset": "aranara_05",
+    "ratio": 0.3063,
+    "horizontal": 70,
+    "vertical": -80
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "name": "右侧高花",
+    "asset": "aranara_06",
+    "ratio": 0.2927,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "name": "倒木左苔沿",
+    "asset": "aranara_01",
+    "ratio": 0.3185,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "name": "倒木左苔沿",
+    "asset": "aranara_02",
+    "ratio": 0.2227,
+    "horizontal": -70,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "name": "倒木左苔沿",
+    "asset": "aranara_03",
+    "ratio": 0.3452,
+    "horizontal": 70,
+    "vertical": 40
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "name": "倒木左苔沿",
+    "asset": "aranara_04",
+    "ratio": 0.3154,
+    "horizontal": 35,
+    "vertical": 40
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "name": "倒木左苔沿",
+    "asset": "aranara_05",
+    "ratio": 0.3137,
+    "horizontal": 70,
+    "vertical": 40
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "name": "倒木左苔沿",
+    "asset": "aranara_06",
+    "ratio": 0.37,
+    "horizontal": 70,
+    "vertical": 40
+  },
+  {
+    "stage": "A",
+    "slot": 3,
+    "name": "倒木右断口",
+    "asset": "aranara_01",
+    "ratio": 0.2705,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 3,
+    "name": "倒木右断口",
+    "asset": "aranara_02",
+    "ratio": 0.3113,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 3,
+    "name": "倒木右断口",
+    "asset": "aranara_03",
+    "ratio": 0.2766,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "A",
+    "slot": 3,
+    "name": "倒木右断口",
+    "asset": "aranara_04",
+    "ratio": 0.2741,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 3,
+    "name": "倒木右断口",
+    "asset": "aranara_05",
+    "ratio": 0.268,
+    "horizontal": 70,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 3,
+    "name": "倒木右断口",
+    "asset": "aranara_06",
+    "ratio": 0.2599,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 4,
+    "name": "左树根圆叶",
+    "asset": "aranara_01",
+    "ratio": 0.2951,
+    "horizontal": 70,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 4,
+    "name": "左树根圆叶",
+    "asset": "aranara_02",
+    "ratio": 0.2662,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 4,
+    "name": "左树根圆叶",
+    "asset": "aranara_03",
+    "ratio": 0.2479,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 4,
+    "name": "左树根圆叶",
+    "asset": "aranara_04",
+    "ratio": 0.2489,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 4,
+    "name": "左树根圆叶",
+    "asset": "aranara_05",
+    "ratio": 0.267,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "A",
+    "slot": 4,
+    "name": "左树根圆叶",
+    "asset": "aranara_06",
+    "ratio": 0.3267,
+    "horizontal": 70,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 5,
+    "name": "右侧木栅栏",
+    "asset": "aranara_01",
+    "ratio": 0.3174,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 5,
+    "name": "右侧木栅栏",
+    "asset": "aranara_02",
+    "ratio": 0.2571,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 5,
+    "name": "右侧木栅栏",
+    "asset": "aranara_03",
+    "ratio": 0.2314,
+    "horizontal": -35,
+    "vertical": -80
+  },
+  {
+    "stage": "A",
+    "slot": 5,
+    "name": "右侧木栅栏",
+    "asset": "aranara_04",
+    "ratio": 0.2959,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "A",
+    "slot": 5,
+    "name": "右侧木栅栏",
+    "asset": "aranara_05",
+    "ratio": 0.2903,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "A",
+    "slot": 5,
+    "name": "右侧木栅栏",
+    "asset": "aranara_06",
+    "ratio": 0.2803,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 0,
+    "name": "左木箱薰衣草",
+    "asset": "aranara_01",
+    "ratio": 0.2728,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "C",
+    "slot": 0,
+    "name": "左木箱薰衣草",
+    "asset": "aranara_02",
+    "ratio": 0.2832,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 0,
+    "name": "左木箱薰衣草",
+    "asset": "aranara_03",
+    "ratio": 0.2824,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 0,
+    "name": "左木箱薰衣草",
+    "asset": "aranara_04",
+    "ratio": 0.2706,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 0,
+    "name": "左木箱薰衣草",
+    "asset": "aranara_05",
+    "ratio": 0.2728,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 0,
+    "name": "左木箱薰衣草",
+    "asset": "aranara_06",
+    "ratio": 0.2902,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 1,
+    "name": "右侧灯笼花箱",
+    "asset": "aranara_01",
+    "ratio": 0.2426,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "C",
+    "slot": 1,
+    "name": "右侧灯笼花箱",
+    "asset": "aranara_02",
+    "ratio": 0.3034,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 1,
+    "name": "右侧灯笼花箱",
+    "asset": "aranara_03",
+    "ratio": 0.3043,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 1,
+    "name": "右侧灯笼花箱",
+    "asset": "aranara_04",
+    "ratio": 0.2936,
+    "horizontal": -70,
+    "vertical": -40
+  },
+  {
+    "stage": "C",
+    "slot": 1,
+    "name": "右侧灯笼花箱",
+    "asset": "aranara_05",
+    "ratio": 0.2351,
+    "horizontal": 70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 1,
+    "name": "右侧灯笼花箱",
+    "asset": "aranara_06",
+    "ratio": 0.2438,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 2,
+    "name": "左上旗杆侧缘",
+    "asset": "aranara_01",
+    "ratio": 0.3162,
+    "horizontal": 35,
+    "vertical": -80
+  },
+  {
+    "stage": "C",
+    "slot": 2,
+    "name": "左上旗杆侧缘",
+    "asset": "aranara_02",
+    "ratio": 0.4604,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "C",
+    "slot": 2,
+    "name": "左上旗杆侧缘",
+    "asset": "aranara_03",
+    "ratio": 0.3676,
+    "horizontal": 35,
+    "vertical": -80
+  },
+  {
+    "stage": "C",
+    "slot": 2,
+    "name": "左上旗杆侧缘",
+    "asset": "aranara_04",
+    "ratio": 0.258,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "C",
+    "slot": 2,
+    "name": "左上旗杆侧缘",
+    "asset": "aranara_05",
+    "ratio": 0.3418,
+    "horizontal": 35,
+    "vertical": -80
+  },
+  {
+    "stage": "C",
+    "slot": 2,
+    "name": "左上旗杆侧缘",
+    "asset": "aranara_06",
+    "ratio": 0.4585,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "name": "左旗柱下沿",
+    "asset": "aranara_01",
+    "ratio": 0.3002,
+    "horizontal": 70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "name": "左旗柱下沿",
+    "asset": "aranara_02",
+    "ratio": 0.2777,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "name": "左旗柱下沿",
+    "asset": "aranara_03",
+    "ratio": 0.283,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "name": "左旗柱下沿",
+    "asset": "aranara_04",
+    "ratio": 0.25,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "name": "左旗柱下沿",
+    "asset": "aranara_05",
+    "ratio": 0.2659,
+    "horizontal": 70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "name": "左旗柱下沿",
+    "asset": "aranara_06",
+    "ratio": 0.31,
+    "horizontal": 35,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 4,
+    "name": "左前黄花",
+    "asset": "aranara_01",
+    "ratio": 0.2882,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "C",
+    "slot": 4,
+    "name": "左前黄花",
+    "asset": "aranara_02",
+    "ratio": 0.2919,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 4,
+    "name": "左前黄花",
+    "asset": "aranara_03",
+    "ratio": 0.2617,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 4,
+    "name": "左前黄花",
+    "asset": "aranara_04",
+    "ratio": 0.2936,
+    "horizontal": -35,
+    "vertical": 80
+  },
+  {
+    "stage": "C",
+    "slot": 4,
+    "name": "左前黄花",
+    "asset": "aranara_05",
+    "ratio": 0.2829,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 4,
+    "name": "左前黄花",
+    "asset": "aranara_06",
+    "ratio": 0.2952,
+    "horizontal": 0,
+    "vertical": 80
+  },
+  {
+    "stage": "C",
+    "slot": 5,
+    "name": "右阶台面内沿",
+    "asset": "aranara_01",
+    "ratio": 0.3253,
+    "horizontal": -70,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 5,
+    "name": "右阶台面内沿",
+    "asset": "aranara_02",
+    "ratio": 0.2235,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "C",
+    "slot": 5,
+    "name": "右阶台面内沿",
+    "asset": "aranara_03",
+    "ratio": 0.3537,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 5,
+    "name": "右阶台面内沿",
+    "asset": "aranara_04",
+    "ratio": 0.32,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 5,
+    "name": "右阶台面内沿",
+    "asset": "aranara_05",
+    "ratio": 0.31,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "C",
+    "slot": 5,
+    "name": "右阶台面内沿",
+    "asset": "aranara_06",
+    "ratio": 0.177,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 0,
+    "name": "左门柱侧面",
+    "asset": "aranara_01",
+    "ratio": 0.2671,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "D",
+    "slot": 0,
+    "name": "左门柱侧面",
+    "asset": "aranara_02",
+    "ratio": 0.2991,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 0,
+    "name": "左门柱侧面",
+    "asset": "aranara_03",
+    "ratio": 0.3218,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 0,
+    "name": "左门柱侧面",
+    "asset": "aranara_04",
+    "ratio": 0.2947,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 0,
+    "name": "左门柱侧面",
+    "asset": "aranara_05",
+    "ratio": 0.3339,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 0,
+    "name": "左门柱侧面",
+    "asset": "aranara_06",
+    "ratio": 0.2599,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "name": "右门柱上缘",
+    "asset": "aranara_01",
+    "ratio": 0.2985,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "name": "右门柱上缘",
+    "asset": "aranara_02",
+    "ratio": 0.2512,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "name": "右门柱上缘",
+    "asset": "aranara_03",
+    "ratio": 0.3117,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "name": "右门柱上缘",
+    "asset": "aranara_04",
+    "ratio": 0.3028,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "name": "右门柱上缘",
+    "asset": "aranara_05",
+    "ratio": 0.3116,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "name": "右门柱上缘",
+    "asset": "aranara_06",
+    "ratio": 0.2964,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "name": "左阶梯折角",
+    "asset": "aranara_01",
+    "ratio": 0.2489,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "name": "左阶梯折角",
+    "asset": "aranara_02",
+    "ratio": 0.2868,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "name": "左阶梯折角",
+    "asset": "aranara_03",
+    "ratio": 0.2686,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "name": "左阶梯折角",
+    "asset": "aranara_04",
+    "ratio": 0.2294,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "name": "左阶梯折角",
+    "asset": "aranara_05",
+    "ratio": 0.2967,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "name": "左阶梯折角",
+    "asset": "aranara_06",
+    "ratio": 0.2952,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 3,
+    "name": "右阶梯折角",
+    "asset": "aranara_01",
+    "ratio": 0.2586,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "D",
+    "slot": 3,
+    "name": "右阶梯折角",
+    "asset": "aranara_02",
+    "ratio": 0.3034,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 3,
+    "name": "右阶梯折角",
+    "asset": "aranara_03",
+    "ratio": 0.241,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 3,
+    "name": "右阶梯折角",
+    "asset": "aranara_04",
+    "ratio": 0.2638,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 3,
+    "name": "右阶梯折角",
+    "asset": "aranara_05",
+    "ratio": 0.2914,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 3,
+    "name": "右阶梯折角",
+    "asset": "aranara_06",
+    "ratio": 0.2178,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "D",
+    "slot": 4,
+    "name": "左侧栏尾",
+    "asset": "aranara_01",
+    "ratio": 0.2449,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "D",
+    "slot": 4,
+    "name": "左侧栏尾",
+    "asset": "aranara_02",
+    "ratio": 0.2793,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 4,
+    "name": "左侧栏尾",
+    "asset": "aranara_03",
+    "ratio": 0.2862,
+    "horizontal": -70,
+    "vertical": -80
+  },
+  {
+    "stage": "D",
+    "slot": 4,
+    "name": "左侧栏尾",
+    "asset": "aranara_04",
+    "ratio": 0.2695,
+    "horizontal": -35,
+    "vertical": -80
+  },
+  {
+    "stage": "D",
+    "slot": 4,
+    "name": "左侧栏尾",
+    "asset": "aranara_05",
+    "ratio": 0.2606,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "D",
+    "slot": 4,
+    "name": "左侧栏尾",
+    "asset": "aranara_06",
+    "ratio": 0.2556,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 5,
+    "name": "右栏流叶",
+    "asset": "aranara_01",
+    "ratio": 0.2078,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 5,
+    "name": "右栏流叶",
+    "asset": "aranara_02",
+    "ratio": 0.2765,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "D",
+    "slot": 5,
+    "name": "右栏流叶",
+    "asset": "aranara_03",
+    "ratio": 0.2186,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "D",
+    "slot": 5,
+    "name": "右栏流叶",
+    "asset": "aranara_04",
+    "ratio": 0.2523,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "D",
+    "slot": 5,
+    "name": "右栏流叶",
+    "asset": "aranara_05",
+    "ratio": 0.3089,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "D",
+    "slot": 5,
+    "name": "右栏流叶",
+    "asset": "aranara_06",
+    "ratio": 0.1275,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 0,
+    "name": "左铜柱侧面",
+    "asset": "aranara_01",
+    "ratio": 0.2671,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "E",
+    "slot": 0,
+    "name": "左铜柱侧面",
+    "asset": "aranara_02",
+    "ratio": 0.2991,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 0,
+    "name": "左铜柱侧面",
+    "asset": "aranara_03",
+    "ratio": 0.3218,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 0,
+    "name": "左铜柱侧面",
+    "asset": "aranara_04",
+    "ratio": 0.2947,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 0,
+    "name": "左铜柱侧面",
+    "asset": "aranara_05",
+    "ratio": 0.3339,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 0,
+    "name": "左铜柱侧面",
+    "asset": "aranara_06",
+    "ratio": 0.2599,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "name": "右铜柱上缘",
+    "asset": "aranara_01",
+    "ratio": 0.2985,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "name": "右铜柱上缘",
+    "asset": "aranara_02",
+    "ratio": 0.2512,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "name": "右铜柱上缘",
+    "asset": "aranara_03",
+    "ratio": 0.3117,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "name": "右铜柱上缘",
+    "asset": "aranara_04",
+    "ratio": 0.3028,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "name": "右铜柱上缘",
+    "asset": "aranara_05",
+    "ratio": 0.3116,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "name": "右铜柱上缘",
+    "asset": "aranara_06",
+    "ratio": 0.2964,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "name": "左锈阶折角",
+    "asset": "aranara_01",
+    "ratio": 0.2489,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "name": "左锈阶折角",
+    "asset": "aranara_02",
+    "ratio": 0.2868,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "name": "左锈阶折角",
+    "asset": "aranara_03",
+    "ratio": 0.2686,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "name": "左锈阶折角",
+    "asset": "aranara_04",
+    "ratio": 0.2294,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "name": "左锈阶折角",
+    "asset": "aranara_05",
+    "ratio": 0.2967,
+    "horizontal": 35,
+    "vertical": 80
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "name": "左锈阶折角",
+    "asset": "aranara_06",
+    "ratio": 0.2952,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 3,
+    "name": "右锈阶折角",
+    "asset": "aranara_01",
+    "ratio": 0.2586,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 3,
+    "name": "右锈阶折角",
+    "asset": "aranara_02",
+    "ratio": 0.3034,
+    "horizontal": -70,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 3,
+    "name": "右锈阶折角",
+    "asset": "aranara_03",
+    "ratio": 0.241,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 3,
+    "name": "右锈阶折角",
+    "asset": "aranara_04",
+    "ratio": 0.2638,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 3,
+    "name": "右锈阶折角",
+    "asset": "aranara_05",
+    "ratio": 0.2914,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 3,
+    "name": "右锈阶折角",
+    "asset": "aranara_06",
+    "ratio": 0.2178,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 4,
+    "name": "左青灰栏尾",
+    "asset": "aranara_01",
+    "ratio": 0.2449,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "E",
+    "slot": 4,
+    "name": "左青灰栏尾",
+    "asset": "aranara_02",
+    "ratio": 0.2793,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 4,
+    "name": "左青灰栏尾",
+    "asset": "aranara_03",
+    "ratio": 0.2862,
+    "horizontal": -70,
+    "vertical": -80
+  },
+  {
+    "stage": "E",
+    "slot": 4,
+    "name": "左青灰栏尾",
+    "asset": "aranara_04",
+    "ratio": 0.2695,
+    "horizontal": -35,
+    "vertical": -80
+  },
+  {
+    "stage": "E",
+    "slot": 4,
+    "name": "左青灰栏尾",
+    "asset": "aranara_05",
+    "ratio": 0.2606,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 4,
+    "name": "左青灰栏尾",
+    "asset": "aranara_06",
+    "ratio": 0.2556,
+    "horizontal": 0,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 5,
+    "name": "右青灰栏叶",
+    "asset": "aranara_01",
+    "ratio": 0.2078,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 5,
+    "name": "右青灰栏叶",
+    "asset": "aranara_02",
+    "ratio": 0.2765,
+    "horizontal": 0,
+    "vertical": -80
+  },
+  {
+    "stage": "E",
+    "slot": 5,
+    "name": "右青灰栏叶",
+    "asset": "aranara_03",
+    "ratio": 0.2186,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "E",
+    "slot": 5,
+    "name": "右青灰栏叶",
+    "asset": "aranara_04",
+    "ratio": 0.2523,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "E",
+    "slot": 5,
+    "name": "右青灰栏叶",
+    "asset": "aranara_05",
+    "ratio": 0.3089,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "E",
+    "slot": 5,
+    "name": "右青灰栏叶",
+    "asset": "aranara_06",
+    "ratio": 0.1275,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 0,
+    "name": "左高金叶",
+    "asset": "aranara_01",
+    "ratio": 0.4161,
+    "horizontal": -35,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 0,
+    "name": "左高金叶",
+    "asset": "aranara_02",
+    "ratio": 0.3382,
+    "horizontal": -70,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 0,
+    "name": "左高金叶",
+    "asset": "aranara_03",
+    "ratio": 0.2532,
+    "horizontal": -70,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 0,
+    "name": "左高金叶",
+    "asset": "aranara_04",
+    "ratio": 0.3188,
+    "horizontal": -70,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 0,
+    "name": "左高金叶",
+    "asset": "aranara_05",
+    "ratio": 0.284,
+    "horizontal": -35,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 0,
+    "name": "左高金叶",
+    "asset": "aranara_06",
+    "ratio": 0.3608,
+    "horizontal": -70,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 1,
+    "name": "右红花",
+    "asset": "aranara_01",
+    "ratio": 0.2529,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 1,
+    "name": "右红花",
+    "asset": "aranara_02",
+    "ratio": 0.2832,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 1,
+    "name": "右红花",
+    "asset": "aranara_03",
+    "ratio": 0.3144,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 1,
+    "name": "右红花",
+    "asset": "aranara_04",
+    "ratio": 0.2844,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 1,
+    "name": "右红花",
+    "asset": "aranara_05",
+    "ratio": 0.2866,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 1,
+    "name": "右红花",
+    "asset": "aranara_06",
+    "ratio": 0.2519,
+    "horizontal": 35,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 2,
+    "name": "左花茎",
+    "asset": "aranara_01",
+    "ratio": 0.2705,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 2,
+    "name": "左花茎",
+    "asset": "aranara_02",
+    "ratio": 0.3066,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 2,
+    "name": "左花茎",
+    "asset": "aranara_03",
+    "ratio": 0.2537,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 2,
+    "name": "左花茎",
+    "asset": "aranara_04",
+    "ratio": 0.3154,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 2,
+    "name": "左花茎",
+    "asset": "aranara_05",
+    "ratio": 0.2431,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 2,
+    "name": "左花茎",
+    "asset": "aranara_06",
+    "ratio": 0.3144,
+    "horizontal": -35,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 3,
+    "name": "右金瓣",
+    "asset": "aranara_01",
+    "ratio": 0.2962,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 3,
+    "name": "右金瓣",
+    "asset": "aranara_02",
+    "ratio": 0.2488,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 3,
+    "name": "右金瓣",
+    "asset": "aranara_03",
+    "ratio": 0.2979,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 3,
+    "name": "右金瓣",
+    "asset": "aranara_04",
+    "ratio": 0.2775,
+    "horizontal": 35,
+    "vertical": 40
+  },
+  {
+    "stage": "F",
+    "slot": 3,
+    "name": "右金瓣",
+    "asset": "aranara_05",
+    "ratio": 0.3243,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 3,
+    "name": "右金瓣",
+    "asset": "aranara_06",
+    "ratio": 0.2871,
+    "horizontal": -70,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 4,
+    "name": "左前巨叶",
+    "asset": "aranara_01",
+    "ratio": 0.2865,
+    "horizontal": 35,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 4,
+    "name": "左前巨叶",
+    "asset": "aranara_02",
+    "ratio": 0.3232,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 4,
+    "name": "左前巨叶",
+    "asset": "aranara_03",
+    "ratio": 0.2638,
+    "horizontal": -35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 4,
+    "name": "左前巨叶",
+    "asset": "aranara_04",
+    "ratio": 0.2982,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 4,
+    "name": "左前巨叶",
+    "asset": "aranara_05",
+    "ratio": 0.2824,
+    "horizontal": -35,
+    "vertical": 40
+  },
+  {
+    "stage": "F",
+    "slot": 4,
+    "name": "左前巨叶",
+    "asset": "aranara_06",
+    "ratio": 0.2791,
+    "horizontal": 0,
+    "vertical": -40
+  },
+  {
+    "stage": "F",
+    "slot": 5,
+    "name": "右前绿叶",
+    "asset": "aranara_01",
+    "ratio": 0.3008,
+    "horizontal": -70,
+    "vertical": -80
+  },
+  {
+    "stage": "F",
+    "slot": 5,
+    "name": "右前绿叶",
+    "asset": "aranara_02",
+    "ratio": 0.2911,
+    "horizontal": 35,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 5,
+    "name": "右前绿叶",
+    "asset": "aranara_03",
+    "ratio": 0.2803,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 5,
+    "name": "右前绿叶",
+    "asset": "aranara_04",
+    "ratio": 0.289,
+    "horizontal": 70,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 5,
+    "name": "右前绿叶",
+    "asset": "aranara_05",
+    "ratio": 0.2346,
+    "horizontal": 0,
+    "vertical": 0
+  },
+  {
+    "stage": "F",
+    "slot": 5,
+    "name": "右前绿叶",
+    "asset": "aranara_06",
+    "ratio": 0.3249,
+    "horizontal": 35,
+    "vertical": 0
+  }
+]

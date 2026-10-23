@@ -1,0 +1,42 @@
+.forest-inhabitants { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.creature-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.creature-anchor { position: absolute; }
+.creature-crystal { transform: translateY(var(--ground-entrance-y, 0px)); }
+.creature-fallback-mask { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.creature-poster { position: absolute; max-width: none; object-fit: contain; }
+.roaming-fallback { position: absolute; inset: 0; z-index: 1; pointer-events: none; isolation: isolate; }
+.roaming-poster-anchor { position: absolute; }
+.roaming-poster-anchor .creature-poster { width: 100%; height: 100%; transform-origin: center bottom; }
+.roaming-foreground, .roaming-back { position: absolute; inset: 0; transform-origin: center; pointer-events: none; }
+.roaming-foreground img, .roaming-back img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.roaming-additive { mix-blend-mode: plus-lighter; }
+.forest-inhabitants.is-enchanted .creature-canvas,
+.forest-inhabitants.is-enchanted .creature-poster { filter: drop-shadow(0 0 9px #deefa390); }
+.nahida-avatar[data-character^=nahida_] .character-shadow { display: none; }
+.creature-hit { position: absolute; inset: 0; min-width: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 40%; background: none; pointer-events: auto; cursor: pointer; touch-action: manipulation; }
+.creature-hit:disabled { opacity: 1; cursor: default; pointer-events: none; }
+.creature-hit:focus-visible { outline: 2px solid #d9edae; outline-offset: 3px; }
+.roaming-poster-anchor[data-phase=arriving] .creature-poster { animation: creature-appear .75s ease-out both; }
+.roaming-poster-anchor[data-phase=leaving] .creature-poster { animation: creature-retreat .7s ease-in both; }
+.roaming-poster-anchor[data-phase=leaving][data-celebrated=true] .creature-poster { animation: creature-celebrate 1.35s ease-in-out both; }
+.roaming-poster-anchor[data-phase=leaving][data-celebrated=true][data-edge=left] .creature-poster,
+.roaming-poster-anchor[data-phase=leaving][data-celebrated=true][data-edge=right] .creature-poster { animation-name: creature-edge-depart; }
+.roaming-poster-anchor[data-phase=watching] .creature-poster { animation: creature-peek 8.4s ease-in-out infinite; }
+.roaming-fallback[data-paused=true] * { animation-play-state: paused !important; }
+.forest-inhabitants[data-paused=true] * { animation-play-state: paused !important; }
+.dew-particle.is-reward { width: 44px; height: 44px; margin: -22px; }
+.dew-particle.is-reward .dew-visual { color: #e4fac0; filter: drop-shadow(0 0 8px #d2ef9c); }
+.dew-particle[data-launching=true] { animation: reward-flight .85s cubic-bezier(.16,.65,.36,1) both; pointer-events: none; }
+.reward-burst { position: absolute; width: 1px; height: 1px; pointer-events: none; }
+.reward-burst i { position: absolute; width: 5px; height: 8px; border-radius: 70% 20% 65% 35%; background: #e3f9be; box-shadow: 0 0 8px #d2efab; animation: reward-scatter 1.2s ease-out both; }
+@keyframes creature-appear { from { transform: translate(var(--enter-x),var(--enter-y)); opacity: var(--enter-opacity); } to { transform: translate(0,0); opacity: 1; } }
+@keyframes creature-retreat { to { transform: translate(var(--retreat-x),var(--retreat-y)); opacity: var(--retreat-opacity); } }
+@keyframes creature-celebrate { 0%,10% { transform: scale(1.06,.85); opacity: 1; } 32.5% { transform: translate(var(--hop-x),var(--hop-y)) scale(.98,1.04); } 55% { transform: translateY(0) scale(1.08,.86); opacity: 1; } 100% { transform: translate(var(--exit-x),var(--exit-y)) scale(1); opacity: var(--exit-opacity); } }
+@keyframes creature-edge-depart { 0%,10% { transform: scale(1.06,.85); } 35% { transform: translate(var(--hop-x),var(--hop-y)) scale(.98,1.04); } 100% { transform: translate(var(--exit-x),var(--exit-y)) scale(1); } }
+@keyframes reward-flight { from { transform: translate(var(--launch-x),var(--launch-y)) scale(.45); opacity: .7; } 35% { opacity: 1; } to { transform: translate(0,0) scale(1); opacity: 1; } }
+@keyframes creature-peek { 0%,60%,100% { transform: translateY(0); } 77% { transform: translate(2px,-12%); } 82% { transform: translate(-2px,-12%); } 87% { transform: translate(1px,-12%); } }
+@keyframes reward-scatter { from { opacity: 0; transform: scale(.4); } 15% { opacity: 1; } to { transform: translate(var(--scatter-x), var(--scatter-y)) rotate(85deg) scale(.3); opacity: 0; } }
+.reduced-motion .creature-poster { animation: none !important; }
+.reduced-motion .reward-burst { display: none; }
+.reduced-motion .dew-particle[data-launching=true] { animation: none; }
+.dream-scene[data-paused=true] .dew-layer * { animation-play-state: paused !important; }

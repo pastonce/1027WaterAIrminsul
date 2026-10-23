@@ -1,0 +1,469 @@
+{
+  "browser": "155.0.8059.40",
+  "frames": [
+    {
+      "name": "image_1",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_1-desktop.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.000051279578189300414,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.00006188914609053498,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.00003263245884773662,
+          "maximum": 2,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 10.791666666666666,
+          "meanAbsoluteChannelError": 0.000032310956790123456,
+          "maximum": 2,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 14.871572466563785,
+        "maximum": 223,
+        "changedPixels": 921510,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 5.333333333333333,
+        "meanAbsoluteChannelError": 2.627355967078189,
+        "maximum": 81,
+        "changedPixels": 44701,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_2",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_2-desktop.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.00001961162551440329,
+          "maximum": 2,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.00003938400205761317,
+          "maximum": 8,
+          "changedPixels": 1,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.00013695987654320987,
+          "maximum": 3,
+          "changedPixels": 1,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 40.125,
+          "meanAbsoluteChannelError": 0.00010255915637860083,
+          "maximum": 3,
+          "changedPixels": 1,
+          "pixelCount": 2073600
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 13.199094167952675,
+        "maximum": 248,
+        "changedPixels": 887807,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 4.5,
+        "meanAbsoluteChannelError": 6.354264403292181,
+        "maximum": 209,
+        "changedPixels": 45854,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_3",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_3-desktop.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.00005610210905349794,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.00001912937242798354,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.000022344393004115225,
+          "maximum": 4,
+          "changedPixels": 1,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 50.125,
+          "meanAbsoluteChannelError": 0.0001625192901234568,
+          "maximum": 9,
+          "changedPixels": 1,
+          "pixelCount": 2073600
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 15.867881783693417,
+        "maximum": 252,
+        "changedPixels": 1028444,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.715303497942387,
+        "maximum": 86,
+        "changedPixels": 33675,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_4",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_4-desktop.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.00004356352880658436,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.000017200360082304527,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.00003713348765432099,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        },
+        {
+          "time": 16.125,
+          "meanAbsoluteChannelError": 0.00004356352880658436,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 2073600
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 16.50222495498971,
+        "maximum": 241,
+        "changedPixels": 1023024,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 8,
+        "meanAbsoluteChannelError": 1.7526286008230452,
+        "maximum": 81,
+        "changedPixels": 33501,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_1",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_1-mobile-landscape.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.000074000074000074,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.000037000037000037,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.0000394667061333728,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 10.791666666666666,
+          "meanAbsoluteChannelError": 0.0000333000333000333,
+          "maximum": 2,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 14.854898188231521,
+        "maximum": 224,
+        "changedPixels": 120028,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 5.333333333333333,
+        "meanAbsoluteChannelError": 2.106026234567901,
+        "maximum": 78,
+        "changedPixels": 36936,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_2",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_2-mobile-landscape.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.0000555000555000555,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.0000419333752667086,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.0000592000592000592,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 40.125,
+          "meanAbsoluteChannelError": 0.0000900334233667567,
+          "maximum": 2,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 13.165446898780232,
+        "maximum": 238,
+        "changedPixels": 115750,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 4.5,
+        "meanAbsoluteChannelError": 6.075012860082304,
+        "maximum": 207,
+        "changedPixels": 43927,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_3",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_3-mobile-landscape.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.0001776001776001776,
+          "maximum": 23,
+          "changedPixels": 1,
+          "pixelCount": 270270
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.0000222000222000222,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.0000690667357334024,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 50.125,
+          "meanAbsoluteChannelError": 0.0002824336157669491,
+          "maximum": 2,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 15.863880563880564,
+        "maximum": 250,
+        "changedPixels": 134029,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.3642052469135801,
+        "maximum": 88,
+        "changedPixels": 28235,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_4",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_4-mobile-landscape.png",
+      "comparisons": [
+        {
+          "time": 0,
+          "meanAbsoluteChannelError": 0.0000431667098333765,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 1.25,
+          "meanAbsoluteChannelError": 0.0000530333863667197,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 8.125,
+          "meanAbsoluteChannelError": 0.0000407000407000407,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        },
+        {
+          "time": 16.125,
+          "meanAbsoluteChannelError": 0.0000567333900667234,
+          "maximum": 1,
+          "changedPixels": 0,
+          "pixelCount": 270270
+        }
+      ],
+      "motion": {
+        "meanAbsoluteChannelError": 16.474202340869006,
+        "maximum": 240,
+        "changedPixels": 133308,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.4739223251028806,
+        "maximum": 98,
+        "changedPixels": 29228,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "dew": {
+    "src": "/asserts/sfx/dew-db4e0fbf46b0.json",
+    "duration": 0.347
+  },
+  "water": {
+    "src": "/asserts/sfx/water-50b8d31fea4e.json",
+    "duration": 1.61
+  },
+  "rustle": {
+    "src": "/asserts/sfx/rustle-116b4c33c78c.json",
+    "duration": 1.05
+  },
+  "jump": {
+    "src": "/asserts/sfx/jump-b57c5dd14227.json",
+    "duration": 0.388
+  },
+  "transition": {
+    "src": "/asserts/sfx/transition-81ee1e0bec14.json",
+    "duration": 3.24
+  }
+}

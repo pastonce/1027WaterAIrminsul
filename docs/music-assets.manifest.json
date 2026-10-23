@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "encoder": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers\r",
+  "format": "AAC-LC",
+  "bitrate": 192000,
+  "sampleRate": 48000,
+  "channels": 2,
+  "sourceBytes": 30131001,
+  "publishedBytes": 17845437,
+  "files": [
+    {
+      "stage": "A",
+      "source": "asserts/bgm/A.mp3",
+      "sourceSha256": "a25c7e7ed9f5c3ad75b4755e12b8fc1e3e079d85aea542766ff118795986d17f",
+      "sourceBytes": 4463428,
+      "file": "public/asserts/music/a-7b6b6173d11b.m4a",
+      "sha256": "7b6b6173d11b9ec9a0e1fc638483b0ad2d2842a890c53980111c42dad411bacc",
+      "bytes": 2627841,
+      "duration": 109.75
+    },
+    {
+      "stage": "B",
+      "source": "asserts/bgm/B.mp3",
+      "sourceSha256": "3c5d552639aca61445f562c5a0a067256acdaf15a35cc56434fe6ad2e5122679",
+      "sourceBytes": 5973108,
+      "file": "public/asserts/music/b-75e6556a9ecb.m4a",
+      "sha256": "75e6556a9ecb952c7a39550aff995040943f374a97356306e4cbd1c0951564bb",
+      "bytes": 3603535,
+      "duration": 148.01
+    },
+    {
+      "stage": "C",
+      "source": "asserts/bgm/C.mp3",
+      "sourceSha256": "07938fbfd081f34b059684fc36c18e061fda08fdf4d09596d68d186cab7c8104",
+      "sourceBytes": 3917156,
+      "file": "public/asserts/music/c-46aecb4e4ad6.m4a",
+      "sha256": "46aecb4e4ad6337da268dc24d9e391419b56322009928bd26c29718cf131c827",
+      "bytes": 2263922,
+      "duration": 96.1
+    },
+    {
+      "stage": "D",
+      "source": "asserts/bgm/D.mp3",
+      "sourceSha256": "e331c9142ea934cbc08781437abc896a445bb81340fb7260d035805cd820a4fc",
+      "sourceBytes": 5452362,
+      "file": "public/asserts/music/d-5b23fae64e8d.m4a",
+      "sha256": "5b23fae64e8dbcaaa6768171fb5553b5c71a0d56ee28d91334f7a396cd345750",
+      "bytes": 3206139,
+      "duration": 134.47
+    },
+    {
+      "stage": "E",
+      "source": "asserts/bgm/E.mp3",
+      "sourceSha256": "39d4e1cdf6713f13ac676b4014ea9c747336ddb3ed3dd437e85e4603036bcd59",
+      "sourceBytes": 4434640,
+      "file": "public/asserts/music/e-6e90b2ee434f.m4a",
+      "sha256": "6e90b2ee434fa89ea4eb4590a33725de57f1c423a0f4509e5ab047910d845bea",
+      "bytes": 2603243,
+      "duration": 109.03
+    },
+    {
+      "stage": "F",
+      "source": "asserts/bgm/F.mp3",
+      "sourceSha256": "afa28494ec468e8bca0691944f8e5fb51d46d46cbe9355b06cf18dc9da1ad1d8",
+      "sourceBytes": 5890307,
+      "file": "public/asserts/music/f-bce8691c1710.m4a",
+      "sha256": "bce8691c171008bb229a074d748fe5544fce4475043b300b76d5fd270b9f7051",
+      "bytes": 3540757,
+      "duration": 145.57999999999998
+    }
+  ],
+  "button": {
+    "source": "asserts/bgm/button.png",
+    "file": "public/asserts/ui/music-button-5c2a85153f5e.png",
+    "bytes": 7167,
+    "sha256": "5c2a85153f5e6cc0d4d1d1049f9e9467e3e84f76da0943f959eb6448ef1453f2"
+  }
+}

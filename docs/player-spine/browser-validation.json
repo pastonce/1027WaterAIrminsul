@@ -1,0 +1,245 @@
+{
+  "browser": "155.0.8059.40",
+  "frames": [
+    {
+      "name": "image_1",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_1-desktop.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 14.8715719843107,
+        "maximum": 223,
+        "changedPixels": 921510,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 5.333333333333333,
+        "meanAbsoluteChannelError": 2.6273533950617285,
+        "maximum": 81,
+        "changedPixels": 44701,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_2",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_2-desktop.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 13.19909609696502,
+        "maximum": 248,
+        "changedPixels": 887807,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 4.5,
+        "meanAbsoluteChannelError": 6.354264403292181,
+        "maximum": 209,
+        "changedPixels": 45854,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_3",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_3-desktop.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 15.8678811406893,
+        "maximum": 252,
+        "changedPixels": 1028444,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.715303497942387,
+        "maximum": 86,
+        "changedPixels": 33675,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_4",
+      "viewport": {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080
+      },
+      "screenshot": "docs/screenshots/player-spine/image_4-desktop.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 16.502224794238682,
+        "maximum": 241,
+        "changedPixels": 1023024,
+        "pixelCount": 2073600
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.7526260288065845,
+        "maximum": 81,
+        "changedPixels": 33501,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 1920,
+        "height": 1080
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_1",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_1-mobile-landscape.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 14.854903121569789,
+        "maximum": 224,
+        "changedPixels": 120028,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 5.333333333333333,
+        "meanAbsoluteChannelError": 2.106031378600823,
+        "maximum": 78,
+        "changedPixels": 36936,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_2",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_2-mobile-landscape.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 13.165474032140699,
+        "maximum": 238,
+        "changedPixels": 115753,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 4.5,
+        "meanAbsoluteChannelError": 6.075010288065844,
+        "maximum": 207,
+        "changedPixels": 43927,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_3",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_3-mobile-landscape.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 15.863883030549697,
+        "maximum": 250,
+        "changedPixels": 134029,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.3642001028806585,
+        "maximum": 88,
+        "changedPixels": 28235,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "name": "image_4",
+      "viewport": {
+        "name": "mobile-landscape",
+        "width": 844,
+        "height": 390
+      },
+      "screenshot": "docs/screenshots/player-spine/image_4-mobile-landscape.png",
+      "mode": "retained-pack-without-deleted-source",
+      "comparisons": [],
+      "motion": {
+        "meanAbsoluteChannelError": 16.474197407530742,
+        "maximum": 240,
+        "changedPixels": 133309,
+        "pixelCount": 270270
+      },
+      "bestReference": {
+        "time": 0,
+        "meanAbsoluteChannelError": 1.4739326131687243,
+        "maximum": 98,
+        "changedPixels": 29229,
+        "pixelCount": 129600
+      },
+      "canvas": {
+        "width": 693,
+        "height": 390
+      },
+      "glError": 0,
+      "contextLost": false
+    }
+  ]
+}

@@ -1,0 +1,614 @@
+{
+  "nahida_bouquet": {
+    "id": "nahida_bouquet",
+    "group": "nahida",
+    "json": "/asserts/inhabitants/nahida/nahida_bouquet/nahida_bouquet.json",
+    "atlas": "/asserts/inhabitants/nahida/nahida_bouquet/nahida_bouquet.atlas",
+    "texture": "/asserts/inhabitants/nahida/nahida_bouquet/nahida_bouquet.png",
+    "poster": "/asserts/inhabitants/nahida/nahida_bouquet/nahida_bouquet.webp",
+    "bounds": {
+      "x": -507,
+      "y": -38,
+      "width": 1013,
+      "height": 843
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/nahida/nahida_bouquet",
+    "files": [
+      {
+        "file": "nahida_bouquet.json",
+        "source": "asserts/player-extracted/nahida/nahida_bouquet/nahida_bouquet.json",
+        "bytes": 4061236,
+        "sha256": "82f5ec2b54c8087f28a8ff80c44f33ad7c8709e3acd399b073784dbd0cdb0e40"
+      },
+      {
+        "file": "nahida_bouquet.atlas",
+        "source": "asserts/player-extracted/nahida/nahida_bouquet/nahida_bouquet.atlas",
+        "bytes": 6862,
+        "sha256": "8b0c80dba0db4da07d5d51de06777fe40ef8fabd187148f9bc9e6b635c62f9d7"
+      },
+      {
+        "file": "nahida_bouquet.png",
+        "source": "asserts/player-extracted/nahida/nahida_bouquet/nahida_bouquet.png",
+        "bytes": 1774860,
+        "sha256": "7aab15c85396ebef4665c230539e968a3f79022a2154232faaf242479f43558e"
+      }
+    ]
+  },
+  "nahida_dream": {
+    "id": "nahida_dream",
+    "group": "nahida",
+    "json": "/asserts/inhabitants/nahida/nahida_dream/nahida_dream.json",
+    "atlas": "/asserts/inhabitants/nahida/nahida_dream/nahida_dream.atlas",
+    "texture": "/asserts/inhabitants/nahida/nahida_dream/nahida_dream.png",
+    "poster": "/asserts/inhabitants/nahida/nahida_dream/nahida_dream.webp",
+    "bounds": {
+      "x": -996,
+      "y": -74,
+      "width": 1991,
+      "height": 1949
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/nahida/nahida_dream",
+    "files": [
+      {
+        "file": "nahida_dream.json",
+        "source": "asserts/player-extracted/nahida/nahida_dream/nahida_dream.json",
+        "bytes": 499900,
+        "sha256": "7645b5121826d2f1445be0ec93347925bfc8b16693d1376a8b2e8e70598387e0"
+      },
+      {
+        "file": "nahida_dream.atlas",
+        "source": "asserts/player-extracted/nahida/nahida_dream/nahida_dream.atlas",
+        "bytes": 4235,
+        "sha256": "5bfc7edf40659325d01dee74405ef83c67ce0542cf9dd16d966b41f83ae39a9e"
+      },
+      {
+        "file": "nahida_dream.png",
+        "source": "asserts/player-extracted/nahida/nahida_dream/nahida_dream.png",
+        "bytes": 1591691,
+        "sha256": "6234a57a36051a79cce9da1760c6322559b1d77564953edf3f67fdce841b05bf"
+      }
+    ]
+  },
+  "nahida_swing": {
+    "id": "nahida_swing",
+    "group": "nahida",
+    "json": "/asserts/inhabitants/nahida/nahida_swing/nahida_swing.json",
+    "atlas": "/asserts/inhabitants/nahida/nahida_swing/nahida_swing.atlas",
+    "texture": "/asserts/inhabitants/nahida/nahida_swing/nahida_swing.png",
+    "poster": "/asserts/inhabitants/nahida/nahida_swing/nahida_swing.webp",
+    "bounds": {
+      "x": -741,
+      "y": -58,
+      "width": 1481,
+      "height": 1553
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/nahida/nahida_swing",
+    "files": [
+      {
+        "file": "nahida_swing.json",
+        "source": "asserts/player-extracted/nahida/nahida_swing/nahida_swing.json",
+        "bytes": 2001902,
+        "sha256": "c9fb9c219421c31083094d6c3ffb18d0176892612da26cb666813d1b8ef3ce68"
+      },
+      {
+        "file": "nahida_swing.atlas",
+        "source": "asserts/player-extracted/nahida/nahida_swing/nahida_swing.atlas",
+        "bytes": 11768,
+        "sha256": "eb4ba57aceef7ed75ddc505c4ef266a9bc54b88ff8582fe710dfadf25ab5b8d1"
+      },
+      {
+        "file": "nahida_swing.png",
+        "source": "asserts/player-extracted/nahida/nahida_swing/nahida_swing.png",
+        "bytes": 2580153,
+        "sha256": "120302c44c53fa94771963e49ef3c9e022a5530dbf93839641b901296e21d134"
+      }
+    ]
+  },
+  "nahida_wave": {
+    "id": "nahida_wave",
+    "group": "nahida",
+    "json": "/asserts/inhabitants/nahida/nahida_wave/nahida_wave.json",
+    "atlas": "/asserts/inhabitants/nahida/nahida_wave/nahida_wave.atlas",
+    "texture": "/asserts/inhabitants/nahida/nahida_wave/nahida_wave.png",
+    "poster": "/asserts/inhabitants/nahida/nahida_wave/nahida_wave.webp",
+    "bounds": {
+      "x": -660,
+      "y": -56,
+      "width": 1319,
+      "height": 1488
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/nahida/nahida_wave",
+    "files": [
+      {
+        "file": "nahida_wave.json",
+        "source": "asserts/player-extracted/nahida/nahida_wave/nahida_wave.json",
+        "bytes": 2677281,
+        "sha256": "734b114e81c164a076f5df65fb96dbd5582ce5b6322f1994c1ac7cea26932446"
+      },
+      {
+        "file": "nahida_wave.atlas",
+        "source": "asserts/player-extracted/nahida/nahida_wave/nahida_wave.atlas",
+        "bytes": 9519,
+        "sha256": "9a2c973a9fb8dba30b22247f708c469061866a5426376608e9944fcaf067d9df"
+      },
+      {
+        "file": "nahida_wave.png",
+        "source": "asserts/player-extracted/nahida/nahida_wave/nahida_wave.png",
+        "bytes": 1006443,
+        "sha256": "50d1393613908ecce71f1b0010f260b6e9574b52f3d8d35748142e4f7c405552"
+      }
+    ]
+  },
+  "aranara_01": {
+    "id": "aranara_01",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_01/aranara_01.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_01/aranara_01.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_01/aranara_01.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_01/aranara_01.webp",
+    "bounds": {
+      "x": -251,
+      "y": -23,
+      "width": 501,
+      "height": 618
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_01",
+    "files": [
+      {
+        "file": "aranara_01.json",
+        "source": "asserts/player-extracted/aranara/aranara_01/aranara_01.json",
+        "bytes": 379953,
+        "sha256": "4c7ce33666e054833fa0eee37433dfbd5f2e7994b3ddb870af046c55c5a5ee52"
+      },
+      {
+        "file": "aranara_01.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_01/aranara_01.atlas",
+        "bytes": 1231,
+        "sha256": "965baefaf75f8babe18daffa6b90d97c39b07fdd035ccf0841522c3be8e1848a"
+      },
+      {
+        "file": "aranara_01.png",
+        "source": "asserts/player-extracted/aranara/aranara_01/aranara_01.png",
+        "bytes": 124573,
+        "sha256": "ab4ef28d4b028a740ad9decfe81ad487fbc4c4552831bee5e412329b0410465e"
+      }
+    ]
+  },
+  "aranara_02": {
+    "id": "aranara_02",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_02/aranara_02.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_02/aranara_02.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_02/aranara_02.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_02/aranara_02.webp",
+    "bounds": {
+      "x": -262,
+      "y": -20,
+      "width": 523,
+      "height": 479
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_02",
+    "files": [
+      {
+        "file": "aranara_02.json",
+        "source": "asserts/player-extracted/aranara/aranara_02/aranara_02.json",
+        "bytes": 319667,
+        "sha256": "a8be559761605061b60c4c92f08669917d3dac07ec2aefa85e161c4c8348fb29"
+      },
+      {
+        "file": "aranara_02.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_02/aranara_02.atlas",
+        "bytes": 1288,
+        "sha256": "bfc30669e0626785c6a195e38a80b97abc6e376008d6e7e46329430330f1938b"
+      },
+      {
+        "file": "aranara_02.png",
+        "source": "asserts/player-extracted/aranara/aranara_02/aranara_02.png",
+        "bytes": 121427,
+        "sha256": "927878c871cbc37c95cc1d3f3fdf2cfd6fb04a2f997d5fc7c225b253afd2c3cb"
+      }
+    ]
+  },
+  "aranara_03": {
+    "id": "aranara_03",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_03/aranara_03.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_03/aranara_03.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_03/aranara_03.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_03/aranara_03.webp",
+    "bounds": {
+      "x": -327,
+      "y": -28,
+      "width": 654,
+      "height": 745
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_03",
+    "files": [
+      {
+        "file": "aranara_03.json",
+        "source": "asserts/player-extracted/aranara/aranara_03/aranara_03.json",
+        "bytes": 243329,
+        "sha256": "8a587740ccb64b4d5f8ed4a83a4b51bc81ea6093c414c846c0d0cb46cb365323"
+      },
+      {
+        "file": "aranara_03.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_03/aranara_03.atlas",
+        "bytes": 1041,
+        "sha256": "f2a37c9193f22da6e9ac61243799059e8d1b6b8e17af262f4c81b6cc9d146b3d"
+      },
+      {
+        "file": "aranara_03.png",
+        "source": "asserts/player-extracted/aranara/aranara_03/aranara_03.png",
+        "bytes": 114468,
+        "sha256": "190e5793d68f20e73240fc6b246cb615e049cd361f127373bf66d2c6400496d4"
+      }
+    ]
+  },
+  "aranara_04": {
+    "id": "aranara_04",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_04/aranara_04.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_04/aranara_04.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_04/aranara_04.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_04/aranara_04.webp",
+    "bounds": {
+      "x": -277,
+      "y": -42,
+      "width": 553,
+      "height": 1112
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_04",
+    "files": [
+      {
+        "file": "aranara_04.json",
+        "source": "asserts/player-extracted/aranara/aranara_04/aranara_04.json",
+        "bytes": 234553,
+        "sha256": "da8408dd5c6484729c13807ac8579e095eccd6df51502856414481ef6a9ebfff"
+      },
+      {
+        "file": "aranara_04.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_04/aranara_04.atlas",
+        "bytes": 706,
+        "sha256": "6a53cf35a5eeaec47e448b18a30e0270bad8f5444102968ef9797b02b59cc315"
+      },
+      {
+        "file": "aranara_04.png",
+        "source": "asserts/player-extracted/aranara/aranara_04/aranara_04.png",
+        "bytes": 166483,
+        "sha256": "2a7836457c7809976bd84783a915209b36ed2d251ff68424e7f8e50d4d1b3b11"
+      }
+    ]
+  },
+  "aranara_05": {
+    "id": "aranara_05",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_05/aranara_05.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_05/aranara_05.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_05/aranara_05.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_05/aranara_05.webp",
+    "bounds": {
+      "x": -346,
+      "y": -31,
+      "width": 691,
+      "height": 835
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_05",
+    "files": [
+      {
+        "file": "aranara_05.json",
+        "source": "asserts/player-extracted/aranara/aranara_05/aranara_05.json",
+        "bytes": 221477,
+        "sha256": "84c3056cefa9424a0b67602cbcd5a7b18eb56b99339134e8bff793ee925d161c"
+      },
+      {
+        "file": "aranara_05.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_05/aranara_05.atlas",
+        "bytes": 884,
+        "sha256": "3dcec7625c967824b926fea785ae1ae95de3b85e9b6cfdb1c7dc15b5f0ed98ba"
+      },
+      {
+        "file": "aranara_05.png",
+        "source": "asserts/player-extracted/aranara/aranara_05/aranara_05.png",
+        "bytes": 161390,
+        "sha256": "f51f83a27b533c6523d6b0345a7c18becc9a532d320d8e9b66c6323ff6adf797"
+      }
+    ]
+  },
+  "aranara_06": {
+    "id": "aranara_06",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_06/aranara_06.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_06/aranara_06.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_06/aranara_06.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_06/aranara_06.webp",
+    "bounds": {
+      "x": -413,
+      "y": -31,
+      "width": 825,
+      "height": 833
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_06",
+    "files": [
+      {
+        "file": "aranara_06.json",
+        "source": "asserts/player-extracted/aranara/aranara_06/aranara_06.json",
+        "bytes": 287502,
+        "sha256": "684db3a104ec0669e428d90a3eff34984ea60bd9b6b256f48baf82df735c3fbe"
+      },
+      {
+        "file": "aranara_06.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_06/aranara_06.atlas",
+        "bytes": 981,
+        "sha256": "74a791fa9cf864c1ead341ac064f5b03243e6c86a2395944bca3843923b91bb2"
+      },
+      {
+        "file": "aranara_06.png",
+        "source": "asserts/player-extracted/aranara/aranara_06/aranara_06.png",
+        "bytes": 190234,
+        "sha256": "941642849fee9fba8984c4525d531424d354864b5a8ded464d850cd472eb06c4"
+      }
+    ]
+  },
+  "aranara_07": {
+    "id": "aranara_07",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_07/aranara_07.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_07/aranara_07.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_07/aranara_07.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_07/aranara_07.webp",
+    "bounds": {
+      "x": -380,
+      "y": -29,
+      "width": 760,
+      "height": 512
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_07",
+    "files": [
+      {
+        "file": "aranara_07.json",
+        "source": "asserts/player-extracted/aranara/aranara_07/aranara_07.json",
+        "bytes": 106653,
+        "sha256": "00a20e7c625ca1803ca812df4af4f556049dd63e5c56538af92573f00dfbc679"
+      },
+      {
+        "file": "aranara_07.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_07/aranara_07.atlas",
+        "bytes": 692,
+        "sha256": "48f740c0d50452cc0d1b0aae6513f1a00ddf1a23b7a4704921e2148904e0d115"
+      },
+      {
+        "file": "aranara_07.png",
+        "source": "asserts/player-extracted/aranara/aranara_07/aranara_07.png",
+        "bytes": 159329,
+        "sha256": "2c2490c2d7cdbad16955e8e99f9b6caa25a206d5100a89850fed64ea07ddd3ca"
+      }
+    ]
+  },
+  "aranara_08": {
+    "id": "aranara_08",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_08/aranara_08.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_08/aranara_08.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_08/aranara_08.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_08/aranara_08.webp",
+    "bounds": {
+      "x": -485,
+      "y": -36,
+      "width": 969,
+      "height": 741
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_08",
+    "files": [
+      {
+        "file": "aranara_08.json",
+        "source": "asserts/player-extracted/aranara/aranara_08/aranara_08.json",
+        "bytes": 166238,
+        "sha256": "91e6d5cfc2c4c20f04bceb8fddb2a8d6427b0e9480b6581a428eaac09f8fd272"
+      },
+      {
+        "file": "aranara_08.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_08/aranara_08.atlas",
+        "bytes": 930,
+        "sha256": "49e2c5a7c313d2bf29653abb00789648ac600872390cc819b9471eb76105ceb9"
+      },
+      {
+        "file": "aranara_08.png",
+        "source": "asserts/player-extracted/aranara/aranara_08/aranara_08.png",
+        "bytes": 309286,
+        "sha256": "49fbd8d1631486fb5f3d36e4338d54a286018c0892963977322b357f7e6318c6"
+      }
+    ]
+  },
+  "aranara_09": {
+    "id": "aranara_09",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_09/aranara_09.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_09/aranara_09.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_09/aranara_09.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_09/aranara_09.webp",
+    "bounds": {
+      "x": -296,
+      "y": -22,
+      "width": 592,
+      "height": 464
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_09",
+    "files": [
+      {
+        "file": "aranara_09.json",
+        "source": "asserts/player-extracted/aranara/aranara_09/aranara_09.json",
+        "bytes": 142016,
+        "sha256": "d55a87257daa36a406d8d40923f84d5635fbbe9a6f96985d18a59cfa09eaa298"
+      },
+      {
+        "file": "aranara_09.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_09/aranara_09.atlas",
+        "bytes": 810,
+        "sha256": "d4bb82d3be4e32c0e1638521fc87fe89a91ab8275af198af4e58b878317a852e"
+      },
+      {
+        "file": "aranara_09.png",
+        "source": "asserts/player-extracted/aranara/aranara_09/aranara_09.png",
+        "bytes": 148938,
+        "sha256": "f5f9999b9fb05eb42c1fda781fe9825ef7fed5cd9e62a5634cba19998eb3a723"
+      }
+    ]
+  },
+  "aranara_10": {
+    "id": "aranara_10",
+    "group": "aranara",
+    "json": "/asserts/inhabitants/aranara/aranara_10/aranara_10.json",
+    "atlas": "/asserts/inhabitants/aranara/aranara_10/aranara_10.atlas",
+    "texture": "/asserts/inhabitants/aranara/aranara_10/aranara_10.png",
+    "poster": "/asserts/inhabitants/aranara/aranara_10/aranara_10.webp",
+    "bounds": {
+      "x": -336,
+      "y": -25,
+      "width": 672,
+      "height": 453
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/aranara/aranara_10",
+    "files": [
+      {
+        "file": "aranara_10.json",
+        "source": "asserts/player-extracted/aranara/aranara_10/aranara_10.json",
+        "bytes": 106736,
+        "sha256": "1fe5a8cd2ab30069f0e415073f98ad16f5e5c056b0241084d75168e86e305159"
+      },
+      {
+        "file": "aranara_10.atlas",
+        "source": "asserts/player-extracted/aranara/aranara_10/aranara_10.atlas",
+        "bytes": 781,
+        "sha256": "0fdd507cfa0534faea92400709611f17008cb560bbc4abe6e49c01184c7d0598"
+      },
+      {
+        "file": "aranara_10.png",
+        "source": "asserts/player-extracted/aranara/aranara_10/aranara_10.png",
+        "bytes": 92732,
+        "sha256": "ee73f32c187f8908b16e6330f9f2e83df974bb3bf230775eb851914a7a5a38d4"
+      }
+    ]
+  },
+  "crystalfly_01": {
+    "id": "crystalfly_01",
+    "group": "crystalfly",
+    "json": "/asserts/inhabitants/crystalfly/crystalfly_01/crystalfly_01.json",
+    "atlas": "/asserts/inhabitants/crystalfly/crystalfly_01/crystalfly_01.atlas",
+    "texture": "/asserts/inhabitants/crystalfly/crystalfly_01/crystalfly_01.png",
+    "poster": "/asserts/inhabitants/crystalfly/crystalfly_01/crystalfly_01.webp",
+    "bounds": {
+      "x": -295,
+      "y": -22,
+      "width": 590,
+      "height": 436
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/crystalfly/crystalfly_01",
+    "files": [
+      {
+        "file": "crystalfly_01.json",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_01/crystalfly_01.json",
+        "bytes": 130295,
+        "sha256": "eec9075a8486363990e2aa99abff9122a0356c7ec0494539c40e0eaf96aef021"
+      },
+      {
+        "file": "crystalfly_01.atlas",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_01/crystalfly_01.atlas",
+        "bytes": 381,
+        "sha256": "545137de4ce623ffc039bac0aeea17d07008a47ca44d75299e4833a13ec85040"
+      },
+      {
+        "file": "crystalfly_01.png",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_01/crystalfly_01.png",
+        "bytes": 20147,
+        "sha256": "bf7e591a3a9f621946f033226b4ab7baac7084b4b92d3e27761b398328e47a1f"
+      }
+    ]
+  },
+  "crystalfly_02": {
+    "id": "crystalfly_02",
+    "group": "crystalfly",
+    "json": "/asserts/inhabitants/crystalfly/crystalfly_02/crystalfly_02.json",
+    "atlas": "/asserts/inhabitants/crystalfly/crystalfly_02/crystalfly_02.atlas",
+    "texture": "/asserts/inhabitants/crystalfly/crystalfly_02/crystalfly_02.png",
+    "poster": "/asserts/inhabitants/crystalfly/crystalfly_02/crystalfly_02.webp",
+    "bounds": {
+      "x": -327,
+      "y": -25,
+      "width": 653,
+      "height": 376
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/crystalfly/crystalfly_02",
+    "files": [
+      {
+        "file": "crystalfly_02.json",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_02/crystalfly_02.json",
+        "bytes": 136735,
+        "sha256": "4361e3d644363f9c8a41584524285a12b890df8e284e79b1af948fac980dd047"
+      },
+      {
+        "file": "crystalfly_02.atlas",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_02/crystalfly_02.atlas",
+        "bytes": 381,
+        "sha256": "a890cecc42268a4deac1068281db27c787341e59fc79496e474496e6801ad32c"
+      },
+      {
+        "file": "crystalfly_02.png",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_02/crystalfly_02.png",
+        "bytes": 20147,
+        "sha256": "bf7e591a3a9f621946f033226b4ab7baac7084b4b92d3e27761b398328e47a1f"
+      }
+    ]
+  },
+  "crystalfly_03": {
+    "id": "crystalfly_03",
+    "group": "crystalfly",
+    "json": "/asserts/inhabitants/crystalfly/crystalfly_03/crystalfly_03.json",
+    "atlas": "/asserts/inhabitants/crystalfly/crystalfly_03/crystalfly_03.atlas",
+    "texture": "/asserts/inhabitants/crystalfly/crystalfly_03/crystalfly_03.png",
+    "poster": "/asserts/inhabitants/crystalfly/crystalfly_03/crystalfly_03.webp",
+    "bounds": {
+      "x": -106,
+      "y": -17,
+      "width": 211,
+      "height": 439
+    },
+    "animation": "loop",
+    "source": "asserts/player-extracted/crystalfly/crystalfly_03",
+    "files": [
+      {
+        "file": "crystalfly_03.json",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_03/crystalfly_03.json",
+        "bytes": 135939,
+        "sha256": "901f4c24c758c8ef906af1fc92d3dd17ef189a77531c48a28db399fd0bbf2681"
+      },
+      {
+        "file": "crystalfly_03.atlas",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_03/crystalfly_03.atlas",
+        "bytes": 381,
+        "sha256": "e7e6e3b2f92cf438945be2f9b77364d070205422a1bed0d6c5b496caa7a7094e"
+      },
+      {
+        "file": "crystalfly_03.png",
+        "source": "asserts/player-extracted/crystalfly/crystalfly_03/crystalfly_03.png",
+        "bytes": 20147,
+        "sha256": "bf7e591a3a9f621946f033226b4ab7baac7084b4b92d3e27761b398328e47a1f"
+      }
+    ]
+  }
+}

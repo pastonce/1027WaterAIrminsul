@@ -1,0 +1,178 @@
+{
+  "spine": "4.0.17",
+  "runtime": "4.0.31",
+  "sourceFiles": 61,
+  "exportedFiles": 51,
+  "assets": [
+    {
+      "id": "image_1/nahida",
+      "animations": 5,
+      "samples": 35,
+      "vertexCoordinates": 173600,
+      "uvCoordinates": 173600,
+      "maxVertexError": 0.0001220703125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/aranara_01",
+      "animations": 3,
+      "samples": 21,
+      "vertexCoordinates": 11382,
+      "uvCoordinates": 11382,
+      "maxVertexError": 0.0000152587890625,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/aranara_02",
+      "animations": 3,
+      "samples": 21,
+      "vertexCoordinates": 10626,
+      "uvCoordinates": 10626,
+      "maxVertexError": 0.000019073486328125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/aranara_03",
+      "animations": 3,
+      "samples": 21,
+      "vertexCoordinates": 8904,
+      "uvCoordinates": 8904,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/aranara_04",
+      "animations": 3,
+      "samples": 21,
+      "vertexCoordinates": 7350,
+      "uvCoordinates": 7350,
+      "maxVertexError": 0.00002288818359375,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/aranara_05",
+      "animations": 3,
+      "samples": 21,
+      "vertexCoordinates": 8988,
+      "uvCoordinates": 8988,
+      "maxVertexError": 0.00006103515625,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/aranara_06",
+      "animations": 3,
+      "samples": 21,
+      "vertexCoordinates": 9870,
+      "uvCoordinates": 9870,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/crystalfly_01",
+      "animations": 4,
+      "samples": 28,
+      "vertexCoordinates": 7952,
+      "uvCoordinates": 7952,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/crystalfly_02",
+      "animations": 4,
+      "samples": 28,
+      "vertexCoordinates": 7952,
+      "uvCoordinates": 7952,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_1/crystalfly_03",
+      "animations": 4,
+      "samples": 28,
+      "vertexCoordinates": 7952,
+      "uvCoordinates": 7952,
+      "maxVertexError": 0.00000762939453125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_2/nahida_swing",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 121240,
+      "uvCoordinates": 121240,
+      "maxVertexError": 0.0001220703125,
+      "maxUvPixelError": 0.00006103515625,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_3/nahida_dream",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 42812,
+      "uvCoordinates": 42812,
+      "maxVertexError": 0.0001220703125,
+      "maxUvPixelError": 0.00006103515625,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_4/nahida_bouquet",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 74368,
+      "uvCoordinates": 74368,
+      "maxVertexError": 0.00006103515625,
+      "maxUvPixelError": 0.00006103515625,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_4/aranara_01",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 5992,
+      "uvCoordinates": 5992,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_4/aranara_02",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 8120,
+      "uvCoordinates": 8120,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_4/aranara_03",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 6104,
+      "uvCoordinates": 6104,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    },
+    {
+      "id": "image_4/aranara_04",
+      "animations": 2,
+      "samples": 14,
+      "vertexCoordinates": 5768,
+      "uvCoordinates": 5768,
+      "maxVertexError": 0.000030517578125,
+      "maxUvPixelError": 0.000030517578125,
+      "maxColorError": 0
+    }
+  ]
+}

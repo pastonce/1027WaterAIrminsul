@@ -1,0 +1,2361 @@
+{
+  "format": 1,
+  "runtime": "4.0.31",
+  "skeletonVersion": "4.0.17",
+  "referenceSize": [
+    1920,
+    1080
+  ],
+  "pages": [
+    {
+      "name": "image_1",
+      "reference": "asserts/player/images/image_1.png",
+      "unitScale": 0.6,
+      "viewport": {
+        "spine": "4.0.17",
+        "x": -1600,
+        "y": -900,
+        "width": 3200,
+        "height": 1800,
+        "fps": 30,
+        "images": "./"
+      },
+      "loopSeconds": 10.666666666666666,
+      "layers": [
+        {
+          "id": "layer_00_Sky",
+          "kind": "image",
+          "placement": {
+            "x": 0,
+            "y": -80,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Frm_SumeruBirth_KV_Gradient.png"
+        },
+        {
+          "id": "layer_01_Cloud01",
+          "kind": "image",
+          "placement": {
+            "x": -1476,
+            "y": -224,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Cloud01.png"
+        },
+        {
+          "id": "layer_02_Cloud02",
+          "kind": "image",
+          "placement": {
+            "x": 1104,
+            "y": -56,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Cloud02.png"
+        },
+        {
+          "id": "layer_03_Building",
+          "kind": "image",
+          "placement": {
+            "x": -522,
+            "y": -56,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Building.png"
+        },
+        {
+          "id": "layer_04_Float",
+          "kind": "image",
+          "placement": {
+            "x": 594,
+            "y": -56,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Float.png"
+        },
+        {
+          "id": "layer_05_Spine_04",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -560,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+          },
+          "sourceSha256": "31370d3c45b505d6d7668a9344185a2720218ded18748a48cd966ebabadd0c5d",
+          "animation": "loop1",
+          "periodSeconds": 10.666666984558105,
+          "repeats": 1,
+          "originalAnimations": [
+            "loop1"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_04.json"
+        },
+        {
+          "id": "layer_06_Grounds_R",
+          "kind": "image",
+          "placement": {
+            "x": 1160.3999999999999,
+            "y": -470,
+            "scaleX": 1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Grounds.png"
+        },
+        {
+          "id": "layer_07_Grounds_L",
+          "kind": "image",
+          "placement": {
+            "x": -1296,
+            "y": -470,
+            "scaleX": -1.2,
+            "scaleY": 1.2
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Grounds.png"
+        },
+        {
+          "id": "layer_08_Spine_03",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -560,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+          },
+          "sourceSha256": "cd4fdf6f536587ee0969b2f80a3c8f780b32a237010c11ebff6777b0cb3c0dc8",
+          "animation": "loop1",
+          "periodSeconds": 0,
+          "repeats": 0,
+          "originalAnimations": [
+            "loop1"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_03.json"
+        },
+        {
+          "id": "layer_09_Spine_02",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -560,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+          },
+          "sourceSha256": "58934779d0ee6f0e3a646b4da41aded0a0816b50c85ac2a68998cf38315d2623",
+          "animation": "loop1",
+          "periodSeconds": 5.333333492279053,
+          "repeats": 2,
+          "originalAnimations": [
+            "eye",
+            "Fadein1",
+            "hudie",
+            "loop1",
+            "loop2",
+            "yulan"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02.json"
+        },
+        {
+          "id": "layer_10_Spine_01",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -560,
+            "scaleX": 0.6,
+            "scaleY": 0.6
+          },
+          "sourceSha256": "d665aa34b55da05235cb1884812a55c922a04b23c6070dcf441cfdb8ed04003a",
+          "animation": "loop",
+          "periodSeconds": 10.666666984558105,
+          "repeats": 1,
+          "originalAnimations": [
+            "loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_01.json"
+        }
+      ],
+      "textures": [
+        {
+          "file": "image_1_01.png",
+          "size": [
+            16,
+            1024
+          ],
+          "sha256": "68fe6ce7c0e16948675a581697e767cdc7a63dbcfe90b7d68527098f712b450b",
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Frm_SumeruBirth_KV_Gradient.png"
+        },
+        {
+          "file": "image_1_02.png",
+          "size": [
+            2048,
+            724
+          ],
+          "sha256": "c478da2111cf1b7a4706617494dcd0fcb67595c1cc06d2d358911e30062e47da",
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Cloud01.png"
+        },
+        {
+          "file": "image_1_03.png",
+          "size": [
+            2048,
+            784
+          ],
+          "sha256": "c25ed711c1c89ec6411cb8b82e95cc2d0d13ae63d3beb1344f333315350d3492",
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Cloud02.png"
+        },
+        {
+          "file": "image_1_04.png",
+          "size": [
+            956,
+            484
+          ],
+          "sha256": "16ba64e2cd7c860cd1eb790aac6f8ec461d377d6accb9f5b010ce9635a88fd23",
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Building.png"
+        },
+        {
+          "file": "image_1_05.png",
+          "size": [
+            608,
+            600
+          ],
+          "sha256": "5f7e0daac414536c47be924a4983e5e6a3d76d3be356cd27e3c0d4834662bbe6",
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Float.png"
+        },
+        {
+          "file": "image_1_06.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "7c4824c6ef74f704b05c5a57d183e933fa6eeab7107fb34a72af217e36d14dfe",
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine.png"
+        },
+        {
+          "file": "image_1_07.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "ff3503c1865a967e162d1c5fee3dcb6720efab1e79631a9276ba39473a558af3",
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_2.png"
+        },
+        {
+          "file": "image_1_08.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "9c85cbbc948d36d04684b25c66231538bdba76911b69696ad5cb3f05f85bae35",
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_3.png"
+        },
+        {
+          "file": "image_1_09.png",
+          "size": [
+            2048,
+            260
+          ],
+          "sha256": "a6c87a83eea86cf739b7f4d11e6b0380bc5ef6ade0a19cbf4f9b3426280122d8",
+          "historicalSource": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Grounds.png"
+        },
+        {
+          "file": "image_1_10.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "1c4d9aadc5ca38b9d7f4b22b53bf0c81108dd2ad2993f36006529027c10f37b2",
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02.png"
+        },
+        {
+          "file": "image_1_11.png",
+          "size": [
+            256,
+            128
+          ],
+          "sha256": "ad8a31f90f51cecbf39890e5224f3907d9e761257ae50aa69b6585a051120706",
+          "historicalSource": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02_2.png"
+        }
+      ],
+      "bones": 947,
+      "slots": 500,
+      "animations": 10,
+      "files": [
+        {
+          "file": "image_1.atlas",
+          "bytes": 26140,
+          "sha256": "b6ee373fdf0e3ddc35592d4ce08b4b1d3b925bae5f3e78f74cee06ee6b1ab9e5"
+        },
+        {
+          "file": "image_1.json",
+          "bytes": 7450956,
+          "sha256": "8f902705b77b47cb204a936925cb85bd32163f7b4ad8dbf12e49d064fb70e348"
+        },
+        {
+          "file": "image_1_01.png",
+          "bytes": 4638,
+          "sha256": "68fe6ce7c0e16948675a581697e767cdc7a63dbcfe90b7d68527098f712b450b"
+        },
+        {
+          "file": "image_1_02.png",
+          "bytes": 182361,
+          "sha256": "c478da2111cf1b7a4706617494dcd0fcb67595c1cc06d2d358911e30062e47da"
+        },
+        {
+          "file": "image_1_03.png",
+          "bytes": 259248,
+          "sha256": "c25ed711c1c89ec6411cb8b82e95cc2d0d13ae63d3beb1344f333315350d3492"
+        },
+        {
+          "file": "image_1_04.png",
+          "bytes": 474055,
+          "sha256": "16ba64e2cd7c860cd1eb790aac6f8ec461d377d6accb9f5b010ce9635a88fd23"
+        },
+        {
+          "file": "image_1_05.png",
+          "bytes": 322802,
+          "sha256": "5f7e0daac414536c47be924a4983e5e6a3d76d3be356cd27e3c0d4834662bbe6"
+        },
+        {
+          "file": "image_1_06.png",
+          "bytes": 1030788,
+          "sha256": "7c4824c6ef74f704b05c5a57d183e933fa6eeab7107fb34a72af217e36d14dfe"
+        },
+        {
+          "file": "image_1_07.png",
+          "bytes": 759914,
+          "sha256": "ff3503c1865a967e162d1c5fee3dcb6720efab1e79631a9276ba39473a558af3"
+        },
+        {
+          "file": "image_1_08.png",
+          "bytes": 486056,
+          "sha256": "9c85cbbc948d36d04684b25c66231538bdba76911b69696ad5cb3f05f85bae35"
+        },
+        {
+          "file": "image_1_09.png",
+          "bytes": 178356,
+          "sha256": "a6c87a83eea86cf739b7f4d11e6b0380bc5ef6ade0a19cbf4f9b3426280122d8"
+        },
+        {
+          "file": "image_1_10.png",
+          "bytes": 1366625,
+          "sha256": "1c4d9aadc5ca38b9d7f4b22b53bf0c81108dd2ad2993f36006529027c10f37b2"
+        },
+        {
+          "file": "image_1_11.png",
+          "bytes": 36858,
+          "sha256": "ad8a31f90f51cecbf39890e5224f3907d9e761257ae50aa69b6585a051120706"
+        }
+      ]
+    },
+    {
+      "name": "image_2",
+      "reference": "asserts/player/images/image_2.png",
+      "unitScale": 0.8,
+      "viewport": {
+        "spine": "4.0.17",
+        "x": -1200,
+        "y": -675,
+        "width": 2400,
+        "height": 1350,
+        "fps": 30,
+        "images": "./"
+      },
+      "loopSeconds": 40,
+      "layers": [
+        {
+          "id": "layer_00_Sky",
+          "kind": "image",
+          "placement": {
+            "x": -60,
+            "y": -60,
+            "scaleX": 1.2000000000000002,
+            "scaleY": 1.2000000000000002
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Bg_SumeruBirth_MainPage_01_Color.png"
+        },
+        {
+          "id": "layer_01_Cloud01",
+          "kind": "image",
+          "placement": {
+            "x": 589.6,
+            "y": -151.20000000000002,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_04_Distort.png"
+        },
+        {
+          "id": "layer_02_Cloud02",
+          "kind": "image",
+          "placement": {
+            "x": -692,
+            "y": -44,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_03_Distort.png"
+        },
+        {
+          "id": "layer_03_Cloud03",
+          "kind": "image",
+          "placement": {
+            "x": 242.40000000000003,
+            "y": -89.60000000000001,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_03_Distort.png"
+        },
+        {
+          "id": "layer_04_Cloud04",
+          "kind": "image",
+          "placement": {
+            "x": -117.6,
+            "y": -56.800000000000004,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_01_Distort.png"
+        },
+        {
+          "id": "layer_05_Cloud05",
+          "kind": "image",
+          "placement": {
+            "x": 1186.4,
+            "y": -84.80000000000001,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_01_Distort.png"
+        },
+        {
+          "id": "layer_06_Cloud06",
+          "kind": "image",
+          "placement": {
+            "x": -940,
+            "y": -56.800000000000004,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_01_Distort.png"
+        },
+        {
+          "id": "layer_07_Cloud07",
+          "kind": "image",
+          "placement": {
+            "x": -600,
+            "y": -152.8,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_04_Distort.png"
+        },
+        {
+          "id": "layer_08_Build01",
+          "kind": "image",
+          "placement": {
+            "x": 1242.4,
+            "y": -250.4,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_01.png"
+        },
+        {
+          "id": "layer_09_Build02",
+          "kind": "image",
+          "placement": {
+            "x": -1356,
+            "y": 292,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_01.png"
+        },
+        {
+          "id": "layer_10_Build03",
+          "kind": "image",
+          "placement": {
+            "x": -600.8000000000001,
+            "y": 181.60000000000002,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_02.png"
+        },
+        {
+          "id": "layer_11_Build04",
+          "kind": "image",
+          "placement": {
+            "x": 15.200000000000003,
+            "y": 116.80000000000001,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_03.png"
+        },
+        {
+          "id": "layer_12_Build05",
+          "kind": "image",
+          "placement": {
+            "x": 479.20000000000005,
+            "y": -51.2,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_04.png"
+        },
+        {
+          "id": "layer_13_Build06",
+          "kind": "image",
+          "placement": {
+            "x": 1319.2,
+            "y": -233.60000000000002,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_05.png"
+        },
+        {
+          "id": "layer_14_People",
+          "kind": "skeleton",
+          "placement": {
+            "x": -60,
+            "y": -60,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "ef769c0bfb9014c3c857c4e1f34a7de98cb64526b57679d95d8d96e757bd7f73",
+          "animation": "Anim_Loop",
+          "periodSeconds": 8,
+          "repeats": 5,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_People.json"
+        },
+        {
+          "id": "layer_15_Float",
+          "kind": "skeleton",
+          "placement": {
+            "x": -60,
+            "y": -60,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "941495eb0b29adddf6cda0d9453bcef10377f3499bf0809425a1c58c0fab4f52",
+          "animation": "Anim_Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 12,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_Float.json"
+        },
+        {
+          "id": "layer_16_Ground",
+          "kind": "image",
+          "placement": {
+            "x": 60,
+            "y": -452,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_M_01.png"
+        },
+        {
+          "id": "layer_17_Role",
+          "kind": "skeleton",
+          "placement": {
+            "x": -60,
+            "y": -60,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "1e79a296e986bfbf003f782912ed61e63e70c6ccbf2b7771183449f0b1cf74a9",
+          "animation": "Anim_Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 12,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_C.json"
+        },
+        {
+          "id": "layer_18_Flower",
+          "kind": "skeleton",
+          "placement": {
+            "x": -60,
+            "y": -60,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "0f95f577619cf9821b1f1aac67abc8da8f757375ef75509272ebca4a8b7b077a",
+          "animation": "Anim_Loop",
+          "periodSeconds": 4,
+          "repeats": 10,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_Flower.json"
+        },
+        {
+          "id": "layer_19_Grasses",
+          "kind": "skeleton",
+          "placement": {
+            "x": -60,
+            "y": -60,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "6be486aadaf80e26b4575eedea94e949b1e645c30e00e55693f1e27b61bf4426",
+          "animation": "Anim_Loop",
+          "periodSeconds": 4,
+          "repeats": 10,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_Grasses.json"
+        }
+      ],
+      "textures": [
+        {
+          "file": "image_2_01.png",
+          "size": [
+            20,
+            1024
+          ],
+          "sha256": "54779451e9667fb4031ea046c7fd27293ebd9d76c379ee14066016e96e668092",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Bg_SumeruBirth_MainPage_01_Color.png"
+        },
+        {
+          "file": "image_2_02.png",
+          "size": [
+            640,
+            572
+          ],
+          "sha256": "c657b2c881463da49c053de234eeeb827bdeddbdb07946b5d3cdbd9ddda25574",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_04_Distort.png"
+        },
+        {
+          "file": "image_2_03.png",
+          "size": [
+            882,
+            760
+          ],
+          "sha256": "203c01e6b2ff4087f048532418d4b7240c7a13d8e3712133cd2f21e53f3608bf",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_03_Distort.png"
+        },
+        {
+          "file": "image_2_04.png",
+          "size": [
+            976,
+            748
+          ],
+          "sha256": "37e94104d49f8177e402407d87fb77e356f9f3b8559ef01f84a25c9b9b6c009d",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_01_Distort.png"
+        },
+        {
+          "file": "image_2_05.png",
+          "size": [
+            448,
+            688
+          ],
+          "sha256": "74a5b41a0913ae135f7bc5cd370a1ef21d8e21cae5923022a132e8e730eda45a",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_01.png"
+        },
+        {
+          "file": "image_2_06.png",
+          "size": [
+            588,
+            736
+          ],
+          "sha256": "fe0367bcf7bce191bcfdc5aba1613bf7e43b7f3bb0ab4bdc6ab6d6249a041962",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_02.png"
+        },
+        {
+          "file": "image_2_07.png",
+          "size": [
+            560,
+            740
+          ],
+          "sha256": "761701bfba764c6fa64709ebfe6aeaeb9a06257b2135f1d612ab72763fe149b2",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_03.png"
+        },
+        {
+          "file": "image_2_08.png",
+          "size": [
+            592,
+            668
+          ],
+          "sha256": "ee60a66fcb661a6446e71b07ccb73f5a4ce786e8b2043f51c0433e084cb5f8c2",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_04.png"
+        },
+        {
+          "file": "image_2_09.png",
+          "size": [
+            592,
+            688
+          ],
+          "sha256": "fdc547641d5a49ef60ae5443d59e3c54202a3132b6404be1eb7d96f6ea8aad5e",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_05.png"
+        },
+        {
+          "file": "image_2_10.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "525bb1063ba6174b535647d881b4cc153f7e2e0b6449da195488d6d3e05ddd92",
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01.png"
+        },
+        {
+          "file": "image_2_11.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "d824b2a7676b10c8f648035a6a28d15d4b2122b63483b6c21cfe52990c871c71",
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_2.png"
+        },
+        {
+          "file": "image_2_12.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "6d6eb06e57a1df2d73306ec1f9f2d47956d4e09676a2de908f42837c676f4e9f",
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_3.png"
+        },
+        {
+          "file": "image_2_13.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "ab5a1c708cba193250e26182dce02ab3ca1d64181837263c92d1fbcc7e702b9b",
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_4.png"
+        },
+        {
+          "file": "image_2_14.png",
+          "size": [
+            2048,
+            492
+          ],
+          "sha256": "8e199f59892ad8af61277621173d28982228287c480b4faec8e3cabaece541f4",
+          "historicalSource": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_M_01.png"
+        },
+        {
+          "file": "image_2_15.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "873792a1fea44ad183c6080b0040ba06dc983dccf3830728cfc1b74a82b35d20",
+          "historicalSource": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_C.png"
+        }
+      ],
+      "bones": 733,
+      "slots": 342,
+      "animations": 11,
+      "files": [
+        {
+          "file": "image_2.atlas",
+          "bytes": 18790,
+          "sha256": "797d96f8178fa6d8e139263b9b1b4dc026c2cee8b645c347b3b862d3077f17af"
+        },
+        {
+          "file": "image_2.json",
+          "bytes": 8064293,
+          "sha256": "e05ebb84206b0e50401896057dc559012a213f90ea0439aad373ab18d8c97645"
+        },
+        {
+          "file": "image_2_01.png",
+          "bytes": 2595,
+          "sha256": "54779451e9667fb4031ea046c7fd27293ebd9d76c379ee14066016e96e668092"
+        },
+        {
+          "file": "image_2_02.png",
+          "bytes": 71663,
+          "sha256": "c657b2c881463da49c053de234eeeb827bdeddbdb07946b5d3cdbd9ddda25574"
+        },
+        {
+          "file": "image_2_03.png",
+          "bytes": 114954,
+          "sha256": "203c01e6b2ff4087f048532418d4b7240c7a13d8e3712133cd2f21e53f3608bf"
+        },
+        {
+          "file": "image_2_04.png",
+          "bytes": 139762,
+          "sha256": "37e94104d49f8177e402407d87fb77e356f9f3b8559ef01f84a25c9b9b6c009d"
+        },
+        {
+          "file": "image_2_05.png",
+          "bytes": 204875,
+          "sha256": "74a5b41a0913ae135f7bc5cd370a1ef21d8e21cae5923022a132e8e730eda45a"
+        },
+        {
+          "file": "image_2_06.png",
+          "bytes": 298695,
+          "sha256": "fe0367bcf7bce191bcfdc5aba1613bf7e43b7f3bb0ab4bdc6ab6d6249a041962"
+        },
+        {
+          "file": "image_2_07.png",
+          "bytes": 291552,
+          "sha256": "761701bfba764c6fa64709ebfe6aeaeb9a06257b2135f1d612ab72763fe149b2"
+        },
+        {
+          "file": "image_2_08.png",
+          "bytes": 262404,
+          "sha256": "ee60a66fcb661a6446e71b07ccb73f5a4ce786e8b2043f51c0433e084cb5f8c2"
+        },
+        {
+          "file": "image_2_09.png",
+          "bytes": 236727,
+          "sha256": "fdc547641d5a49ef60ae5443d59e3c54202a3132b6404be1eb7d96f6ea8aad5e"
+        },
+        {
+          "file": "image_2_10.png",
+          "bytes": 1032910,
+          "sha256": "525bb1063ba6174b535647d881b4cc153f7e2e0b6449da195488d6d3e05ddd92"
+        },
+        {
+          "file": "image_2_11.png",
+          "bytes": 1010824,
+          "sha256": "d824b2a7676b10c8f648035a6a28d15d4b2122b63483b6c21cfe52990c871c71"
+        },
+        {
+          "file": "image_2_12.png",
+          "bytes": 837570,
+          "sha256": "6d6eb06e57a1df2d73306ec1f9f2d47956d4e09676a2de908f42837c676f4e9f"
+        },
+        {
+          "file": "image_2_13.png",
+          "bytes": 855203,
+          "sha256": "ab5a1c708cba193250e26182dce02ab3ca1d64181837263c92d1fbcc7e702b9b"
+        },
+        {
+          "file": "image_2_14.png",
+          "bytes": 841391,
+          "sha256": "8e199f59892ad8af61277621173d28982228287c480b4faec8e3cabaece541f4"
+        },
+        {
+          "file": "image_2_15.png",
+          "bytes": 1389688,
+          "sha256": "873792a1fea44ad183c6080b0040ba06dc983dccf3830728cfc1b74a82b35d20"
+        }
+      ]
+    },
+    {
+      "name": "image_3",
+      "reference": "asserts/player/images/image_3.png",
+      "unitScale": 0.4,
+      "viewport": {
+        "spine": "4.0.17",
+        "x": -2400,
+        "y": -1350,
+        "width": 4800,
+        "height": 2700,
+        "fps": 30,
+        "images": "./"
+      },
+      "loopSeconds": 50,
+      "layers": [
+        {
+          "id": "layer_00_Sky",
+          "kind": "image",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 1.2000000000000002,
+            "scaleY": 1.2000000000000002
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Bg_SumeruBirth_MainPage_02_Color.png"
+        },
+        {
+          "id": "layer_01_Cloud01",
+          "kind": "image",
+          "placement": {
+            "x": -1323.2,
+            "y": 32,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_07_Distort.png"
+        },
+        {
+          "id": "layer_02_Cloud02",
+          "kind": "image",
+          "placement": {
+            "x": -1058.4,
+            "y": -1.6,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_06_Distort.png"
+        },
+        {
+          "id": "layer_03_Cloud03",
+          "kind": "image",
+          "placement": {
+            "x": 732.8000000000001,
+            "y": 32,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_07_Distort.png"
+        },
+        {
+          "id": "layer_04_Cloud04",
+          "kind": "image",
+          "placement": {
+            "x": 980.8,
+            "y": -97.60000000000001,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_06_Distort.png"
+        },
+        {
+          "id": "layer_05_Cloud05",
+          "kind": "image",
+          "placement": {
+            "x": 497.6,
+            "y": -146.4,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_03_Distort.png"
+        },
+        {
+          "id": "layer_06_Cloud06",
+          "kind": "image",
+          "placement": {
+            "x": 726.4000000000001,
+            "y": -132,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_06_Distort.png"
+        },
+        {
+          "id": "layer_07_Cloud07",
+          "kind": "image",
+          "placement": {
+            "x": 484.80000000000007,
+            "y": -292.8,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_01_Distort.png"
+        },
+        {
+          "id": "layer_08_Cloud08",
+          "kind": "image",
+          "placement": {
+            "x": -36,
+            "y": 88,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_05_Distort.png"
+        },
+        {
+          "id": "layer_09_Cloud09",
+          "kind": "image",
+          "placement": {
+            "x": -212.8,
+            "y": 4.800000000000001,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_04_Distort.png"
+        },
+        {
+          "id": "layer_10_Cloud10",
+          "kind": "image",
+          "placement": {
+            "x": -795.2,
+            "y": 103.2,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_07_Distort.png"
+        },
+        {
+          "id": "layer_11_Cloud11",
+          "kind": "image",
+          "placement": {
+            "x": -817.6,
+            "y": -65.60000000000001,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_06_Distort.png"
+        },
+        {
+          "id": "layer_12_Cloud12",
+          "kind": "image",
+          "placement": {
+            "x": -549.6,
+            "y": -17.6,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_03_Distort.png"
+        },
+        {
+          "id": "layer_13_Cloud13",
+          "kind": "image",
+          "placement": {
+            "x": 116.80000000000001,
+            "y": -107.2,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_02_Distort.png"
+        },
+        {
+          "id": "layer_14_GreenCloud",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "546947da5ac038093584d9038cdce1872b7885264495e4c5d486e21f98511d2e",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_GC.json"
+        },
+        {
+          "id": "layer_15_Float03",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "c4b001f7d27518ddd7081a45ed7b665e769bb492154de1d7c1e9afab05c9d5ca",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_F3.json"
+        },
+        {
+          "id": "layer_16_Bubble",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "0bbebf2629283810e5c056803853c14f24d95a576cd766d132eb5001396986e6",
+          "animation": "Loop",
+          "periodSeconds": 50.000003814697266,
+          "repeats": 1,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_BB.json"
+        },
+        {
+          "id": "layer_17_Role",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "02c6bf4c50fc88ff2bbc72341a00eacab45263669436191aa98386b43b4ba283",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_C.json"
+        },
+        {
+          "id": "layer_18_Bubble",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "b158ba9c80df7ee92a0a7b888a1252a52f76e47803ca5be9faec098568b215a8",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_B.json"
+        },
+        {
+          "id": "layer_19_WhiteCloud",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "45826728c230a954e0b34a00ec4821c0dfba60371541ce0033857fef0c9f2ecc",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_WC.json"
+        },
+        {
+          "id": "layer_20_Float02",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "e74e2e10d2feb27ed9d9765483efcfbb71fb0705ce66c045e55f8ef6ca22aa25",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_F2.json"
+        },
+        {
+          "id": "layer_21_BlueCloud",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "4f9c7bd45f12017819bdb71be12ce7435f7f70176229dfaa67018716edcf46f8",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_BC.json"
+        },
+        {
+          "id": "layer_22_Float01",
+          "kind": "skeleton",
+          "placement": {
+            "x": -120,
+            "y": 0,
+            "scaleX": 0.4,
+            "scaleY": 0.4
+          },
+          "sourceSha256": "969fd4a99884544a4bbd2650f3fed9d707ff9980b7455ecd0b8a52c42dbaa7a3",
+          "animation": "Loop",
+          "periodSeconds": 3.3333334922790527,
+          "repeats": 15,
+          "originalAnimations": [
+            "Fadein",
+            "Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_F1.json"
+        }
+      ],
+      "textures": [
+        {
+          "file": "image_3_01.png",
+          "size": [
+            20,
+            1024
+          ],
+          "sha256": "fa37ad09fa94d35f83aa6a33be35ed6e8f958ec5ff3cc25f69e9cf0f17474154",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Bg_SumeruBirth_MainPage_02_Color.png"
+        },
+        {
+          "file": "image_3_02.png",
+          "size": [
+            380,
+            302
+          ],
+          "sha256": "6710b32f6479384f5510cecb32296a988d6221091a40990b5fdd004f1552471d",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_07_Distort.png"
+        },
+        {
+          "file": "image_3_03.png",
+          "size": [
+            590,
+            422
+          ],
+          "sha256": "8c98d6826493eae4736166a4da3790fbeef3deee2bf25f0eb178b884c5f3323d",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_06_Distort.png"
+        },
+        {
+          "file": "image_3_04.png",
+          "size": [
+            402,
+            416
+          ],
+          "sha256": "058988b36af9c9a8f004d7de508f9aeca883c19a149a21756361df387d1d57da",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_03_Distort.png"
+        },
+        {
+          "file": "image_3_05.png",
+          "size": [
+            744,
+            486
+          ],
+          "sha256": "df140192c6a84992d6df50c9280d0d0e218fd3dde23087b334d6a32422cd34a1",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_01_Distort.png"
+        },
+        {
+          "file": "image_3_06.png",
+          "size": [
+            566,
+            544
+          ],
+          "sha256": "2e39ce8f24d839b95142fcfcefc23b72cbeba92397e211f4ae77b6ac4117b636",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_05_Distort.png"
+        },
+        {
+          "file": "image_3_07.png",
+          "size": [
+            722,
+            658
+          ],
+          "sha256": "648a9e37d288206faa48422f289e7147e3effc2f6fcd30af0f4ad997e46f1e0d",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_04_Distort.png"
+        },
+        {
+          "file": "image_3_08.png",
+          "size": [
+            542,
+            480
+          ],
+          "sha256": "003561c83449e3714a980453c433d64b03a2ba4cdd9622ff712cab3568dd6a30",
+          "historicalSource": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_02_Distort.png"
+        },
+        {
+          "file": "image_3_09.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "5e555d157e56196d5fc924db33f26e4b5a75eaefb3b0757b45e1035fdaf74092",
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02.png"
+        },
+        {
+          "file": "image_3_10.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "a59994bf0f2cee19e955dfac73501c192ac072f833c9ce14b68b4c6c4bb06b41",
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_2.png"
+        },
+        {
+          "file": "image_3_11.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "7dc752ab4fc1a4529e903cd6e139e31cd2ff8e4cdf0586be25b8ab8a3f9c25db",
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_3.png"
+        },
+        {
+          "file": "image_3_12.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "51c0edee6e9a8f5efe08a28e492dd37e5ef02091a0b6732dc7aed0709cbd893d",
+          "historicalSource": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_C.png"
+        }
+      ],
+      "bones": 655,
+      "slots": 186,
+      "animations": 19,
+      "files": [
+        {
+          "file": "image_3.atlas",
+          "bytes": 10116,
+          "sha256": "d617d60949517c7bc0bc5d21a2ee1e02af6cb8b4788254390cf5f3bfe1d4c2c8"
+        },
+        {
+          "file": "image_3.json",
+          "bytes": 5522716,
+          "sha256": "b87f55a9e3be23b77a2e195d6d06119b4cef6e38de93ff852844e56b8a394a32"
+        },
+        {
+          "file": "image_3_01.png",
+          "bytes": 2509,
+          "sha256": "fa37ad09fa94d35f83aa6a33be35ed6e8f958ec5ff3cc25f69e9cf0f17474154"
+        },
+        {
+          "file": "image_3_02.png",
+          "bytes": 34303,
+          "sha256": "6710b32f6479384f5510cecb32296a988d6221091a40990b5fdd004f1552471d"
+        },
+        {
+          "file": "image_3_03.png",
+          "bytes": 52264,
+          "sha256": "8c98d6826493eae4736166a4da3790fbeef3deee2bf25f0eb178b884c5f3323d"
+        },
+        {
+          "file": "image_3_04.png",
+          "bytes": 64979,
+          "sha256": "058988b36af9c9a8f004d7de508f9aeca883c19a149a21756361df387d1d57da"
+        },
+        {
+          "file": "image_3_05.png",
+          "bytes": 47127,
+          "sha256": "df140192c6a84992d6df50c9280d0d0e218fd3dde23087b334d6a32422cd34a1"
+        },
+        {
+          "file": "image_3_06.png",
+          "bytes": 46491,
+          "sha256": "2e39ce8f24d839b95142fcfcefc23b72cbeba92397e211f4ae77b6ac4117b636"
+        },
+        {
+          "file": "image_3_07.png",
+          "bytes": 56215,
+          "sha256": "648a9e37d288206faa48422f289e7147e3effc2f6fcd30af0f4ad997e46f1e0d"
+        },
+        {
+          "file": "image_3_08.png",
+          "bytes": 38755,
+          "sha256": "003561c83449e3714a980453c433d64b03a2ba4cdd9622ff712cab3568dd6a30"
+        },
+        {
+          "file": "image_3_09.png",
+          "bytes": 1195928,
+          "sha256": "5e555d157e56196d5fc924db33f26e4b5a75eaefb3b0757b45e1035fdaf74092"
+        },
+        {
+          "file": "image_3_10.png",
+          "bytes": 913089,
+          "sha256": "a59994bf0f2cee19e955dfac73501c192ac072f833c9ce14b68b4c6c4bb06b41"
+        },
+        {
+          "file": "image_3_11.png",
+          "bytes": 497182,
+          "sha256": "7dc752ab4fc1a4529e903cd6e139e31cd2ff8e4cdf0586be25b8ab8a3f9c25db"
+        },
+        {
+          "file": "image_3_12.png",
+          "bytes": 1042955,
+          "sha256": "51c0edee6e9a8f5efe08a28e492dd37e5ef02091a0b6732dc7aed0709cbd893d"
+        }
+      ]
+    },
+    {
+      "name": "image_4",
+      "reference": "asserts/player/images/image_4.png",
+      "unitScale": 0.8,
+      "viewport": {
+        "spine": "4.0.17",
+        "x": -1200,
+        "y": -675,
+        "width": 2400,
+        "height": 1350,
+        "fps": 30,
+        "images": "./"
+      },
+      "loopSeconds": 16,
+      "layers": [
+        {
+          "id": "layer_00_Sky",
+          "kind": "image",
+          "placement": {
+            "x": 0,
+            "y": -24,
+            "scaleX": 1.2000000000000002,
+            "scaleY": 1.2000000000000002
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Bg_SumeruBirth_MainPage_03_Color.png"
+        },
+        {
+          "id": "layer_01_Cloud01",
+          "kind": "image",
+          "placement": {
+            "x": -606.4,
+            "y": 78.4,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_08_Distort.png"
+        },
+        {
+          "id": "layer_02_Cloud02",
+          "kind": "image",
+          "placement": {
+            "x": -993.6,
+            "y": 126.4,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_05_Distort.png"
+        },
+        {
+          "id": "layer_03_Cloud03",
+          "kind": "image",
+          "placement": {
+            "x": -1150.4,
+            "y": 25.599999999999994,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_09_Distort.png"
+        },
+        {
+          "id": "layer_04_Cloud04",
+          "kind": "image",
+          "placement": {
+            "x": -900,
+            "y": -24,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_10_Distort.png"
+        },
+        {
+          "id": "layer_05_Cloud05",
+          "kind": "image",
+          "placement": {
+            "x": 1227.2,
+            "y": -24,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_02_Distort.png"
+        },
+        {
+          "id": "layer_06_Cloud06",
+          "kind": "image",
+          "placement": {
+            "x": 740.8000000000001,
+            "y": -24,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_10_Distort.png"
+        },
+        {
+          "id": "layer_07_Cloud07",
+          "kind": "image",
+          "placement": {
+            "x": 1009.6,
+            "y": -156.8,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_09_Distort.png"
+        },
+        {
+          "id": "layer_08_Cloud08",
+          "kind": "image",
+          "placement": {
+            "x": 344,
+            "y": -94.4,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_06_Distort.png"
+        },
+        {
+          "id": "layer_09_Cloud09",
+          "kind": "image",
+          "placement": {
+            "x": 372,
+            "y": -168.8,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_05_Distort.png"
+        },
+        {
+          "id": "layer_10_Cloud10",
+          "kind": "image",
+          "placement": {
+            "x": 113.60000000000001,
+            "y": -65.60000000000002,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_04_Distort.png"
+        },
+        {
+          "id": "layer_11_Cloud11",
+          "kind": "image",
+          "placement": {
+            "x": 132.8,
+            "y": -58.400000000000006,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_03_Distort.png"
+        },
+        {
+          "id": "layer_12_Cloud12",
+          "kind": "image",
+          "placement": {
+            "x": -208.8,
+            "y": 61.599999999999994,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_02_Distort.png"
+        },
+        {
+          "id": "layer_13_Cloud13",
+          "kind": "image",
+          "placement": {
+            "x": -182.4,
+            "y": -8,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_01_Distort.png"
+        },
+        {
+          "id": "layer_14_Knight",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "76765296c165d791ad01e1a273e5de07416a5802c469c0a7a7a4312884ca953a",
+          "animation": "Anim_Loop",
+          "periodSeconds": 8,
+          "repeats": 2,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Knight.json"
+        },
+        {
+          "id": "layer_15_Ground",
+          "kind": "image",
+          "placement": {
+            "x": 0,
+            "y": -360,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_M_02.png"
+        },
+        {
+          "id": "layer_16_Aranara02",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "3efbe8000c0dfa038d1f2ee3b507b2160aa8d80220f8490de35345f531bd8fbc",
+          "animation": "Anim_Loop",
+          "periodSeconds": 8,
+          "repeats": 2,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_A02.json"
+        },
+        {
+          "id": "layer_17_Flower",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "e14679898d8343a8c363b3905221daa60200e0391f15978374764d6877eb459b",
+          "animation": "Anim_Loop",
+          "periodSeconds": 8,
+          "repeats": 2,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Flower_B.json"
+        },
+        {
+          "id": "layer_18_Role",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "ffdc3535ff2453d13b8053ef868b1b2245ed4971e95a295d714c857c478fa49d",
+          "animation": "Anim_Loop",
+          "periodSeconds": 16,
+          "repeats": 1,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_C.json"
+        },
+        {
+          "id": "layer_19_Aranara01",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "b75f6a733ba744043ee60501bc23290af987f2a2e0e07527c6b2fc151d67fe29",
+          "animation": "Anim_Loop",
+          "periodSeconds": 8,
+          "repeats": 2,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_A01.json"
+        },
+        {
+          "id": "layer_20_Flower",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "08f920aa2e63ca915a0ca6d59b878c9ef9e69f597bafb8a0554dc55c0c67ae79",
+          "animation": "Anim_Loop",
+          "periodSeconds": 8,
+          "repeats": 2,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Flower.json"
+        },
+        {
+          "id": "layer_21_Grasses",
+          "kind": "skeleton",
+          "placement": {
+            "x": 0,
+            "y": -240,
+            "scaleX": 0.8,
+            "scaleY": 0.8
+          },
+          "sourceSha256": "3f3d9f6bcfc40917a222e7c50c0dc69c0facc82fa185c275e682f9946e429894",
+          "animation": "Anim_Loop",
+          "periodSeconds": 4,
+          "repeats": 4,
+          "originalAnimations": [
+            "Anim_FadeIn",
+            "Anim_Loop"
+          ],
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Grasses.json"
+        }
+      ],
+      "textures": [
+        {
+          "file": "image_4_01.png",
+          "size": [
+            20,
+            1024
+          ],
+          "sha256": "aa9599b4caecc18e73f3d52d80b332ceadc184ae2bdac64417f415653e436558",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Bg_SumeruBirth_MainPage_03_Color.png"
+        },
+        {
+          "file": "image_4_02.png",
+          "size": [
+            562,
+            490
+          ],
+          "sha256": "2311525da46f9e338d0d6c6ef1774e8b10a05b795890b2c7e588970f0c98c448",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_08_Distort.png"
+        },
+        {
+          "file": "image_4_03.png",
+          "size": [
+            376,
+            294
+          ],
+          "sha256": "5488412d38f0e93c2df26a000dd9f991ec9c008ef78b571290409ab2275067d0",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_05_Distort.png"
+        },
+        {
+          "file": "image_4_04.png",
+          "size": [
+            604,
+            384
+          ],
+          "sha256": "160f21aa58604c7b434e99e40f965853914dd9c29f972b89eb56efe9ddc991d8",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_09_Distort.png"
+        },
+        {
+          "file": "image_4_05.png",
+          "size": [
+            510,
+            368
+          ],
+          "sha256": "0b028b63f6230e48c5a41c5181b17616bfad2a61fa6957d81ac6aff5176de911",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_10_Distort.png"
+        },
+        {
+          "file": "image_4_06.png",
+          "size": [
+            716,
+            588
+          ],
+          "sha256": "1aaae0d81c7ba9b5154766c627a20ee971a5fc3b4867ee003d6e6c53ad0c986c",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_02_Distort.png"
+        },
+        {
+          "file": "image_4_07.png",
+          "size": [
+            636,
+            494
+          ],
+          "sha256": "a285e672acda86d2ffcbc8159e4786f455aba407a030e46dd037037058a8c31f",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_06_Distort.png"
+        },
+        {
+          "file": "image_4_08.png",
+          "size": [
+            618,
+            572
+          ],
+          "sha256": "db1daa04018d88664830d1a61edc7457b5a53add89ea8468a684c2404c019116",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_04_Distort.png"
+        },
+        {
+          "file": "image_4_09.png",
+          "size": [
+            446,
+            396
+          ],
+          "sha256": "ddf4dedac38b85a516427f3b47c0c9c2554cc9cb912deafbadbf1e3033b036c5",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_03_Distort.png"
+        },
+        {
+          "file": "image_4_10.png",
+          "size": [
+            562,
+            478
+          ],
+          "sha256": "a9d0382591ba8139dc610a43624f4fe870092fd6b0ecdc4eb6bc8b60f778ca54",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_01_Distort.png"
+        },
+        {
+          "file": "image_4_11.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "541ac496d150360e5665757853b472f10782165ff9b0e813b68840e66947675e",
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03.png"
+        },
+        {
+          "file": "image_4_12.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "b9a220424a49e5c09f99e1429921fbbc5df40cc6e31d7c7382ef34dd5128ceef",
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_2.png"
+        },
+        {
+          "file": "image_4_13.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "484b23ac082b1bc86bfcf6af39744668e13015c09685d9efd48f1b84695c410e",
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_3.png"
+        },
+        {
+          "file": "image_4_14.png",
+          "size": [
+            1024,
+            496
+          ],
+          "sha256": "7534848cd26e8741df1b435e6977413e571c73313c680be44e941abd053af1a0",
+          "historicalSource": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_M_02.png"
+        },
+        {
+          "file": "image_4_15.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "sha256": "6e13e84b0c3dfc0a20891e08b44d2c3926c7c2c13497a110d4932d9b124f7a95",
+          "historicalSource": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_C.png"
+        }
+      ],
+      "bones": 674,
+      "slots": 258,
+      "animations": 15,
+      "files": [
+        {
+          "file": "image_4.atlas",
+          "bytes": 15105,
+          "sha256": "ca7b46d3cddbc6f8d27608278c46b33efe7c05e4ed85bb3163abdc6bf774f434"
+        },
+        {
+          "file": "image_4.json",
+          "bytes": 6232927,
+          "sha256": "d056ad0ca3460944644b5c95c62801772f6052f73ce175aa49d5404ee8f08488"
+        },
+        {
+          "file": "image_4_01.png",
+          "bytes": 2403,
+          "sha256": "aa9599b4caecc18e73f3d52d80b332ceadc184ae2bdac64417f415653e436558"
+        },
+        {
+          "file": "image_4_02.png",
+          "bytes": 101029,
+          "sha256": "2311525da46f9e338d0d6c6ef1774e8b10a05b795890b2c7e588970f0c98c448"
+        },
+        {
+          "file": "image_4_03.png",
+          "bytes": 121989,
+          "sha256": "5488412d38f0e93c2df26a000dd9f991ec9c008ef78b571290409ab2275067d0"
+        },
+        {
+          "file": "image_4_04.png",
+          "bytes": 227368,
+          "sha256": "160f21aa58604c7b434e99e40f965853914dd9c29f972b89eb56efe9ddc991d8"
+        },
+        {
+          "file": "image_4_05.png",
+          "bytes": 157286,
+          "sha256": "0b028b63f6230e48c5a41c5181b17616bfad2a61fa6957d81ac6aff5176de911"
+        },
+        {
+          "file": "image_4_06.png",
+          "bytes": 297821,
+          "sha256": "1aaae0d81c7ba9b5154766c627a20ee971a5fc3b4867ee003d6e6c53ad0c986c"
+        },
+        {
+          "file": "image_4_07.png",
+          "bytes": 199875,
+          "sha256": "a285e672acda86d2ffcbc8159e4786f455aba407a030e46dd037037058a8c31f"
+        },
+        {
+          "file": "image_4_08.png",
+          "bytes": 182153,
+          "sha256": "db1daa04018d88664830d1a61edc7457b5a53add89ea8468a684c2404c019116"
+        },
+        {
+          "file": "image_4_09.png",
+          "bytes": 185621,
+          "sha256": "ddf4dedac38b85a516427f3b47c0c9c2554cc9cb912deafbadbf1e3033b036c5"
+        },
+        {
+          "file": "image_4_10.png",
+          "bytes": 214927,
+          "sha256": "a9d0382591ba8139dc610a43624f4fe870092fd6b0ecdc4eb6bc8b60f778ca54"
+        },
+        {
+          "file": "image_4_11.png",
+          "bytes": 1048043,
+          "sha256": "541ac496d150360e5665757853b472f10782165ff9b0e813b68840e66947675e"
+        },
+        {
+          "file": "image_4_12.png",
+          "bytes": 874290,
+          "sha256": "b9a220424a49e5c09f99e1429921fbbc5df40cc6e31d7c7382ef34dd5128ceef"
+        },
+        {
+          "file": "image_4_13.png",
+          "bytes": 722296,
+          "sha256": "484b23ac082b1bc86bfcf6af39744668e13015c09685d9efd48f1b84695c410e"
+        },
+        {
+          "file": "image_4_14.png",
+          "bytes": 89195,
+          "sha256": "7534848cd26e8741df1b435e6977413e571c73313c680be44e941abd053af1a0"
+        },
+        {
+          "file": "image_4_15.png",
+          "bytes": 1195905,
+          "sha256": "6e13e84b0c3dfc0a20891e08b44d2c3926c7c2c13497a110d4932d9b124f7a95"
+        }
+      ]
+    }
+  ],
+  "referenceFiles": [
+    {
+      "file": "asserts/player/images/image_0.png",
+      "sha256": "9e0c501914fbff825a6e09144ee8da46530e05b13155bfe3b20ccf4c7856843a"
+    },
+    {
+      "file": "asserts/player/images/image_1.png",
+      "sha256": "5cce1d6f5ffed9638135bd83b0eb5c107fd9f1da5dd5c9c280355df146d16a0c"
+    },
+    {
+      "file": "asserts/player/images/image_2.png",
+      "sha256": "91da9a74b69a28e3b0b94d402398e6ed9d48dde99af60b08a10c3d3fcf4e700e"
+    },
+    {
+      "file": "asserts/player/images/image_3.png",
+      "sha256": "2a4c25407b543daa186af87bc6a42c9f8de38098b6bd2eddcb87bafde219f405"
+    },
+    {
+      "file": "asserts/player/images/image_4.png",
+      "sha256": "87ea40c4637ebdb0192765291e902b06e3de80bd81ce08760cc2279a188d6ce5"
+    }
+  ],
+  "sourceArchive": {
+    "status": "deleted-by-explicit-user-request",
+    "date": "2026-10-16",
+    "directory": "asserts/player-source",
+    "retainedFiles": 0,
+    "historicalFileCount": 101
+  },
+  "historicalSourceFiles": [
+    {
+      "file": "asserts/player-source/README.md",
+      "sha256": "b80d904212e0748e984a128bf482df62f2b0ee3d05cbab5f5b417d83984326cb"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine.atlas.txt",
+      "sha256": "ed12d554a6fee8b5bf8cef4e63bf9e994e3161f4f7045c7ec0594a6d15d00704"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine.png",
+      "sha256": "7c4824c6ef74f704b05c5a57d183e933fa6eeab7107fb34a72af217e36d14dfe"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_01.json",
+      "sha256": "d665aa34b55da05235cb1884812a55c922a04b23c6070dcf441cfdb8ed04003a"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02.atlas.txt",
+      "sha256": "70e3e9888b7adc0b337209a93296d11793821b5c3247f66921db428f27bc0a1d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02.json",
+      "sha256": "58934779d0ee6f0e3a646b4da41aded0a0816b50c85ac2a68998cf38315d2623"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02.png",
+      "sha256": "1c4d9aadc5ca38b9d7f4b22b53bf0c81108dd2ad2993f36006529027c10f37b2"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_02_2.png",
+      "sha256": "ad8a31f90f51cecbf39890e5224f3907d9e761257ae50aa69b6585a051120706"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_03.json",
+      "sha256": "cd4fdf6f536587ee0969b2f80a3c8f780b32a237010c11ebff6777b0cb3c0dc8"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_04.json",
+      "sha256": "31370d3c45b505d6d7668a9344185a2720218ded18748a48cd966ebabadd0c5d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_2.png",
+      "sha256": "ff3503c1865a967e162d1c5fee3dcb6720efab1e79631a9276ba39473a558af3"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/spine/Eff_UI_Activity_SumeruBirth_Spine_3.png",
+      "sha256": "9c85cbbc948d36d04684b25c66231538bdba76911b69696ad5cb3f05f85bae35"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/textures/UI_Frm_SumeruBirth_KV_Gradient.png",
+      "sha256": "68fe6ce7c0e16948675a581697e767cdc7a63dbcfe90b7d68527098f712b450b"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Building.png",
+      "sha256": "16ba64e2cd7c860cd1eb790aac6f8ec461d377d6accb9f5b010ce9635a88fd23"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Cloud01.png",
+      "sha256": "c478da2111cf1b7a4706617494dcd0fcb67595c1cc06d2d358911e30062e47da"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Cloud02.png",
+      "sha256": "c25ed711c1c89ec6411cb8b82e95cc2d0d13ae63d3beb1344f333315350d3492"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Float.png",
+      "sha256": "5f7e0daac414536c47be924a4983e5e6a3d76d3be356cd27e3c0d4834662bbe6"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p0/textures/UI_Img_SumeruBirth_KV_Grounds.png",
+      "sha256": "a6c87a83eea86cf739b7f4d11e6b0380bc5ef6ade0a19cbf4f9b3426280122d8"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01.atlas.txt",
+      "sha256": "f65760c362f0df4f2eecc3122a5904570caf41d66c4eb2589deea867aa0bdfce"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01.png",
+      "sha256": "525bb1063ba6174b535647d881b4cc153f7e2e0b6449da195488d6d3e05ddd92"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_2.png",
+      "sha256": "d824b2a7676b10c8f648035a6a28d15d4b2122b63483b6c21cfe52990c871c71"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_3.png",
+      "sha256": "6d6eb06e57a1df2d73306ec1f9f2d47956d4e09676a2de908f42837c676f4e9f"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_4.png",
+      "sha256": "ab5a1c708cba193250e26182dce02ab3ca1d64181837263c92d1fbcc7e702b9b"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_C.atlas.txt",
+      "sha256": "c8f8868208381e132de904f437506cb562e1efac650c423cc45b2a8395c0c902"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_C.json",
+      "sha256": "1e79a296e986bfbf003f782912ed61e63e70c6ccbf2b7771183449f0b1cf74a9"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_C.png",
+      "sha256": "873792a1fea44ad183c6080b0040ba06dc983dccf3830728cfc1b74a82b35d20"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_Float.json",
+      "sha256": "941495eb0b29adddf6cda0d9453bcef10377f3499bf0809425a1c58c0fab4f52"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_Flower.json",
+      "sha256": "0f95f577619cf9821b1f1aac67abc8da8f757375ef75509272ebca4a8b7b077a"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_Grasses.json",
+      "sha256": "6be486aadaf80e26b4575eedea94e949b1e645c30e00e55693f1e27b61bf4426"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/spine/Eff_UI_SumeruBirthMainPage_Spine01_People.json",
+      "sha256": "ef769c0bfb9014c3c857c4e1f34a7de98cb64526b57679d95d8d96e757bd7f73"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Bg_SumeruBirth_MainPage_01_Color.png",
+      "sha256": "54779451e9667fb4031ea046c7fd27293ebd9d76c379ee14066016e96e668092"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_01.png",
+      "sha256": "74a5b41a0913ae135f7bc5cd370a1ef21d8e21cae5923022a132e8e730eda45a"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_02.png",
+      "sha256": "fe0367bcf7bce191bcfdc5aba1613bf7e43b7f3bb0ab4bdc6ab6d6249a041962"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_03.png",
+      "sha256": "761701bfba764c6fa64709ebfe6aeaeb9a06257b2135f1d612ab72763fe149b2"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_04.png",
+      "sha256": "ee60a66fcb661a6446e71b07ccb73f5a4ce786e8b2043f51c0433e084cb5f8c2"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Build_05.png",
+      "sha256": "fdc547641d5a49ef60ae5443d59e3c54202a3132b6404be1eb7d96f6ea8aad5e"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_01_Distort.png",
+      "sha256": "37e94104d49f8177e402407d87fb77e356f9f3b8559ef01f84a25c9b9b6c009d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_03_Distort.png",
+      "sha256": "203c01e6b2ff4087f048532418d4b7240c7a13d8e3712133cd2f21e53f3608bf"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_Cloud_04_Distort.png",
+      "sha256": "c657b2c881463da49c053de234eeeb827bdeddbdb07946b5d3cdbd9ddda25574"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p1/textures/UI_Img_SumeruBirth_MainPage_01_M_01.png",
+      "sha256": "8e199f59892ad8af61277621173d28982228287c480b4faec8e3cabaece541f4"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02.atlas.txt",
+      "sha256": "43c925e83728d7b507afe1876496625a7e94af6214d918b8350a57c4afdf67dc"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02.png",
+      "sha256": "5e555d157e56196d5fc924db33f26e4b5a75eaefb3b0757b45e1035fdaf74092"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_2.png",
+      "sha256": "a59994bf0f2cee19e955dfac73501c192ac072f833c9ce14b68b4c6c4bb06b41"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_3.png",
+      "sha256": "7dc752ab4fc1a4529e903cd6e139e31cd2ff8e4cdf0586be25b8ab8a3f9c25db"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_B.json",
+      "sha256": "b158ba9c80df7ee92a0a7b888a1252a52f76e47803ca5be9faec098568b215a8"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_BB.json",
+      "sha256": "0bbebf2629283810e5c056803853c14f24d95a576cd766d132eb5001396986e6"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_BC.json",
+      "sha256": "4f9c7bd45f12017819bdb71be12ce7435f7f70176229dfaa67018716edcf46f8"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_C.atlas.txt",
+      "sha256": "5241ea463abf57aaca493c113332d2a4451fd8739dcebfbb8bf349ebc75cbb11"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_C.json",
+      "sha256": "02c6bf4c50fc88ff2bbc72341a00eacab45263669436191aa98386b43b4ba283"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_C.png",
+      "sha256": "51c0edee6e9a8f5efe08a28e492dd37e5ef02091a0b6732dc7aed0709cbd893d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_F1.json",
+      "sha256": "969fd4a99884544a4bbd2650f3fed9d707ff9980b7455ecd0b8a52c42dbaa7a3"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_F2.json",
+      "sha256": "e74e2e10d2feb27ed9d9765483efcfbb71fb0705ce66c045e55f8ef6ca22aa25"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_F3.json",
+      "sha256": "c4b001f7d27518ddd7081a45ed7b665e769bb492154de1d7c1e9afab05c9d5ca"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_GC.json",
+      "sha256": "546947da5ac038093584d9038cdce1872b7885264495e4c5d486e21f98511d2e"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/spine/Eff_UI_SumeruBirthMainPage_Spine02_WC.json",
+      "sha256": "45826728c230a954e0b34a00ec4821c0dfba60371541ce0033857fef0c9f2ecc"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Bg_SumeruBirth_MainPage_02_Color.png",
+      "sha256": "fa37ad09fa94d35f83aa6a33be35ed6e8f958ec5ff3cc25f69e9cf0f17474154"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_01_Distort.png",
+      "sha256": "df140192c6a84992d6df50c9280d0d0e218fd3dde23087b334d6a32422cd34a1"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_02_Distort.png",
+      "sha256": "003561c83449e3714a980453c433d64b03a2ba4cdd9622ff712cab3568dd6a30"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_03_Distort.png",
+      "sha256": "058988b36af9c9a8f004d7de508f9aeca883c19a149a21756361df387d1d57da"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_04_Distort.png",
+      "sha256": "648a9e37d288206faa48422f289e7147e3effc2f6fcd30af0f4ad997e46f1e0d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_05_Distort.png",
+      "sha256": "2e39ce8f24d839b95142fcfcefc23b72cbeba92397e211f4ae77b6ac4117b636"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_06_Distort.png",
+      "sha256": "8c98d6826493eae4736166a4da3790fbeef3deee2bf25f0eb178b884c5f3323d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p2/textures/UI_Img_SumeruBirth_MainPage_02_Cloud_07_Distort.png",
+      "sha256": "6710b32f6479384f5510cecb32296a988d6221091a40990b5fdd004f1552471d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03.atlas.txt",
+      "sha256": "09331f5cb47398c229c375dd3dacf97571d33173ff8aae0d4bc1d81ed43c66f3"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03.png",
+      "sha256": "541ac496d150360e5665757853b472f10782165ff9b0e813b68840e66947675e"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_2.png",
+      "sha256": "b9a220424a49e5c09f99e1429921fbbc5df40cc6e31d7c7382ef34dd5128ceef"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_3.png",
+      "sha256": "484b23ac082b1bc86bfcf6af39744668e13015c09685d9efd48f1b84695c410e"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_A01.json",
+      "sha256": "b75f6a733ba744043ee60501bc23290af987f2a2e0e07527c6b2fc151d67fe29"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_A02.json",
+      "sha256": "3efbe8000c0dfa038d1f2ee3b507b2160aa8d80220f8490de35345f531bd8fbc"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_C.atlas.txt",
+      "sha256": "c93a26bee28c55a59c8ef2cef969904fee4aba3c39eeff8fd09805b4df77c136"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_C.json",
+      "sha256": "ffdc3535ff2453d13b8053ef868b1b2245ed4971e95a295d714c857c478fa49d"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_C.png",
+      "sha256": "6e13e84b0c3dfc0a20891e08b44d2c3926c7c2c13497a110d4932d9b124f7a95"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Flower.json",
+      "sha256": "08f920aa2e63ca915a0ca6d59b878c9ef9e69f597bafb8a0554dc55c0c67ae79"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Flower_B.json",
+      "sha256": "e14679898d8343a8c363b3905221daa60200e0391f15978374764d6877eb459b"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Grasses.json",
+      "sha256": "3f3d9f6bcfc40917a222e7c50c0dc69c0facc82fa185c275e682f9946e429894"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/spine/Eff_UI_SumeruBirthMainPage_Spine03_Knight.json",
+      "sha256": "76765296c165d791ad01e1a273e5de07416a5802c469c0a7a7a4312884ca953a"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Bg_SumeruBirth_MainPage_03_Color.png",
+      "sha256": "aa9599b4caecc18e73f3d52d80b332ceadc184ae2bdac64417f415653e436558"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_01_Distort.png",
+      "sha256": "a9d0382591ba8139dc610a43624f4fe870092fd6b0ecdc4eb6bc8b60f778ca54"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_02_Distort.png",
+      "sha256": "1aaae0d81c7ba9b5154766c627a20ee971a5fc3b4867ee003d6e6c53ad0c986c"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_03_Distort.png",
+      "sha256": "ddf4dedac38b85a516427f3b47c0c9c2554cc9cb912deafbadbf1e3033b036c5"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_04_Distort.png",
+      "sha256": "db1daa04018d88664830d1a61edc7457b5a53add89ea8468a684c2404c019116"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_05_Distort.png",
+      "sha256": "5488412d38f0e93c2df26a000dd9f991ec9c008ef78b571290409ab2275067d0"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_06_Distort.png",
+      "sha256": "a285e672acda86d2ffcbc8159e4786f455aba407a030e46dd037037058a8c31f"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_08_Distort.png",
+      "sha256": "2311525da46f9e338d0d6c6ef1774e8b10a05b795890b2c7e588970f0c98c448"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_09_Distort.png",
+      "sha256": "160f21aa58604c7b434e99e40f965853914dd9c29f972b89eb56efe9ddc991d8"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_Cloud_10_Distort.png",
+      "sha256": "0b028b63f6230e48c5a41c5181b17616bfad2a61fa6957d81ac6aff5176de911"
+    },
+    {
+      "file": "asserts/player-source/assets/pages/p3/textures/UI_Img_SumeruBirth_MainPage_03_M_02.png",
+      "sha256": "7534848cd26e8741df1b435e6977413e571c73313c680be44e941abd053af1a0"
+    },
+    {
+      "file": "asserts/player-source/data/Page_0.js",
+      "sha256": "ea32ee9c44e1f761e488dd90d710486095b6da1fd6ed8a0e6a9c263abb810829"
+    },
+    {
+      "file": "asserts/player-source/data/Page_1.js",
+      "sha256": "adbf50995926463d6698564c700cada421034015986bcaeb9fce0f29d1676119"
+    },
+    {
+      "file": "asserts/player-source/data/Page_2.js",
+      "sha256": "c8caec3e74dc36c4f27f0ef7b326f303b6b2ce77d1a6263a9119245c858983f6"
+    },
+    {
+      "file": "asserts/player-source/data/Page_3.js",
+      "sha256": "9ce2705c4fc36c6305565df48295a1ffcbf74dd195342286aed71699e375e2e0"
+    },
+    {
+      "file": "asserts/player-source/data/layout.js",
+      "sha256": "e450e170dbeceab9336c7312b1fef167b2f421fce5f2204dff56a4d1251ade79"
+    },
+    {
+      "file": "asserts/player-source/index.html",
+      "sha256": "770d7c606a695d3b7ce6ac39e0178d44c03b7f6f791d515dd3411114917f2c78"
+    },
+    {
+      "file": "asserts/player-source/js/loader.js",
+      "sha256": "6c9976eb6f87eb506e191fbd0b320c0cb8ece1e1cad1bb70fcf192686a3d42c2"
+    },
+    {
+      "file": "asserts/player-source/js/main.js",
+      "sha256": "1678dd18a7ac5ba97278a6b88bec4d852ce36c172580a748f14d3f76adce2f28"
+    },
+    {
+      "file": "asserts/player-source/js/scene.js",
+      "sha256": "417f0498b83aebf419b85d4e01ba649129d6efdc136dea3cb1edc26d0ffac119"
+    },
+    {
+      "file": "asserts/player-source/js/ui.js",
+      "sha256": "cd6112d574a65e66e6b9a362f95ca6b9c998326b5b1556e1427391c005d1e357"
+    },
+    {
+      "file": "asserts/player-source/layout.json",
+      "sha256": "dbcfe9b3286fb65ae03fcc765c99deacbb2e699aa2bdffc6fde1b5fe24c0419e"
+    },
+    {
+      "file": "asserts/player-source/manifest.json",
+      "sha256": "63449c9abdf5c064f5a2b8a1c8e203976f24b7eecf7187a2a3bdfc2e64e2043a"
+    },
+    {
+      "file": "asserts/player-source/project.json",
+      "sha256": "f7c54986b84bc2554e55082a92b3db1e1c7bf9a7d6d2ad3d9dd5114bd088de72"
+    },
+    {
+      "file": "asserts/player-source/vendor/spine-webgl.js",
+      "sha256": "d82e2c32d2fbe2d47d461da5b8dd3b9daac1fbfeda74e6476114d5d70619185a"
+    }
+  ]
+}

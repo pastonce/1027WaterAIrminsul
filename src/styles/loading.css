@@ -1,0 +1,12 @@
+.game-content{position:relative;width:100%;height:100%}
+.stage-loading-screen{position:absolute;inset:0;z-index:110;background:#fff;outline:none;touch-action:none;user-select:none;overflow:hidden;opacity:1}
+.stage-loading-screen[data-phase=revealing]{animation:stage-loading-reveal .28s ease-out both}
+.stage-loading-screen[data-paused=true]{animation-play-state:paused}
+.stage-loading-screen[data-reduced=true][data-phase=revealing]{animation:none;opacity:0}
+.stage-loading-artwork{position:absolute;inset:0;pointer-events:none}
+.stage-loading-art{display:block;width:100%;height:100%;object-fit:cover;object-position:center;pointer-events:none}
+.stage-loading-art[data-illustration=CD2]{object-position:right center}
+.element-loading-bar{position:absolute;z-index:1;left:50%;bottom:max(44px,10vh);width:min(400px,68vw);height:auto;aspect-ratio:8/1;transform:translateX(-50%);filter:drop-shadow(0 1px 3px #0008) drop-shadow(0 0 2px #ffffffe0);pointer-events:none}
+@keyframes stage-loading-reveal{from{opacity:1}to{opacity:0}}
+@media(max-height:480px){.element-loading-bar{width:min(350px,58vw);bottom:max(26px,9vh)}}
+@media(orientation:portrait) and (max-width:900px){.stage-loading-screen{visibility:hidden}}

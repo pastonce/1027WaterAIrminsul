@@ -1,0 +1,152 @@
+[
+  {
+    "stage": "A",
+    "changes": 14417,
+    "edges": [
+      {
+        "edge": "left",
+        "changed": 652
+      },
+      {
+        "edge": "right",
+        "changed": 896
+      },
+      {
+        "edge": "top",
+        "changed": 1565
+      },
+      {
+        "edge": "bottom",
+        "changed": 1509
+      }
+    ],
+    "backgroundDelta": 0,
+    "error": 0,
+    "remaining": {
+      "Texture": 0,
+      "Program": 0,
+      "Buffer": 0,
+      "Framebuffer": 0
+    }
+  },
+  {
+    "stage": "C",
+    "changes": 15012,
+    "edges": [
+      {
+        "edge": "left",
+        "changed": 647
+      },
+      {
+        "edge": "right",
+        "changed": 902
+      },
+      {
+        "edge": "top",
+        "changed": 1560
+      },
+      {
+        "edge": "bottom",
+        "changed": 1469
+      }
+    ],
+    "backgroundDelta": 0,
+    "error": 0,
+    "remaining": {
+      "Texture": 0,
+      "Program": 0,
+      "Buffer": 0,
+      "Framebuffer": 0
+    }
+  },
+  {
+    "stage": "D",
+    "changes": 14061,
+    "edges": [
+      {
+        "edge": "left",
+        "changed": 652
+      },
+      {
+        "edge": "right",
+        "changed": 911
+      },
+      {
+        "edge": "top",
+        "changed": 1574
+      },
+      {
+        "edge": "bottom",
+        "changed": 1472
+      }
+    ],
+    "backgroundDelta": 0,
+    "error": 0,
+    "remaining": {
+      "Texture": 0,
+      "Program": 0,
+      "Buffer": 0,
+      "Framebuffer": 0
+    }
+  },
+  {
+    "stage": "E",
+    "changes": 14248,
+    "edges": [
+      {
+        "edge": "left",
+        "changed": 655
+      },
+      {
+        "edge": "right",
+        "changed": 905
+      },
+      {
+        "edge": "top",
+        "changed": 1562
+      },
+      {
+        "edge": "bottom",
+        "changed": 1475
+      }
+    ],
+    "backgroundDelta": 1.3605791505791507,
+    "error": 0,
+    "remaining": {
+      "Texture": 0,
+      "Program": 0,
+      "Buffer": 0,
+      "Framebuffer": 0
+    }
+  },
+  {
+    "stage": "F",
+    "changes": 22341,
+    "edges": [
+      {
+        "edge": "left",
+        "changed": 796
+      },
+      {
+        "edge": "right",
+        "changed": 1124
+      },
+      {
+        "edge": "top",
+        "changed": 1703
+      },
+      {
+        "edge": "bottom",
+        "changed": 1723
+      }
+    ],
+    "backgroundDelta": 0,
+    "error": 0,
+    "remaining": {
+      "Texture": 0,
+      "Program": 0,
+      "Buffer": 0,
+      "Framebuffer": 0
+    }
+  }
+]

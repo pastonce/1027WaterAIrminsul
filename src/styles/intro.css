@@ -1,0 +1,107 @@
+.intro-scene { background: #e3f1e5; color: #315945; }
+.intro-settings{position:absolute;z-index:2;top:max(24px,calc(env(safe-area-inset-top) + 12px));right:max(32px,calc(env(safe-area-inset-right) + 16px));color:#315945;background:#f6fbeddb;border-color:#71947599;box-shadow:0 1px 8px #eef8d9aa}
+@media(max-height:600px){.intro-settings{top:max(16px,env(safe-area-inset-top));right:max(24px,calc(env(safe-area-inset-right) + 12px))}}
+.intro-brand,
+.intro-content,
+.intro-footer { text-shadow: 0 1px 2px #fbfff4cc; }
+.intro-brand {
+  top: max(32px, calc(env(safe-area-inset-top) + 16px));
+  left: max(48px, calc(env(safe-area-inset-left) + 20px));
+  color: #315945;
+  font-size: 15px;
+}
+.intro-content { width: min(720px, calc(100% - 80px)); margin-top: 12px; }
+.intro-emblem {
+  width: 92px;
+  height: 92px;
+  margin-bottom: 28px;
+  color: #4a7853;
+  border-color: #71947599;
+  outline-color: #71947540;
+  background: #f6fbed45;
+}
+.intro-emblem > svg { width: 52px; height: 52px; }
+.intro-emblem::after {
+  bottom: -10px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #a3bb8c80;
+  border-radius: 50%;
+  background: #e8f3e4;
+  color: #5b794b;
+  font-size: 12px;
+}
+.intro-content > .eyebrow { color: #596d42; font-size: 10px; letter-spacing: .25em; }
+.intro-content h1 {
+  margin: 20px 0 24px;
+  color: #244f3f;
+  font-size: clamp(32px, 3.1vw, 46px);
+  line-height: 1.55;
+  letter-spacing: .13em;
+}
+.intro-content .intro-invitation { color: #355c4b; font-size: 14px; line-height: 2.1; letter-spacing: .07em; }
+.intro-scene .enter-dream {
+  min-width: 224px;
+  min-height: 52px;
+  margin-top: 28px;
+  border: 1px solid #708c5e;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #345f49, #234c3a);
+  color: #f5f0d5;
+  box-shadow: 0 6px 18px #234e3825, inset 0 0 0 3px #e5eac822;
+  text-shadow: none;
+  letter-spacing: .18em;
+}
+.intro-scene .enter-dream > svg { color: #d8e1b8; }
+.intro-scene .enter-dream:hover:not(:disabled) {
+  border-color: #517345;
+  background: linear-gradient(135deg, #416f54, #2c5941);
+  box-shadow: 0 6px 22px #234e3833, inset 0 0 0 3px #e5eac833;
+}
+.intro-scene .enter-dream:focus-visible { outline-color: #315945; }
+.intro-footer {
+  left: max(48px, calc(env(safe-area-inset-left) + 20px));
+  right: max(48px, calc(env(safe-area-inset-right) + 20px));
+  bottom: max(28px, calc(env(safe-area-inset-bottom) + 12px));
+  align-items: flex-end;
+  gap: 24px;
+  color: #385b49;
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: .08em;
+}
+.intro-footer > span:last-child { text-align: right; }
+@media (max-height: 600px) and (orientation: landscape) {
+  .intro-scene { padding-bottom: calc(56px + env(safe-area-inset-bottom) * 2); }
+  .intro-brand { top: max(16px, env(safe-area-inset-top)); left: max(24px, calc(env(safe-area-inset-left) + 12px)); font-size: 12px; gap: 10px; }
+  .intro-brand > svg { width: 21px; height: 21px; }
+  .intro-content { width: min(620px, calc(100% - 64px)); margin-top: 0; }
+  .intro-emblem { width: 46px; height: 46px; margin-bottom: 14px; outline-offset: 6px; }
+  .intro-emblem > svg { width: 28px; height: 28px; }
+  .intro-emblem::after { width: 17px; height: 17px; bottom: -8px; font-size: 9px; }
+  .intro-content > .eyebrow { font-size: 8px; letter-spacing: .2em; }
+  .intro-content h1 { font-size: 26px; line-height: 1.5; margin: 12px 0 16px; }
+  .intro-content .intro-invitation { font-size: 11px; line-height: 2; letter-spacing: .06em; }
+  .intro-scene .enter-dream { min-width: 198px; min-height: 42px; padding: 10px 22px; margin-top: 22px; font-size: 12px; }
+  .intro-footer { left: max(24px, calc(env(safe-area-inset-left) + 12px)); right: max(24px, calc(env(safe-area-inset-right) + 12px)); bottom: max(12px, env(safe-area-inset-bottom)); font-size: 8.5px; gap: 16px; }
+  .intro-scene .intro-notice { bottom: calc(32px + env(safe-area-inset-bottom)); }
+}
+@media (max-height: 360px) and (orientation: landscape) {
+  .intro-emblem { display: none; }
+  .intro-content h1 { font-size: 24px; line-height: 1.45; margin: 12px 0 14px; }
+  .intro-content .intro-invitation { font-size: 10.5px; }
+  .intro-scene .enter-dream { min-height: 40px; margin-top: 18px; }
+}
+@media (forced-colors: active) {
+  .intro-scene { background: Canvas; }
+  .intro-scene .background-parallax { display: none; }
+  .intro-brand, .intro-content, .intro-footer, .intro-content > .eyebrow,
+  .intro-content h1, .intro-content .intro-invitation { color: CanvasText; text-shadow: none; }
+  .intro-emblem { visibility: hidden; }
+  .intro-scene .enter-dream, .intro-scene .enter-dream:hover:not(:disabled) { color: ButtonText; background: ButtonFace; border-color: ButtonText; box-shadow: none; }
+  .intro-scene .enter-dream > svg { color: ButtonText; }
+  .intro-scene .enter-dream:focus-visible { outline-color: Highlight; }
+}

@@ -1,0 +1,35 @@
+{
+  "button": "/asserts/ui/music-button-5c2a85153f5e.png",
+  "tracks": {
+    "A": {
+      "src": "/asserts/music/a-7b6b6173d11b.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 109.75
+    },
+    "B": {
+      "src": "/asserts/music/b-75e6556a9ecb.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 148.01
+    },
+    "C": {
+      "src": "/asserts/music/c-46aecb4e4ad6.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 96.1
+    },
+    "D": {
+      "src": "/asserts/music/d-5b23fae64e8d.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 134.47
+    },
+    "E": {
+      "src": "/asserts/music/e-6e90b2ee434f.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 109.03
+    },
+    "F": {
+      "src": "/asserts/music/f-bce8691c1710.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 145.57999999999998
+    }
+  }
+}

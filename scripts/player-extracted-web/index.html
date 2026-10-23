@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>独立 Spine 角色预览</title>
+<link rel="stylesheet" href="./runtime/spine-player.css">
+<style>
+  *{box-sizing:border-box}html,body{margin:0;height:100%;font:15px/1.5 system-ui,sans-serif;background:#e7ede8;color:#22352b}
+  body{display:grid;grid-template-rows:auto 1fr auto}header,footer{padding:12px 20px;background:#f7faf6}
+  header{display:flex;gap:12px;align-items:center;flex-wrap:wrap}select,button{font:inherit;padding:6px 10px;border:1px solid #9aafa0;border-radius:6px;background:white;color:inherit}
+  main{min-height:0;display:grid;place-items:center;padding:12px;background-color:#d5dfd8;background-image:linear-gradient(45deg,#e6ece7 25%,transparent 25%),linear-gradient(-45deg,#e6ece7 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e6ece7 75%),linear-gradient(-45deg,transparent 75%,#e6ece7 75%);background-size:24px 24px;background-position:0 0,0 12px,12px -12px,-12px 0}
+  #player{width:100%;height:100%;min-height:100px;max-width:1100px}footer{font-size:12px;overflow-wrap:anywhere}strong{font-size:16px}
+  @media(max-height:500px){header,footer{padding:6px 12px}header{gap:6px}select,button{padding:3px 7px}main{padding:4px}}
+</style>
+<header><strong>独立 Spine 角色</strong><select id="character" aria-label="角色"></select><select id="animation" aria-label="动画"></select><button id="pause">暂停</button></header>
+<main><div id="player"></div></main><footer id="status">正在读取素材清单…</footer>
+<script src="./runtime/spine-player.js"></script>
+<script>
+(async()=>{
+  const manifest=await fetch('../manifest.json').then(r=>r.json());
+  const picker=document.querySelector('#character'), animations=document.querySelector('#animation'), status=document.querySelector('#status'), pause=document.querySelector('#pause');
+  let player, generation=0;
+  for(const asset of manifest.assets){const option=new Option(asset.id+' · '+asset.label,asset.id);picker.add(option)}
+  async function show(id){
+    const ticket=++generation;player?.dispose();player=undefined;
+    const asset=manifest.assets.find(item=>item.id===id);picker.value=id;
+    animations.replaceChildren(...asset.animations.map(name=>new Option(name,name)));animations.value='loop';pause.textContent='暂停';
+    const raw=await fetch('../'+asset.folder+'/'+asset.name+'.json').then(r=>r.json());if(ticket!==generation)return;
+    window.extractedPreview={ready:false,id};
+    const stem='../'+asset.folder+'/'+asset.name;
+    const next=new spine.SpinePlayer('player',{
+      jsonUrl:stem+'.json',atlasUrl:stem+'.atlas',animation:'loop',alpha:true,premultipliedAlpha:false,showControls:false,backgroundColor:'#00000000',preserveDrawingBuffer:true,
+      viewport:{...raw.skeleton,padLeft:0,padRight:0,padTop:0,padBottom:0},
+      success(ready){if(ticket!==generation){ready.dispose();return}player=ready;status.textContent=asset.id+' · '+asset.slots+' slots · '+asset.atlasSize.join('×')+' PNG';window.extractedPreview={ready:true,id,player:ready,show};},
+      error(failed,message){failed.dispose();status.textContent=message;window.extractedPreview={error:message,id,show};}
+    });
+  }
+  picker.addEventListener('change',()=>show(picker.value).catch(fail));
+  animations.addEventListener('change',()=>player?.setAnimation(animations.value,animations.value==='loop'||/loop|eye|hudie|yulan/i.test(animations.value)));
+  pause.addEventListener('click',()=>{if(!player)return;if(player.paused){player.play();pause.textContent='暂停'}else{player.pause();pause.textContent='播放'}});
+  window.addEventListener('pagehide',()=>player?.dispose());
+  function fail(error){status.textContent=String(error);window.extractedPreview={error:String(error)};console.error(error)}
+  await show(new URLSearchParams(location.search).get('asset')||manifest.assets[0].id);
+})().catch(error=>{document.querySelector('#status').textContent=String(error);window.extractedPreview={error:String(error)};console.error(error)});
+</script>
+</html>

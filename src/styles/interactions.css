@@ -1,0 +1,272 @@
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.camera-controls {
+  right: max(8px, calc(env(safe-area-inset-right) + 4px));
+  top: 28%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.camera-controls .icon-button { pointer-events: auto; }
+
+.water-action {
+  position: absolute;
+  right: max(42px, calc(env(safe-area-inset-right) + 24px));
+  bottom: max(32px, calc(env(safe-area-inset-bottom) + 20px));
+  z-index: 24;
+  min-width: 150px;
+  min-height: 58px;
+  padding: 13px 25px;
+  gap: 13px;
+  font-family: var(--serif);
+  font-size: 20px;
+  letter-spacing: .17em;
+}
+
+.water-action.needs-dew {
+  background: linear-gradient(130deg, #b8cba4, #9fb995);
+}
+
+.dew-particle.is-expiring { opacity: 1; pointer-events: none; }
+.dew-particle.is-expiring .dew-visual { animation: dew-expire .3s ease-out forwards; }
+@keyframes dew-expire {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: translateY(-6px) scale(.8); }
+}
+
+.dew-counter.dew-feedback {
+  color: #ffe5b0;
+  background: radial-gradient(ellipse, #f4b95e35, transparent 75%);
+  filter: drop-shadow(0 0 9px #f2cf9677);
+  animation: resource-shake .65s ease-in-out;
+}
+
+.dream-tree {
+  pointer-events: none;
+  outline: none;
+}
+.tree-art { cursor: pointer; }
+
+.dream-tree:focus-visible .tree-hit-target {
+  stroke: #e5ecb447;
+  stroke-width: 6;
+}
+
+.nahida-companion {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  transition: top .3s ease, left .3s ease;
+}
+
+.nahida-companion .nahida-avatar,
+.reality-character .nahida-avatar {
+  width: 100%;
+}
+
+.spine-host,
+.spine-host > .spine-player,
+.spine-host canvas,
+.nahida-avatar .character-static {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.spine-host { overflow: hidden; }
+.nahida-avatar .character-static { object-fit: contain; }
+.nahida-avatar[data-renderer=fallback] .spine-host { visibility: hidden; }
+.nahida-avatar[data-paused=true] { animation-play-state: paused !important; }
+
+.nahida-companion .nahida-avatar[data-action=arrive] {
+  animation: companion-appear .65s ease both;
+}
+
+.nahida-companion .nahida-avatar[data-action=observe] {
+  transform-origin: 65% 70%;
+  animation: companion-observe 5s ease-in-out infinite;
+}
+
+.nahida-companion .nahida-avatar[data-action=leave] {
+  animation: companion-disappear .45s ease both;
+}
+
+.dialogue-bubble {
+  --bubble-line-height: 26.6px;
+  position: absolute;
+  z-index: 18;
+  padding: 14px 18px;
+  pointer-events: auto;
+  opacity: 1;
+  transition: top .2s ease, opacity .45s ease;
+}
+
+.bubble-name {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+  letter-spacing: .12em;
+  margin-bottom: 10px;
+  opacity: .9;
+}
+
+.bubble-dialogue-id{position:absolute;right:9px;bottom:4px;font:9px/1.2 var(--font-game);letter-spacing:.02em;opacity:.68;pointer-events:none}
+
+.dialogue-bubble p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: var(--bubble-line-height);
+  letter-spacing: .04em;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  height: calc(var(--bubble-line-height) * 2);
+  overflow: hidden;
+}
+
+.dialogue-bubble .bubble-measure {
+  position: absolute;
+  height: auto;
+  visibility: hidden;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.dialogue-bubble.bubble-fading {
+  opacity: 0;
+}
+
+
+.reality-character {
+  padding: 0;
+  display: block;
+}
+
+.nahida-companion .character-fallback,
+.reality-character .character-fallback {
+  width: 100%;
+  height: auto;
+  aspect-ratio: inherit;
+  font-size: 58px;
+}
+
+.reality-scene {
+  animation: reality-appear .7s ease both;
+}
+
+.night-dew {
+  min-height: 44px;
+}
+
+.journal-return {
+  margin-top: 22px;
+}
+
+.awakening-light {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  background: #e8eed7;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.is-awakening .awakening-light {
+  visibility: visible;
+  animation: awakening-light 1.1s ease both;
+}
+
+@keyframes resource-shake {
+  0%, 100% { transform: translateX(0); }
+  14%, 42%, 70% { transform: translateX(-8px) rotate(-3deg); }
+  28%, 56%, 84% { transform: translateX(8px) rotate(3deg); }
+}
+
+@keyframes companion-appear {
+  from { opacity: 0; transform: translateY(18px) scale(.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes companion-observe {
+  0%, 100% { transform: translateY(0) rotate(1deg); }
+  50% { transform: translateY(-7px) rotate(3deg); }
+}
+
+@keyframes companion-disappear {
+  to { opacity: 0; transform: translateY(-18px) scale(.96); }
+}
+
+@keyframes bubble-appear {
+  from { opacity: 0; translate: 0 5px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes bubble-disappear {
+  to { opacity: 0; translate: 0 -5px; }
+}
+
+@keyframes awakening-light {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes reality-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .camera-controls { top: max(94px, 24%); }
+
+  .water-action {
+    right: max(22px, calc(env(safe-area-inset-right) + 16px));
+    bottom: max(21px, calc(env(safe-area-inset-bottom) + 14px));
+    min-width: 122px;
+    min-height: 52px;
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+
+  .dialogue-bubble {
+    --bubble-line-height: 17.5px;
+    padding: 9px 11px 10px;
+  }
+
+  .bubble-name { font-size: 8.5px; margin-bottom: 5px; }
+  .dialogue-bubble p { font-size: 10.5px; letter-spacing: .02em; }
+}
+
+@media (max-height: 600px) and (max-width: 700px) and (orientation: landscape) {
+  .reality-copy { left: 26px; top: 74px; }
+  .reality-copy h1 { font-size: 24px; line-height: 1.4; white-space: nowrap; margin: 8px 0; letter-spacing: .08em; }
+  .reality-copy h1 br,
+  .reality-date { display: none; }
+  .reality-actions { left: 26px; bottom: 20px; }
+}
+
+.reduced-motion .dew-counter.dew-feedback { animation: none !important; outline: 2px solid #f0d39b; outline-offset: 4px; }
+.intro-notice { position: absolute; bottom: max(70px, 9%); left: 50%; transform: translateX(-50%); max-width: 85%; padding: 12px 20px; border: 1px solid #d4dfb86b; border-radius: 5px; background: #173e32f2; color: #f1eed9; box-shadow: 0 5px 20px #102c2970; text-align: center; font-size: 13px; line-height: 1.7; pointer-events: none; }
+@media (max-height: 600px) { .intro-notice { bottom: 50px; padding: 8px 14px; font-size: 11px; } }
+.time-sync-setting { gap: 18px; }
+.settings-modal h2 { text-align: center; margin-top: 0; margin-bottom: 12px; }
+.time-sync-setting > span { min-width: 0; }
+.time-sync-setting > button { flex-shrink: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .dew-counter.dew-feedback { animation: none !important; outline: 2px solid #f0d39b; outline-offset: 4px; }
+}

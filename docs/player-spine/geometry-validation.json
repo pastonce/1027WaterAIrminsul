@@ -1,0 +1,39 @@
+{
+  "mode": "retained-packs-after-user-source-cleanup",
+  "runtime": "4.0.31",
+  "pages": [
+    {
+      "name": "image_1",
+      "files": 13,
+      "textures": 11,
+      "animations": 10,
+      "coordinates": 470280,
+      "sha256MatchPreviousExport": true
+    },
+    {
+      "name": "image_2",
+      "files": 17,
+      "textures": 15,
+      "animations": 11,
+      "coordinates": 609708,
+      "sha256MatchPreviousExport": true
+    },
+    {
+      "name": "image_3",
+      "files": 14,
+      "textures": 12,
+      "animations": 19,
+      "coordinates": 509124,
+      "sha256MatchPreviousExport": true
+    },
+    {
+      "name": "image_4",
+      "files": 17,
+      "textures": 15,
+      "animations": 15,
+      "coordinates": 587520,
+      "sha256MatchPreviousExport": true
+    }
+  ],
+  "referenceHashes": 5
+}

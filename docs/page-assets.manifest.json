@@ -1,0 +1,346 @@
+{
+  "version": 1,
+  "inputs": [
+    {
+      "file": "asserts/阶段转场/AB1.png",
+      "bytes": 3580199,
+      "sha256": "a6d6413a301b44f7efc62653b5024d943add5f4ad46a8a2fdeec9d2f67fe5481",
+      "width": 2304,
+      "height": 1296,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/AB2.png",
+      "bytes": 2292727,
+      "sha256": "555faa984b5663af618bcfe71c41adb39141ec1658fbc2a1cd6efc5f903d3554",
+      "width": 2304,
+      "height": 1296,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/BC1.png",
+      "bytes": 2884238,
+      "sha256": "851c5f195c928e6220484593ad06e7d3b5f2fff19354f439d14517aac27dbe18",
+      "width": 2304,
+      "height": 1296,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/BC2.png",
+      "bytes": 5228316,
+      "sha256": "da374021c80661edfb5abacb8b8367ed8ce64b194eaddbad04bb3eda7e547b15",
+      "width": 4800,
+      "height": 2700,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/CD1.jpg",
+      "bytes": 3182046,
+      "sha256": "32bd79ca412ff27240dcec3c58d586912f59b985181a55efef456892d8f60d1d",
+      "width": 7680,
+      "height": 4320,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/CD2.png",
+      "bytes": 1051309,
+      "sha256": "30271315b38eb648d01d5f07caafb05e30b030b7c97ee26669ea818ecd478ea2",
+      "width": 2500,
+      "height": 1080,
+      "cropLeft": 580
+    },
+    {
+      "file": "asserts/阶段转场/DE1.png",
+      "bytes": 2835550,
+      "sha256": "8df9846d6ef0ea875ca80c3663443a01f911424017422d57c0d3d3cfde10c27f",
+      "width": 2880,
+      "height": 1620,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/DE2.png",
+      "bytes": 3647549,
+      "sha256": "80c06fe1980295a232b986cd80a22de3b740bed49bcc615fc74d834fa9d0a334",
+      "width": 1952,
+      "height": 1216,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/EF1.png",
+      "bytes": 6628210,
+      "sha256": "06fa225a6125f62aad6ffbe6d6d595d645b2c3bcb3f3f4545ef511b405269ad1",
+      "width": 3840,
+      "height": 2160,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/EF2.png",
+      "bytes": 4211783,
+      "sha256": "6b6dc288b32ea05dfd66884797e97e17097ae42d8e87f417b04f28da34965b1f",
+      "width": 10240,
+      "height": 5760,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/阶段转场/FG1.png",
+      "bytes": 4022681,
+      "sha256": "a1e69e84986184a588e0d8bff112fbb7bb1ade47b7f4014f56e49ec5a387417d",
+      "width": 3840,
+      "height": 2160,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/background.png",
+      "bytes": 659606,
+      "sha256": "3ad54fe5061190321c7d0c5ebab396d5f9bdcbf374b144adca0b5b8d543041db",
+      "width": 1067,
+      "height": 600,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/dialog.jpg",
+      "bytes": 27582,
+      "sha256": "65991ba7011b9484553c263a700370243843458f242b2ddcf177c787830e16e9",
+      "width": 840,
+      "height": 400,
+      "cropLeft": 0
+    },
+    {
+      "file": "asserts/icon.png",
+      "bytes": 453527,
+      "sha256": "1d4ccec6fb887ca6c9a1904d868b0e9dc7e5bc88d7efec48e942bf6ce6117004",
+      "width": 629,
+      "height": 600,
+      "cropLeft": 0
+    }
+  ],
+  "files": [
+    {
+      "file": "public/asserts/loading/art/ab1-1280.af8d46114d50.webp",
+      "bytes": 117880,
+      "sha256": "af8d46114d50bd7c37c502b35974e93430616558b98b338e2939f301131b640b",
+      "source": "asserts/阶段转场/AB1.png",
+      "src": "/asserts/loading/art/ab1-1280.af8d46114d50.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/ab1-1920.d191a25ce953.webp",
+      "bytes": 206286,
+      "sha256": "d191a25ce9535257e3b3b54dd645db32c3aa76b42aa089d7df777d6d2e6fdc57",
+      "source": "asserts/阶段转场/AB1.png",
+      "src": "/asserts/loading/art/ab1-1920.d191a25ce953.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/ab2-1280.14d894444167.webp",
+      "bytes": 58856,
+      "sha256": "14d894444167c8aaef29b97b3742279c6e343ac81b5ca5f8a445612ffdd0e5a5",
+      "source": "asserts/阶段转场/AB2.png",
+      "src": "/asserts/loading/art/ab2-1280.14d894444167.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/ab2-1920.dd01f87478c4.webp",
+      "bytes": 92298,
+      "sha256": "dd01f87478c4feafda5c93ce0ec7b26172d5a6bd2afd49c7f661f8de705070f0",
+      "source": "asserts/阶段转场/AB2.png",
+      "src": "/asserts/loading/art/ab2-1920.dd01f87478c4.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/bc1-1280.bf7dcbc8cc8c.webp",
+      "bytes": 69478,
+      "sha256": "bf7dcbc8cc8c9aa3f3ac71c3c3398b1e58beffe2da19bd18b2da069378f20699",
+      "source": "asserts/阶段转场/BC1.png",
+      "src": "/asserts/loading/art/bc1-1280.bf7dcbc8cc8c.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/bc1-1920.c0da9a4f2a49.webp",
+      "bytes": 114626,
+      "sha256": "c0da9a4f2a49f0605f4581fc15f4864ae06880c7bf626f55f6ecb1306e308ea8",
+      "source": "asserts/阶段转场/BC1.png",
+      "src": "/asserts/loading/art/bc1-1920.c0da9a4f2a49.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/bc2-1280.35de2d5588ff.webp",
+      "bytes": 73792,
+      "sha256": "35de2d5588fff8f11bcc452d643b0eefe6d31c75eeb8a4d6ece5541d6bf89f24",
+      "source": "asserts/阶段转场/BC2.png",
+      "src": "/asserts/loading/art/bc2-1280.35de2d5588ff.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/bc2-1920.0c3fa68efcc5.webp",
+      "bytes": 121238,
+      "sha256": "0c3fa68efcc51451b6747936084bb9f2041fe584573b6ccb6fd7948ec426027f",
+      "source": "asserts/阶段转场/BC2.png",
+      "src": "/asserts/loading/art/bc2-1920.0c3fa68efcc5.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/cd1-1280.49e4d36a5173.webp",
+      "bytes": 149938,
+      "sha256": "49e4d36a51736a57c1ea2688fbcaf67bd6ba05000e5597d268e35c21f52451b8",
+      "source": "asserts/阶段转场/CD1.jpg",
+      "src": "/asserts/loading/art/cd1-1280.49e4d36a5173.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/cd1-1920.17b87f471a65.webp",
+      "bytes": 270406,
+      "sha256": "17b87f471a656c8cdfe9f3a929a5a6b1d672767ff00a961991f2f56fb93ef471",
+      "source": "asserts/阶段转场/CD1.jpg",
+      "src": "/asserts/loading/art/cd1-1920.17b87f471a65.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/cd2-1280.b90508a4b838.webp",
+      "bytes": 117260,
+      "sha256": "b90508a4b838a37916401815d4cb62a2e73b7c33f8187a963efee6c5681cdf35",
+      "source": "asserts/阶段转场/CD2.png",
+      "src": "/asserts/loading/art/cd2-1280.b90508a4b838.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/cd2-1920.bc8c8049478a.webp",
+      "bytes": 235878,
+      "sha256": "bc8c8049478a8f11c83af1be45c5579fc635b30162a06f2d6846d324928da08d",
+      "source": "asserts/阶段转场/CD2.png",
+      "src": "/asserts/loading/art/cd2-1920.bc8c8049478a.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/de1-1280.07b9cb28ad24.webp",
+      "bytes": 48352,
+      "sha256": "07b9cb28ad24b843891685f31d1edbaa6973ae04f546b88ca2d9f5f9301e776a",
+      "source": "asserts/阶段转场/DE1.png",
+      "src": "/asserts/loading/art/de1-1280.07b9cb28ad24.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/de1-1920.dd0ae0a56f63.webp",
+      "bytes": 76666,
+      "sha256": "dd0ae0a56f636de62e7b7190d14a42769cfa3be24711d4cd0e78ae73701743f7",
+      "source": "asserts/阶段转场/DE1.png",
+      "src": "/asserts/loading/art/de1-1920.dd0ae0a56f63.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/de2-1280.15a1469c545a.webp",
+      "bytes": 171318,
+      "sha256": "15a1469c545ab67906120930f7677f8f0bc387252622c2e0b47252554939a7ce",
+      "source": "asserts/阶段转场/DE2.png",
+      "src": "/asserts/loading/art/de2-1280.15a1469c545a.webp",
+      "width": 1280,
+      "height": 797
+    },
+    {
+      "file": "public/asserts/loading/art/de2-1920.a2225957fa68.webp",
+      "bytes": 307820,
+      "sha256": "a2225957fa681a19141ed06261a6d4ad29e2880d9b79174566c64747d9c34643",
+      "source": "asserts/阶段转场/DE2.png",
+      "src": "/asserts/loading/art/de2-1920.a2225957fa68.webp",
+      "width": 1920,
+      "height": 1196
+    },
+    {
+      "file": "public/asserts/loading/art/ef1-1280.ceadf0a771ab.webp",
+      "bytes": 168726,
+      "sha256": "ceadf0a771abbde848f3fec8a0b3baf2d538874dccb9353c0f1f2c4689ddb6cc",
+      "source": "asserts/阶段转场/EF1.png",
+      "src": "/asserts/loading/art/ef1-1280.ceadf0a771ab.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/ef1-1920.3f5bc14bc600.webp",
+      "bytes": 320234,
+      "sha256": "3f5bc14bc600f380516574892ec736fdf02dae5f3d125bbbc0c3474d2640a31a",
+      "source": "asserts/阶段转场/EF1.png",
+      "src": "/asserts/loading/art/ef1-1920.3f5bc14bc600.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/ef2-1280.fca2fb5984c7.webp",
+      "bytes": 126410,
+      "sha256": "fca2fb5984c7201a6648c78ac140ea3dcd5330490bcc834303e5672c5a850007",
+      "source": "asserts/阶段转场/EF2.png",
+      "src": "/asserts/loading/art/ef2-1280.fca2fb5984c7.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/ef2-1920.f6f76fdc2d27.webp",
+      "bytes": 202612,
+      "sha256": "f6f76fdc2d27bc4c5219513986c8e13df875ecb00b7aa8bbdc44fe3318b94a82",
+      "source": "asserts/阶段转场/EF2.png",
+      "src": "/asserts/loading/art/ef2-1920.f6f76fdc2d27.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/loading/art/fg1-1280.b679078e0674.webp",
+      "bytes": 88602,
+      "sha256": "b679078e0674ce4a4a30bde5ca998dd3fd32bbbe580c916e6df12d9ca283cf25",
+      "source": "asserts/阶段转场/FG1.png",
+      "src": "/asserts/loading/art/fg1-1280.b679078e0674.webp",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "public/asserts/loading/art/fg1-1920.7d8aadf281da.webp",
+      "bytes": 150898,
+      "sha256": "7d8aadf281da8c9c522a41b4a56468244f56c90f6a5492d0862aee79626a0f2b",
+      "source": "asserts/阶段转场/FG1.png",
+      "src": "/asserts/loading/art/fg1-1920.7d8aadf281da.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "public/asserts/backgrounds/reality/realitybackground-1067.cb87856aa318.webp",
+      "bytes": 56568,
+      "sha256": "cb87856aa318b4b032a2bb301e73bc90dad138cb53faa2aeeb28df1f9e71c44c",
+      "source": "asserts/background.png",
+      "src": "/asserts/backgrounds/reality/realitybackground-1067.cb87856aa318.webp",
+      "width": 1067,
+      "height": 600
+    },
+    {
+      "file": "public/asserts/ui/dialogue-840.65991ba7011b.jpg",
+      "bytes": 27582,
+      "sha256": "65991ba7011b9484553c263a700370243843458f242b2ddcf177c787830e16e9",
+      "source": "asserts/dialog.jpg",
+      "src": "/asserts/ui/dialogue-840.65991ba7011b.jpg",
+      "width": 840,
+      "height": 400
+    },
+    {
+      "file": "public/asserts/ui/icon-128.30e0cb4524ea.png",
+      "bytes": 32043,
+      "sha256": "30e0cb4524ea1d77210b55495cb3802cc5041e9ef49eecd00ce8b770c4b17dca",
+      "source": "asserts/icon.png",
+      "src": "/asserts/ui/icon-128.30e0cb4524ea.png",
+      "width": 128,
+      "height": 128
+    }
+  ],
+  "sourceBytes": 40705323,
+  "publishedBytes": 3405767
+}

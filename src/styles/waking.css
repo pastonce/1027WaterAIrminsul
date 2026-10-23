@@ -1,0 +1,22 @@
+.waking-reveal { position: absolute; inset: 0; z-index: 105; overflow: hidden; outline: none; touch-action: none; user-select: none; }
+.waking-reveal > svg { display: block; width: 100%; height: 100%; }
+.reality-character:disabled { opacity: 1; }
+.waking-eye { transform-box: view-box; transform-origin: 50% 50%; transform: scale(.64, 0); animation-duration: var(--waking-duration); animation-timing-function: cubic-bezier(.4, 0, .25, 1); animation-fill-mode: both; }
+.waking-reveal[data-phase=first-opening] .waking-eye { animation-name: waking-first-open; }
+.waking-reveal[data-phase=first-hold] .waking-eye { transform: scale(.74, .14); }
+.waking-reveal[data-phase=first-closing] .waking-eye { animation-name: waking-first-close; }
+.waking-reveal[data-phase=second-opening] .waking-eye { animation-name: waking-second-open; }
+.waking-reveal[data-phase=second-hold] .waking-eye { transform: scale(.93, .4); }
+.waking-reveal[data-phase=second-closing] .waking-eye { animation-name: waking-second-close; }
+.waking-reveal[data-phase=final-opening] .waking-eye { animation-name: waking-final-open; }
+.waking-reveal[data-phase=settling] .waking-eye { transform: scale(1.02); }
+.waking-reveal[data-reduced=true] { background: #000; animation: waking-gentle-open var(--waking-duration) ease both; }
+.waking-reveal[data-reduced=true] > svg { visibility: hidden; }
+.waking-reveal[data-paused=true], .waking-reveal[data-paused=true] .waking-eye { animation-play-state: paused; }
+@keyframes waking-first-open { from { transform: scale(.64, 0); } to { transform: scale(.74, .14); } }
+@keyframes waking-first-close { from { transform: scale(.74, .14); } to { transform: scale(.64, 0); } }
+@keyframes waking-second-open { from { transform: scale(.64, 0); } to { transform: scale(.93, .4); } }
+@keyframes waking-second-close { from { transform: scale(.93, .4); } to { transform: scale(.64, 0); } }
+@keyframes waking-final-open { from { transform: scale(.64, 0); } to { transform: scale(1.02); } }
+@keyframes waking-gentle-open { from { opacity: 1; } to { opacity: 0; } }
+@media (orientation: portrait) and (max-width: 900px) { .waking-reveal { visibility: hidden; } }

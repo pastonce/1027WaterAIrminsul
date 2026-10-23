@@ -1,0 +1,39 @@
+.dendro-blessing { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 11; pointer-events: none; overflow: visible; }
+.blessing-dendro-icon { filter: brightness(1.05) drop-shadow(0 0 4px #c5ff9199) drop-shadow(0 1px 1px #1b573bcc); }
+.blessing-analysis { filter: drop-shadow(0 1px 1px #164a3977); animation: blessing-focus var(--focus-duration) ease-out var(--focus-wait) both; }
+.blessing-pattern-piece { animation: blessing-piece var(--piece-reveal) linear var(--piece-wait) both; }
+.blessing-flow-path { fill: none; stroke: #d4f5a7; stroke-linecap: round; stroke-dasharray: 1; animation: blessing-stream var(--flow-duration) ease-out var(--flow-wait) both; }
+.blessing-flow-halo { stroke-width: 8; filter: url(#blessing-soft-glow); }
+.blessing-flow-thread { stroke-width: 1; }
+.blessing-flow-particle { offset-distance: 0%; offset-rotate: auto; animation: blessing-transfer calc(var(--flow-duration) - var(--leaf-delay)) ease-in-out calc(var(--flow-wait) + var(--leaf-delay)) both; filter: drop-shadow(0 0 3px #cbef8f); }
+.blessing-leaf { fill: #c5ed94; stroke: #f1ffd0; stroke-width: .6; }
+.blessing-flower { fill: #d8f8a9; stroke: #f2ffd0; stroke-width: .5; }
+.blessing-flower circle { fill: #fff6b8; }
+.blessing-lattice { fill: none; stroke: #d0ffab; stroke-width: .8; opacity: .55; }
+.blessing-scan { animation: blessing-scan var(--focus-duration) cubic-bezier(.3,0,.2,1) var(--focus-wait) both; }
+.blessing-resonance { display: none; }
+.dendro-blessing[data-phase=bloom] .blessing-flow { display: none; }
+.dendro-blessing[data-phase=bloom] .blessing-analysis { animation: blessing-confirm .9s ease-out both; }
+.dendro-blessing[data-phase=bloom] .blessing-pattern-piece { animation: none; }
+.dendro-blessing[data-phase=bloom] .blessing-scan { display: none; }
+.dendro-blessing[data-phase=bloom] .blessing-resonance { display: inline; }
+.blessing-resolution-ring { fill: none; stroke: #d7ffad; stroke-width: 1.2; transform-origin: 0 0; transform: rotate(45deg); animation: blessing-resolve calc(.9s - var(--ring-delay)) ease-out both; animation-delay: var(--ring-delay); }
+.blessing-ground-light { animation: blessing-confirm .9s ease-out both; }
+.dendro-blessing[data-paused=true] * { animation-play-state: paused !important; }
+.nahida-companion[data-blessing=channel] .spine-host,
+.nahida-companion[data-blessing=channel] .character-static { animation: blessing-outline var(--blessing-duration) ease-in-out both; }
+.nahida-companion[data-paused=true] .spine-host,
+.nahida-companion[data-paused=true] .character-static { animation-play-state: paused !important; }
+.dendro-blessing[data-reduced=true] .blessing-analysis,
+.dendro-blessing[data-reduced=true] .blessing-pattern-piece { animation: none; }
+.dendro-blessing[data-reduced=true] .blessing-analysis { opacity: .9; }
+.nahida-companion[data-reduced=true][data-blessing=channel] .spine-host,
+.nahida-companion[data-reduced=true][data-blessing=channel] .character-static { animation: none; filter: drop-shadow(0 0 4px #d7ffb8aa); }
+@keyframes blessing-outline { from { filter: drop-shadow(0 0 0 #d7ffb800); } 10%,20% { filter: drop-shadow(0 0 2px #efffc9) drop-shadow(0 0 9px #a4ed65) drop-shadow(0 0 17px #b8f27577); } 55% { filter: drop-shadow(0 0 4px #cbffac99); } to { filter: drop-shadow(0 0 0 #d7ffb800); } }
+@keyframes blessing-focus { from { opacity: 0; transform: scale(.93); } to { opacity: 1; transform: scale(1); } }
+@keyframes blessing-piece { from { opacity: 0; } to { opacity: 1; } }
+@keyframes blessing-stream { from { stroke-dashoffset: 1; opacity: 0; } 35% { opacity: .5; } 75% { stroke-dashoffset: 0; opacity: .4; } to { stroke-dashoffset: -1; opacity: 0; } }
+@keyframes blessing-transfer { from { offset-distance: 0%; opacity: 0; } 20%,80% { opacity: 1; } to { offset-distance: 100%; opacity: 0; } }
+@keyframes blessing-scan { from { transform: translateY(0); opacity: 0; } 20%,80% { opacity: .9; } to { transform: translateY(112px); opacity: 0; } }
+@keyframes blessing-confirm { from { opacity: 1; transform: scale(1); } 50% { opacity: 1; } to { opacity: 0; transform: scale(.94); } }
+@keyframes blessing-resolve { from { opacity: .7; transform: rotate(45deg) scale(.85); } to { opacity: 0; transform: rotate(45deg) scale(1.8); } }

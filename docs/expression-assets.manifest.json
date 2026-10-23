@@ -1,0 +1,105 @@
+{
+  "files": [
+    {
+      "asset": 0,
+      "source": "asserts/表情包/0.png",
+      "file": "public/asserts/expressions/0-53e10bb82cff.png",
+      "src": "/asserts/expressions/0-53e10bb82cff.png",
+      "bytes": 115853,
+      "sha256": "53e10bb82cffa7d61441c43ccc108d3b1c00099a108b290b152d48215864bc9d",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 1,
+      "source": "asserts/表情包/1.png",
+      "file": "public/asserts/expressions/1-a56f342b4597.png",
+      "src": "/asserts/expressions/1-a56f342b4597.png",
+      "bytes": 113569,
+      "sha256": "a56f342b4597fc9c041af0657c86f0b96b4c47de96f237c14457b90e26a99407",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 2,
+      "source": "asserts/表情包/2.png",
+      "file": "public/asserts/expressions/2-60c790de2197.png",
+      "src": "/asserts/expressions/2-60c790de2197.png",
+      "bytes": 118374,
+      "sha256": "60c790de21974ec285e3f2555f0b7cbff89c27e3003903f3852a1a8de2986ac8",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 3,
+      "source": "asserts/表情包/3.png",
+      "file": "public/asserts/expressions/3-e766e771566c.png",
+      "src": "/asserts/expressions/3-e766e771566c.png",
+      "bytes": 131908,
+      "sha256": "e766e771566cd6714f509acb5a0c80491b33875cf8226385bd878ac0798341b6",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 4,
+      "source": "asserts/表情包/4.png",
+      "file": "public/asserts/expressions/4-1cc7e4ab4727.png",
+      "src": "/asserts/expressions/4-1cc7e4ab4727.png",
+      "bytes": 127697,
+      "sha256": "1cc7e4ab4727e12fe158fb684b683cc23cfdc7cf09344508102bb4e519c5240c",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 5,
+      "source": "asserts/表情包/5.png",
+      "file": "public/asserts/expressions/5-2436ba7afcba.png",
+      "src": "/asserts/expressions/5-2436ba7afcba.png",
+      "bytes": 127474,
+      "sha256": "2436ba7afcba2cd47550ac566b61418116d6800add3af4869fb280d7187dcd64",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 6,
+      "source": "asserts/表情包/6.png",
+      "file": "public/asserts/expressions/6-ed09b156c64f.png",
+      "src": "/asserts/expressions/6-ed09b156c64f.png",
+      "bytes": 142045,
+      "sha256": "ed09b156c64f5160455b29e79095d5e2ff9a5fb64959e3b88873736b598aaaef",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 7,
+      "source": "asserts/表情包/7.png",
+      "file": "public/asserts/expressions/7-269605e1f34e.png",
+      "src": "/asserts/expressions/7-269605e1f34e.png",
+      "bytes": 119353,
+      "sha256": "269605e1f34e765c2ebabe85887909c236729436dc0c27e7da53d6c394d34375",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 8,
+      "source": "asserts/表情包/8.png",
+      "file": "public/asserts/expressions/8-d1334a381d42.png",
+      "src": "/asserts/expressions/8-d1334a381d42.png",
+      "bytes": 131756,
+      "sha256": "d1334a381d42d8612481e0feb30471b7766fc55b566341bb073dc2d94497502d",
+      "width": 340,
+      "height": 340
+    },
+    {
+      "asset": 9,
+      "source": "asserts/表情包/9.png",
+      "file": "public/asserts/expressions/9-5e1379064253.png",
+      "src": "/asserts/expressions/9-5e1379064253.png",
+      "bytes": 160353,
+      "sha256": "5e1379064253bb564b391af8d89cd72177d0dc33d2edd273d9afa2c3dbec1cf7",
+      "width": 340,
+      "height": 340
+    }
+  ],
+  "publishedBytes": 1288382
+}

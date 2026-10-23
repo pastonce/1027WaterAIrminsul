@@ -1,0 +1,1142 @@
+{
+  "A-0": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.46539480944756545,
+      "hitY": 0.24333920187793454
+    },
+    "aranara_02": {
+      "horizontal": 70,
+      "vertical": -40,
+      "hitX": 0.5809278561209891,
+      "hitY": 0.30644642857142884
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.4152935771638587,
+      "hitY": 0.47506021194605025
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.6173625318885604,
+      "hitY": 0.4519829317269077
+    },
+    "aranara_05": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.4355549178563743,
+      "hitY": 0.45860266159695795
+    },
+    "aranara_06": {
+      "horizontal": 70,
+      "vertical": -40,
+      "hitX": 0.5706526261640525,
+      "hitY": 0.33586630695443626
+    }
+  },
+  "A-1": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.42946625998051857,
+      "hitY": 0.4639529520295205
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.5252360515021457,
+      "hitY": 0.5492187500000001
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": -80,
+      "hitX": 0.5038795869552535,
+      "hitY": 0.41050204918032807
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.5909001572327035,
+      "hitY": 0.48808593750000007
+    },
+    "aranara_05": {
+      "horizontal": 70,
+      "vertical": -80,
+      "hitX": 0.577260390438507,
+      "hitY": 0.48488951473136943
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.5647954862245813,
+      "hitY": 0.397053382663848
+    }
+  },
+  "A-2": {
+    "aranara_01": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.44328423146249024,
+      "hitY": 0.208512544802867
+    },
+    "aranara_02": {
+      "horizontal": -70,
+      "vertical": 0,
+      "hitX": 0.5654055400127564,
+      "hitY": 0.2445714920071051
+    },
+    "aranara_03": {
+      "horizontal": 70,
+      "vertical": 40,
+      "hitX": 0.5241570661680444,
+      "hitY": 0.3694626348228044
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": 40,
+      "hitX": 0.6857861635220104,
+      "hitY": 0.3042045454545457
+    },
+    "aranara_05": {
+      "horizontal": 70,
+      "vertical": 40,
+      "hitX": 0.48934010152284263,
+      "hitY": 0.33852580372250407
+    },
+    "aranara_06": {
+      "horizontal": 70,
+      "vertical": 40,
+      "hitX": 0.5296097401432744,
+      "hitY": 0.3396321070234113
+    }
+  },
+  "A-3": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.5089957155516533,
+      "hitY": 0.2416666666666666
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.6140047590222373,
+      "hitY": 0.344623570520966
+    },
+    "aranara_03": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.5858198740761024,
+      "hitY": 0.39492788461538464
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.7240335780637328,
+      "hitY": 0.30724372384937243
+    },
+    "aranara_05": {
+      "horizontal": 70,
+      "vertical": -40,
+      "hitX": 0.6096170371754154,
+      "hitY": 0.39285891089108893
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.6345500976415799,
+      "hitY": 0.4061607142857142
+    }
+  },
+  "A-4": {
+    "aranara_01": {
+      "horizontal": 70,
+      "vertical": -40,
+      "hitX": 0.4575828385937845,
+      "hitY": 0.24819874274661452
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.5859612649784133,
+      "hitY": 0.27651374442793497
+    },
+    "aranara_03": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.5496922395491272,
+      "hitY": 0.3271727467811158
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.7147784250644861,
+      "hitY": 0.2576324884792626
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.5748602723282942,
+      "hitY": 0.3380839960238569
+    },
+    "aranara_06": {
+      "horizontal": 70,
+      "vertical": -40,
+      "hitX": 0.5944221393748205,
+      "hitY": 0.4325520833333335
+    }
+  },
+  "A-5": {
+    "aranara_01": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.44765112765279075,
+      "hitY": 0.2531249999999997
+    },
+    "aranara_02": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.4681853196874656,
+      "hitY": 0.37915384615384606
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": -80,
+      "hitX": 0.39096821695913586,
+      "hitY": 0.41975574712643665
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.5768611964311855,
+      "hitY": 0.34011627906976744
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.33120623641819896,
+      "hitY": 0.4470406764168188
+    },
+    "aranara_06": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.5448847849248957,
+      "hitY": 0.35473233995585013
+    }
+  },
+  "C-0": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.4236663683781966,
+      "hitY": 0.23948744769874475
+    },
+    "aranara_02": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.5587231559850072,
+      "hitY": 0.3207402234636872
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.5263284878460709,
+      "hitY": 0.40954566854990554
+    },
+    "aranara_04": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.62530647052553,
+      "hitY": 0.3260593220338983
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.5078041259819391,
+      "hitY": 0.3695282101167312
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.46923113140920025,
+      "hitY": 0.33452825159914745
+    }
+  },
+  "C-1": {
+    "aranara_01": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.4245086705202314,
+      "hitY": 0.19033823529411742
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.5158496119433055,
+      "hitY": 0.3293758148631032
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.44834880422069034,
+      "hitY": 0.38395979020978976
+    },
+    "aranara_04": {
+      "horizontal": -70,
+      "vertical": -40,
+      "hitX": 0.5365566037735853,
+      "hitY": 0.37431640624999996
+    },
+    "aranara_05": {
+      "horizontal": 70,
+      "vertical": 40,
+      "hitX": 0.3559776821840791,
+      "hitY": 0.46104683972912003
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.4432416852151357,
+      "hitY": 0.2744606598984774
+    }
+  },
+  "C-2": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -80,
+      "hitX": 0.4295681086232203,
+      "hitY": 0.4210063176895303
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.47426613375022625,
+      "hitY": 0.5887564432989686
+    },
+    "aranara_03": {
+      "horizontal": 35,
+      "vertical": -80,
+      "hitX": 0.6028397649494518,
+      "hitY": 0.5797485528219966
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.31938504542278184,
+      "hitY": 0.6523611111111113
+    },
+    "aranara_05": {
+      "horizontal": 35,
+      "vertical": -80,
+      "hitX": 0.45665065041603153,
+      "hitY": 0.5746118012422358
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.6286244609339405,
+      "hitY": 0.523675775978408
+    }
+  },
+  "C-3": {
+    "aranara_01": {
+      "horizontal": 70,
+      "vertical": 40,
+      "hitX": 0.296123724330938,
+      "hitY": 0.40439638783269977
+    },
+    "aranara_02": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.5787184785754166,
+      "hitY": 0.6141203703703701
+    },
+    "aranara_03": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.33524201963984657,
+      "hitY": 0.5025845864661657
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.31711961225549634,
+      "hitY": 0.6217889908256885
+    },
+    "aranara_05": {
+      "horizontal": 70,
+      "vertical": 40,
+      "hitX": 0.3073249726961169,
+      "hitY": 0.5769585828343322
+    },
+    "aranara_06": {
+      "horizontal": 35,
+      "vertical": 40,
+      "hitX": 0.4530371433788577,
+      "hitY": 0.4116641716566869
+    }
+  },
+  "C-4": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.49314943054999166,
+      "hitY": 0.290928217821782
+    },
+    "aranara_02": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.6346813682729102,
+      "hitY": 0.414972899728997
+    },
+    "aranara_03": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.510603824899459,
+      "hitY": 0.4551321138211381
+    },
+    "aranara_04": {
+      "horizontal": -35,
+      "vertical": 80,
+      "hitX": 0.5406839622641507,
+      "hitY": 0.43178710937500003
+    },
+    "aranara_05": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.5282310878261175,
+      "hitY": 0.4012077861163225
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": 80,
+      "hitX": 0.568630174129847,
+      "hitY": 0.5101284067085953
+    }
+  },
+  "C-5": {
+    "aranara_01": {
+      "horizontal": -70,
+      "vertical": 0,
+      "hitX": 0.4448230402596089,
+      "hitY": 0.22945175438596446
+    },
+    "aranara_02": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.5680630989909734,
+      "hitY": 0.27366150442477905
+    },
+    "aranara_03": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.5289273004575501,
+      "hitY": 0.373073308270677
+    },
+    "aranara_04": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.6801018913009154,
+      "hitY": 0.3178987455197136
+    },
+    "aranara_05": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.5002067717756525,
+      "hitY": 0.33617294520547936
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.38269616818512736,
+      "hitY": 0.24414335664335685
+    }
+  },
+  "D-0": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.27314197256393813,
+      "hitY": 0.3602029914529915
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.32932912475115633,
+      "hitY": 0.5562830687830685
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.34101349960295263,
+      "hitY": 0.5135847107438014
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.34050363409441425,
+      "hitY": 0.5843628404669262
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.27521372649008596,
+      "hitY": 0.5525735294117646
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.39122727955535574,
+      "hitY": 0.3469345238095239
+    }
+  },
+  "D-1": {
+    "aranara_01": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.6491524736863434,
+      "hitY": 0.4070865200764819
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.7465603280276658,
+      "hitY": 0.4993011811023618
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.7106263588111701,
+      "hitY": 0.5324018771331058
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.7345149609300519,
+      "hitY": 0.32542613636363626
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.6697695348911948,
+      "hitY": 0.4880643100511074
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.8299493555843855,
+      "hitY": 0.625952505219207
+    }
+  },
+  "D-2": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.3852857471142458,
+      "hitY": 0.19968463302752315
+    },
+    "aranara_02": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.48882442898722306,
+      "hitY": 0.32173275862068956
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.4763609457031115,
+      "hitY": 0.34382425742574213
+    },
+    "aranara_04": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.7085534591194967,
+      "hitY": 0.24574999999999997
+    },
+    "aranara_05": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.40048604313632846,
+      "hitY": 0.36899597495527753
+    },
+    "aranara_06": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.45432480870847625,
+      "hitY": 0.31041666666666684
+    }
+  },
+  "D-3": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.49956828167600265,
+      "hitY": 0.2005380794701986
+    },
+    "aranara_02": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.6177646218382375,
+      "hitY": 0.3154579530638854
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.586725114499619,
+      "hitY": 0.3364376379690946
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.7181843040743762,
+      "hitY": 0.27114130434782596
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.5863834759597211,
+      "hitY": 0.3510359744990892
+    },
+    "aranara_06": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.5837396042443361,
+      "hitY": 0.32936789772727265
+    }
+  },
+  "D-4": {
+    "aranara_01": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.31405203659538955,
+      "hitY": 0.3204982517482519
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.3470437330545056,
+      "hitY": 0.5136508498583571
+    },
+    "aranara_03": {
+      "horizontal": -70,
+      "vertical": -80,
+      "hitX": 0.5436505311619418,
+      "hitY": 0.38008828996282495
+    },
+    "aranara_04": {
+      "horizontal": -35,
+      "vertical": -80,
+      "hitX": 0.5831660644988624,
+      "hitY": 0.4126329787234046
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.30924951004880274,
+      "hitY": 0.5161787169042773
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.3990345322751891,
+      "hitY": 0.32522699757869267
+    }
+  },
+  "D-5": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.6512100616146863,
+      "hitY": 0.3288118131868131
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.7295359608351185,
+      "hitY": 0.4872764663805433
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.7151899282195151,
+      "hitY": 0.4621198296836983
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.7312750142938805,
+      "hitY": 0.26767045454545446
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.6504830448032154,
+      "hitY": 0.43771477663230246
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.8498361459067105,
+      "hitY": 0.5367718446601942
+    }
+  },
+  "E-0": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.27314197256393813,
+      "hitY": 0.3602029914529915
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.32932912475115633,
+      "hitY": 0.5562830687830685
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.34101349960295263,
+      "hitY": 0.5135847107438014
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.34050363409441425,
+      "hitY": 0.5843628404669262
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.27521372649008596,
+      "hitY": 0.5525735294117646
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.39122727955535574,
+      "hitY": 0.3469345238095239
+    }
+  },
+  "E-1": {
+    "aranara_01": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.6491524736863434,
+      "hitY": 0.4070865200764819
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.7465603280276658,
+      "hitY": 0.4993011811023618
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.7106263588111701,
+      "hitY": 0.5324018771331058
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.7345149609300519,
+      "hitY": 0.32542613636363626
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.6697695348911948,
+      "hitY": 0.4880643100511074
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.8299493555843855,
+      "hitY": 0.625952505219207
+    }
+  },
+  "E-2": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.3852857471142458,
+      "hitY": 0.19968463302752315
+    },
+    "aranara_02": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.48882442898722306,
+      "hitY": 0.32173275862068956
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.4763609457031115,
+      "hitY": 0.34382425742574213
+    },
+    "aranara_04": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.7085534591194967,
+      "hitY": 0.24574999999999997
+    },
+    "aranara_05": {
+      "horizontal": 35,
+      "vertical": 80,
+      "hitX": 0.40048604313632846,
+      "hitY": 0.36899597495527753
+    },
+    "aranara_06": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.45432480870847625,
+      "hitY": 0.31041666666666684
+    }
+  },
+  "E-3": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.49956828167600265,
+      "hitY": 0.2005380794701986
+    },
+    "aranara_02": {
+      "horizontal": -70,
+      "vertical": 40,
+      "hitX": 0.6177646218382375,
+      "hitY": 0.3154579530638854
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.586725114499619,
+      "hitY": 0.3364376379690946
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.7181843040743762,
+      "hitY": 0.27114130434782596
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.5863834759597211,
+      "hitY": 0.3510359744990892
+    },
+    "aranara_06": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.5837396042443361,
+      "hitY": 0.32936789772727265
+    }
+  },
+  "E-4": {
+    "aranara_01": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.31405203659538955,
+      "hitY": 0.3204982517482519
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.3470437330545056,
+      "hitY": 0.5136508498583571
+    },
+    "aranara_03": {
+      "horizontal": -70,
+      "vertical": -80,
+      "hitX": 0.5436505311619418,
+      "hitY": 0.38008828996282495
+    },
+    "aranara_04": {
+      "horizontal": -35,
+      "vertical": -80,
+      "hitX": 0.5831660644988624,
+      "hitY": 0.4126329787234046
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.30924951004880274,
+      "hitY": 0.5161787169042773
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": 40,
+      "hitX": 0.3990345322751891,
+      "hitY": 0.32522699757869267
+    }
+  },
+  "E-5": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.6512100616146863,
+      "hitY": 0.3288118131868131
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -80,
+      "hitX": 0.7295359608351185,
+      "hitY": 0.4872764663805433
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.7151899282195151,
+      "hitY": 0.4621198296836983
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.7312750142938805,
+      "hitY": 0.26767045454545446
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.6504830448032154,
+      "hitY": 0.43771477663230246
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.8498361459067105,
+      "hitY": 0.5367718446601942
+    }
+  },
+  "F-0": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": -80,
+      "hitX": 0.5299734902246851,
+      "hitY": 0.3569701646090536
+    },
+    "aranara_02": {
+      "horizontal": -70,
+      "vertical": -80,
+      "hitX": 0.5512904818077614,
+      "hitY": 0.43328216374268963
+    },
+    "aranara_03": {
+      "horizontal": -70,
+      "vertical": -80,
+      "hitX": 0.469691079278686,
+      "hitY": 0.42295168067226896
+    },
+    "aranara_04": {
+      "horizontal": -70,
+      "vertical": -40,
+      "hitX": 0.518619067010544,
+      "hitY": 0.395998201438849
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": -80,
+      "hitX": 0.5786210544877447,
+      "hitY": 0.4347546728971966
+    },
+    "aranara_06": {
+      "horizontal": -70,
+      "vertical": -80,
+      "hitX": 0.6127016249032791,
+      "hitY": 0.39338550600343053
+    }
+  },
+  "F-1": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.4349917578952407,
+      "hitY": 0.19445541760722293
+    },
+    "aranara_02": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.47122385530806177,
+      "hitY": 0.36265712290502805
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.4772296186570808,
+      "hitY": 0.38463409475465304
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.6562182998579831,
+      "hitY": 0.31517137096774184
+    },
+    "aranara_05": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.513906359189378,
+      "hitY": 0.35641203703703694
+    },
+    "aranara_06": {
+      "horizontal": 35,
+      "vertical": -40,
+      "hitX": 0.5626613134499566,
+      "hitY": 0.33720823095823105
+    }
+  },
+  "F-2": {
+    "aranara_01": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.4873051876783485,
+      "hitY": 0.2627900843881854
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.6103834971618439,
+      "hitY": 0.3661370967741941
+    },
+    "aranara_03": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.6173668464677668,
+      "hitY": 0.43090932914046176
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.697861635220123,
+      "hitY": 0.35743181818181813
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.564159182664579,
+      "hitY": 0.3489901746724891
+    },
+    "aranara_06": {
+      "horizontal": -35,
+      "vertical": -40,
+      "hitX": 0.6002632951638137,
+      "hitY": 0.4024360236220477
+    }
+  },
+  "F-3": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.3914003883264466,
+      "hitY": 0.22631262042389233
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.5243830045647769,
+      "hitY": 0.28464825119236925
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.4709710218607019,
+      "hitY": 0.36765624999999985
+    },
+    "aranara_04": {
+      "horizontal": 35,
+      "vertical": 40,
+      "hitX": 0.6564790269764534,
+      "hitY": 0.2971590909090909
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.4434054905351569,
+      "hitY": 0.35864361702127673
+    },
+    "aranara_06": {
+      "horizontal": -70,
+      "vertical": 0,
+      "hitX": 0.5131621886217772,
+      "hitY": 0.36161099137931046
+    }
+  },
+  "F-4": {
+    "aranara_01": {
+      "horizontal": 35,
+      "vertical": -80,
+      "hitX": 0.4741573206211764,
+      "hitY": 0.20527888446215103
+    },
+    "aranara_02": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.5968239292712268,
+      "hitY": 0.32361536107711175
+    },
+    "aranara_03": {
+      "horizontal": -35,
+      "vertical": 0,
+      "hitX": 0.6899322695442552,
+      "hitY": 0.48825604838709685
+    },
+    "aranara_04": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.7022738268021264,
+      "hitY": 0.29399038461538474
+    },
+    "aranara_05": {
+      "horizontal": -35,
+      "vertical": 40,
+      "hitX": 0.6829053766491692,
+      "hitY": 0.5377349624060147
+    },
+    "aranara_06": {
+      "horizontal": 0,
+      "vertical": -40,
+      "hitX": 0.6446662516524786,
+      "hitY": 0.40137195121951164
+    }
+  },
+  "F-5": {
+    "aranara_01": {
+      "horizontal": -70,
+      "vertical": -80,
+      "hitX": 0.36814337892531623,
+      "hitY": 0.2427300759013285
+    },
+    "aranara_02": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.5972818311874106,
+      "hitY": 0.2943614130434785
+    },
+    "aranara_03": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.5754320095619472,
+      "hitY": 0.35527751423149845
+    },
+    "aranara_04": {
+      "horizontal": 70,
+      "vertical": 0,
+      "hitX": 0.7159828291903738,
+      "hitY": 0.29097222222222213
+    },
+    "aranara_05": {
+      "horizontal": 0,
+      "vertical": 0,
+      "hitX": 0.430291129514215,
+      "hitY": 0.31524321266968325
+    },
+    "aranara_06": {
+      "horizontal": 35,
+      "vertical": 0,
+      "hitX": 0.5535826949076157,
+      "hitY": 0.33027380952380964
+    }
+  }
+}

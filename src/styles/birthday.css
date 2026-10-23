@@ -1,0 +1,39 @@
+.birthday-offering { position: absolute; inset: 0; overflow: hidden; z-index: 17; pointer-events: none; user-select: none; }
+.birthday-gift { position: absolute; width: 116px; height: 116px; margin: -58px; animation: birthday-give 2500ms cubic-bezier(.22, .55, .35, 1) var(--gift-delay) both; }
+.birthday-gift img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 5px 6px #234a3430); }
+.birthday-falling { position: absolute; top: var(--fall-start); animation: birthday-fall var(--fall-duration) linear var(--fall-delay) both; }
+.birthday-drifting { display: block; width: 100%; height: 100%; animation: birthday-drift var(--fall-duration) cubic-bezier(.45, 0, .55, 1) var(--fall-delay) both; animation-play-state: inherit; }
+.birthday-ribbon { border: 1px solid #fff4c580; border-radius: 2px 6px 2px 6px; background: linear-gradient(110deg, currentColor 18%, #fff5df 47%, currentColor 70%); }
+.birthday-candy { filter: drop-shadow(0 2px 2px #34543735); }
+.birthday-candy svg { display: block; width: 100%; height: 100%; }
+.birthday-offering[data-paused=true] > span { animation-play-state: paused; }
+.birthday-offering[data-reduced=true] .birthday-gift { transform: translate(var(--gift-x), var(--gift-y)); animation: birthday-gentle 650ms ease both; }
+.birthday-offering[data-reduced=true] .birthday-falling { top: 17%; animation: birthday-gentle 650ms ease both; }
+.birthday-offering[data-reduced=true] .birthday-drifting { animation: none; }
+.reality-actions > button { display: grid; grid-template-columns: 22px auto; column-gap: 17px; justify-content: start; text-align: left; }
+.reality-actions > .text-button { padding-inline: 29px; font-size: 13px; font-weight: 500; letter-spacing: .09em; }
+.reality-actions > button > svg { width: 22px; height: 22px; }
+@keyframes birthday-give {
+  0% { opacity: 0; transform: translate(0, 0) rotate(-14deg) scale(.5); }
+  12% { opacity: 1; }
+  45% { transform: translate(var(--gift-arc-x), var(--gift-arc-y)) rotate(6deg) scale(1); }
+  78% { opacity: 1; transform: translate(var(--gift-x), var(--gift-y)) rotate(-3deg) scale(.8); }
+  100% { opacity: 0; transform: translate(var(--gift-x), var(--gift-y)) rotate(0) scale(.3); }
+}
+@keyframes birthday-fall {
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  6%, 86% { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(0, var(--fall-drop), 0); }
+}
+@keyframes birthday-drift {
+  0% { transform: translateX(0) rotate(var(--fall-rotation)); }
+  50% { transform: translateX(var(--fall-mid-x)) rotate(var(--fall-mid-spin)); }
+  100% { transform: translateX(var(--fall-drift)) rotate(var(--fall-spin)); }
+}
+@keyframes birthday-gentle { 0%, 100% { opacity: 0; } 20%, 75% { opacity: 1; } }
+@media (max-height: 600px) and (orientation: landscape) {
+  .birthday-gift { width: 80px; height: 80px; margin: -40px; }
+  .reality-actions > .text-button { padding-inline: 18px; font-size: 10px; }
+  .reality-actions > button { grid-template-columns: 16px auto; }
+  .reality-actions > button > svg { width: 16px; height: 16px; }
+}

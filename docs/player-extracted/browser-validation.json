@@ -1,0 +1,1169 @@
+{
+  "browser": "155.0.8059.40",
+  "geometryPixelCases": [
+    {
+      "id": "image_1/nahida",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0006704330444335938,
+          "max": 20,
+          "changed": 34
+        },
+        {
+          "time": 0.5,
+          "mean": 0.0008230209350585938,
+          "max": 24,
+          "changed": 40
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0007495880126953125,
+          "max": 27,
+          "changed": 40
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.0010242462158203125,
+          "max": 51,
+          "changed": 40
+        }
+      ],
+      "motion": {
+        "mean": 25.361000061035156,
+        "max": 255,
+        "changed": 81315
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/aranara_01",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.000179290771484375,
+          "max": 4,
+          "changed": 5
+        },
+        {
+          "time": 0.5,
+          "mean": 0.000171661376953125,
+          "max": 4,
+          "changed": 5
+        },
+        {
+          "time": 1.25,
+          "mean": 0.00019168853759765625,
+          "max": 4,
+          "changed": 5
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.00016021728515625,
+          "max": 4,
+          "changed": 5
+        }
+      ],
+      "motion": {
+        "mean": 1.621415138244629,
+        "max": 251,
+        "changed": 30913
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/aranara_02",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.00037670135498046875,
+          "max": 8,
+          "changed": 10
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00043392181396484375,
+          "max": 6,
+          "changed": 13
+        },
+        {
+          "time": 1.25,
+          "mean": 0.000537872314453125,
+          "max": 8,
+          "changed": 28
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.00022602081298828125,
+          "max": 4,
+          "changed": 6
+        }
+      ],
+      "motion": {
+        "mean": 4.428719520568848,
+        "max": 255,
+        "changed": 52787
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/aranara_03",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0022039413452148438,
+          "max": 60,
+          "changed": 22
+        },
+        {
+          "time": 0.5,
+          "mean": 0.0024814605712890625,
+          "max": 62,
+          "changed": 38
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0024480819702148438,
+          "max": 63,
+          "changed": 39
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.0023651123046875,
+          "max": 58,
+          "changed": 43
+        }
+      ],
+      "motion": {
+        "mean": 1.896101951599121,
+        "max": 251,
+        "changed": 33339
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/aranara_04",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.000041961669921875,
+          "max": 1,
+          "changed": 0
+        },
+        {
+          "time": 0.5,
+          "mean": 0.0000324249267578125,
+          "max": 1,
+          "changed": 0
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0000324249267578125,
+          "max": 1,
+          "changed": 0
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.00003528594970703125,
+          "max": 1,
+          "changed": 0
+        }
+      ],
+      "motion": {
+        "mean": 0.6531295776367188,
+        "max": 255,
+        "changed": 12290
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/aranara_05",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0001926422119140625,
+          "max": 8,
+          "changed": 5
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00013446807861328125,
+          "max": 4,
+          "changed": 5
+        },
+        {
+          "time": 1.25,
+          "mean": 0.00014400482177734375,
+          "max": 5,
+          "changed": 8
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.0001506805419921875,
+          "max": 5,
+          "changed": 6
+        }
+      ],
+      "motion": {
+        "mean": 1.4436540603637695,
+        "max": 246,
+        "changed": 25741
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/aranara_06",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0008039474487304688,
+          "max": 14,
+          "changed": 51
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00047969818115234375,
+          "max": 10,
+          "changed": 29
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0005216598510742188,
+          "max": 14,
+          "changed": 22
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.001068115234375,
+          "max": 22,
+          "changed": 39
+        }
+      ],
+      "motion": {
+        "mean": 2.6360883712768555,
+        "max": 255,
+        "changed": 29765
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/crystalfly_01",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0005359649658203125,
+          "max": 34,
+          "changed": 16
+        },
+        {
+          "time": 0.5,
+          "mean": 0.000396728515625,
+          "max": 27,
+          "changed": 9
+        },
+        {
+          "time": 1.25,
+          "mean": 0.00045299530029296875,
+          "max": 21,
+          "changed": 15
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.0004911422729492188,
+          "max": 28,
+          "changed": 15
+        }
+      ],
+      "motion": {
+        "mean": 6.055961608886719,
+        "max": 255,
+        "changed": 14084
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/crystalfly_02",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.00042247772216796875,
+          "max": 18,
+          "changed": 12
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00037097930908203125,
+          "max": 20,
+          "changed": 10
+        },
+        {
+          "time": 1.25,
+          "mean": 0.000347137451171875,
+          "max": 22,
+          "changed": 10
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.0003795623779296875,
+          "max": 25,
+          "changed": 12
+        }
+      ],
+      "motion": {
+        "mean": 2.543050765991211,
+        "max": 255,
+        "changed": 8171
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_1/crystalfly_03",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.000247955322265625,
+          "max": 17,
+          "changed": 10
+        },
+        {
+          "time": 0.5,
+          "mean": 0.0002288818359375,
+          "max": 14,
+          "changed": 6
+        },
+        {
+          "time": 1.25,
+          "mean": 0.00029754638671875,
+          "max": 20,
+          "changed": 8
+        },
+        {
+          "time": 5.458333492279053,
+          "mean": 0.00024318695068359375,
+          "max": 24,
+          "changed": 9
+        }
+      ],
+      "motion": {
+        "mean": 4.409704208374023,
+        "max": 255,
+        "changed": 8280
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_2/nahida_swing",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0022630691528320312,
+          "max": 66,
+          "changed": 67
+        },
+        {
+          "time": 0.5,
+          "mean": 0.003292083740234375,
+          "max": 66,
+          "changed": 83
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0019130706787109375,
+          "max": 44,
+          "changed": 62
+        },
+        {
+          "time": 3.4583334922790527,
+          "mean": 0.0023164749145507812,
+          "max": 56,
+          "changed": 70
+        }
+      ],
+      "motion": {
+        "mean": 27.547603607177734,
+        "max": 255,
+        "changed": 57057
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_3/nahida_dream",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.00011539459228515625,
+          "max": 14,
+          "changed": 4
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00014591217041015625,
+          "max": 15,
+          "changed": 4
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0002803802490234375,
+          "max": 24,
+          "changed": 10
+        },
+        {
+          "time": 3.4583334922790527,
+          "mean": 0.0001888275146484375,
+          "max": 14,
+          "changed": 7
+        }
+      ],
+      "motion": {
+        "mean": 14.289921760559082,
+        "max": 255,
+        "changed": 72024
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_4/nahida_bouquet",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.000217437744140625,
+          "max": 13,
+          "changed": 2
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00016880035400390625,
+          "max": 14,
+          "changed": 5
+        },
+        {
+          "time": 1.25,
+          "mean": 0.00018310546875,
+          "max": 19,
+          "changed": 3
+        },
+        {
+          "time": 16.125,
+          "mean": 0.00010204315185546875,
+          "max": 6,
+          "changed": 1
+        }
+      ],
+      "motion": {
+        "mean": 26.818745613098145,
+        "max": 255,
+        "changed": 89209
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_4/aranara_01",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.000091552734375,
+          "max": 3,
+          "changed": 1
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00009918212890625,
+          "max": 4,
+          "changed": 2
+        },
+        {
+          "time": 1.25,
+          "mean": 0.00008678436279296875,
+          "max": 2,
+          "changed": 0
+        },
+        {
+          "time": 8.125,
+          "mean": 0.0000972747802734375,
+          "max": 4,
+          "changed": 1
+        }
+      ],
+      "motion": {
+        "mean": 11.848306655883789,
+        "max": 255,
+        "changed": 38931
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_4/aranara_02",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.00010395050048828125,
+          "max": 2,
+          "changed": 0
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00009918212890625,
+          "max": 3,
+          "changed": 1
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0001277923583984375,
+          "max": 5,
+          "changed": 7
+        },
+        {
+          "time": 8.125,
+          "mean": 0.00010204315185546875,
+          "max": 5,
+          "changed": 6
+        }
+      ],
+      "motion": {
+        "mean": 21.424962043762207,
+        "max": 255,
+        "changed": 54093
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_4/aranara_03",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.00008869171142578125,
+          "max": 3,
+          "changed": 2
+        },
+        {
+          "time": 0.5,
+          "mean": 0.00004863739013671875,
+          "max": 2,
+          "changed": 0
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0000782012939453125,
+          "max": 3,
+          "changed": 1
+        },
+        {
+          "time": 8.125,
+          "mean": 0.00009918212890625,
+          "max": 3,
+          "changed": 2
+        }
+      ],
+      "motion": {
+        "mean": 20.185739517211914,
+        "max": 255,
+        "changed": 58609
+      },
+      "glError": 0,
+      "contextLost": false
+    },
+    {
+      "id": "image_4/aranara_04",
+      "comparisons": [
+        {
+          "time": 0,
+          "mean": 0.0023956298828125,
+          "max": 63,
+          "changed": 31
+        },
+        {
+          "time": 0.5,
+          "mean": 0.0025796890258789062,
+          "max": 77,
+          "changed": 26
+        },
+        {
+          "time": 1.25,
+          "mean": 0.0026311874389648438,
+          "max": 64,
+          "changed": 26
+        },
+        {
+          "time": 8.125,
+          "mean": 0.0023326873779296875,
+          "max": 56,
+          "changed": 30
+        }
+      ],
+      "motion": {
+        "mean": 7.348446846008301,
+        "max": 255,
+        "changed": 24126
+      },
+      "glError": 0,
+      "contextLost": false
+    }
+  ],
+  "standaloneCases": [
+    {
+      "id": "image_1/nahida",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 159,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/aranara_01",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 18,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/aranara_02",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 18,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/aranara_03",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 15,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/aranara_04",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 9,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/aranara_05",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 12,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/aranara_06",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 14,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/crystalfly_01",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 5,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/crystalfly_02",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 5,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/crystalfly_03",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 5,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_2/nahida_swing",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 184,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_3/nahida_dream",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 64,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_4/nahida_bouquet",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 108,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_4/aranara_01",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 9,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_4/aranara_02",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 12,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_4/aranara_03",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 11,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_4/aranara_04",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "name": "desktop"
+      },
+      "version": "4.0.17",
+      "slots": 11,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        1100,
+        674
+      ]
+    },
+    {
+      "id": "image_1/nahida",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 159,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/aranara_01",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 18,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/aranara_02",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 18,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/aranara_03",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 15,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/aranara_04",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 9,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/aranara_05",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 12,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/aranara_06",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 14,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/crystalfly_01",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 5,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/crystalfly_02",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 5,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_1/crystalfly_03",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 5,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_2/nahida_swing",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 184,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_3/nahida_dream",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 64,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_4/nahida_bouquet",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 108,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_4/aranara_01",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 9,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_4/aranara_02",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 12,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_4/aranara_03",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 11,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    },
+    {
+      "id": "image_4/aranara_04",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "name": "mobile-landscape"
+      },
+      "version": "4.0.17",
+      "slots": 11,
+      "glError": 0,
+      "contextLost": false,
+      "canvas": [
+        836,
+        310
+      ]
+    }
+  ],
+  "typeScriptHelper": {
+    "loaded": true,
+    "version": "4.0.17",
+    "glError": 0,
+    "abortedLoadRejected": true
+  }
+}

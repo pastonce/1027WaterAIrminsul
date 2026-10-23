@@ -1,0 +1,488 @@
+[
+  {
+    "stage": "A",
+    "slot": 1,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 659,
+    "departed": 413,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 1101,
+    "departed": 1398,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 794,
+    "departed": 94,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 627,
+    "departed": 342,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 869,
+    "departed": 631,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 1,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 616,
+    "departed": 922,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 852,
+    "departed": 1144,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 1306,
+    "departed": 1576,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 491,
+    "departed": 1214,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 551,
+    "departed": 1410,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 865,
+    "departed": 1964,
+    "error": 0
+  },
+  {
+    "stage": "A",
+    "slot": 2,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 715,
+    "departed": 1346,
+    "error": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 831,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 1716,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 1005,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 578,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 958,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "C",
+    "slot": 3,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 1058,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 723,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 1216,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 917,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 695,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 943,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 1,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 624,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 785,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 858,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 843,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 628,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 941,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 2,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 691,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 6,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 564,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 6,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 908,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 6,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 612,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 6,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 491,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 6,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 927,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "D",
+    "slot": 6,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 298,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 756,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 1249,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 938,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 712,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 960,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 1,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 641,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 802,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 857,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 857,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 617,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 957,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 2,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 712,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 6,
+    "asset": "aranara_01",
+    "entrance": 0,
+    "watching": 559,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 6,
+    "asset": "aranara_02",
+    "entrance": 0,
+    "watching": 934,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 6,
+    "asset": "aranara_03",
+    "entrance": 0,
+    "watching": 622,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 6,
+    "asset": "aranara_04",
+    "entrance": 0,
+    "watching": 500,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 6,
+    "asset": "aranara_05",
+    "entrance": 0,
+    "watching": 946,
+    "departed": 0,
+    "error": 0
+  },
+  {
+    "stage": "E",
+    "slot": 6,
+    "asset": "aranara_06",
+    "entrance": 0,
+    "watching": 305,
+    "departed": 0,
+    "error": 0
+  }
+]
