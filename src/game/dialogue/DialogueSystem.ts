@@ -15,6 +15,16 @@ export function drawDialogue(decks: DialogueDecks, key: string, random = Math.ra
   return { entry: entries.find((entry) => entry.id === selected)!, decks: { ...decks, [key]: remaining.filter((id) => id !== selected) } };
 }
 
+export function drawUnplayedDialogue(decks: DialogueDecks, key: string, excluded: readonly string[], random = Math.random) {
+  const entries = DIALOGUE_POOLS[key]?.filter((entry) => !excluded.includes(entry.id));
+  if (!entries?.length) return;
+  const current = entries.filter((entry) => decks[key]?.includes(entry.id));
+  const remaining = current.length ? current : entries;
+  const entry = remaining[Math.min(remaining.length - 1, Math.max(0, Math.floor(random() * remaining.length)))];
+  const deck = decks[key]?.length ? decks[key] : DIALOGUE_POOLS[key].map((item) => item.id);
+  return { entry, decks: { ...decks, [key]: deck.filter((id) => id !== entry.id) } };
+}
+
 export function dreamDialogueCategory(roll: number, options: { visitAllowed: boolean; guaranteed: boolean; capped: boolean; story: number; mechanism: number }): DreamDialogueCategory {
   if (options.visitAllowed && options.guaranteed) return 'visit';
   if (roll < DIALOGUE_RULES.visitChance) return options.visitAllowed ? 'visit' : 'normal';

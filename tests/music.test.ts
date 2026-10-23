@@ -28,6 +28,18 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(() => { managers.splice(0).forEach((manager) => manager.dispose()); expect(vi.getTimerCount()).toBe(0); vi.useRealTimers(); });
 
 describe('单播放器、留白与渐变', () => {
+  it('F→G 同一播放器延续八秒留白，读信暂停剩余时间，G 曲终留白十二秒', async () => {
+    const { media, manager, factory } = await setup(); await vi.advanceTimersByTimeAsync(10000);
+    manager.configure({ ...options, stage: 'G', paused: true }); await vi.advanceTimersByTimeAsync(30000);
+    expect(media.src).toBe(''); expect(manager.getSnapshot().playing).toBe(false);
+    manager.configure({ ...options, stage: 'G' }); await vi.advanceTimersByTimeAsync(3000);
+    manager.configure({ ...options, stage: 'G', paused: true }); await vi.advanceTimersByTimeAsync(60000);
+    manager.configure({ ...options, stage: 'G' }); await vi.advanceTimersByTimeAsync(4999); expect(media.src).toBe('');
+    await vi.advanceTimersByTimeAsync(1); expect(media.src).toBe(assets.tracks.G.src); expect(factory).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(1800); expect(media.volume).toBeCloseTo(.45);
+    media.paused = true; media.onended?.(); await vi.advanceTimersByTimeAsync(11999); expect(media.paused).toBe(true);
+    await vi.advanceTimersByTimeAsync(1); expect(media.paused).toBe(false); expect(media.src).toBe(assets.tracks.G.src);
+  });
   it('留白 / 请求解码 / 实际播放 / 缓冲区分，音量调整不重复发起挂起的播放', async () => {
     const { media, manager } = await setup(); expect(manager.getSnapshot().phase).toBe('waiting');
     let resolve!: () => void;
@@ -78,7 +90,7 @@ describe('单播放器、留白与渐变', () => {
     await vi.advanceTimersByTimeAsync(1); expect(media.play).toHaveBeenCalledTimes(count + 1);
     expect(media.src).toBe(assets.tracks.A.src); expect(factory).toHaveBeenCalledOnce(); expect(media.currentTime).toBe(0);
   });
-  it('切换先淡出旧曲，完成之后留白才加载新曲，G 释放并保持静默', async () => {
+  it('切换先淡出旧曲，完成之后留白才加载新曲，无场景时释放', async () => {
     const { media, manager } = await setup(); await vi.advanceTimersByTimeAsync(10000);
     manager.configure({ ...options, stage: 'B' }); expect(media.src).toBe(assets.tracks.A.src);
     await vi.advanceTimersByTimeAsync(MUSIC_RULES.sceneFadeMs); expect(media.src).toBe('');
@@ -140,8 +152,8 @@ describe('资源保护、字体与设置迁移', () => {
     expect(validateSave({ settings: { musicVolume: 2 } }).settings.musicVolume).toBe(1);
     expect(validateSave({ settings: { musicVolume: NaN } }).settings.musicVolume).toBe(0.45);
   });
-  it('六曲 48k 双声道 AAC 高质量压缩，原文件哈希不变，只发布一档且显著小于原 MP3', () => {
-    expect(Object.keys(assets.tracks)).toEqual(['A', 'B', 'C', 'D', 'E', 'F']); expect(manifest.bitrate).toBe(192000);
+  it('七曲 48k 双声道 AAC 高质量压缩，原文件哈希不变，只发布一档且显著小于原 MP3', () => {
+    expect(Object.keys(assets.tracks)).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G']); expect(manifest.bitrate).toBe(192000);
     expect(manifest.sampleRate).toBe(48000); expect(manifest.channels).toBe(2); expect(manifest.publishedBytes).toBeLessThan(manifest.sourceBytes * 0.65);
     for (const file of manifest.files) {
       expect(createHash('sha256').update(readFileSync(file.source)).digest('hex')).toBe(file.sourceSha256);

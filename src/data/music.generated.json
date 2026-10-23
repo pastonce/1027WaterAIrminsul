@@ -30,6 +30,11 @@
       "src": "/asserts/music/f-bce8691c1710.m4a",
       "type": "audio/mp4; codecs=\"mp4a.40.2\"",
       "duration": 145.57999999999998
+    },
+    "G": {
+      "src": "/asserts/music/g-384a125f05d1.m4a",
+      "type": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "duration": 58.01
     }
   }
 }

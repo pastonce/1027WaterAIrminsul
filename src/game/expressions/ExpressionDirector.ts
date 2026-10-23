@@ -46,7 +46,7 @@ export class ExpressionDirector {
   }
 
   show(asset: number, anchor: ExpressionPlayback['anchor']) {
-    if (!this.stage || !EXPRESSION_ASSETS[asset] || anchor === 'nahida' && this.stage !== 'G' || anchor === 'tree' && this.stage === 'G') return;
+    if (!this.stage || !EXPRESSION_ASSETS[asset] || anchor === 'tree' && this.stage === 'G') return;
     this.display.clear();
     this.playback = { id: ++this.sequence, asset, anchor, angle: EXPRESSION_RULES.angleMin + this.random() * (EXPRESSION_RULES.angleMax - EXPRESSION_RULES.angleMin), ready: false };
     this.publish(this.playback);

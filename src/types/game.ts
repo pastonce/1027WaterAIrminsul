@@ -103,7 +103,7 @@ export interface GameSave {
   dialogueCounts: Partial<Record<DreamStageId, { story: number; mechanism: number }>>;
   dialogueSequence: number;
   pendingDialogues: PendingDialogue[];
-  visitLines: Record<string, { dialogueId: string; read: boolean }>;
+  visitLines: Record<string, { dialogueId: string; read: boolean; followup?: { dialogueId: string; expression: number; read: boolean } }>;
   watchedStories: string[];
   unlockedSecrets: string[];
   playedDialogues: string[];
@@ -151,6 +151,13 @@ export type QueuedEvent = {
   stage: DreamStageId;
   dialogue: DialogueEntry;
   position: 0 | 1;
+} | {
+  id: string;
+  type: 'visit-followup';
+  stage: DreamStageId;
+  visitId: string;
+  dialogue: DialogueEntry;
+  expression: number;
 };
 
 export interface GameSnapshot {
@@ -167,6 +174,7 @@ export interface GameSnapshot {
   speech: SpeechPlayback | null;
   expression: ExpressionPlayback | null;
   companion: CharacterAction | null;
+  companionCanTalk: boolean;
   companionStage: DreamStageId | null;
   companionPosition: 0 | 1;
   nahidaPlaceholder: boolean;

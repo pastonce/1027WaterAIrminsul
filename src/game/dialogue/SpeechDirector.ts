@@ -8,6 +8,7 @@ interface SpeechCallbacks {
   options(): { textSpeed: number; reducedMotion: boolean };
   speech(playback: SpeechPlayback | null): void;
   companion(action: CharacterAction | null): void;
+  interactable?(enabled: boolean): void;
   read(entry: DialogueEntry): void;
   prepare?(entry: DialogueEntry, start: () => void): void;
   available?(): void;
@@ -23,11 +24,13 @@ export class SpeechDirector {
   private presence = new PausableTimer();
   private expression = new PausableTimer();
   private visiting = false;
+  private leaving = false;
+  private followupReserved = false;
   private sequence = 0;
   private paused = false;
   private hovered = false;
   private playback: SpeechPlayback | null = null;
-  private current: { lines: DialogueEntry[]; index: number; anchor: SpeechAnchor; visit: boolean; finished: () => void; parts: string[]; part: number; read: boolean; lingerMs?: number; casting?: boolean; expression?: ExpressionChoice; expressed: boolean } | null = null;
+  private current: { lines: DialogueEntry[]; index: number; anchor: SpeechAnchor; visit: boolean; finished: () => void; parts: string[]; part: number; read: boolean; lingerMs?: number; casting?: boolean; followupExpression?: number; expression?: ExpressionChoice; expressed: boolean } | null = null;
 
   constructor(private readonly callbacks: SpeechCallbacks, private readonly random = Math.random) {}
 
@@ -39,9 +42,34 @@ export class SpeechDirector {
     this.current = { lines, index: 0, anchor, visit, finished, parts: [], part: 0, read: false, expressed: false };
     if (visit) {
       this.visiting = true;
+      this.leaving = false; this.followupReserved = false;
       this.callbacks.companion('arrive');
+      this.callbacks.interactable?.(true);
       this.timer.schedule(() => { this.callbacks.companion('observe'); this.playLine(); }, PRESENTATION_RULES.arrivalMs);
     } else this.playLine();
+    return true;
+  }
+
+  reserveFollowup() {
+    if (!this.visiting || this.leaving || this.followupReserved) return false;
+    this.followupReserved = true;
+    this.presence.clear();
+    this.callbacks.interactable?.(false);
+    return true;
+  }
+
+  startFollowup(entry: DialogueEntry, expression: number, finished: () => void) {
+    if (this.busy || this.leaving) return false;
+    const present = this.visiting;
+    this.visiting = true; this.followupReserved = true;
+    this.presence.clear();
+    this.current = { lines: [entry], index: 0, anchor: 'nahida', visit: true, finished, parts: [], part: 0, read: false, expressed: false, followupExpression: expression };
+    this.callbacks.interactable?.(false);
+    if (present) this.playLine();
+    else {
+      this.callbacks.companion('arrive');
+      this.timer.schedule(() => { this.callbacks.companion('observe'); this.playLine(); }, PRESENTATION_RULES.arrivalMs);
+    }
     return true;
   }
 
@@ -69,7 +97,7 @@ export class SpeechDirector {
     current.parts = splitDialogue(entry.text);
     current.part = 0;
     current.read = false;
-    current.expression = this.callbacks.expressionAllowed?.(entry) ? chooseDialogueExpression(entry.expressions, this.random) : undefined;
+    current.expression = current.followupExpression !== undefined ? { asset: current.followupExpression, mode: 'before', offset: 0 } : this.callbacks.expressionAllowed?.(entry) ? chooseDialogueExpression(entry.expressions, this.random) : undefined;
     current.expressed = false;
     this.hovered = false;
     this.playPart();
@@ -173,7 +201,7 @@ export class SpeechDirector {
     this.expression.clear();
     this.show(null);
     if (this.current?.visit) this.current.lingerMs = PRESENTATION_RULES.lingerMinMs + this.random() * (PRESENTATION_RULES.lingerMaxMs - PRESENTATION_RULES.lingerMinMs);
-    if (this.current?.visit && this.callbacks.canBless?.()) {
+    if (this.current?.visit && this.current.followupExpression === undefined && this.callbacks.canBless?.()) {
       this.current.casting = true;
       this.callbacks.companion('happy');
       this.callbacks.blessing?.('channel');
@@ -185,11 +213,13 @@ export class SpeechDirector {
   }
 
   private finishVisit() {
-    if (this.current?.visit) {
+    if (this.current?.visit && (!this.followupReserved || this.current.followupExpression !== undefined)) {
       const linger = Math.max(0, (this.current.lingerMs ?? PRESENTATION_RULES.lingerMinMs) - (this.current.casting ? PRESENTATION_RULES.blessingTravelMs + PRESENTATION_RULES.blessingBloomMs : 0));
       this.presence.schedule(() => {
+        this.leaving = true;
+        this.callbacks.interactable?.(false);
         this.callbacks.companion('leave');
-        this.presence.schedule(() => { this.visiting = false; this.callbacks.companion(null); this.callbacks.available?.(); }, PRESENTATION_RULES.leaveMs);
+        this.presence.schedule(() => { this.visiting = false; this.leaving = false; this.callbacks.companion(null); this.callbacks.available?.(); }, PRESENTATION_RULES.leaveMs);
       }, linger);
     }
     this.finish();
@@ -230,6 +260,8 @@ export class SpeechDirector {
     this.expression.clear();
     this.hold.clear(); this.hovered = false;
     this.presence.clear(); this.visiting = false;
+    this.leaving = false; this.followupReserved = false;
+    this.callbacks.interactable?.(false);
     this.current = null;
     this.show(null);
     this.callbacks.companion(null);

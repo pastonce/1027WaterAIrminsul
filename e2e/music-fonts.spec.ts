@@ -169,11 +169,13 @@ test('真实音频曲尾后留白十二秒再单曲循环，设置暂停不丢�
   await expect(page.getByRole('button', { name: '设置', exact: true })).toBeFocused();
 });
 
-test('G 保持无音乐且不请求曲目，按钮静止', async ({ page }, info) => {
+test('G 沿用留白与单曲播放，仅请求生日曲目，设置暂停后续播', async ({ page }, info) => {
   const requests: string[] = []; page.on('request', (request) => { if (request.url().includes('/asserts/music/')) requests.push(request.url()); });
-  await launch(page, info, 'G'); await page.mouse.click(20, 120); await page.clock.fastForward(30000);
-  await expect(page.getByRole('button', { name: '此处暂无背景音乐' })).toBeDisabled();
-  await expect(page.locator('.music-button img')).toHaveCSS('animation-play-state', 'paused'); expect(requests).toEqual([]);
+  await launch(page, info, 'G'); await page.mouse.click(20, 120); await page.clock.runFor(100); await page.clock.runFor(7700);
+  expect(requests).toEqual([]); await page.clock.runFor(300); await playing(page);
+  expect(requests.length).toBeGreaterThan(0); expect(requests.every((url) => url.endsWith(music.tracks.G.src))).toBe(true);
+  await openSettings(page); await page.clock.runFor(350); await expect(page.locator('.music-button img')).toHaveCSS('animation-play-state', 'paused');
+  await page.keyboard.press('Escape'); await playing(page); await picture(page, info, 'g-music');
 });
 
 test('全部文字使用新字体，常用包独立加载，扩展字按需加载且设置仍可访问', async ({ page }, info) => {

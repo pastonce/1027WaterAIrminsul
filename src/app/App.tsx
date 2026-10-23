@@ -25,7 +25,7 @@ import type { StartupPlan } from '../game/assets/startupPlan';
 import { GAME_RULES } from '../data/schedule';
 import { sound } from '../game/core/SoundManager';
 import { MusicManager } from '../game/audio/MusicManager';
-import type { DreamStageId, GameSnapshot } from '../types/game';
+import type { GameSnapshot } from '../types/game';
 import type { GameController } from '../game/core/GameController';
 import type { Clock } from '../game/time/TimeGateService';
 import type { ServerClock } from '../game/time/ServerClock';
@@ -54,7 +54,7 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
   const panelOpen = Boolean(introPanel) || state.mode === 'journal' || state.mode === 'settings' || state.mode === 'notice' || state.mode === 'mail';
   const wakingCover = state.stageLoading && needsWakingReveal(state.stageLoading.from, state.stageLoading.to, state.save.sceneStage);
   const inputBlocked = Boolean(state.stageLoading || state.waking) || panelOpen || firstNoticePending;
-  const musicStage = state.reviewStage ?? (state.stage === 'G' ? null : state.stage as DreamStageId);
+  const musicStage = state.reviewStage ?? state.stage;
 
   useLayoutEffect(() => {
     if (!opening || openingPlan) return;

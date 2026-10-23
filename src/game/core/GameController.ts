@@ -17,9 +17,9 @@ import { EncounterDirector } from '../encounters/EncounterDirector';
 import { ENCOUNTER_RULES, FESTIVAL_ARANARA } from '../../data/inhabitants';
 import { stageVisitIds, visitGrowth } from '../../data/visits';
 import { DIALOGUE_RULES, dialogueEntry, transitionDialoguePool } from '../../data/dialogues';
-import { drawDialogue, dreamDialogueCategory } from '../dialogue/DialogueSystem';
+import { drawDialogue, drawUnplayedDialogue, dreamDialogueCategory } from '../dialogue/DialogueSystem';
 import { ExpressionDirector } from '../expressions/ExpressionDirector';
-import { REALITY_EXPRESSION_IDS } from '../../data/expressions';
+import { pickExpression, REALITY_EXPRESSION_IDS, VISIT_EXPRESSION_CHOICES } from '../../data/expressions';
 import { WakingDirector } from '../awakening/WakingDirector';
 import { needsWakingReveal, WAKING_REDUCED_MS, WAKING_SEQUENCE } from '../awakening/choreography';
 import { BirthdayDirector } from '../awakening/BirthdayDirector';
@@ -69,6 +69,7 @@ export class GameController {
   private summonedAranara: DreamStageId | null = null;
   private pendingRainSound = false;
   private openingAssetsPrepared = false;
+  private companionVisit: { id: string; stage: DreamStageId; position: 0 | 1 } | null = null;
 
   constructor(readonly time: TimeGateService, private readonly saves: SaveManager, private readonly random = Math.random) {
     const save = saves.load();
@@ -78,7 +79,7 @@ export class GameController {
     save.pendingDialogues = save.pendingDialogues.filter((entry) => entry.kind !== 'opening' && !(wishing && entry.kind === 'idle' && entry.stage === 'G'));
     this.snapshot = {
       save, stage: getSceneStage(save, time), growth: 0, now: time.now(), mode: save.introSeen && time.isOpen('A') ? 'idle' : 'intro', stageLoading: null, waking: null, birthday: null,
-      dewParticles: [], event: null, speech: null, expression: null, companion: null, companionStage: null, companionPosition: 0, nahidaPlaceholder: false, blessing: null, encounters: [], rewardBursts: [], presentationPaused: false,
+      dewParticles: [], event: null, speech: null, expression: null, companion: null, companionCanTalk: false, companionStage: null, companionPosition: 0, nahidaPlaceholder: false, blessing: null, encounters: [], rewardBursts: [], presentationPaused: false,
       dewFeedback: null, dewFeedbackRevision: 0, message: '', effects: [], reviewStage: null, growthRevision: 0, saveStatus: saves.status,
     };
     this.expressions = new ExpressionDirector((expression) => this.update({ expression }), random);
@@ -88,9 +89,11 @@ export class GameController {
       speech: (speech) => this.update({ speech }),
       companion: (companion) => {
         const arriving = companion === 'arrive' && this.snapshot.companion !== 'arrive';
-        this.update({ companion, companionStage: companion ? (this.snapshot.event?.type === 'visit' || this.snapshot.event?.type === 'secret-visit') && this.snapshot.event.stage !== 'G' ? this.snapshot.event.stage : this.snapshot.companionStage : null });
+        if (!companion) { this.companionVisit = null; if (this.snapshot.expression?.anchor === 'nahida') this.expressions.dismiss(); }
+        this.update({ companion, companionStage: companion ? this.companionVisit?.stage ?? this.snapshot.companionStage : null });
         if (arriving) this.emitSound('nahida-arrive');
       },
+      interactable: (enabled) => this.update({ companionCanTalk: enabled && !this.snapshot.save.visitLines[this.companionVisit?.id ?? '']?.followup }),
       read: (entry) => this.markRead(entry),
       prepare: (entry, start) => this.prepareSpeech(entry, start),
       available: () => this.reconcile(),
@@ -171,7 +174,7 @@ export class GameController {
       playedDialogues: [...new Set([...save.playedDialogues, entry.id])],
       pendingWaterings: event?.type === 'watering' ? save.pendingWaterings.filter((pending) => `watering-${pending.id}` !== event.id) : save.pendingWaterings,
       pendingDialogues: event?.type === 'dialogue' ? save.pendingDialogues.map((pending) => `dialogue-${pending.id}` === event.id && pending.lines[pending.cursor] === entry.id ? { ...pending, cursor: pending.cursor + 1 } : pending) : save.pendingDialogues,
-      visitLines: event?.type === 'visit' && save.visitLines[event.id]?.dialogueId === entry.id ? { ...save.visitLines, [event.id]: { dialogueId: entry.id, read: true } } : save.visitLines,
+      visitLines: event?.type === 'visit' && save.visitLines[event.id]?.dialogueId === entry.id ? { ...save.visitLines, [event.id]: { ...save.visitLines[event.id], read: true } } : event?.type === 'visit-followup' && save.visitLines[event.visitId]?.followup?.dialogueId === entry.id ? { ...save.visitLines, [event.visitId]: { ...save.visitLines[event.visitId], followup: { ...save.visitLines[event.visitId].followup!, read: true } } } : save.visitLines,
     });
   }
 
@@ -346,6 +349,23 @@ export class GameController {
     if (stage === 'G' || !this.time.isOpen(stage)) return;
     this.scheduleVisit(stage);
     this.reconcile();
+  }
+
+  talkToCompanion() {
+    const visit = this.companionVisit;
+    if (!visit || !this.canExplore() || this.snapshot.reviewStage || !this.snapshot.companionCanTalk || visit.stage !== this.snapshot.stage) return false;
+    const save = this.snapshot.save;
+    const reserved = Object.values(save.visitLines).flatMap((line) => [line.dialogueId, ...(line.followup ? [line.followup.dialogueId] : [])]);
+    const queued = [...this.queue, ...(this.snapshot.event ? [this.snapshot.event] : [])].flatMap((event) => event.type === 'secret-visit' || event.type === 'visit-followup' ? [event.dialogue.id] : []);
+    const selected = drawUnplayedDialogue(save.dialogueDecks, `${visit.stage}/nahida`, [...save.playedDialogues, ...reserved, ...queued], this.random);
+    const expression = pickExpression(VISIT_EXPRESSION_CHOICES, this.random);
+    if (!selected || expression === undefined || !this.speech.reserveFollowup()) return false;
+    const line = save.visitLines[visit.id];
+    this.commit({ dialogueDecks: selected.decks, ...(line ? { visitLines: { ...save.visitLines, [visit.id]: { ...line, followup: { dialogueId: selected.entry.id, expression, read: false } } } } : {}) });
+    this.enqueue({ id: `${visit.id}-followup`, type: 'visit-followup', stage: visit.stage, visitId: visit.id, dialogue: selected.entry, expression });
+    this.activity();
+    this.reconcile();
+    return true;
   }
 
   private scheduleVisit(stage: DreamStageId, guaranteed = false, watering: Partial<GameSave> = {}) {
@@ -646,6 +666,7 @@ export class GameController {
 
   private isDone(event: QueuedEvent) {
     if (event.type === 'secret-visit') return false;
+    if (event.type === 'visit-followup') return this.snapshot.save.visitLines[event.visitId]?.followup?.read === true;
     if (event.type === 'dialogue') return !this.snapshot.save.pendingDialogues.some((pending) => `dialogue-${pending.id}` === event.id && pending.kind !== 'night');
     if (event.type === 'visit') return this.snapshot.save.completedVisits.includes(event.id);
     if (event.type === 'transition') return this.snapshot.save.playedDialogues.includes(event.id);
@@ -654,7 +675,7 @@ export class GameController {
   }
 
   private eventOpen(event: QueuedEvent) {
-    if (event.type === 'secret-visit') return event.stage === this.snapshot.stage && this.time.isOpen(event.stage);
+    if (event.type === 'secret-visit' || event.type === 'visit-followup') return event.stage === this.snapshot.stage && this.time.isOpen(event.stage);
     if (event.type === 'dialogue') {
       const pending = this.snapshot.save.pendingDialogues.find((entry) => `dialogue-${entry.id}` === event.id);
       if (!pending) return false;
@@ -701,25 +722,38 @@ export class GameController {
         if (stageOrder(stage) > stageOrder(this.snapshot.stage)) continue;
         const ids = stageVisitIds(stage);
         ids.filter((id) => this.snapshot.save.pendingVisits.includes(id)).forEach((id) => { this.ensureVisitLine(stage, id); this.enqueue({ id, type: 'visit', stage }); });
+        if (stage === this.snapshot.stage) for (const id of ids) {
+          const extra = this.snapshot.save.visitLines[id]?.followup;
+          const entry = extra && dialogueEntry(extra.dialogueId);
+          if (extra && entry && !extra.read && this.snapshot.save.completedVisits.includes(id)) this.enqueue({ id: `${id}-followup`, type: 'visit-followup', stage, visitId: id, dialogue: entry, expression: extra.expression });
+        }
       }
     }
     this.queue = this.queue.filter((entry) => !this.isDone(entry) && this.eventOpen(entry));
     const priority = (event: QueuedEvent) => {
-      if (event.type !== 'dialogue') return { watering: 2, visit: 3, 'secret-visit': 3, transition: 4, night: 4 }[event.type];
+      if (event.type !== 'dialogue') return { watering: 2, visit: 3, 'secret-visit': 3, 'visit-followup': 1.5, transition: 4, night: 4 }[event.type];
       const kind = this.snapshot.save.pendingDialogues.find((entry) => `dialogue-${entry.id}` === event.id)?.kind;
       return kind === 'transition' ? 0 : kind === 'welcome' || kind === 'opening' ? 1 : kind === 'idle' ? 5 : 2;
     };
     this.queue.sort((first, second) => priority(first) - priority(second));
     if (this.speech.busy || this.snapshot.event) return;
-    const next = this.queue.findIndex((entry) => entry.type !== 'visit' && entry.type !== 'secret-visit' || this.speech.canVisit);
+    const next = this.queue.findIndex((entry) => entry.type === 'visit-followup' ? this.speech.canVisit || this.companionVisit?.id === entry.visitId && this.snapshot.companion !== 'leave' : entry.type !== 'visit' && entry.type !== 'secret-visit' || this.speech.canVisit);
     const event = next < 0 ? undefined : this.queue.splice(next, 1)[0];
     if (event) {
-      this.update({ event, ...(event.type === 'visit' ? { companionPosition: this.snapshot.save.visitPositions[event.id] ?? 0 } : event.type === 'secret-visit' ? { companionPosition: event.position } : {}) });
+      const visiting = event.type === 'visit' || event.type === 'secret-visit';
+      if (visiting || event.type === 'visit-followup') {
+        const position = event.type === 'secret-visit' ? event.position : event.type === 'visit-followup' && this.companionVisit?.id === event.visitId ? this.companionVisit.position : this.snapshot.save.visitPositions[event.type === 'visit-followup' ? event.visitId : event.id] ?? 0;
+        this.companionVisit = { id: event.type === 'visit-followup' ? event.visitId : event.id, stage: event.stage as DreamStageId, position };
+        this.update({ event, companionPosition: position });
+      } else this.update({ event });
+      if (event.type === 'visit-followup') {
+        this.speech.startFollowup(event.dialogue, event.expression, () => this.completeEvent(event.id));
+        return;
+      }
       const config = STAGES[event.stage];
       const pending = event.type === 'dialogue' ? this.snapshot.save.pendingDialogues.find((entry) => `dialogue-${entry.id}` === event.id) : undefined;
       const visit = this.snapshot.save.visitLines[event.id];
       const lines = event.type === 'dialogue' ? (pending?.lines.slice(pending.cursor) ?? []).map(dialogueEntry).filter(Boolean) : event.type === 'visit' ? visit && !visit.read ? [dialogueEntry(visit.dialogueId)] : [] : event.type === 'watering' || event.type === 'secret-visit' ? [event.dialogue] : [config.transition];
-      const visiting = event.type === 'visit' || event.type === 'secret-visit';
       this.speech.start(lines, visiting || event.stage === 'G' ? 'nahida' : 'tree', () => this.completeEvent(event.id), visiting);
       return;
     }

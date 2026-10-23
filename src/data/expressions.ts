@@ -3,6 +3,7 @@ import assets from './expressionAssets.generated.json' with { type: 'json' };
 import type { DreamStageId, ExpressionChoice, ExpressionMarker, ExpressionMode } from '../types/game';
 
 export const EXPRESSION_RULES = { idleMs: 10000, chance: 0.5, visibleMs: 2800, assetWaitMs: 2000, angleMin: -60, angleMax: 30 } as const;
+export const VISIT_EXPRESSION_CHOICES = [1, 2, 4, 5, 6, 7] as const;
 export const EXPRESSION_ASSETS: Record<number, string> = assets;
 export const TREE_EXPRESSIONS = source.treeExpressions as Partial<Record<DreamStageId, number[]>>;
 export const REALITY_EXPRESSION_IDS = new Set([...source.pools['G/reply'], ...source.pools['G/nahida']].map((entry) => entry.id));

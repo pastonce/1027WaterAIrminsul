@@ -19,7 +19,7 @@ const tracks = {};
 const outputDirectory = path.join(root, 'public/asserts/music');
 mkdirSync(outputDirectory, { recursive: true });
 mkdirSync(path.join(root, '.asset-work/music'), { recursive: true });
-for (const stage of ['A', 'B', 'C', 'D', 'E', 'F']) {
+for (const stage of ['A', 'B', 'C', 'D', 'E', 'F', 'G']) {
   const source = path.join(root, `asserts/bgm/${stage}.mp3`);
   const input = readFileSync(source);
   const info = run(['-i', source], true);

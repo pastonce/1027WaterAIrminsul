@@ -7,6 +7,7 @@ import { FESTIVAL_ARANARA } from '../../data/inhabitants';
 import { validateLoadingArtChoices } from '../../data/stageLoading';
 import { DIALOGUE_ENTRIES, DIALOGUE_POOLS, DIALOGUE_RULES, dialoguePool, transitionDialoguePool } from '../../data/dialogues';
 import { SOUND_RULES } from '../../data/sounds';
+import { VISIT_EXPRESSION_CHOICES } from '../../data/expressions';
 import type { DreamStageId, GameSave, PendingDialogueKind, StageId } from '../../types/game';
 
 export interface StorageLike {
@@ -81,7 +82,10 @@ export function validateSave(input: unknown): GameSave {
     if (!completedVisits.includes(id) && !pendingVisits.includes(id)) return [];
     const stage = DREAM_STAGES.find((stage) => stageVisitIds(stage).includes(id));
     const entry = record(value);
-    return stage && typeof entry.dialogueId === 'string' && dialoguePool(`${stage}/nahida`).some((line) => line.id === entry.dialogueId) ? [[id, { dialogueId: entry.dialogueId, read: entry.read === true }]] : [];
+    if (!stage || typeof entry.dialogueId !== 'string' || !dialoguePool(`${stage}/nahida`).some((line) => line.id === entry.dialogueId)) return [];
+    const extra = record(entry.followup);
+    const followup = typeof extra.dialogueId === 'string' && extra.dialogueId !== entry.dialogueId && dialoguePool(`${stage}/nahida`).some((line) => line.id === extra.dialogueId) && VISIT_EXPRESSION_CHOICES.some((asset) => asset === extra.expression) ? { dialogueId: extra.dialogueId, expression: extra.expression as number, read: extra.read === true } : undefined;
+    return [[id, { dialogueId: entry.dialogueId, read: entry.read === true, ...(followup ? { followup } : {}) }]];
   }));
   const pendingDialogues: GameSave['pendingDialogues'] = [];
   if (Array.isArray(source.pendingDialogues)) for (const value of source.pendingDialogues) {

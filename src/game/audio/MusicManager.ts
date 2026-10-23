@@ -1,11 +1,11 @@
 import assets from '../../data/music.generated.json' with { type: 'json' };
-import type { DreamStageId } from '../../types/game';
+import type { StageId } from '../../types/game';
 import { PausableTimer } from '../core/PausableTimer';
 
 export const MUSIC_RULES = { entryGapMs: 8000, loopGapMs: 12000, fadeInMs: 1800, fadeOutMs: 2200, sceneFadeMs: 1200, pauseFadeMs: 350, volume: 0.45 } as const;
 export type MusicPhase = 'silent' | 'blocked' | 'waiting' | 'loading' | 'buffering' | 'playing' | 'paused' | 'error';
 export interface MusicState { phase: MusicPhase; playing: boolean }
-export interface MusicOptions { stage: DreamStageId | null; enabled: boolean; paused: boolean; volume?: number; immediate?: boolean }
+export interface MusicOptions { stage: StageId | null; enabled: boolean; paused: boolean; volume?: number; immediate?: boolean }
 
 const SILENCE = 'data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQIAAACAgA==';
 
@@ -21,7 +21,7 @@ export class MusicManager {
   private fade = new PausableTimer();
   private loading = new PausableTimer();
   private rampTimer: ReturnType<typeof setTimeout> | null = null;
-  private loaded: DreamStageId | null = null;
+  private loaded: StageId | null = null;
   private unlocked = false;
   private warming = false;
   private disposed = false;

@@ -5,8 +5,8 @@
   "bitrate": 192000,
   "sampleRate": 48000,
   "channels": 2,
-  "sourceBytes": 30131001,
-  "publishedBytes": 17845437,
+  "sourceBytes": 32589013,
+  "publishedBytes": 19196962,
   "files": [
     {
       "stage": "A",
@@ -67,6 +67,16 @@
       "sha256": "bce8691c171008bb229a074d748fe5544fce4475043b300b76d5fd270b9f7051",
       "bytes": 3540757,
       "duration": 145.57999999999998
+    },
+    {
+      "stage": "G",
+      "source": "asserts/bgm/G.mp3",
+      "sourceSha256": "280aec0156fc4e0a9d0c3ea07aa797ff4bec68a697749e2110b0e8ae929464b8",
+      "sourceBytes": 2458012,
+      "file": "public/asserts/music/g-384a125f05d1.m4a",
+      "sha256": "384a125f05d15a1543e1342deb9c559d2d767f55490659993128e250966883c6",
+      "bytes": 1351525,
+      "duration": 58.01
     }
   ],
   "button": {

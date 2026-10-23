@@ -10,6 +10,34 @@ import { EnvelopeGlyph } from './BirthdayEnvelopes';
 
 export interface OpenedEnvelope { index: number; button: HTMLButtonElement; left: number; top: number; width: number; height: number }
 
+function BirthdayMailArt({ source, year }: { source: string | null; year: number }) {
+  const image = useRef<HTMLImageElement>(null);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  useLayoutEffect(() => {
+    const element = image.current;
+    if (!element) return;
+    let active = true;
+    const fail = () => { if (active) { active = false; clearTimeout(timeout); setStatus('error'); } };
+    const loaded = async () => {
+      if (!element.naturalWidth) { fail(); return; }
+      try { await element.decode?.(); } catch { }
+      if (active && element.naturalWidth) { clearTimeout(timeout); setStatus('ready'); }
+      else fail();
+    };
+    const timeout = setTimeout(fail, 10000);
+    element.addEventListener('load', loaded);
+    element.addEventListener('error', fail);
+    if (element.complete) { if (element.naturalWidth) void loaded(); else fail(); }
+    return () => { active = false; clearTimeout(timeout); element.removeEventListener('load', loaded); element.removeEventListener('error', fail); };
+  }, [source]);
+  return <div className="mail-art-page mail-page-content" data-image-state={source ? status : 'pending'}>
+    <figure className="mail-art-frame">
+      {source && status !== 'error' ? <img ref={image} src={source} alt={`${year} 年纳西妲生日贺图`} draggable={false} decoding="async"/> : <div className="mail-art-placeholder"><Icon name="leaf" size={60}/><b>{year}</b><span>{source ? '贺图暂时未能展开' : '贺图尚未发布'}</span></div>}
+      <figcaption>{year}<span> · </span>花与梦的回信</figcaption>
+    </figure>
+  </div>;
+}
+
 export function BirthdayMailBook({ origin, paused, reduced, onReturning, onComplete }: { origin: OpenedEnvelope; paused: boolean; reduced: boolean; onReturning: () => void; onComplete: () => void }) {
   const viewport = useViewportSize();
   const portrait = viewport.width <= 900 && viewport.height > viewport.width;
@@ -17,9 +45,7 @@ export function BirthdayMailBook({ origin, paused, reduced, onReturning, onCompl
   const callbacks = useRef({ onReturning, onComplete }); callbacks.current = { onReturning, onComplete };
   const [frame, setFrame] = useState<MailPlayback>({ phase: 'unsealing', index: origin.index, direction: 1, reduced });
   const [director] = useState(() => new BirthdayMailDirector(setFrame, () => callbacks.current.onComplete()));
-  const [imageState, setImageState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [paperFailed, setPaperFailed] = useState(false);
-  const [imageFailed, setImageFailed] = useState<string | null>(null);
   const dialog = useRef<HTMLDivElement>(null);
   const scroll = useRef<HTMLDivElement>(null);
   const swipe = useRef<{ x: number; y: number } | null>(null);
@@ -31,12 +57,7 @@ export function BirthdayMailBook({ origin, paused, reduced, onReturning, onCompl
   useLayoutEffect(() => { director.setReduced(reduced); }, [director, reduced]);
   useLayoutEffect(() => { director.setPaused(paused || portrait); }, [director, paused, portrait]);
   useLayoutEffect(() => { if (frame.phase === 'returning') callbacks.current.onReturning(); }, [frame.phase]);
-  useEffect(() => { setImageState('loading'); setImageFailed(null); scroll.current?.scrollTo(0, 0); }, [source, letter.year]);
-  useEffect(() => {
-    if (!source || imageState !== 'loading') return;
-    const timer = setTimeout(() => { setImageState('error'); setImageFailed(source); }, 10000);
-    return () => clearTimeout(timer);
-  }, [source, imageState]);
+  useEffect(() => { scroll.current?.scrollTo(0, 0); }, [letter.year]);
   useLayoutEffect(() => {
     const element = dialog.current;
     if (!element || portrait) return;
@@ -82,12 +103,7 @@ export function BirthdayMailBook({ origin, paused, reduced, onReturning, onCompl
     }}>
       <div className="mail-book" data-paper-failed={paperFailed}>
         {!paperFailed && <img className="mail-book-paper" src={MAIL_ASSETS.book} alt="" draggable={false} onError={() => setPaperFailed(true)}/>}
-        <div className="mail-art-page mail-page-content" data-image-state={source ? imageState : 'pending'}>
-          <figure className="mail-art-frame">
-            {source && imageFailed !== source ? <img key={source} src={source} alt={`${letter.year} 年纳西妲生日贺图`} draggable={false} decoding="async" onLoad={() => setImageState('ready')} onError={() => { setImageState('error'); setImageFailed(source); }}/> : <div className="mail-art-placeholder"><Icon name="leaf" size={60}/><b>{letter.year}</b><span>{source ? '贺图暂时未能展开' : '贺图尚未发布'}</span></div>}
-            <figcaption>{letter.year}<span> · </span>花与梦的回信</figcaption>
-          </figure>
-        </div>
+        <BirthdayMailArt key={source ?? letter.year} source={source} year={letter.year}/>
         <div className="mail-letter-page mail-page-content">
           <div className="mail-year-mark" aria-hidden="true"><span/>{letter.year}<span/></div>
           <div className="mail-letter-scroll" ref={scroll} tabIndex={0} aria-label={`${letter.year} 年生日邮件与贺图回复`}>

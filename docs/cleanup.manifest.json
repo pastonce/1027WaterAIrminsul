@@ -1,5 +1,10 @@
 {
   "date": "2026-10-23",
+  "visitFollowupFontRefresh": {
+    "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-04235d4a4865.woff2", "public/asserts/fonts/irminsul-extended-cd3f4e14f2fa.woff2"],
+    "reason": "新增来访点击名称后重生同字形字体，只移除已无引用的旧发布副本；原 TTF / MP3 / 原稿 / asserts 保留，删除前核对解析后的绝对目录与当前清单。",
+    "currentBytes": { "common": 204904, "extended": 3320080 }
+  },
   "firstVisitBirthdayFontRefresh": {
     "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-b70cfed7eb90.woff2", "public/asserts/fonts/irminsul-extended-651c319b8e77.woff2"],
     "reason": "用户更新公告正文及本页预览提示后重生同字形分包，只移除已无引用旧发布副本，删除前核对绝对目录与当前清单；原 TTF / 原稿 / 全部 asserts 保留。",

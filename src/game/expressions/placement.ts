@@ -1,5 +1,6 @@
 import { trunkX } from '../tree/geometry';
 import { EXPRESSION_RULES } from '../../data/expressions';
+import type { DreamStageId } from '../../types/game';
 
 export interface ExpressionAnchor { x: number; y: number; radiusX: number; radiusY: number }
 export interface ExpressionObstacle { left: number; top: number; width: number; height: number }
@@ -10,6 +11,15 @@ export function treeExpressionAnchor(width: number, root: number, treeHeight: nu
 
 export function nahidaExpressionAnchor(character: ExpressionObstacle): ExpressionAnchor {
   return { x: character.left + character.width * .48, y: character.top + character.height * .25, radiusX: character.width * .28, radiusY: character.height * .14 };
+}
+
+export function visitExpressionAnchor(character: ExpressionObstacle, stage: DreamStageId): ExpressionAnchor {
+  const heads: Record<DreamStageId, [number, number, number, number]> = {
+    A: [.73, .3, .19, .2], B: [.54, .3, .26, .24], C: [.47, .2, .25, .18],
+    D: [.63, .31, .23, .19], E: [.54, .3, .26, .24], F: [.48, .48, .19, .14],
+  };
+  const [headX, headY, radiusX, radiusY] = heads[stage];
+  return { x: character.left + character.width * headX, y: character.top + character.height * headY, radiusX: character.width * radiusX, radiusY: character.height * radiusY };
 }
 
 export function expressionPosition(anchor: ExpressionAnchor, width: number, height: number, angle: number, obstacles: ExpressionObstacle[] = []) {

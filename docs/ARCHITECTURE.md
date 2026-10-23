@@ -54,11 +54,13 @@ flowchart TD
 
 ## 音乐与字体
 
+来访额外句独立为 `visit-followup` 事务：自然预约附在 `visitLines`，主来访先完成原一次结算；SpeechDirector 保留角色并暂停离场，原句 / 施法后优先接话，追加结束只重设停留、不再祝福。刷新从原收据恢复未读句及表情 / 位置，不新建自然visit。ExpressionDirector 允许梦境角色锚点，仍只有单个当前表情。G 的 BirthdayMailArt 按源 keyed，缓存 complete / decode 与过期回调各自隔离；只挂当前图，不调浅原色。G 音乐复用同一个 MusicManager / media，未新增播放器或集中音频预载。
+
 来访音直接订阅 SpeechDirector 的真实 arrive 状态边沿，不依赖角色 React 重绘。Rainstorm 在成功生成 40 颗后发声，面板内输入暂存单次声音意图，closePanel 恢复演出后播放；后台 / 竖屏 / 换景 / 清理丢弃，不持久化。两条新声沿用 SoundManager、共享 BGM 上下文与原独立音量，没有新播放循环。开场进度条和百分比在同一 wrapper 内按相同条件挂载，无额外计时器；G 不再挂载两层树影，七份礼物共用原两张透明图。
 
 交互音效已替换合成铃声：GameController 的 `subscribeSound` 发送成功动作，EncounterDirector 区分自然入退 / 点击；App 同步设置、作用域和暂停配置 SoundManager。七份 AAC 以小 JSON / base64 开场只下载、动作时解码（128 KiB / 5s 校验）、缓存解码，避开 IDM 对媒体 fetch 的接管；共用 BGM 唯一 AudioContext，但独立总线 / 压缩器、六声上限与收露节流，不增 HTMLAudioElement / RAF。0、面板 / 后台 / 竖屏、换景清理，旧请求不补响。v2 新增 soundVolume、保留旧 sound 关闭；真实转场一次传送，不根据重绘 / 进度猜测。来源与授权见 INTERACTION_AUDIO.md。
 
-`App` 用场景 / 回访、设置、面板、揭幕、后台和竖屏状态配置独立 `MusicManager`，不让音频承诺阻塞 GameController。一个 HTMLAudioElement 流式加载当前曲，与 SoundManager 共用惰性 AudioContext / GainNode 包络；8 秒初入留白、12 秒曲间留白使用 PausableTimer，隐藏立即暂停，面板 / 手动暂停保留播放位置。原按钮图片仅真实播放时旋转，重试手势与全页捕获授权分离，避免一次点击被先授权后误切关闭；失败不自动重试。G 静默，v2 settings.music 默认 true、musicVolume 默认 0.45，旧音效偏好不变。右上直接设置，设置不再含手记入口，跨面板不恢复时钟，Modal 最终回退设置入口焦点。MusicManager 区分 waiting 留白、loading 请求 / 解码、buffering 播放中等待，以原生 title / aria-description 提示，不伪造网络百分比；音量变化不换曲 / 重置留白，0 静音并保留上次正音量。无新 RAF / 画布或运行依赖。
+`App` 用场景 / 回访、设置、面板、揭幕、后台和竖屏状态配置独立 `MusicManager`，不让音频承诺阻塞 GameController。一个 HTMLAudioElement 流式加载当前曲，与 SoundManager 共用惰性 AudioContext / GainNode 包络；8 秒初入留白、12 秒曲间留白使用 PausableTimer，隐藏立即暂停，面板 / 手动暂停保留播放位置。原按钮图片仅真实播放时旋转，重试手势与全页捕获授权分离，避免一次点击被先授权后误切关闭；失败不自动重试。G 同样使用 G.mp3 派生曲，v2 settings.music 默认 true、musicVolume 默认 0.45，旧音效偏好不变。右上直接设置，设置不再含手记入口，跨面板不恢复时钟，Modal 最终回退设置入口焦点。MusicManager 区分 waiting 留白、loading 请求 / 解码、buffering 播放中等待，以原生 title / aria-description 提示，不伪造网络百分比；音量变化不换曲 / 重置留白，0 静音并保留上次正音量。无新 RAF / 画布或运行依赖。
 
 全局 `--font-game` 指向 Irminsul，源为原神0.87.ttf 的同字形 WOFF2。`prepare-fonts.py` 扫描当前正文生成常用包和互斥 unicode-range 扩展包；index 通过 Vite 构建插件预载当前哈希常用包，不预载罕见字。font-display: swap 与已有 DOM 量尺 / 字体事件协作，保持两行和全部原文，不阻塞开场。音频 / 字体脚本、资源哈希与具体规则见 AUDIO_AND_FONTS.md。
 

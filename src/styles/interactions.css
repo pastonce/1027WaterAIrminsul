@@ -74,6 +74,10 @@
   width: 100%;
 }
 
+.companion-interact { position: absolute; inset: 10%; width: 80%; height: 80%; padding: 0; border: 0; border-radius: 45%; background: transparent; pointer-events: auto; }
+.companion-interact:disabled { pointer-events: none; }
+.companion-interact:focus-visible { outline: 2px solid #e5ecb4; outline-offset: 4px; }
+
 .spine-host,
 .spine-host > .spine-player,
 .spine-host canvas,

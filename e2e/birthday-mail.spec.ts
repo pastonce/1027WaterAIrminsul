@@ -39,6 +39,14 @@ test('四封来信在祝福上方，原书页 / 叶形按钮循环四年，正�
   await launch(page, info); await expect(page.locator('.birthday-envelope')).toHaveCount(4);
   const row = await page.locator('.birthday-envelopes').boundingBox(); const wish = await page.getByRole('button', { name: '送上生日祝福', exact: true }).boundingBox();
   expect(row!.y + row!.height).toBeLessThan(wish!.y); await picture(page, info, 'envelopes');
+  if (page.viewportSize()!.height <= 600) {
+    const title = (await page.locator('.reality-copy h1').boundingBox())!;
+    const review = (await page.getByRole('button', { name: '回望那场长梦', exact: true }).boundingBox())!;
+    expect(Math.abs(title.x + title.width / 2 - wish!.x - wish!.width / 2)).toBeLessThan(1);
+    expect(Math.abs(title.x + title.width / 2 - review.x - review.width / 2)).toBeLessThan(1);
+    const letters = await page.locator('.birthday-envelope').evaluateAll((elements) => elements.map((element) => { const bounds = element.getBoundingClientRect(); return { x: bounds.x, y: bounds.y }; }));
+    expect(letters[0].y).toBe(letters[1].y); expect(letters[2].y).toBe(letters[3].y); expect(letters[2].y).toBeGreaterThan(letters[0].y);
+  }
   const canvases = await page.locator('canvas').count(); const background = await page.locator('.atmosphere img').first().getAttribute('src');
   const book = await open(page); await expect(page.locator('.game-content')).toHaveAttribute('inert', '');
   await expect(page.locator('.mail-art-frame > img')).toHaveCSS('object-fit', 'contain');
@@ -53,6 +61,37 @@ test('四封来信在祝福上方，原书页 / 叶形按钮循环四年，正�
   await text.evaluate((element) => { element.scrollTop = element.scrollHeight; }); await picture(page, info, '2024-reply');
   await expect(page.locator('canvas')).toHaveCount(canvases); expect(await page.locator('.atmosphere img').first().getAttribute('src')).toBe(background);
   await page.setViewportSize({ width: 640, height: 360 }); await page.clock.runFor(100); await expect(page.locator('.mail-book-flight')).toBeInViewport(); await expect(page.getByRole('button', { name: '收起生日来信' })).toBeInViewport(); await picture(page, info, '640');
+});
+
+test('反复缓存切年及切换分辨率后贺图保持原色，不被旧加载 / 解码 / 超时污染', async ({ page }, info) => {
+  await page.addInitScript(() => {
+    const decode = HTMLImageElement.prototype.decode;
+    let delayed = false;
+    HTMLImageElement.prototype.decode = function () {
+      if (!delayed && this.src.includes('/birthday-mail/2023-')) {
+        delayed = true;
+        return new Promise<void>((resolve) => { Reflect.set(window, '__releaseOldBirthdayImage', resolve); });
+      }
+      return decode.call(this);
+    };
+  });
+  await launch(page, info); const book = await open(page);
+  await expect.poll(() => page.locator('.mail-art-frame > img').evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  await next(page); await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
+  await page.evaluate(() => { (Reflect.get(window, '__releaseOldBirthdayImage') as (() => void) | undefined)?.(); });
+  for (let cycle = 0; cycle < 3; cycle++) for (const year of [2025, 2026, 2023, 2024]) {
+    await next(page); await expect(book).toHaveAttribute('data-year', String(year));
+    if (year === 2026) { await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'pending'); continue; }
+    await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
+    await expect(page.locator('.mail-art-frame > img')).toHaveCSS('opacity', '1');
+    expect(await page.locator('.mail-art-frame > img').evaluate((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0)).toBe(true);
+  }
+  await page.setViewportSize({ width: 640, height: 360 });
+  await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
+  await page.setViewportSize(info.project.use.viewport!);
+  await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
+  await page.clock.runFor(11000); await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
+  await picture(page, info, 'cached-original-colors');
 });
 
 test('收页返回原信封再合上，读信不消耗闲置时钟或写已读，完成后才恢复交互', async ({ page }, info) => {
