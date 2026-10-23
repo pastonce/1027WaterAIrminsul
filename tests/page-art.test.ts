@@ -31,13 +31,13 @@ describe('转场素材抽选与按需下载', () => {
     expect(validateSave({ version: 2 }).loadingArtChoices).toEqual({});
   });
 
-  it('选择在启动揭幕后保存，后续操作和刷新不重抽，重置清除该轮选择', () => {
+  it('同页选择保持，重新进入时由开场重抽，重置清除该轮选择', () => {
     const { game, storage, clock } = testGame();
     game.setSuspended(true); startScene(game); expect(game.getSnapshot().save.loadingArtChoices).toEqual({});
     game.setSuspended(false); const choices = game.getSnapshot().save.loadingArtChoices;
     expect(Object.keys(choices)).toHaveLength(6); game.tick(); expect(game.getSnapshot().save.loadingArtChoices).toEqual(choices); game.stop();
     const restored = testGame({ ...game.getSnapshot().save }, clock, storage).game;
-    startScene(restored); expect(restored.getSnapshot().save.loadingArtChoices).toEqual(choices);
+    restored.prepareOpeningAssets(); startScene(restored); expect(restored.getSnapshot().save.loadingArtChoices).toEqual(completeLoadingArtChoices({}, () => .99));
     restored.reset(); expect(restored.getSnapshot().save.loadingArtChoices).toEqual({}); restored.stop();
   });
 

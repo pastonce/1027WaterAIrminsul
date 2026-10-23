@@ -22,6 +22,7 @@ async function launch(page: Page, info: TestInfo, stage: 'A' | 'F' | 'G', bounda
   const save = { ...fixture, growth: stage === 'G' ? fixture.growth : boundary ? STAGES[stage].growth.end + 1 : STAGES[stage].growth.start + 13, loadingArtChoices: completeLoadingArtChoices({}, () => 0), pendingVisits: visit ? [`visit-${stage}`] : [], completedVisits: visit || stage === 'G' ? fixture.completedVisits : [...fixture.completedVisits, `visit-${stage}`, `visit-${stage}-2`], playedDialogues: [...fixture.playedDialogues, STAGES[stage].transition.id] };
   await page.addInitScript(({ save, key, date }) => {
     if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(save));
+    Math.random = () => Number(sessionStorage.getItem('page-art-test-rng') ?? '0');
     sessionStorage.setItem('irminsul.development.clock', JSON.stringify({ offset: Date.parse(date) - Date.now(), simulated: true }));
   }, { save, key: key(info), date: OPEN });
   await page.goto('/'); await finishOpening(page, true); await finishSceneEntrance(page, true);
@@ -41,28 +42,33 @@ async function finish(page: Page) {
   await expect(page.getByTestId('stage-loading')).toHaveCount(0);
 }
 
-test('只轻量预取下一张已选图片，刷新不重抽，网站图标使用新 PNG', async ({ page }, info) => {
+test('开场仅下载六张已选图、空闲只补下一张，刷新重新预选，图标使用新 PNG', async ({ page }, info) => {
   const images: string[] = []; page.on('request', (request) => { if (request.url().includes('/loading/art/')) images.push(new URL(request.url()).pathname); });
   await launch(page, info, 'A'); await page.clock.runFor(6000);
   const save = await saved(page, info); const selected = getLoadingArt('B', save.loadingArtChoices.B)!;
   const viewport = page.viewportSize()!;
   const source = loadingArtSource(selected, viewport.width, viewport.height, 1);
   await expect(page.locator('head link[rel=prefetch]')).toHaveAttribute('href', source);
-  expect(images.every((image) => image === source)).toBe(true);
+  const chosen = (save: GameSave) => Object.entries(save.loadingArtChoices).map(([stage, choice]) => loadingArtSource(getLoadingArt(stage as keyof typeof STAGES, choice)!, viewport.width, viewport.height, 1));
+  expect(new Set(images)).toEqual(new Set(chosen(save)));
   await expect(page.locator('link[rel=icon]')).toHaveAttribute('href', pageAssets.icon);
   const icon = await page.request.get(pageAssets.icon); expect(icon.ok()).toBe(true); expect(icon.headers()['content-type']).toContain('image/png');
   await openSettings(page); await expect(page.locator('head link[rel=prefetch]')).toHaveCount(0);
   await page.getByRole('button', { name: '关闭', exact: true }).click();
+  await page.evaluate(() => sessionStorage.setItem('page-art-test-rng', '.99'));
   await page.reload(); await finishOpening(page, true); await finishSceneEntrance(page, true);
-  expect((await saved(page, info)).loadingArtChoices).toEqual(save.loadingArtChoices);
-  expect(images.every((image) => image === source)).toBe(true);
+  const reopened = await saved(page, info); expect(reopened.loadingArtChoices.B).toBe('AB2');
+  expect(images.every((image) => [...chosen(save), ...chosen(reopened)].includes(image))).toBe(true);
 });
 
 test('省流量模式不预取，仍正常显示页面且不下载未选图片', async ({ page }, info) => {
   await page.addInitScript(() => Object.defineProperty(navigator, 'connection', { configurable: true, value: { saveData: true, effectiveType: '4g' } }));
   const images: string[] = []; page.on('request', (request) => { if (request.url().includes('/loading/art/')) images.push(request.url()); });
   await launch(page, info, 'A'); await page.clock.runFor(7000);
-  await expect(page.locator('head link[rel=prefetch]')).toHaveCount(0); expect(images).toEqual([]);
+  await expect(page.locator('head link[rel=prefetch]')).toHaveCount(0);
+  const choices = (await saved(page, info)).loadingArtChoices; const viewport = page.viewportSize()!;
+  const selected = Object.entries(choices).map(([stage, choice]) => loadingArtSource(getLoadingArt(stage as keyof typeof STAGES, choice)!, viewport.width, viewport.height, 1));
+  expect(images.every((image) => selected.includes(new URL(image).pathname))).toBe(true); expect(new Set(images)).toHaveProperty('size', 6);
   await expect(page.getByRole('button', { name: '浇灌梦中的树' })).toBeEnabled();
 });
 

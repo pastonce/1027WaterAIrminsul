@@ -67,6 +67,8 @@ export class GameController {
   private secretVisitSequence = 0;
   private secretBlessed = new Set<string>();
   private summonedAranara: DreamStageId | null = null;
+  private pendingRainSound = false;
+  private openingAssetsPrepared = false;
 
   constructor(readonly time: TimeGateService, private readonly saves: SaveManager, private readonly random = Math.random) {
     const save = saves.load();
@@ -84,7 +86,11 @@ export class GameController {
     this.speech = new SpeechDirector({
       options: () => this.snapshot.save.settings,
       speech: (speech) => this.update({ speech }),
-      companion: (companion) => this.update({ companion, companionStage: companion ? (this.snapshot.event?.type === 'visit' || this.snapshot.event?.type === 'secret-visit') && this.snapshot.event.stage !== 'G' ? this.snapshot.event.stage : this.snapshot.companionStage : null }),
+      companion: (companion) => {
+        const arriving = companion === 'arrive' && this.snapshot.companion !== 'arrive';
+        this.update({ companion, companionStage: companion ? (this.snapshot.event?.type === 'visit' || this.snapshot.event?.type === 'secret-visit') && this.snapshot.event.stage !== 'G' ? this.snapshot.event.stage : this.snapshot.companionStage : null });
+        if (arriving) this.emitSound('nahida-arrive');
+      },
       read: (entry) => this.markRead(entry),
       prepare: (entry, start) => this.prepareSpeech(entry, start),
       available: () => this.reconcile(),
@@ -103,8 +109,9 @@ export class GameController {
 
   getSnapshot = () => this.snapshot;
   prepareOpeningAssets() {
-    const choices = completeLoadingArtChoices(this.snapshot.save.loadingArtChoices);
-    if (JSON.stringify(choices) !== JSON.stringify(this.snapshot.save.loadingArtChoices)) this.commit({ loadingArtChoices: choices });
+    if (this.openingAssetsPrepared) return;
+    this.openingAssetsPrepared = true;
+    this.commit({ loadingArtChoices: completeLoadingArtChoices({}, this.random) });
   }
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   subscribeSound = (listener: (kind: InteractionSound) => void) => { this.soundListeners.add(listener); return () => { this.soundListeners.delete(listener); }; };
@@ -116,6 +123,7 @@ export class GameController {
 
   private update(patch: Partial<GameSnapshot>) {
     if (patch.stage && patch.stage !== this.snapshot.stage) {
+      this.pendingRainSound = false;
       this.summonedAranara = null;
       this.queue = this.queue.filter((event) => event.type !== 'secret-visit');
       patch.dewParticles ??= this.snapshot.dewParticles.filter((particle) => particle.kind !== 'rainstorm');
@@ -141,7 +149,7 @@ export class GameController {
   private syncExpressions() {
     const state = this.snapshot;
     const inactive = !this.active || !state.save.introSeen || Boolean(state.reviewStage) || ['intro', 'ending', 'loading', 'waking'].includes(state.mode) || state.stage === 'A' && !this.forestEntered;
-    const paused = this.suspended || state.presentationPaused || ['journal', 'settings', 'mail'].includes(state.mode);
+    const paused = this.suspended || state.presentationPaused || ['journal', 'settings', 'notice', 'mail'].includes(state.mode);
     this.expressions?.configure(inactive ? null : state.stage, !inactive && !paused && state.mode === 'idle' && !state.speech && !state.blessing, inactive || paused, Boolean(state.speech || state.blessing || ['watering', 'growing'].includes(state.mode)));
   }
 
@@ -186,6 +194,7 @@ export class GameController {
   }
 
   private cancelTimers() {
+    this.pendingRainSound = false;
     this.summonedAranara = null; this.secretBlessed.clear();
     this.timers.forEach(clearTimeout);
     this.timers.clear();
@@ -228,7 +237,7 @@ export class GameController {
   }
 
   private syncPresentationPause() {
-    const presentationPaused = this.suspended || ['intro', 'journal', 'settings', 'mail', 'loading', 'waking'].includes(this.snapshot.mode);
+    const presentationPaused = this.suspended || ['intro', 'journal', 'settings', 'notice', 'mail', 'loading', 'waking'].includes(this.snapshot.mode);
     this.loading.setPaused(!this.active || this.suspended);
     this.waking.setPaused(!this.active || this.suspended);
     this.birthday.setPaused(!this.active || presentationPaused);
@@ -249,6 +258,7 @@ export class GameController {
   }
 
   setSuspended(suspended: boolean) {
+    if (suspended) this.pendingRainSound = false;
     this.suspended = suspended;
     if (this.active && !suspended) this.restoringScene = false;
     this.syncPresentationPause();
@@ -292,7 +302,7 @@ export class GameController {
     if ((previousGrowth > this.snapshot.growth || invalidEvent || invalidLoading || invalidWaking) && this.snapshot.mode !== 'intro') {
       this.cancelTimers();
       this.queue = [];
-      this.update({ mode: ['journal', 'settings'].includes(this.snapshot.mode) ? this.snapshot.mode : 'idle', event: null, reviewStage: null, dewParticles: [] });
+      this.update({ mode: ['journal', 'settings', 'notice'].includes(this.snapshot.mode) ? this.snapshot.mode : 'idle', event: null, reviewStage: null, dewParticles: [] });
       this.refreshProgress(true);
       this.syncPresentationPause();
       if (this.active) this.scheduleDew();
@@ -819,9 +829,9 @@ export class GameController {
     return true;
   }
 
-  openPanel(panel: 'journal' | 'settings') {
+  openPanel(panel: 'journal' | 'settings' | 'notice') {
     const mode = this.snapshot.mode;
-    if (!['idle', 'watering', 'growing', 'journal', 'settings'].includes(mode)) return;
+    if (!['idle', 'watering', 'growing', 'journal', 'settings', 'notice'].includes(mode)) return;
     if (mode === 'idle' || mode === 'watering' || mode === 'growing') this.panelResumeMode = mode;
     this.activity();
     this.update({ mode: panel, message: '' });
@@ -829,11 +839,13 @@ export class GameController {
   }
 
   closePanel() {
-    if (!['journal', 'settings', 'mail'].includes(this.snapshot.mode)) return;
+    if (!['journal', 'settings', 'notice', 'mail'].includes(this.snapshot.mode)) return;
+    const rainSound = this.pendingRainSound; this.pendingRainSound = false;
     this.update({ mode: this.panelResumeMode, message: '' });
     this.panelResumeMode = 'idle';
     this.syncPresentationPause();
     this.activity();
+    if (rainSound) this.emitSound('rainstorm');
     this.reconcile();
   }
 
@@ -862,7 +874,7 @@ export class GameController {
       return this.snapshot.nahidaPlaceholder ? '她换了一副模样。' : '熟悉的身影回来了。';
     }
     const stage = this.snapshot.stage;
-    if (stage === 'G' || this.snapshot.reviewStage || !this.time.isOpen(stage) || !['idle', 'watering', 'growing', 'journal', 'settings'].includes(this.snapshot.mode)) return null;
+    if (stage === 'G' || this.snapshot.reviewStage || !this.time.isOpen(stage) || !['idle', 'watering', 'growing', 'journal', 'settings', 'notice'].includes(this.snapshot.mode)) return null;
     if (code === 'aranara') {
       if (stage === 'B' || this.snapshot.encounters.length >= ENCOUNTER_RULES.maximum || this.summonedAranara) return null;
       if (!this.spawnAranara()) this.summonedAranara = stage;
@@ -882,6 +894,8 @@ export class GameController {
       if (positions.length !== EASTER_RULES.rainCount) return null;
       const particles = positions.map((position) => ({ id: ++this.particleSequence, ...position, value: 2 + Math.floor(this.random() * 3), collected: false, kind: 'rainstorm' as const }));
       this.update({ dewParticles: [...retained, ...particles] });
+      if (this.snapshot.presentationPaused) this.pendingRainSound = true;
+      else this.emitSound('rainstorm');
       for (const particle of particles) {
         const timer = new PausableTimer(); this.dewLifetimes.set(particle.id, timer); timer.setPaused(this.snapshot.presentationPaused);
         timer.schedule(() => {

@@ -12,7 +12,9 @@
 
 ## 当前资源清单
 
-两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 8.4 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 197,136 B / 扩展 3,323,448 B，仅当前两包；371 句 / 两行量尺不变。五份音效为 AAC 87,344 B / JSON 发布包 116,593 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
+最新：G 远 / 近树影 SVG 不再挂载，不删除 A～F 回退代码；祝福复用两张甜点图各 3 / 4 份，不增加下载 URL。新增来访竖琴与短雨声源 / 哈希 / 许可见 sfx-assets.manifest.json；本轮仅编码与更新清单，不作验证通过声明。
+
+两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 8.4 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 201,756 B / 扩展 3,319,240 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
 
 | 资源 | 已使用路径 | 来源 / 状态 |
 | --- | --- | --- |
@@ -41,9 +43,9 @@
 | 生长树 | `geometry.ts` 与 `TreeRenderer.tsx` | 确定性程序 SVG |
 | 森林轮廓、梦露、花瓣 | React / CSS / Canvas | 自绘占位；小生物现用登记的真实素材 |
 | 花朵 | `TreeRenderer.tsx` | 五片椭圆花瓣，已移除心形轮廓 |
-| 交互音效 | `public/asserts/sfx/*-*.json`、sounds.generated.json、SoundManager.ts | 五份 AAC-LC / MP4、96 kb/s / 48 kHz 单声道，以 JSON / base64 兼容 IDM，约 114 KiB；水滴 / 浇水 / 叶声 / 弹跳 / 传送，按动作请求，共用 BGM 上下文；来源 / 授权 / 双哈希见 sfx-assets.manifest.json，署名随 CREDITS.txt 发布 |
+| 交互音效 | `public/asserts/sfx/*-*.json`、sounds.generated.json、SoundManager.ts | 七份 AAC-LC / MP4、96 kb/s / 48 kHz 单声道，以 JSON / base64 兼容 IDM，约 196 KiB；水滴 / 浇水 / 叶声 / 弹跳 / 传送 / 来访竖琴 / 短暴雨，按动作请求，共用 BGM 上下文；来源 / 授权 / 双哈希见 sfx-assets.manifest.json，署名随 CREDITS.txt 发布 |
 | A～F 音乐 | `public/asserts/music/*.m4a`、music.generated.json | 同名 MP3 派生 AAC-LC 192 kb/s / 48 kHz 双声道，六首约 17.85 MB，仅当前场景流式加载，G 暂无；music-assets.manifest.json 登记哈希 |
-| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 197,136 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
+| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 201,756 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
 
 背景与梦境角色从原始目录复制，现实角色直接使用用户在发布目录替换的 JSON / atlas / 打包纹理。没有复制 MP4、Spine 工程或散件图目录，没有引用远程资源站。此前原始目录保留；player 的旧 Unity 备份已按用户后续明确要求清空，完整成品 `asserts/player/` 保持哈希不变，另从中提取独立角色。
 

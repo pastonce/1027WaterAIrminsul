@@ -1,7 +1,7 @@
 export const DREAM_STAGES = ['A', 'B', 'C', 'D', 'E', 'F'] as const;
 export type DreamStageId = (typeof DREAM_STAGES)[number];
 export type StageId = DreamStageId | 'G';
-export type GameMode = 'intro' | 'idle' | 'watering' | 'growing' | 'ending' | 'journal' | 'settings' | 'mail' | 'loading' | 'waking';
+export type GameMode = 'intro' | 'idle' | 'watering' | 'growing' | 'ending' | 'journal' | 'settings' | 'notice' | 'mail' | 'loading' | 'waking';
 export type SecretEffect = 'forest' | 'moon' | 'memory' | 'petals' | 'birthday';
 export type CharacterAction = 'idle' | 'arrive' | 'observe' | 'happy' | 'leave';
 export type SpeechAnchor = 'tree' | 'nahida' | 'user';

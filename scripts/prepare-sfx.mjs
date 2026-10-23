@@ -19,6 +19,8 @@ const definitions = [
   { id: 'rustle', source: 'moving-leaves-stereo.ogg', duration: 1.05, gainDb: 5, fade: 0.16, author: 'Augmentality / Brandon Morris (submitted by HaelDB)', license: 'CC0-1.0', page: 'https://opengameart.org/content/random-sounds-samples', download: 'https://opengameart.org/sites/default/files/moving%20leaves%20stereo.ogg' },
   { id: 'jump', source: 'qubodup-cfork-ccby3-jump.flac', duration: 0.388, gainDb: -9, fade: 0.04, author: 'cfork; Iwan Gabovitch / qubodup', license: 'CC-BY-3.0', page: 'https://opengameart.org/content/cute-cartoon-jump-sound-effect', download: 'https://opengameart.org/sites/default/files/qubodup-cfork-ccby3-jump.flac' },
   { id: 'transition', source: 'genshin-teleport.mp3', duration: 3.24, gainDb: 5, fade: 0.22, author: 'Genshin Impact / HoYoverse; uploaded by malakai1', license: 'All rights reserved; no separate redistribution license supplied', page: 'https://www.myinstants.com/en/instant/genshin-teleport-81406/', download: 'https://www.myinstants.com/media/sounds/genshin-teleport.mp3' },
+  { id: 'nahidaArrival', source: 'health_restore.wav', duration: 1.85, gainDb: -3, fade: 0.3, effect: 'aecho=0.8:0.7:110|230:0.18|0.10', author: 'Julie Damsgaard / Spring Spring / Spring Enterprises', license: 'CC0-1.0', page: 'https://opengameart.org/content/magic-words-healing-sound-effect', download: 'https://opengameart.org/sites/default/files/health_restore.wav' },
+  { id: 'rainstorm', source: 'rain-window-1.mp3', duration: 3.1, gainDb: 2, fade: 0.55, author: 'Ylmir', license: 'CC0-1.0', page: 'https://opengameart.org/content/rain-loopable', download: 'https://opengameart.org/sites/default/files/Rain%20MP3.zip', member: '1.mp3' },
 ];
 const output = path.join(root, 'public/asserts/sfx');
 const temporary = path.join(root, '.asset-work/sfx');
@@ -28,7 +30,7 @@ const assets = {};
 for (const definition of definitions) {
   const source = `asserts/reference-supplements/sfx/${definition.source}`;
   const input = readFileSync(path.join(root, source));
-  const filter = `atrim=duration=${definition.duration},asetpts=PTS-STARTPTS,highpass=f=90,lowpass=f=7500,volume=${definition.gainDb}dB,alimiter=limit=0.63:level=0:latency=1,volume=-4dB,afade=t=in:d=0.008,afade=t=out:st=${(definition.duration - definition.fade).toFixed(3)}:d=${definition.fade}`;
+  const filter = `${definition.effect ? definition.effect + ',' : ''}atrim=duration=${definition.duration},asetpts=PTS-STARTPTS,highpass=f=90,lowpass=f=7500,volume=${definition.gainDb}dB,alimiter=limit=0.63:level=0:latency=1,volume=-4dB,afade=t=in:d=0.008,afade=t=out:st=${(definition.duration - definition.fade).toFixed(3)}:d=${definition.fade}`;
   const target = path.join(temporary, `${definition.id}.m4a`);
   run(['-y', '-i', path.join(root, source), '-map', '0:a:0', '-vn', '-sn', '-dn', '-map_metadata', '-1', '-af', filter, '-c:a', 'aac', '-profile:a', 'aac_low', '-b:a', '96k', '-ar', '48000', '-ac', '1', '-movflags', '+faststart', target]);
   const stats = run(['-i', target, '-af', 'volumedetect', '-f', 'null', '-']);

@@ -1,5 +1,13 @@
 # 本地预览、校时与发布
 
+## 声明正文更新
+
+公告 / 设置 / 全屏已统一绿色衬底。新增机制提示按用户决定留到下一轮，正常 `build` 通过 `dialogueRelease.ts` 保留旧池；不要手改生成 JSON 或绕过这个发布保护。解除方式见 DIALOGUE_RELEASE.md，当前原稿不删除、未实现提示中的新彩蛋。
+
+右上设置左侧的声明正文在 `src/content/notice.md`，已按用户确认公开署名「独钓」、QQ 1666417849 与原神 UID 190497686。该文件随 `src/` 上传并在构建时编入脚本，不需要发布机访问外部 Markdown 服务；修改线上内容必须重新构建 / 部署，不是只上传原始 MD 即时生效。字体生成器已包含 `src/**/*.md`，新增字符后按 NOTICE.md 执行对白同步 → 字体 → 启动清单 → 验证 / 构建，再由负责人手动发布；这里只完成本地开发。
+
+G 当前底图使用最小 cover、下沿优先，仍是同一压缩派生；每次整页重抽六组转场，不强制绕过有效 HTTP / CacheStorage，未修改服务器校时和成长存档权限。素材原作者 / 许可仍需负责人核对、尤其社区传送片段，声明页不会把来源记录冒充授权证明。
+
 本轮发布还需携带 `public/asserts/gifts/date-candy.png` 与 `public/asserts/gifts/halvamazd.png`（真正透明 PNG、开场只下载压缩文件、G 送礼才解码展示），资源 / 精确编辑提示词见 gift-assets.manifest.json。FG 加载后新增 8.4 秒黑屏 / 眨眼，G 展示收据延迟至醒来完成；祝福流程为 U / 送礼 / 彩雨同步 → N，详见 REALITY_CELEBRATION.md。仅本地完成验证，未代替用户发布。
 
 仅在本地开发，没有登录或部署 Cloudflare。2026-10-18 来访 / 祝福开发恢复单元、生产构建与浏览器验证，最新结果见 TEST_PLAN.md；此前 C4 / C6 小轮跳测仅为历史。以下发布操作由负责人决定并手动执行。
@@ -86,7 +94,7 @@ Pages Git构建：根目录本项目、Node24、命令 `npm run build`、输出 
 
 ## 断网策略与边界
 
-音效发布附带 `sounds.generated.json` 对应的 `public/asserts/sfx/` 五份哈希 JSON 数据包及 CREDITS.txt，不发布下载原文件 / 临时 M4A / 旧二进制副本。服务器按 `application/json` 提供，不重写音频数据；校验源、数据包与还原 AAC 三组哈希。音效打包在本地执行 `npm run assets:sfx`，发布机不需 FFmpeg。上线前负责人确认社区原神传送片段的使用 / 再分发许可，或替换为已获许可的源；CC-BY 弹跳的作者与改动声明必须随 CREDITS.txt 保留。重试 / 静音 / 真实动作播放见 INTERACTION_AUDIO.md，不能只验证请求成功。
+音效发布附带 `sounds.generated.json` 对应的 `public/asserts/sfx/` 七份哈希 JSON 数据包及 CREDITS.txt，不发布下载原文件 / 临时 M4A / 旧二进制副本。服务器按 `application/json` 提供，不重写音频数据；校验源、数据包与还原 AAC 三组哈希。音效打包在本地执行 `npm run assets:sfx`，发布机不需 FFmpeg。上线前负责人确认社区原神传送片段的使用 / 再分发许可，或替换为已获许可的源；CC-BY 弹跳的作者与改动声明必须随 CREDITS.txt 保留。重试 / 静音 / 真实动作播放见 INTERACTION_AUDIO.md，不能只验证请求成功。
 
 - 正常每 60 秒校时，临近配置边界提前请求；只有服务器确认后才开放新日期内容。网络恢复、前台恢复及设置内手动重试也会更新。
 - 整次响应读取在 5 秒后取消，HTTP 错误、HTML、错误协议 / 请求标识或非法时间均拒绝。失败每 15 秒重试，绝不回退设备时间。

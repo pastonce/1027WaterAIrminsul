@@ -18,5 +18,13 @@
   "transition": {
     "src": "/asserts/sfx/transition-81ee1e0bec14.json",
     "duration": 3.24
+  },
+  "nahidaArrival": {
+    "src": "/asserts/sfx/nahidaArrival-ea66b10f64e5.json",
+    "duration": 1.85
+  },
+  "rainstorm": {
+    "src": "/asserts/sfx/rainstorm-96f3be3925f7.json",
+    "duration": 3.1
   }
 }

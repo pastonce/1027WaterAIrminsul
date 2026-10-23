@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-export type IconName = 'leaf' | 'dew' | 'book' | 'settings' | 'up' | 'down' | 'sound' | 'close' | 'moon' | 'sun' | 'spark' | 'arrow' | 'fullscreen';
+export type IconName = 'leaf' | 'dew' | 'book' | 'settings' | 'notice' | 'up' | 'down' | 'sound' | 'close' | 'moon' | 'sun' | 'spark' | 'arrow' | 'fullscreen';
 
 export function Icon({ name, size = 22, style }: { name: IconName; size?: number; style?: CSSProperties }) {
   const paths: Record<IconName, React.ReactNode> = {
@@ -8,6 +8,7 @@ export function Icon({ name, size = 22, style }: { name: IconName; size?: number
     dew: <path d="M12 2S4 10 4 15a8 8 0 0 0 16 0c0-5-8-13-8-13ZM8 15q0 4 4 4"/>,
     book: <><path d="M12 5v16M3 3q5-1 9 2 4-3 9-2v16q-5-1-9 2-4-3-9-2Z"/><path d="m6 8 3 1m6 0 3-1"/></>,
     settings: <><path d="m9 3 6 0 1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1Z"/><circle cx="12" cy="12" r="3"/></>,
+    notice: <><path d="M5 16h14l-2-3V9a5 5 0 0 0-10 0v4ZM10 20h4M12 2v2"/><circle cx="18" cy="5" r="2.2" fill="currentColor" stroke="none"/></>,
     up: <><path d="m6 14 6-6 6 6"/><path d="M12 8v13M7 3h10"/></>,
     down: <><path d="m6 10 6 6 6-6"/><path d="M12 16V3M7 21h10"/></>,
     sound: <><path d="M3 9h4l5-5v16l-5-5H3ZM16 8q5 4 0 8m3-11q7 7 0 14"/></>,

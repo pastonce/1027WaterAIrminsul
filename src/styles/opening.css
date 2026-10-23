@@ -11,6 +11,8 @@
 .opening-structure,.opening-scan,[data-opening-corner]{opacity:0}
 .opening-still{opacity:1}
 @media(orientation:portrait) and (max-width:900px){.rotate-overlay{position:fixed;z-index:1400}}
-.opening-progress{position:absolute;left:50%;top:calc(50% + var(--opening-leaf-size, 72px)*.75);width:clamp(120px,18vw,230px);height:3px;transform:translateX(-50%);border-radius:3px;overflow:hidden;background:#c4deb92b;box-shadow:0 0 0 1px #d8edc51a}
+.opening-loading{position:absolute;left:50%;top:calc(50% + var(--opening-leaf-size, 72px)*.75);width:clamp(120px,18vw,230px);transform:translateX(-50%);text-align:center}
+.opening-progress{height:3px;border-radius:3px;overflow:hidden;background:#c4deb92b;box-shadow:0 0 0 1px #d8edc51a}
 .opening-progress>span{display:block;height:100%;background:linear-gradient(90deg,#6a9d55,#d1e9a0);box-shadow:0 0 10px #c8eaa25c}
-@media(forced-colors:active){.opening-progress{background:Canvas;border:1px solid CanvasText}.opening-progress>span{background:Highlight}}
+.opening-percentage{display:block;margin-top:11px;color:#d9e9bb;font-size:12px;line-height:1.4;letter-spacing:.09em;font-variant-numeric:tabular-nums;text-shadow:0 0 8px #b3d89540}
+@media(forced-colors:active){.opening-progress{background:Canvas;border:1px solid CanvasText}.opening-progress>span{background:Highlight}.opening-percentage{color:CanvasText}}

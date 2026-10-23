@@ -18,13 +18,13 @@ describe('五套对白外观', () => {
       expect(dialogueTheme(entry, 'tree')).toBe(theme); expect(dialogueTheme(entry, 'nahida')).toBe(theme);
     }
   });
-  it('全部 371 句按池分类，常态 / 转场 / 上限 / 待机 / 欢迎共用森林', () => {
+  it('全部原句按池分类，常态 / 转场 / 上限 / 待机 / 欢迎共用森林', () => {
     const before = JSON.stringify(DIALOGUE_POOLS);
     for (const [pool, entries] of Object.entries(DIALOGUE_POOLS)) {
       const expected = pool === 'G/wish' || pool === 'G/reply' ? 'celebration' : pool.endsWith('/story') ? 'story' : pool === 'shared/mechanism' ? 'mechanism' : pool.endsWith('/nahida') ? 'nahida' : 'forest';
       for (const entry of entries) expect(dialogueTheme(entry), `${pool}:${entry.id}`).toBe(expected);
     }
-    expect(Object.keys(DIALOGUE_ENTRIES)).toHaveLength(371); expect(JSON.stringify(DIALOGUE_POOLS)).toBe(before);
+    expect(Object.keys(DIALOGUE_ENTRIES)).toHaveLength(Object.values(DIALOGUE_POOLS).flat().length); expect(JSON.stringify(DIALOGUE_POOLS)).toBe(before);
   });
   it('现实祝福和回复共享庆典框，未单独指定的现实日常沿用温柔草纹', () => {
     for (const entry of [...DIALOGUE_POOLS['G/wish'], ...DIALOGUE_POOLS['G/reply']]) expect(dialogueTheme(entry)).toBe('celebration');

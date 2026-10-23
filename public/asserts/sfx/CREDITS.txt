@@ -29,5 +29,18 @@ not an official asset download and not evidence of permission to publish.
 Confirm permission or replace this clip with an authorized source before release.
 Changes: mono AAC-LC conversion, filtering, level adjustment and short fades.
 
+Nahida arrival harp:
+Julie Damsgaard / Spring Spring / Spring Enterprises. CC0 1.0.
+https://opengameart.org/content/magic-words-healing-sound-effect
+https://opengameart.org/sites/default/files/health_restore.wav
+Changes: short excerpt, subtle echo, mono AAC-LC, filtering, gain and fades.
+
+Rainstorm:
+Ylmir, Rain (loopable). CC0 1.0.
+https://opengameart.org/content/rain-loopable
+https://opengameart.org/sites/default/files/Rain%20MP3.zip
+Original archive member: 1.mp3. Changes: 3.1s excerpt, mono AAC-LC,
+filtering, gain and fades. Plays once; not an ambient loop.
+
 Original downloads are retained unchanged. Derived, locally hosted game audio
 and hashes are documented in docs/sfx-assets.manifest.json.

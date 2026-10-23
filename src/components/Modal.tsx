@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { Icon } from './Icon';
 import { useViewportSize } from '../hooks/useViewportSize';
 
-export function Modal({ title, subtitle, onClose, children, className = '', reduced = false }: { title: string; subtitle?: string | null; onClose: () => void; children: ReactNode; className?: string; reduced?: boolean }) {
+export function Modal({ title, subtitle, onClose, children, className = '', reduced = false, returnFocus = '[data-panel-opener]:not(:disabled)' }: { title: string; subtitle?: string | null; onClose: () => void; children: ReactNode; className?: string; reduced?: boolean; returnFocus?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const viewport = useViewportSize();
   const portrait = viewport.width <= 900 && viewport.height > viewport.width;
@@ -18,7 +18,7 @@ export function Modal({ title, subtitle, onClose, children, className = '', redu
     const keyboard = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { event.preventDefault(); closeRef.current(); return; }
       if (event.key !== 'Tab' || !element) return;
-      const focusable = Array.from(element.querySelectorAll<HTMLElement>('button:not(:disabled), input, select, [tabindex="0"]'));
+      const focusable = Array.from(element.querySelectorAll<HTMLElement>('button:not(:disabled), input, select, textarea, a[href], [tabindex="0"]'));
       const first = focusable[0];
       const last = focusable.at(-1);
       if (event.shiftKey && (document.activeElement === first || document.activeElement === element || document.activeElement?.classList.contains('modal'))) { event.preventDefault(); last?.focus(); }
@@ -27,10 +27,10 @@ export function Modal({ title, subtitle, onClose, children, className = '', redu
     document.addEventListener('keydown', keyboard);
     return () => {
       document.removeEventListener('keydown', keyboard);
-      const target = previous?.isConnected && previous.matches('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href], [tabindex]') ? previous : document.querySelector<HTMLElement>('[data-panel-opener]:not(:disabled)');
+      const target = previous?.isConnected && previous.matches('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href], [tabindex]') ? previous : document.querySelector<HTMLElement>(returnFocus);
       queueMicrotask(() => { if (target?.isConnected && !target.closest('[inert]')) target.focus({ preventScroll: true }); });
     };
-  }, [portrait]);
+  }, [portrait, returnFocus]);
   if (portrait) return null;
   return createPortal(<div className={`modal-backdrop ${reduced ? 'reduced-motion' : ''}`} onPointerDown={(event) => { if (event.target === event.currentTarget) onClose(); }} data-modal-portal data-no-drag>
     <div className={`modal ${className}`} role="dialog" aria-modal="true" aria-label={title} ref={ref} tabIndex={-1}>

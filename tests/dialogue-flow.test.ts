@@ -4,6 +4,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DIALOGUE_ENTRIES, DIALOGUE_POOLS, dialogueArchive, dialoguePool, transitionDialoguePool } from '../src/data/dialogues';
 import catalog from '../src/data/dialogues.generated.json' with { type: 'json' };
 import { parseDialogueSource } from '../src/data/dialogueSource';
+import type { DialogueCatalog } from '../src/data/dialogueSource';
+import { releaseDialoguePools } from '../src/data/dialogueRelease';
 import { drawDialogue, dreamDialogueCategory } from '../src/game/dialogue/DialogueSystem';
 import { GameController } from '../src/game/core/GameController';
 import { createSave, SaveManager, SAVE_KEYS, validateSave } from '../src/game/save/SaveManager';
@@ -36,11 +38,12 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(() => { games.splice(0).forEach((game) => game.stop()); expect(vi.getTimerCount()).toBe(0); vi.useRealTimers(); });
 
 describe('对白原文、唯一编号与循环抽取', () => {
-  it('31 个范围 / 371 个编号保持原稿正文，仅排除加粗与用户确认的编辑标记', () => {
+  it('31 个范围按原稿发布，仅用户明确暂缓的机制池保留旧快照', () => {
     const bytes = readFileSync('asserts/对白整合.md');
     const parsed = parseDialogueSource(bytes.toString('utf8'));
-    expect(parsed).toEqual(catalog.pools); expect(createHash('sha256').update(bytes).digest('hex')).toBe(catalog.sha256);
-    expect(Object.keys(parsed)).toHaveLength(31); expect(Object.keys(DIALOGUE_ENTRIES)).toHaveLength(371);
+    const released = releaseDialoguePools(parsed, { ...catalog, pools: catalog.pools as DialogueCatalog });
+    expect(released.pools).toEqual(catalog.pools); expect(createHash('sha256').update(bytes).digest('hex')).toBe(catalog.sha256);
+    expect(Object.keys(parsed)).toHaveLength(31); expect(Object.keys(DIALOGUE_ENTRIES)).toHaveLength(Object.values(released.pools).flat().length);
     expect(DIALOGUE_ENTRIES.A27.text).not.toContain('**'); expect(DIALOGUE_ENTRIES.A3Q.text).toContain('░░');
     expect(DIALOGUE_ENTRIES.U01.anchor).toBe('user'); expect(DIALOGUE_ENTRIES.N01.anchor).toBe('nahida');
     expect(dialoguePool('shared/mechanism')).toHaveLength(18);
@@ -81,9 +84,9 @@ describe('对白原文、唯一编号与循环抽取', () => {
 });
 
 describe('完整已读归档与权限', () => {
-  it('全部已开放且已读时可归档 371 句，包含剧情、公共、非首句转场及用户回复', () => {
+  it('全部已开放且已读时可归档全部原句，包含剧情、公共、非首句转场及用户回复', () => {
     const entries = dialogueArchive(Object.keys(DIALOGUE_ENTRIES), [...DREAM_STAGES, 'G']);
-    expect(entries).toHaveLength(371); expect(new Set(entries.map((entry) => entry.id)).size).toBe(371);
+    expect(entries).toHaveLength(Object.keys(DIALOGUE_ENTRIES).length); expect(new Set(entries.map((entry) => entry.id)).size).toBe(entries.length);
   });
   it('只展示真正读过的原稿条目，未知或旧占位编号不冒充新正文', () => {
     expect(dialogueArchive(['unknown', 'tree-A-0', 'R01'], [...DREAM_STAGES, 'G']).map((entry) => entry.id)).toEqual(['R01']);

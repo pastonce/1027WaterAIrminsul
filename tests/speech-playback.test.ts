@@ -43,7 +43,7 @@ describe('长句自适应分段', () => {
     const source = '🍃'.repeat(30); const parts = splitDialogue(source, (text) => Array.from(text).length <= 10);
     expect(parts).toEqual([source]);
   });
-  it('全部 371 条原文最多两段，每段符合新宽度预算，之前误列的长句均能拆开', () => {
+  it('全部原文最多两段，每段符合新宽度预算，之前误列的长句均能拆开', () => {
     for (const line of Object.values(DIALOGUE_ENTRIES)) {
       const parts = splitDialogue(line.text);
       expect(parts.length, line.id).toBeLessThanOrEqual(2); expect(parts.join(''), line.id).toBe(line.text);

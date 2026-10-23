@@ -188,7 +188,7 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
         </svg>
         <svg className="opening-center opening-art" viewBox={pattern.viewBox.join(' ')}><g transform={recenter}><g transform={`matrix(${pattern.openingCenter.matrix.join(' ')})`}><ESkillPiece piece={pattern.openingCenter}/></g></g></svg>
       </div>}
-      {mode !== 'loading' && (phase === 'loading' || mode === 'fallback' && phase !== 'reveal') && <div className="opening-progress" role="progressbar" aria-label="梦境准备" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.floor(progress.progress * 100)}><span style={{ width: `${progress.progress * 100}%` }}/></div>}
+      {mode !== 'loading' && (phase === 'loading' || mode === 'fallback' && phase !== 'reveal') && <div className="opening-loading"><div className="opening-progress" role="progressbar" aria-label="梦境准备" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.floor(progress.progress * 100)}><span style={{ width: `${progress.progress * 100}%` }}/></div><span className="opening-percentage" aria-hidden="true">{Math.floor(progress.progress * 100)}%</span></div>}
     </div>}
   </div>;
 }

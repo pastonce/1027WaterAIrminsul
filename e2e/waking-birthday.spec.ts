@@ -61,7 +61,9 @@ test('送礼与丰富彩雨同步，匀速下落不突变，整段结束后二�
   await launch(page, info); await page.getByRole('button', { name: '送上生日祝福', exact: true }).click();
   const offering = page.getByTestId('birthday-offering'); await expect(offering).toHaveAttribute('data-phase', 'gifting');
   await expect(page.locator('.dialogue-bubble')).toHaveAttribute('data-speaker', 'user');
-  await expect(offering.locator('img')).toHaveCount(2);
+  await expect(offering.locator('img')).toHaveCount(7);
+  await expect(offering.locator('[data-gift="date-candy"]')).toHaveCount(3);
+  await expect(offering.locator('[data-gift="halvamazd"]')).toHaveCount(4);
   await expect.poll(() => offering.locator('img').evaluateAll((images) => images.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0))).toBe(true);
   const pieces = await offering.locator('.birthday-falling').count(); expect(pieces).toBeGreaterThanOrEqual(76); expect(pieces).toBeLessThanOrEqual(168);
   await page.clock.runFor(1200); await picture(page, info, 'gifts-and-rain');
@@ -106,7 +108,7 @@ test('送礼与丰富彩雨同步，匀速下落不突变，整段结束后二�
 test('减少动态时送礼和彩雨同步静态淡入淡出，不补第二场彩雨', async ({ page }, info) => {
   await launch(page, info, 'G', true); await page.getByRole('button', { name: '送上生日祝福', exact: true }).click();
   const offering = page.getByTestId('birthday-offering'); await expect(offering).toHaveAttribute('data-reduced', 'true');
-  await expect(offering.locator('img')).toHaveCount(2); await expect(offering.locator('.birthday-falling')).toHaveCount(12);
+  await expect(offering.locator('img')).toHaveCount(7); await expect(offering.locator('.birthday-falling')).toHaveCount(12);
   await expect(offering.locator('.birthday-drifting').first()).toHaveCSS('animation-name', 'none');
   await page.clock.runFor(650); await expect(offering).toHaveCount(0); await expect(page.locator('.dialogue-bubble')).toHaveAttribute('data-speaker', 'user');
   await until(page, async () => await page.locator('.dialogue-bubble[data-speaker=nahida]').count() === 1); await expect(offering).toHaveCount(0);

@@ -1,5 +1,5 @@
 {
-  "revision": "9547c3dedb7288c0",
+  "revision": "06ec06b5224ea282",
   "files": {
     "/asserts/backgrounds/canopy/bg.png": 360596,
     "/asserts/backgrounds/canopy/close_bottle.atlas": 107,
@@ -208,8 +208,8 @@
     "/asserts/expressions/7-269605e1f34e.png": 119353,
     "/asserts/expressions/8-d1334a381d42.png": 131756,
     "/asserts/expressions/9-5e1379064253.png": 160353,
-    "/asserts/fonts/irminsul-common-6e9856747a43.woff2": 197136,
-    "/asserts/fonts/irminsul-extended-80dcd02e11c1.woff2": 3323448,
+    "/asserts/fonts/irminsul-common-b70cfed7eb90.woff2": 201756,
+    "/asserts/fonts/irminsul-extended-651c319b8e77.woff2": 3319240,
     "/asserts/gifts/date-candy.png": 1090545,
     "/asserts/gifts/halvamazd.png": 1229807,
     "/asserts/inhabitants/aranara/aranara_01/aranara_01.atlas": 1231,
@@ -305,6 +305,8 @@
     "/asserts/loading/seven-elements.webp": 50168,
     "/asserts/sfx/dew-db4e0fbf46b0.json": 7153,
     "/asserts/sfx/jump-b57c5dd14227.json": 7885,
+    "/asserts/sfx/nahidaArrival-ea66b10f64e5.json": 31761,
+    "/asserts/sfx/rainstorm-96f3be3925f7.json": 52333,
     "/asserts/sfx/rustle-116b4c33c78c.json": 18773,
     "/asserts/sfx/transition-81ee1e0bec14.json": 53369,
     "/asserts/sfx/water-50b8d31fea4e.json": 29413,

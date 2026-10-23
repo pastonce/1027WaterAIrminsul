@@ -1,5 +1,11 @@
 # 工程架构 · 连续交互版
 
+## 声明与每页选图
+
+`src/content/notice.md?raw` 经最小纯文本解析交给 Notice / 原 Modal，安全行内链接可参与焦点约束。首屏局部 `introPanel` 不改变日期权限；梦境 / 现实临时 `notice` 复用面板暂停、panelResumeMode 与剩余演出时钟，音乐 / 音效 / 表情同时暂停。关闭返回对应铃铛入口；无新持久字段、原生 dialog 或渲染上下文，见 NOTICE.md。
+
+`prepareOpeningAssets()` 每个控制器开场只重抽一次插图，忽略旧选择、提交合法 ID 后再生成本页下载计划；布局 / 后台恢复不重抽，刷新创建新控制器后重新抽。有效压缩响应缓存仍复用，未改变对白抽选、收据、成长或服务器门控。G 静态底图仅去额外缩放 / 位移并底部对齐最小 cover，A～F 镜头保持。
+
 ## G 生日来信
 
 `RealityScene` 的四信封使用独立的可暂停轻晃计时器，不占用对白随机源。`GameController.openBirthdayMail()` 验证 G idle / 无祝福事务后进入临时 mail，统一挂起底层对白、表情和闲置；App 以普通 body Portal 书页承接输入，背景 inert。`BirthdayMailDirector` 的单 PausableTimer 管理启封 / 展开 / 淡换 / 回收 / 合封，它只接受真实后台 / 竖屏挂起，不把底层 mail 暂停误传给自己。
@@ -8,7 +14,7 @@
 
 ## 首屏展现
 
-首屏右上设置为局部面板开关，不改变GameController的intro权限或挂载未开放场景；校时自动恢复离开intro时清理开关。设置与正确代码反馈均Portal到body，反馈不受OpeningShell的隔离层压住。手机在开放前也能输入test，切入独立内存会话，不写正式存档；详见EASTER_EGGS.md。
+首屏右上设置与其左侧声明为局部面板开关，不改变GameController的intro权限或挂载未开放场景；校时自动恢复离开intro时清理开关。设置与正确代码反馈均Portal到body，反馈不受OpeningShell的隔离层压住。手机在开放前也能输入test，切入独立内存会话，不写正式存档；详见EASTER_EGGS.md。
 
 IntroScene 仅修改静态邀请文案 / 入口与声明，不改 onEnter 权限判定。intro.css 在 backgrounds.css 之后加载，样式全部局限 .intro-* / .enter-dream，不改变游戏气泡、镜头 / 背景或其他按钮。清晰深绿文字替代浅字深阴影，深绿浅金入口与原叶徽统一；横屏预留提示 / 页脚空间，缺图浅绿底、强制色系统配色。新字符按原 TTF 重生常用 / 扩展 WOFF2，原稿与存档不动。
 
@@ -42,7 +48,9 @@ flowchart TD
 
 ## 音乐与字体
 
-交互音效已替换合成铃声：GameController 的 `subscribeSound` 发送成功动作，EncounterDirector 区分自然入退 / 点击；App 同步设置、作用域和暂停配置 SoundManager。五份 AAC 以小 JSON / base64 开场只下载、动作时解码（128 KiB / 5s 校验）、缓存解码，避开 IDM 对媒体 fetch 的接管；共用 BGM 唯一 AudioContext，但独立总线 / 压缩器、六声上限与收露节流，不增 HTMLAudioElement / RAF。0、面板 / 后台 / 竖屏、换景清理，旧请求不补响。v2 新增 soundVolume、保留旧 sound 关闭；真实转场一次传送，不根据重绘 / 进度猜测。来源与授权见 INTERACTION_AUDIO.md。
+来访音直接订阅 SpeechDirector 的真实 arrive 状态边沿，不依赖角色 React 重绘。Rainstorm 在成功生成 40 颗后发声，面板内输入暂存单次声音意图，closePanel 恢复演出后播放；后台 / 竖屏 / 换景 / 清理丢弃，不持久化。两条新声沿用 SoundManager、共享 BGM 上下文与原独立音量，没有新播放循环。开场进度条和百分比在同一 wrapper 内按相同条件挂载，无额外计时器；G 不再挂载两层树影，七份礼物共用原两张透明图。
+
+交互音效已替换合成铃声：GameController 的 `subscribeSound` 发送成功动作，EncounterDirector 区分自然入退 / 点击；App 同步设置、作用域和暂停配置 SoundManager。七份 AAC 以小 JSON / base64 开场只下载、动作时解码（128 KiB / 5s 校验）、缓存解码，避开 IDM 对媒体 fetch 的接管；共用 BGM 唯一 AudioContext，但独立总线 / 压缩器、六声上限与收露节流，不增 HTMLAudioElement / RAF。0、面板 / 后台 / 竖屏、换景清理，旧请求不补响。v2 新增 soundVolume、保留旧 sound 关闭；真实转场一次传送，不根据重绘 / 进度猜测。来源与授权见 INTERACTION_AUDIO.md。
 
 `App` 用场景 / 回访、设置、面板、揭幕、后台和竖屏状态配置独立 `MusicManager`，不让音频承诺阻塞 GameController。一个 HTMLAudioElement 流式加载当前曲，与 SoundManager 共用惰性 AudioContext / GainNode 包络；8 秒初入留白、12 秒曲间留白使用 PausableTimer，隐藏立即暂停，面板 / 手动暂停保留播放位置。原按钮图片仅真实播放时旋转，重试手势与全页捕获授权分离，避免一次点击被先授权后误切关闭；失败不自动重试。G 静默，v2 settings.music 默认 true、musicVolume 默认 0.45，旧音效偏好不变。右上直接设置，设置不再含手记入口，跨面板不恢复时钟，Modal 最终回退设置入口焦点。MusicManager 区分 waiting 留白、loading 请求 / 解码、buffering 播放中等待，以原生 title / aria-description 提示，不伪造网络百分比；音量变化不换曲 / 重置留白，0 静音并保留上次正音量。无新 RAF / 画布或运行依赖。
 
@@ -82,7 +90,7 @@ TimeGateService.cap 为最新开放段原上限，未开下一段不减 1，初�
 
 浇灌先进入 watering，respondDream 按浇后成长选互斥类别；预约来访则把扣露 / 成长 / 次数、位置、visitLines 和剩余池一次写档，不创建本次树回应。其他类别将资源、配额、所选 ID 与 pendingWaterings 原子保存；旧待播保留，刷新不重扣 / 重抽，动画仍 600 / 800 ms，改用单个 PausableTimer。设置在 watering / growing 中可立即打开，panelResumeMode 只在首次开面板时保存；跨设置保持暂停，关闭恢复原模式和剩余时长，重置 / 日期撤销 / 停止清理，避免原 raw timeout 在面板中把模式写回 idle。设置采用 document.body 下的 React Portal 兼容弹层，不调用原生 dialog.showModal / open；背景 inert 与 aria-hidden，保留 Escape / Tab / 外侧关闭及焦点恢复，不受场景裁切 / 堆叠影响。竖屏隐藏弹层但保留面板状态，横屏恢复，转屏按钮始终可用。
 
-每次花费 / 成长仍为 13。边界先记事实、stage 暂留旧景；服务器日期及旧段全序列结束后覆盖所选插图，再切新景。v2 的 loadingArtChoices 只存合法组内 ID，开场集中预载前预选、刷新保持；开场统一下载六张已选图的一种规格，StageArtPrefetcher 后续只空闲预取下一张单规格，可取消、不保存大图片对象。插图解码 / 有界回退和新景首帧分别确认，两者都完成后才推进 sceneStage 并解锁；不新增权限或确认，见 STAGE_LOADING.md、PAGE_ASSETS.md。
+每次花费 / 成长仍为 13。边界先记事实、stage 暂留旧景；服务器日期及旧段全序列结束后覆盖所选插图，再切新景。v2 的 loadingArtChoices 只存合法组内 ID，开场集中预载前预选、每次整页打开 / 刷新重新抽选，同页准备幂等；开场统一下载本次六张已选图的一种规格并复用有效缓存，StageArtPrefetcher 后续只空闲预取下一张单规格，可取消、不保存大图片对象。插图解码 / 有界回退和新景首帧分别确认，两者都完成后才推进 sceneStage 并解锁；不新增权限或确认，见 STAGE_LOADING.md、PAGE_ASSETS.md。
 
 阶段和成长值仍保存在业务层，用于确定树形、时间门槛、存档和调试。主界面和树的无障碍名称均不呈现这些信息。
 

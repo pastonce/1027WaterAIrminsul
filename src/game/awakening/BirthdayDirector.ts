@@ -1,7 +1,7 @@
 import type { BirthdayPlayback } from '../../types/game';
 import { PausableTimer } from '../core/PausableTimer';
 
-export const BIRTHDAY_RULES = { giftMs: 2800, showerMs: 4800, reducedMs: 650 } as const;
+export const BIRTHDAY_RULES = { giftMs: 3700, showerMs: 4800, reducedMs: 650 } as const;
 
 export class BirthdayDirector {
   private timer = new PausableTimer();

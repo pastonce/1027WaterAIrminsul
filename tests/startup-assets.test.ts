@@ -36,7 +36,7 @@ describe('开场集中预载计划', () => {
     expect(plan.characterRuntime).toBe(true);
     expect(plan.files.some((file) => file.url.includes('/hiding-band-'))).toBe(true);
   });
-  it('预选立即保存且刷新不重抽，版本目录逐文件哈希与字节数匹配', () => {
+  it('预选立即保存且同页重复准备不重抽，版本目录逐文件哈希与字节数匹配', () => {
     const { game, storage } = testGame(); game.prepareOpeningAssets();
     const selected = game.getSnapshot().save.loadingArtChoices; expect(Object.keys(selected)).toHaveLength(6);
     expect(new SaveManager(storage).load().loadingArtChoices).toEqual(selected);

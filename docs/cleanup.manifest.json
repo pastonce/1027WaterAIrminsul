@@ -1,5 +1,10 @@
 {
   "date": "2026-10-23",
+  "noticeFontRefresh": {
+    "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-6e9856747a43.woff2", "public/asserts/fonts/irminsul-extended-80dcd02e11c1.woff2", "public/asserts/fonts/irminsul-common-9142850359a6.woff2", "public/asserts/fonts/irminsul-extended-7851c8f2815e.woff2", "public/asserts/fonts/irminsul-common-0c1c9614455b.woff2", "public/asserts/fonts/irminsul-extended-d9fba61edddd.woff2"],
+    "reason": "声明 / 最新对白新增字符后重新分包，仅移除已无引用的旧发布副本（包括本轮中间产物）；删除前逐项核对绝对目录与当前清单，原 TTF 和 asserts/ 保留。",
+    "currentBytes": { "common": 201756, "extended": 3319240 }
+  },
   "birthdayMailFontRefresh": {
     "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-8a08ef06cfff.woff2", "public/asserts/fonts/irminsul-extended-ea69559e4ac4.woff2"],
     "reason": "生日来信新增字符后重新分包，仅移除已无引用的两个旧发布哈希字体，原 TTF 与全部 asserts 保留。",

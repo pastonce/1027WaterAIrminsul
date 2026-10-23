@@ -1,5 +1,5 @@
 {
-  "revision": "9547c3dedb7288c0",
+  "revision": "06ec06b5224ea282",
   "files": [
     {
       "url": "/asserts/backgrounds/canopy/bg.png",
@@ -1037,14 +1037,14 @@
       "sha256": "5e1379064253bb564b391af8d89cd72177d0dc33d2edd273d9afa2c3dbec1cf7"
     },
     {
-      "url": "/asserts/fonts/irminsul-common-6e9856747a43.woff2",
-      "bytes": 197136,
-      "sha256": "6e9856747a43e95fc0afd7d3b6a501726eec51a034ecdbc8234f6495ce08dce8"
+      "url": "/asserts/fonts/irminsul-common-b70cfed7eb90.woff2",
+      "bytes": 201756,
+      "sha256": "b70cfed7eb9081a582b7d2deee5f644db26b8347b999bc7f1ffc9b0a27ae12a7"
     },
     {
-      "url": "/asserts/fonts/irminsul-extended-80dcd02e11c1.woff2",
-      "bytes": 3323448,
-      "sha256": "80dcd02e11c1e4b16e633070fe1e9fe53c299490c54428ae8c09f406a5525594"
+      "url": "/asserts/fonts/irminsul-extended-651c319b8e77.woff2",
+      "bytes": 3319240,
+      "sha256": "651c319b8e774bc43f88b8f5b9bd5c6a2cee70b2433e5c5b01f715176dd7123e"
     },
     {
       "url": "/asserts/gifts/date-candy.png",
@@ -1520,6 +1520,16 @@
       "url": "/asserts/sfx/jump-b57c5dd14227.json",
       "bytes": 7885,
       "sha256": "b57c5dd14227b3176420618ba2e8141cbad38c007e95936a030ad555a3ba23b2"
+    },
+    {
+      "url": "/asserts/sfx/nahidaArrival-ea66b10f64e5.json",
+      "bytes": 31761,
+      "sha256": "ea66b10f64e516467101796ff9d8ef3ec63725045b15d010be9b3320169409b3"
+    },
+    {
+      "url": "/asserts/sfx/rainstorm-96f3be3925f7.json",
+      "bytes": 52333,
+      "sha256": "96f3be3925f74b7caa4c07df552632ad065d693169a7632f1144e84616c8f303"
     },
     {
       "url": "/asserts/sfx/rustle-116b4c33c78c.json",

@@ -8,5 +8,7 @@ export const INTERACTION_SOUNDS = {
   'aranara-disappear': { asset: assets.rustle, gain: 0.22, rate: 0.92, cooldownMs: 100, maximum: 2, deadlineMs: 450 },
   'aranara-jump': { asset: assets.jump, gain: 0.75, rate: 1, cooldownMs: 90, maximum: 2, deadlineMs: 450 },
   transition: { asset: assets.transition, gain: 1, rate: 1, cooldownMs: 1000, maximum: 1, deadlineMs: 1200 },
+  'nahida-arrive': { asset: assets.nahidaArrival, gain: 0.64, rate: 1, cooldownMs: 1000, maximum: 1, deadlineMs: 1200 },
+  rainstorm: { asset: assets.rainstorm, gain: 0.54, rate: 1, cooldownMs: 1200, maximum: 1, deadlineMs: 900 },
 } as const;
 export type InteractionSound = keyof typeof INTERACTION_SOUNDS;

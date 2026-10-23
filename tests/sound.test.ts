@@ -48,9 +48,9 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(async () => { managers.splice(0).forEach((manager) => manager.dispose()); await Promise.resolve(); vi.clearAllTimers(); vi.useRealTimers(); });
 
 describe('真实音效素材与独立音量', () => {
-  it('五份 AAC 数据包含原始来源 / 授权与哈希，留足峰值余量且合计小于 128 KiB', () => {
-    expect(manifest.encoder).toMatch(/^ffmpeg version/); expect(manifest.files).toHaveLength(5);
-    expect(manifest.publishedBytes).toBeLessThan(128 * 1024);
+  it('七份 AAC 数据包含原始来源 / 授权与哈希，留足峰值余量且合计小于 256 KiB', () => {
+    expect(manifest.encoder).toMatch(/^ffmpeg version/); expect(manifest.files).toHaveLength(7);
+    expect(manifest.publishedBytes).toBeLessThan(256 * 1024);
     for (const file of manifest.files) {
       expect(createHash('sha256').update(readFileSync(file.source)).digest('hex')).toBe(file.sourceSha256);
       const bytes = readFileSync(file.file);

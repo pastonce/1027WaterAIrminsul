@@ -20,7 +20,6 @@ export function Settings({ game, state, timeSync, testing = false, redeem, onClo
     {timeSync && <TimeSyncStatus clock={timeSync}/>}
     {redeem && <SecretInput redeem={redeem}/>}
     <p className="save-note">{testing ? '当前为本页临时测试，刷新后退出；正式存档不会被覆盖。' : state.saveStatus || '进度会自动保存在此浏览器中。清理浏览器数据会移除本地存档。'}</p>
-    <button className="text-button reset-button" onClick={() => { if (confirmReset) { game.reset(); close(); } else setConfirmReset(true); }}>{confirmReset ? '再次点击，清除当前存档并重新入梦' : '重新开始这场梦'}</button>
-    <p className="fanwork-note">《原神》纳西妲非商业同人生日企划。角色使用企划提供的 Spine 素材，树木与正式演出仍在完善。</p>
+    <button className="text-button reset-button dream-reset-button" onClick={() => { if (confirmReset) { game.reset(); close(); } else setConfirmReset(true); }}>{confirmReset ? '再次点击，清除当前存档并重新入梦' : '开始下一轮梦的轮回'}</button>
   </Modal>;
 }

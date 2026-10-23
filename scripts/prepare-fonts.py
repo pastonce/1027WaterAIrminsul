@@ -11,7 +11,7 @@ source = root / 'asserts/字体/原神0.87.ttf'
 font = TTFont(source)
 supported = set(font.getBestCmap())
 common = set(range(0x20, 0x7F))
-inputs = sorted(path for path in (root / 'src').rglob('*') if path.suffix in {'.ts', '.tsx', '.json', '.css'}) + [root / 'index.html']
+inputs = sorted(path for path in (root / 'src').rglob('*') if path.suffix in {'.ts', '.tsx', '.json', '.css', '.md'}) + [root / 'index.html']
 for file in inputs:
     common.update(map(ord, file.read_text(encoding='utf-8')))
 common &= supported
