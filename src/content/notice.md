@@ -36,7 +36,8 @@
 - [原神字体](https://bbs.nga.cn/read.php?tid=32286544&rand=855)，[原神传送音效](https://www.myinstants.com/en/instant/genshin-teleport-81406/)，[原神七元素图标加载动画](https://codepen.io/jiazengp/pen/dyWvxem)
 - 原神wiki：[米游社观测枢](https://baike.mihoyo.com/ys/obc)和[萌娘百科](https://mzh.moegirl.org.cn/)，非常感谢大佬们的工作，能让人快速了解到非常齐全的内容。
 - 水声、叶声、来访竖琴及雨声等使用各作者公开提供的音效，按来源记录保留 CC0 或 CC-BY 等许可与必要署名；详细作者、来源及改动见 [音效来源与署名](/asserts/sfx/CREDITS.txt)。
-- 各阶段BGM均来自Hoyomix发布的专辑，按顺序依次为：生命之谷的曲调——空虚的愿景——细语回萦——几初的智愿——树与花的旋舞——生萌藏心念
+- 各阶段BGM均来自Hoyomix发布的专辑，按顺序依次为：生命之谷的曲调——空虚的愿景——细语回萦——几初的智愿——树与花的旋舞——生萌藏心念——绿枝新柔。
+- 纳西妲鼠标指针来自 [SAM TOKI STUDIO](https://github.com/SamToki/IconDesign---Sam-Toki-Mouse-Cursors)，非常好鼠标样式，我已长期使用。按随附版权说明，仅供个人免费使用、不得商用，转载须注明出处；[查看原版权说明](/asserts/cursor/COPYRIGHT.txt)。
 
 如需使用原素材，请另行核对对应作者的使用要求。部分素材的原作者署名与出处仍在整理，欢迎补充和勘误。
 

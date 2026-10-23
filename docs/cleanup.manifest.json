@@ -1,5 +1,10 @@
 {
   "date": "2026-10-23",
+  "cursorCreditFontRefresh": {
+    "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-26743652af25.woff2", "public/asserts/fonts/irminsul-extended-dfbc8158e6ac.woff2"],
+    "reason": "新增指针版权署名后重生同字形字体，仅删除与当前清单核对后的旧发布副本；删除前验证解析的绝对路径位于工作区字体目录，原字体 / 指针 / 全部asserts保留。",
+    "currentBytes": { "common": 205092, "extended": 3320320 }
+  },
   "visitFollowupFontRefresh": {
     "removedGeneratedOnly": ["public/asserts/fonts/irminsul-common-04235d4a4865.woff2", "public/asserts/fonts/irminsul-extended-cd3f4e14f2fa.woff2"],
     "reason": "新增来访点击名称后重生同字形字体，只移除已无引用的旧发布副本；原 TTF / MP3 / 原稿 / asserts 保留，删除前核对解析后的绝对目录与当前清单。",

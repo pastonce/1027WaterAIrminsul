@@ -96,6 +96,8 @@ Pages Git构建：根目录本项目、Node24、命令 `npm run build`、输出 
 
 ## 断网策略与边界
 
+指针发布需携带 `public/asserts/cursor/` 六份哈希CUR和COPYRIGHT.txt，以及源码生成CSS / cursor-assets.manifest.json。文件很小、桌面按需请求，不加入手机开场预载；公告原作与本地版权说明链接必须保留。源文件变更先本地 `npm run assets:cursors`，正常build直接使用已生成副本，详见CURSORS.md。
+
 音效发布附带 `sounds.generated.json` 对应的 `public/asserts/sfx/` 七份哈希 JSON 数据包及 CREDITS.txt，不发布下载原文件 / 临时 M4A / 旧二进制副本。服务器按 `application/json` 提供，不重写音频数据；校验源、数据包与还原 AAC 三组哈希。音效打包在本地执行 `npm run assets:sfx`，发布机不需 FFmpeg。上线前负责人确认社区原神传送片段的使用 / 再分发许可，或替换为已获许可的源；CC-BY 弹跳的作者与改动声明必须随 CREDITS.txt 保留。重试 / 静音 / 真实动作播放见 INTERACTION_AUDIO.md，不能只验证请求成功。
 
 - 正常每 60 秒校时，临近配置边界提前请求；只有服务器确认后才开放新日期内容。网络恢复、前台恢复及设置内手动重试也会更新。

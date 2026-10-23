@@ -1,0 +1,27 @@
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+  html { --cursor-normal: url("/asserts/cursor/normal-032f76d8821d.cur") 0 0, auto; --cursor-pointer: url("/asserts/cursor/pointer-d56794923a96.cur") 6 6, pointer; --cursor-text: url("/asserts/cursor/text-eb7c4241ea18.cur") 15 15, text; --cursor-unavailable: url("/asserts/cursor/unavailable-4bb493f2e2ac.cur") 15 15, not-allowed; --cursor-help: url("/asserts/cursor/help-e2b3b9479354.cur") 15 14, help; --cursor-horizontal: url("/asserts/cursor/horizontal-6b66f7928f08.cur") 15 15, ew-resize; cursor: var(--cursor-normal); }
+  :root body, :root body :where(*), :root body ::before, :root body ::after { cursor: inherit; }
+  :root :is(button, a[href], summary, label, [role="button"], [role="link"], select, input:is([type="checkbox"], [type="radio"], [type="button"], [type="submit"], [type="reset"], [type="file"], [type="color"]), .tree-art, .creature-hit) { cursor: var(--cursor-pointer); }
+  :root :is(input:not([type]), input:is([type="text"], [type="search"], [type="email"], [type="url"], [type="tel"], [type="password"], [type="number"], [type="date"], [type="datetime-local"], [type="month"], [type="week"], [type="time"]), textarea, [contenteditable]:not([contenteditable="false"])) { cursor: var(--cursor-text); }
+  :root abbr[title] { cursor: var(--cursor-help); }
+  :root input[type="range"] { cursor: var(--cursor-horizontal); }
+  :root input[type="range"]::-webkit-slider-thumb { cursor: var(--cursor-horizontal); }
+  :root input[type="range"]::-webkit-slider-runnable-track { cursor: var(--cursor-horizontal); }
+  :root input[type="range"]::-moz-range-thumb { cursor: var(--cursor-horizontal); }
+  :root input[type="range"]::-moz-range-track { cursor: var(--cursor-horizontal); }
+  :root input::-webkit-datetime-edit { cursor: var(--cursor-text); }
+  :root input::-webkit-calendar-picker-indicator { cursor: var(--cursor-pointer); }
+  :root input::-webkit-inner-spin-button { cursor: var(--cursor-pointer); }
+  :root input::-webkit-clear-button { cursor: var(--cursor-pointer); }
+  :root input::file-selector-button { cursor: var(--cursor-pointer); }
+  :root :is(button:disabled, input:disabled, select:disabled, textarea:disabled, [role="button"][aria-disabled="true"], [role="link"][aria-disabled="true"], .creature-hit:disabled) { cursor: var(--cursor-unavailable); }
+  :root input:disabled::-webkit-datetime-edit { cursor: var(--cursor-unavailable); }
+  :root input:disabled::-webkit-calendar-picker-indicator { cursor: var(--cursor-unavailable); }
+  :root input:disabled::-webkit-inner-spin-button { cursor: var(--cursor-unavailable); }
+  :root input:disabled::-webkit-clear-button { cursor: var(--cursor-unavailable); }
+  :root input[type="range"]:disabled::-webkit-slider-thumb { cursor: var(--cursor-unavailable); }
+  :root input[type="range"]:disabled::-webkit-slider-runnable-track { cursor: var(--cursor-unavailable); }
+  :root input:disabled::file-selector-button { cursor: var(--cursor-unavailable); }
+  :root input[type="range"]:disabled::-moz-range-thumb { cursor: var(--cursor-unavailable); }
+  :root input[type="range"]:disabled::-moz-range-track { cursor: var(--cursor-unavailable); }
+}

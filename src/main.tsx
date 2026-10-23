@@ -25,6 +25,7 @@ import './styles/media.css';
 import './styles/header.css';
 import './styles/notice.css';
 import './styles/birthday-mail.css';
+import './styles/cursors.generated.css';
 
 class DreamBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };

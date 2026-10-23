@@ -45,7 +45,7 @@ test('开放前可查看声明，正文署名 / 许可可编辑，焦点和竖�
   const credits = panel.getByRole('link', { name: '音效来源与署名' });
   await expect(credits).toHaveAttribute('href', '/asserts/sfx/CREDITS.txt'); await expect(credits).toHaveAttribute('rel', 'noopener noreferrer');
   await page.keyboard.press('Tab'); await expect(panel.getByRole('button', { name: '关闭', exact: true })).toBeFocused();
-  await page.keyboard.press('Shift+Tab'); await expect(credits).toBeFocused();
+  await page.keyboard.press('Shift+Tab'); await expect(panel.getByRole('link').last()).toBeFocused();
   await picture(page, info, 'intro-declaration');
   await page.setViewportSize({ width: 390, height: 844 }); await page.clock.runFor(30000);
   await expect(panel).toHaveCount(0); await expect(page.getByRole('button', { name: /开启横屏体验/ })).toBeVisible();

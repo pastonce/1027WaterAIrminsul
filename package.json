@@ -14,6 +14,7 @@
     "assets:startup": "node scripts/prepare-startup-assets.mjs",
     "assets:dialogues": "node --experimental-strip-types scripts/prepare-dialogues.mjs",
     "assets:expressions": "node scripts/prepare-expressions.mjs",
+    "assets:cursors": "node scripts/prepare-cursors.mjs",
     "assets:music": "node scripts/prepare-music.mjs",
     "assets:sfx": "node scripts/prepare-sfx.mjs",
     "assets:fonts": "python scripts/prepare-fonts.py",

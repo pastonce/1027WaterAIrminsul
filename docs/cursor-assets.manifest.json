@@ -1,0 +1,103 @@
+{
+  "owner": "SAM TOKI STUDIO",
+  "sourceUrl": "https://github.com/SamToki/IconDesign---Sam-Toki-Mouse-Cursors",
+  "files": [
+    {
+      "role": "normal",
+      "source": "asserts/cursor/STMC_GenshinNahida_01_Normal.cur",
+      "file": "public/asserts/cursor/normal-032f76d8821d.cur",
+      "src": "/asserts/cursor/normal-032f76d8821d.cur",
+      "fallback": "auto",
+      "bytes": 4286,
+      "sha256": "032f76d8821d1dc6f9c78e05898be293e98c4fcb548e2bfb1bb96249af7ae5a9",
+      "width": 32,
+      "height": 32,
+      "hotspot": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "role": "pointer",
+      "source": "asserts/cursor/STMC_GenshinNahida_15_Finger(large).cur",
+      "file": "public/asserts/cursor/pointer-d56794923a96.cur",
+      "src": "/asserts/cursor/pointer-d56794923a96.cur",
+      "fallback": "pointer",
+      "bytes": 4286,
+      "sha256": "d56794923a964151255efc66fc646f1618c64602b9b971094807531e0c182ab1",
+      "width": 32,
+      "height": 32,
+      "hotspot": {
+        "x": 6,
+        "y": 6
+      }
+    },
+    {
+      "role": "text",
+      "source": "asserts/cursor/STMC_GenshinNahida_06_Beam(reversed).cur",
+      "file": "public/asserts/cursor/text-eb7c4241ea18.cur",
+      "src": "/asserts/cursor/text-eb7c4241ea18.cur",
+      "fallback": "text",
+      "bytes": 4286,
+      "sha256": "eb7c4241ea1842ff4fce0148671abd0756ee6f6857c0182a8d0c1ab326b43ada",
+      "width": 32,
+      "height": 32,
+      "hotspot": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "role": "unavailable",
+      "source": "asserts/cursor/STMC_GenshinNahida_08_Unavailable.cur",
+      "file": "public/asserts/cursor/unavailable-4bb493f2e2ac.cur",
+      "src": "/asserts/cursor/unavailable-4bb493f2e2ac.cur",
+      "fallback": "not-allowed",
+      "bytes": 4286,
+      "sha256": "4bb493f2e2ace27915805b307109b6eaa30e3bceaef622680c2ba9fb9fe2c07a",
+      "width": 32,
+      "height": 32,
+      "hotspot": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "role": "help",
+      "source": "asserts/cursor/STMC_GenshinNahida_02_Help.cur",
+      "file": "public/asserts/cursor/help-e2b3b9479354.cur",
+      "src": "/asserts/cursor/help-e2b3b9479354.cur",
+      "fallback": "help",
+      "bytes": 4286,
+      "sha256": "e2b3b94793548cc1652c3ce0ad368692e2aadd5c1ccdba9489b84f9af6d05db1",
+      "width": 32,
+      "height": 32,
+      "hotspot": {
+        "x": 15,
+        "y": 14
+      }
+    },
+    {
+      "role": "horizontal",
+      "source": "asserts/cursor/STMC_GenshinNahida_10_EW.cur",
+      "file": "public/asserts/cursor/horizontal-6b66f7928f08.cur",
+      "src": "/asserts/cursor/horizontal-6b66f7928f08.cur",
+      "fallback": "ew-resize",
+      "bytes": 4286,
+      "sha256": "6b66f7928f08b7acc7cca86fea4cee96e96e826fee3e22612d9a0d43ef2f5f4a",
+      "width": 32,
+      "height": 32,
+      "hotspot": {
+        "x": 15,
+        "y": 15
+      }
+    }
+  ],
+  "copyright": {
+    "source": "asserts/cursor/版权说明 Copyright.txt",
+    "file": "public/asserts/cursor/COPYRIGHT.txt",
+    "bytes": 394,
+    "sha256": "c470341ec8b92a5bc58c6daa1dda776ea469b0814a79b86aa797afa360bf6385"
+  },
+  "publishedBytes": 26110
+}
