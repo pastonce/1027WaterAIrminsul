@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { CameraController } from '../src/game/camera/CameraController';
-import { createSkeleton, trunkX } from '../src/game/tree/geometry';
+import { createTreeModel } from '../src/game/tree/model';
+import { getTreeHeight } from '../src/game/growth/GrowthSystem';
 
-describe('巨树与镜头', () => {
-  it('相同种子始终生成相同旧枝条和历史痕迹', () => {
-    const first = createSkeleton(1027); const restored = createSkeleton(1027);
-    expect(restored).toEqual(first); expect(first.some((branch) => branch.historical === 'first-leaf')).toBe(true); expect(first.some((branch) => branch.historical === 'freedom')).toBe(true);
-    expect(trunkX(100)).toBe(trunkX(100));
+describe('原智慧树组织与镜头', () => {
+  it('相同动画时刻恢复相同原始槽位，不再生成额外旧枝或接干', () => {
+    expect(createTreeModel(40, .25)).toEqual(createTreeModel(40, .25));
+    expect(createTreeModel(51).parts.map((part) => part.id)).toEqual(['tree9', 'grass', 'overlay9']);
   });
   it('自由镜头有上下边界，重要演出锁定后不能手动移动', () => {
     const camera = new CameraController(); camera.resize(1440, 900, 3100);
@@ -24,5 +24,11 @@ describe('巨树与镜头', () => {
       const crownAnchor = viewport.height - 40 - 100 * viewport.scale - physicalHeight + camera.maximum;
       expect(crownAnchor - 125 * viewport.scale).toBeGreaterThanOrEqual(79);
     }
+  });
+  it('新树形在桌面无需追逐超高树冠，手机也只有小范围镜头移动', () => {
+    const desktop = new CameraController(); desktop.resize(1440, 900, getTreeHeight(1027));
+    expect(desktop.maximum).toBe(0);
+    const mobile = new CameraController(); mobile.resize(844, 390, getTreeHeight(1000) * .43, .43);
+    expect(mobile.maximum).toBeLessThan(100);
   });
 });

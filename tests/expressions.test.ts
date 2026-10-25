@@ -143,9 +143,10 @@ describe('G 对白播放位置与单句一次表情', () => {
 
 describe('树顶 / 头部的十点至十三点气泡', () => {
   it.each([{ width: 1440, height: 900, scale: 1 }, { width: 844, height: 390, scale: .43 }, { width: 640, height: 360, scale: .37 }])('$width × $height 跟随真实树顶，保留间距且不夹回可见树干', ({ width, height, scale }) => {
-    for (const treeHeight of [95, 1600, 3100]) {
-      const root = height * .6 + treeHeight * scale;
-      const anchor = treeExpressionAnchor(width, root, treeHeight, scale);
+    for (const growth of [20, 180, 1027]) {
+      const initial = treeExpressionAnchor(width, 0, growth, scale);
+      const root = height * .6 - initial.y;
+      const anchor = treeExpressionAnchor(width, root, growth, scale);
       expect(anchor.y).toBeCloseTo(height * .6);
       for (const angle of [-60, -15, 30]) {
         const frame = expressionPosition(anchor, width, height, angle);
@@ -159,7 +160,7 @@ describe('树顶 / 头部的十点至十三点气泡', () => {
         const extent = Math.hypot(anchor.radiusX * offset.x / distance, anchor.radiusY * offset.y / distance);
         expect(distance - extent - frame.width * .7).toBeCloseTo(height <= 600 ? 16 : 22);
       }
-      const hidden = treeExpressionAnchor(width, height - 60, treeHeight + 4000, scale);
+      const hidden = treeExpressionAnchor(width, -4000, growth, scale);
       expect(hidden.y).toBeLessThan(0); expect(expressionPosition(hidden, width, height, 0).visible).toBe(false);
     }
   });

@@ -1,0 +1,1283 @@
+{
+  "version": 2,
+  "generator": "built-in image_gen",
+  "prompts": "docs/tree-art-prompts.json",
+  "completionPrompts": "docs/tree-completion-generation.json",
+  "alphaThreshold": 128,
+  "inputs": [
+    {
+      "name": "tree01",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree01.png",
+      "sourceSha256": "ba66ff647ead988ae907bf1efde7474022ff2861c0c5192bb5484e8beded5e15",
+      "generated": "asserts/world-tree-redraw/tree01.png",
+      "generatedSha256": "34dbb427598d4de96d3450eb0aab3d1100beb95081b7865bd7631dbd33921a03",
+      "generatedBytes": 694286,
+      "width": 994,
+      "height": 1582,
+      "transparentFraction": 0.768948951863354,
+      "paintedFraction": 0.21355784161490685,
+      "loops": 2,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree1",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree1.png",
+      "sourceSha256": "faf78bd4c42794a7c80afc9189cd5d07075ec932f1dfca370954147a9c0e4d76",
+      "generated": "asserts/world-tree-redraw/tree1.png",
+      "generatedSha256": "1b8601b3013c6f39f7b9bcc793b5bf3e876aa6a0d21c093522b7749a3e622b55",
+      "generatedBytes": 754610,
+      "width": 823,
+      "height": 1912,
+      "transparentFraction": 0.7573153409090909,
+      "paintedFraction": 0.22954545454545455,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree2",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree2.png",
+      "sourceSha256": "5c7fab5f5a73877f39ef7efe11f4cc8757d7aff6f5298513a9d1ee10ca31a437",
+      "generated": "asserts/world-tree-redraw/tree2.png",
+      "generatedSha256": "f5f2e31c5dc84193226713a26ee02844b7f61ff058fb445633a8efaa9a324aee",
+      "generatedBytes": 799825,
+      "width": 725,
+      "height": 2170,
+      "transparentFraction": 0.7506813226744186,
+      "paintedFraction": 0.2357376453488372,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree3",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree3.png",
+      "sourceSha256": "a2378a336dffdaaa68f703989b38205f003ba7c85180fee2fc82245000a9f850",
+      "generated": "asserts/world-tree-redraw/tree3.png",
+      "generatedSha256": "78eb28f3d383ddb5222beda7a20ff672402e1ed481bbe85fd9d5fb90b7af9e73",
+      "generatedBytes": 581135,
+      "width": 927,
+      "height": 1697,
+      "transparentFraction": 0.8330915178571429,
+      "paintedFraction": 0.14188058035714285,
+      "loops": 3,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree4",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree4.png",
+      "sourceSha256": "7e44ba08e8e59ef6a5fda9b8604d12c3cafe47d45eb5a3ec7b0af13498535f62",
+      "generated": "asserts/world-tree-redraw/tree4.png",
+      "generatedSha256": "8e3324466639e66ab9daf8b34bd581ad5ad22a1c5db7e4bbe7ccf15184ace7d9",
+      "generatedBytes": 689698,
+      "width": 814,
+      "height": 1933,
+      "transparentFraction": 0.8083043981481481,
+      "paintedFraction": 0.15983072916666666,
+      "loops": 5,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree5",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree5.png",
+      "sourceSha256": "68bf113537cda490e4f4684543577062867e52c16cc996a48353e5901b65a572",
+      "generated": "asserts/world-tree-redraw/tree5.png",
+      "generatedSha256": "0d0e092b457db446be3a7b79895c9fae07e16a58e2141c964c5845ae3c2f1518",
+      "generatedBytes": 713447,
+      "width": 911,
+      "height": 1726,
+      "transparentFraction": 0.8021990740740741,
+      "paintedFraction": 0.15144675925925927,
+      "loops": 4,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree6",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree6.png",
+      "sourceSha256": "91cfcbec9eea031520fbe2f832a3ab8cd4f7f1ee6454ed77134d41ce6915baed",
+      "generated": "asserts/world-tree-redraw/tree6.png",
+      "generatedSha256": "557e0d1beece35d1cd25c0a469f7f9fb198cc53c5def7d1d5e93e0eca63b2784",
+      "generatedBytes": 948078,
+      "width": 1163,
+      "height": 1353,
+      "transparentFraction": 0.7231889204545454,
+      "paintedFraction": 0.1877840909090909,
+      "loops": 9,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree7",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree7.png",
+      "sourceSha256": "3c94fa82ee1d547a232e6e69af5766387e65fd869706e34e01589d58a068dc7a",
+      "generated": "asserts/world-tree-redraw/tree7.png",
+      "generatedSha256": "bd4e72085c9b3ec84bd17a9d1a88d27b25675719b2332cee40c5ff2b69094410",
+      "generatedBytes": 1046674,
+      "width": 1398,
+      "height": 1125,
+      "transparentFraction": 0.6808631674757282,
+      "paintedFraction": 0.2489570691747573,
+      "loops": 9,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree8",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree8.png",
+      "sourceSha256": "c539e66213c18af010c18ee6521cea0a5392f685e2c8702475a9dd9cbee2ec5b",
+      "generated": "asserts/world-tree-redraw/tree8.png",
+      "generatedSha256": "d3942be172b0873027109885415563ecabb13db35f7ead8012fe1a0761774be1",
+      "generatedBytes": 1053082,
+      "width": 1503,
+      "height": 1046,
+      "transparentFraction": 0.6457601825842697,
+      "paintedFraction": 0.3282566713483146,
+      "loops": 4,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree9",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree9.png",
+      "sourceSha256": "abfe5e7b721f0b5bdc5ae362badd7c3c06c847b3bdf3e1ef3d753e3bf0bd1fbc",
+      "generated": "asserts/world-tree-redraw/tree9.png",
+      "generatedSha256": "588f1a27bd31006adce47236957899ac6606747cc921a6b064d01cab0ed3692f",
+      "generatedBytes": 1316599,
+      "width": 1216,
+      "height": 1294,
+      "transparentFraction": 0.508314963692946,
+      "paintedFraction": 0.4744878112033195,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_overlay4",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_overlay4.png",
+      "sourceSha256": "695c418264364d62c95bbc6a2ca65bf1fe371ad9a8c18af7474865d568095874",
+      "generated": "asserts/world-tree-redraw/tree_overlay4.png",
+      "generatedSha256": "da927febfecbd41275935a631e46162df58d6029d65b25c1da2a0b92885fa7b4",
+      "generatedBytes": 1164208,
+      "width": 2164,
+      "height": 727,
+      "transparentFraction": 0.5874818313953488,
+      "paintedFraction": 0.38585574127906974,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_overlay5",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_overlay5.png",
+      "sourceSha256": "5545a4fbef5ebc08337dfed409eb74bd54a648f3af69a1ff0d9120b442c0cde6",
+      "generated": "asserts/world-tree-redraw/tree_overlay5.png",
+      "generatedSha256": "5e64c04d7b66b65390875c621050713d07e70222b1211169459b2c728c8d506c",
+      "generatedBytes": 1185250,
+      "width": 2034,
+      "height": 773,
+      "transparentFraction": 0.6311614046391752,
+      "paintedFraction": 0.3370650773195876,
+      "loops": 4,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_overlay6",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_overlay6.png",
+      "sourceSha256": "0db08d1208b4f4a548b45a55b61aaac30f519d0a64e068397472371bdc2c0346",
+      "generated": "asserts/world-tree-redraw/tree_overlay6.png",
+      "generatedSha256": "d70d0bdb43c95b86fb8415adc91fc9cdbe20591d77890d3921be9ff42849efff",
+      "generatedBytes": 1305485,
+      "width": 2086,
+      "height": 754,
+      "transparentFraction": 0.5933299731182796,
+      "paintedFraction": 0.3809643817204301,
+      "loops": 6,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_overlay7",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_overlay7.png",
+      "sourceSha256": "55c04a81fbb52e96e62988f5d1ae73d07692ae9390ddcfe45b4693ed0a9fd66c",
+      "generated": "asserts/world-tree-redraw/tree_overlay7.png",
+      "generatedSha256": "92ac10e2f476b00c339908ee60b3714163f32f7e201a604b868c7285f899e345",
+      "generatedBytes": 1319812,
+      "width": 2030,
+      "height": 775,
+      "transparentFraction": 0.5686782525510204,
+      "paintedFraction": 0.4108737244897959,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_overlay8",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_overlay8.png",
+      "sourceSha256": "103f384831dc1ee8358432a27ff42975fb304c8937442ff01a28a44d95262344",
+      "generated": "asserts/world-tree-redraw/tree_overlay8.png",
+      "generatedSha256": "21477f794a706f2f748081de883e030e71a32ce43d7c4a284f5fdfba68ddd2f3",
+      "generatedBytes": 1506345,
+      "width": 2172,
+      "height": 724,
+      "transparentFraction": 0.4732077205882353,
+      "paintedFraction": 0.5078584558823529,
+      "loops": 2,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_overlay9",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_overlay9.png",
+      "sourceSha256": "c7b6215c0ea7cb2bc73cc0c3053e8e86457365af8388ed135367bb7240494f39",
+      "generated": "asserts/world-tree-redraw/tree_overlay9.png",
+      "generatedSha256": "d89eefa01aed1c60691068402162a05c8aef937f4219e45e752abbbcbb279653",
+      "generatedBytes": 1680380,
+      "width": 2120,
+      "height": 742,
+      "transparentFraction": 0.4323784722222222,
+      "paintedFraction": 0.5455295138888889,
+      "loops": 4,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leaf1",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leaf1.png",
+      "sourceSha256": "9255b3b77dd426636f1f18f0c449dbae1f1c93dba61f759c5170ec083098b701",
+      "generated": "asserts/world-tree-redraw/leaf1.png",
+      "generatedSha256": "a57b03f810124641f02b1ebe9da7f3d866d298966cbf87c000d470817cab0a7e",
+      "generatedBytes": 1177795,
+      "width": 1254,
+      "height": 1254,
+      "transparentFraction": 0.542510986328125,
+      "paintedFraction": 0.3571014404296875,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leaf2",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leaf2.png",
+      "sourceSha256": "a3586d957476a7739652500ea251f223f9303a77466d764f3680ef9d2f24ee7b",
+      "generated": "asserts/world-tree-redraw/leaf2.png",
+      "generatedSha256": "b115e1625aed5a8a54ddee4a9bdedf3ba7f2a264082149adaba8e60889afd4ee",
+      "generatedBytes": 1315635,
+      "width": 1254,
+      "height": 1254,
+      "transparentFraction": 0.5177459716796875,
+      "paintedFraction": 0.44451904296875,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leaf3",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leaf3.png",
+      "sourceSha256": "8d6f02558ddf053de8cc2220690cfec7c126732cb72f0ac1c2b3c64d4ebe3c8c",
+      "generated": "asserts/world-tree-redraw/leaf3.png",
+      "generatedSha256": "806930b5bde8a5de1405613682078e4fd79b0271ab426b6a8adafa0c50ffa16f",
+      "generatedBytes": 1265499,
+      "width": 1254,
+      "height": 1254,
+      "transparentFraction": 0.5189361572265625,
+      "paintedFraction": 0.40924072265625,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leaf4",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leaf4.png",
+      "sourceSha256": "955e3117d47899cf30a16a294a77938fad90b6313db591ee394c60c264e8a288",
+      "generated": "asserts/world-tree-redraw/leaf4.png",
+      "generatedSha256": "ebb8574ec4109be9977fe560578aff2c1f1340dfc61733caec7b97680ce17701",
+      "generatedBytes": 241371,
+      "width": 1254,
+      "height": 1254,
+      "transparentFraction": 0.9434661865234375,
+      "paintedFraction": 0.0318756103515625,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leafbunch1",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leafbunch1.png",
+      "sourceSha256": "4b3875e31592e8f3a9244616f704222dddf285f674ddf246950895e3e1f69c34",
+      "generated": "asserts/world-tree-redraw/leafbunch1.png",
+      "generatedSha256": "0362ce830b4cef4238d8ee8ccf0bf559e70e4a9edb533775c51322b115c94325",
+      "generatedBytes": 1956168,
+      "width": 1293,
+      "height": 1217,
+      "transparentFraction": 0.3492933091286307,
+      "paintedFraction": 0.6193270228215768,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leafbunch2",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leafbunch2.png",
+      "sourceSha256": "ec2ed66bbab6e3a40a1aac15e3a5e60ca098ffc79673ebcbfee4bbd639db5083",
+      "generated": "asserts/world-tree-redraw/leafbunch2.png",
+      "generatedSha256": "bd0dec51eb4e88d8037023d69f7ca522557a4034e24cf0ba66c37a7d0707a8d2",
+      "generatedBytes": 1538983,
+      "width": 1408,
+      "height": 1117,
+      "transparentFraction": 0.4768126539408867,
+      "paintedFraction": 0.49060960591133007,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "leafbunch3",
+      "source": "asserts/Tree of Wisdom/Split Sprites/leafbunch3.png",
+      "sourceSha256": "4e32c1b4d0ed1b58a9854a79507e635c809be8434ee1c4de9535739fdc3df3ab",
+      "generated": "asserts/world-tree-redraw/leafbunch3.png",
+      "generatedSha256": "732fa756d22efca6dfccd1575e8c2ff1cce1f6c0c9cc796a6e2613a61debe548",
+      "generatedBytes": 1830576,
+      "width": 2115,
+      "height": 744,
+      "transparentFraction": 0.360546875,
+      "paintedFraction": 0.6109809027777777,
+      "loops": 2,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree_grass",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree_grass.png",
+      "sourceSha256": "6388aa35c67f05fb0b8bd018223a983e5d9ac6ee048077f2bc12b87af56b7532",
+      "generated": "asserts/world-tree-redraw/tree_grass.png",
+      "generatedSha256": "7d757f8e5172eb7cf83c66136bb88acee6ff8714b2e8fb3739ef2e23ea355f1e",
+      "generatedBytes": 1819634,
+      "width": 2172,
+      "height": 724,
+      "transparentFraction": 0.4338694852941177,
+      "paintedFraction": 0.5318474264705882,
+      "loops": 4,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "trunk_column",
+      "source": "asserts/Tree of Wisdom/Split Sprites/tree9.png",
+      "sourceSha256": "abfe5e7b721f0b5bdc5ae362badd7c3c06c847b3bdf3e1ef3d753e3bf0bd1fbc",
+      "generated": "asserts/world-tree-redraw/trunk_column.png",
+      "generatedSha256": "9ffda10b49d4eb43b748955a4ef1a49fc667b4888aa8a2c9158f63bb0cba293f",
+      "generatedBytes": 1089237,
+      "width": 724,
+      "height": 2172,
+      "transparentFraction": 0.5932444852941177,
+      "paintedFraction": 0.39453125,
+      "loops": 1,
+      "registration": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "tree6_complete",
+      "source": "asserts/world-tree-redraw/tree6.png",
+      "sourceSha256": "557e0d1beece35d1cd25c0a469f7f9fb198cc53c5def7d1d5e93e0eca63b2784",
+      "generated": "asserts/world-tree-completed/tree6.png",
+      "generatedSha256": "e0332c160bd502777ac6e6cee4d71b9d0b4467ebb557fdc22ebfa9502c915403",
+      "generatedBytes": 1219516,
+      "width": 1163,
+      "height": 1353,
+      "transparentFraction": 0.6471235795454545,
+      "paintedFraction": 0.18240411931818182,
+      "loops": 21,
+      "registration": [
+        1.0714285714285714,
+        0,
+        0,
+        1.0714285714285714,
+        -87.09003807886003,
+        -50.047513462147656
+      ]
+    },
+    {
+      "name": "tree7_complete",
+      "source": "asserts/world-tree-redraw/tree7.png",
+      "sourceSha256": "bd4e72085c9b3ec84bd17a9d1a88d27b25675719b2332cee40c5ff2b69094410",
+      "generated": "asserts/world-tree-completed/tree7.png",
+      "generatedSha256": "9d334dacbc49e063f9b35c67a5ee35b2ee4ab16c7e3e0e6f3dcba0cc8d33d298",
+      "generatedBytes": 1426781,
+      "width": 1068,
+      "height": 1473,
+      "transparentFraction": 0.6182585685483871,
+      "paintedFraction": 0.2493279569892473,
+      "loops": 23,
+      "registration": [
+        0.9132825337835494,
+        0,
+        0,
+        1.5652773290253097,
+        40.37732186067796,
+        -561.7418775803267
+      ]
+    },
+    {
+      "name": "tree8_complete",
+      "source": "asserts/world-tree-redraw/tree8.png",
+      "sourceSha256": "d3942be172b0873027109885415563ecabb13db35f7ead8012fe1a0761774be1",
+      "generated": "asserts/world-tree-completed/tree8.png",
+      "generatedSha256": "8be8d3ee7e4f45fa8f23068a80816aa8d7c39fb7272a113be5bea9991fd3d819",
+      "generatedBytes": 1498462,
+      "width": 1149,
+      "height": 1369,
+      "transparentFraction": 0.5768531976744186,
+      "paintedFraction": 0.31062863372093025,
+      "loops": 22,
+      "registration": [
+        1.0386178669517205,
+        0,
+        0,
+        1.7781422646718559,
+        -50.69166564186,
+        -768.8131118622359
+      ]
+    },
+    {
+      "name": "tree9_complete",
+      "source": "asserts/world-tree-redraw/tree9.png",
+      "sourceSha256": "588f1a27bd31006adce47236957899ac6606747cc921a6b064d01cab0ed3692f",
+      "generated": "asserts/world-tree-completed/tree9.png",
+      "generatedSha256": "609d9695f8f686b45dd062358a0af6023bf6340a9bc6dc0470832704a7a91b2e",
+      "generatedBytes": 1983803,
+      "width": 1216,
+      "height": 1293,
+      "transparentFraction": 0.386475622406639,
+      "paintedFraction": 0.4958019968879668,
+      "loops": 18,
+      "registration": [
+        1.4290998766954377,
+        0,
+        0,
+        1.4279954718448231,
+        -260.444383152703,
+        -439.0309442994986
+      ]
+    },
+    {
+      "name": "leafbunch3_complete",
+      "source": "asserts/world-tree-redraw/leafbunch3.png",
+      "sourceSha256": "732fa756d22efca6dfccd1575e8c2ff1cce1f6c0c9cc796a6e2613a61debe548",
+      "generated": "asserts/world-tree-completed/leafbunch3.png",
+      "generatedSha256": "b6731fe199c7c5c314c649e631ff9bc63136222037ebc4f9b9b7675fa3d799ad",
+      "generatedBytes": 1764512,
+      "width": 1774,
+      "height": 887,
+      "transparentFraction": 0.409027099609375,
+      "paintedFraction": 0.563262939453125,
+      "loops": 3,
+      "registration": [
+        0.9740098698749842,
+        0,
+        0,
+        1.3844293513344028,
+        14.9167305329489,
+        -380.05127353879624
+      ]
+    },
+    {
+      "name": "tree9_growth",
+      "source": "asserts/world-tree-redraw/tree9.png",
+      "sourceSha256": "588f1a27bd31006adce47236957899ac6606747cc921a6b064d01cab0ed3692f",
+      "generated": "asserts/world-tree-completed/tree9-growth.png",
+      "generatedSha256": "50af9164baa316cd93c209752e55aa477df1ed575cbb786c0a7d9438d18e9f9a",
+      "generatedBytes": 1936276,
+      "width": 1216,
+      "height": 1294,
+      "transparentFraction": 0.4437726919087137,
+      "paintedFraction": 0.31480160788381745,
+      "loops": 27,
+      "registration": [
+        1.7065030674846626,
+        0,
+        0,
+        1.7065030674846626,
+        -408.6132749434938,
+        -715.1803984411299
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "tree01",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree01-compact-d822cad682e1.webp",
+      "src": "/asserts/tree/tree01-compact-d822cad682e1.webp",
+      "width": 483,
+      "height": 768,
+      "bytes": 38268,
+      "sha256": "d822cad682e1c208782f0512e9f0d7a4d9d333bc7fa9f1121a2c8ee3fe5ba1b2"
+    },
+    {
+      "name": "tree01",
+      "quality": "full",
+      "file": "public/asserts/tree/tree01-full-067d5a85b95d.webp",
+      "src": "/asserts/tree/tree01-full-067d5a85b95d.webp",
+      "width": 664,
+      "height": 1056,
+      "bytes": 64626,
+      "sha256": "067d5a85b95d8293c8c9d35cf95497dafe699c560387225f51a6f5dde90d6d7d"
+    },
+    {
+      "name": "tree1",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree1-compact-14063138b742.webp",
+      "src": "/asserts/tree/tree1-compact-14063138b742.webp",
+      "width": 331,
+      "height": 768,
+      "bytes": 28280,
+      "sha256": "14063138b7429c94767627fbbab0ee6ca3bed69908133ad1f09527b1bbca2745"
+    },
+    {
+      "name": "tree1",
+      "quality": "full",
+      "file": "public/asserts/tree/tree1-full-68aec7b3ed30.webp",
+      "src": "/asserts/tree/tree1-full-68aec7b3ed30.webp",
+      "width": 455,
+      "height": 1056,
+      "bytes": 49310,
+      "sha256": "68aec7b3ed306fdd79ab94eb4c1b74bb925d55e6b044693b8746ef877a1695b5"
+    },
+    {
+      "name": "tree2",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree2-compact-a07818cbd3a5.webp",
+      "src": "/asserts/tree/tree2-compact-a07818cbd3a5.webp",
+      "width": 257,
+      "height": 768,
+      "bytes": 27488,
+      "sha256": "a07818cbd3a5fe0bc46eda225602f17234d3583e46b68ad0085ee341fd68a480"
+    },
+    {
+      "name": "tree2",
+      "quality": "full",
+      "file": "public/asserts/tree/tree2-full-3210493fc75a.webp",
+      "src": "/asserts/tree/tree2-full-3210493fc75a.webp",
+      "width": 353,
+      "height": 1056,
+      "bytes": 42794,
+      "sha256": "3210493fc75a17cb44f5840893760cfc2f2bc282933477ead0e717e354dace93"
+    },
+    {
+      "name": "tree3",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree3-compact-9faebf905f18.webp",
+      "src": "/asserts/tree/tree3-compact-9faebf905f18.webp",
+      "width": 420,
+      "height": 768,
+      "bytes": 33452,
+      "sha256": "9faebf905f184223ce57eebd068d7ba613fd552c1557da5a594cb8524e774d24"
+    },
+    {
+      "name": "tree3",
+      "quality": "full",
+      "file": "public/asserts/tree/tree3-full-88c79147b087.webp",
+      "src": "/asserts/tree/tree3-full-88c79147b087.webp",
+      "width": 577,
+      "height": 1056,
+      "bytes": 59492,
+      "sha256": "88c79147b0878a6ab7d373a85eb58bc85f358246e65874e1c3ebfd29d3f1d705"
+    },
+    {
+      "name": "tree4",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree4-compact-3dbe984c96e5.webp",
+      "src": "/asserts/tree/tree4-compact-3dbe984c96e5.webp",
+      "width": 323,
+      "height": 768,
+      "bytes": 37184,
+      "sha256": "3dbe984c96e5146cfea28a3b57ca452e0b90c21e685f923da9ea4202e51e9299"
+    },
+    {
+      "name": "tree4",
+      "quality": "full",
+      "file": "public/asserts/tree/tree4-full-3296d14b7acd.webp",
+      "src": "/asserts/tree/tree4-full-3296d14b7acd.webp",
+      "width": 445,
+      "height": 1056,
+      "bytes": 64020,
+      "sha256": "3296d14b7acd82706840be2f9a492de7dedee545bacab9485e259f8e5428975c"
+    },
+    {
+      "name": "tree5",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree5-compact-918005efb39c.webp",
+      "src": "/asserts/tree/tree5-compact-918005efb39c.webp",
+      "width": 405,
+      "height": 768,
+      "bytes": 49246,
+      "sha256": "918005efb39c30333f12581f27a9fae5150c2ec547d742b2d5747397ab6f50fd"
+    },
+    {
+      "name": "tree5",
+      "quality": "full",
+      "file": "public/asserts/tree/tree5-full-eb575bf136fd.webp",
+      "src": "/asserts/tree/tree5-full-eb575bf136fd.webp",
+      "width": 557,
+      "height": 1056,
+      "bytes": 90108,
+      "sha256": "eb575bf136fdbf0f375bddb995a4dd78aa5b34791172af167ae544c6122c54f1"
+    },
+    {
+      "name": "tree6",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree6-compact-49953c50339c.webp",
+      "src": "/asserts/tree/tree6-compact-49953c50339c.webp",
+      "width": 660,
+      "height": 768,
+      "bytes": 104262,
+      "sha256": "49953c50339c62f82048a37df96d68455127065c8e4ba33ed145b2c63216dc28"
+    },
+    {
+      "name": "tree6",
+      "quality": "full",
+      "file": "public/asserts/tree/tree6-full-d8ef91d3618b.webp",
+      "src": "/asserts/tree/tree6-full-d8ef91d3618b.webp",
+      "width": 908,
+      "height": 1056,
+      "bytes": 173572,
+      "sha256": "d8ef91d3618bca8106941c8490f2349a6213d032206ba3d64ace2b781d15024b"
+    },
+    {
+      "name": "tree7",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree7-compact-e20fb1b47c39.webp",
+      "src": "/asserts/tree/tree7-compact-e20fb1b47c39.webp",
+      "width": 768,
+      "height": 618,
+      "bytes": 97234,
+      "sha256": "e20fb1b47c39de24911c9b4d407142fb9c55097a0b08acf6f2181b753398d66d"
+    },
+    {
+      "name": "tree7",
+      "quality": "full",
+      "file": "public/asserts/tree/tree7-full-1f8000da26f8.webp",
+      "src": "/asserts/tree/tree7-full-1f8000da26f8.webp",
+      "width": 1056,
+      "height": 850,
+      "bytes": 166072,
+      "sha256": "1f8000da26f84a255f7d9ad793bcb67f829d06972c0e209680c1b005a09db703"
+    },
+    {
+      "name": "tree8",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree8-compact-057fe5a71756.webp",
+      "src": "/asserts/tree/tree8-compact-057fe5a71756.webp",
+      "width": 768,
+      "height": 534,
+      "bytes": 65144,
+      "sha256": "057fe5a71756be3cc435a54de292d9580565615b8885f88820bd4fa2a83ee516"
+    },
+    {
+      "name": "tree8",
+      "quality": "full",
+      "file": "public/asserts/tree/tree8-full-cd251df03447.webp",
+      "src": "/asserts/tree/tree8-full-cd251df03447.webp",
+      "width": 1056,
+      "height": 735,
+      "bytes": 115746,
+      "sha256": "cd251df034479acba041e089d36e12c28174431edb535947394eb99bfa9f298e"
+    },
+    {
+      "name": "tree9",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree9-compact-9f164ec04043.webp",
+      "src": "/asserts/tree/tree9-compact-9f164ec04043.webp",
+      "width": 722,
+      "height": 768,
+      "bytes": 84168,
+      "sha256": "9f164ec04043385c3744c401a055f6498db0cbdf93253f81a18e587580aeb1eb"
+    },
+    {
+      "name": "tree9",
+      "quality": "full",
+      "file": "public/asserts/tree/tree9-full-cccbc87b9fba.webp",
+      "src": "/asserts/tree/tree9-full-cccbc87b9fba.webp",
+      "width": 992,
+      "height": 1056,
+      "bytes": 143602,
+      "sha256": "cccbc87b9fbab47dbb8d70bc0da50820e8101f98af80ef5e33c44a8511359714"
+    },
+    {
+      "name": "tree_overlay4",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_overlay4-compact-710343755b64.webp",
+      "src": "/asserts/tree/tree_overlay4-compact-710343755b64.webp",
+      "width": 480,
+      "height": 161,
+      "bytes": 19778,
+      "sha256": "710343755b64f9d517a1df2045ec8f2f8847a35d456cd0a8de5450f2b89c3643"
+    },
+    {
+      "name": "tree_overlay4",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_overlay4-full-e0b474e4ab42.webp",
+      "src": "/asserts/tree/tree_overlay4-full-e0b474e4ab42.webp",
+      "width": 640,
+      "height": 215,
+      "bytes": 30800,
+      "sha256": "e0b474e4ab427584f9ad410752e19065a7678857b3ce0b0a442082a9bc0e826e"
+    },
+    {
+      "name": "tree_overlay5",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_overlay5-compact-fede3253e99d.webp",
+      "src": "/asserts/tree/tree_overlay5-compact-fede3253e99d.webp",
+      "width": 480,
+      "height": 182,
+      "bytes": 21920,
+      "sha256": "fede3253e99d730b34288c8749e68b6aed5dae399b87950cdc69375d4be94858"
+    },
+    {
+      "name": "tree_overlay5",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_overlay5-full-c100b6a754d7.webp",
+      "src": "/asserts/tree/tree_overlay5-full-c100b6a754d7.webp",
+      "width": 640,
+      "height": 243,
+      "bytes": 33986,
+      "sha256": "c100b6a754d78a7fd5908e37ef6a6284d8e61315c8ec14c868775e3e09081dc5"
+    },
+    {
+      "name": "tree_overlay6",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_overlay6-compact-df04329037f7.webp",
+      "src": "/asserts/tree/tree_overlay6-compact-df04329037f7.webp",
+      "width": 480,
+      "height": 173,
+      "bytes": 23044,
+      "sha256": "df04329037f71306c9be038c13afdebf34b6cd02be902fc336fe788b73917212"
+    },
+    {
+      "name": "tree_overlay6",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_overlay6-full-ca3f4aedcd49.webp",
+      "src": "/asserts/tree/tree_overlay6-full-ca3f4aedcd49.webp",
+      "width": 640,
+      "height": 231,
+      "bytes": 37782,
+      "sha256": "ca3f4aedcd4970c161a07a3dd4002d5305ccd3205308066ae629490902ed65d1"
+    },
+    {
+      "name": "tree_overlay7",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_overlay7-compact-c4bd3e9dfc17.webp",
+      "src": "/asserts/tree/tree_overlay7-compact-c4bd3e9dfc17.webp",
+      "width": 480,
+      "height": 183,
+      "bytes": 22614,
+      "sha256": "c4bd3e9dfc173b599980a7e348c0a883a7fdae577117f4b462401fb5c2087673"
+    },
+    {
+      "name": "tree_overlay7",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_overlay7-full-1ed4042883bb.webp",
+      "src": "/asserts/tree/tree_overlay7-full-1ed4042883bb.webp",
+      "width": 640,
+      "height": 244,
+      "bytes": 35694,
+      "sha256": "1ed4042883bb6ff97c846f95063fcf20d672ba128d68d67030325cbadd61bb56"
+    },
+    {
+      "name": "tree_overlay8",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_overlay8-compact-064d9c4decd8.webp",
+      "src": "/asserts/tree/tree_overlay8-compact-064d9c4decd8.webp",
+      "width": 480,
+      "height": 160,
+      "bytes": 22608,
+      "sha256": "064d9c4decd8ff4c02a644a8500d137c95890c4b8653036eb09c67be0d0355b4"
+    },
+    {
+      "name": "tree_overlay8",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_overlay8-full-73a601d24262.webp",
+      "src": "/asserts/tree/tree_overlay8-full-73a601d24262.webp",
+      "width": 640,
+      "height": 213,
+      "bytes": 34244,
+      "sha256": "73a601d2426297c5e6166c470ee7ac69326798c2d31b030db25565b6aef65a33"
+    },
+    {
+      "name": "tree_overlay9",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_overlay9-compact-7877518b0e54.webp",
+      "src": "/asserts/tree/tree_overlay9-compact-7877518b0e54.webp",
+      "width": 480,
+      "height": 168,
+      "bytes": 26468,
+      "sha256": "7877518b0e54bb6d51a2adee434fc72862d1887b2a948bb56b89b58430609288"
+    },
+    {
+      "name": "tree_overlay9",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_overlay9-full-ef8fe57d680e.webp",
+      "src": "/asserts/tree/tree_overlay9-full-ef8fe57d680e.webp",
+      "width": 640,
+      "height": 224,
+      "bytes": 42318,
+      "sha256": "ef8fe57d680ef7cd875260c69f215c3e917b2625bde31a59458b68d220702ccc"
+    },
+    {
+      "name": "leaf1",
+      "quality": "compact",
+      "file": "public/asserts/tree/leaf1-compact-ac481b62b45a.webp",
+      "src": "/asserts/tree/leaf1-compact-ac481b62b45a.webp",
+      "width": 180,
+      "height": 180,
+      "bytes": 9152,
+      "sha256": "ac481b62b45a3d25dbaa2e22e2311a82c5e244e73a31130ee0929853fc6d3198"
+    },
+    {
+      "name": "leaf1",
+      "quality": "full",
+      "file": "public/asserts/tree/leaf1-full-473a3053e113.webp",
+      "src": "/asserts/tree/leaf1-full-473a3053e113.webp",
+      "width": 220,
+      "height": 220,
+      "bytes": 11940,
+      "sha256": "473a3053e1138ec4162a75e08573c6fb7de9843381281a630dd0996fe4661eac"
+    },
+    {
+      "name": "leaf2",
+      "quality": "compact",
+      "file": "public/asserts/tree/leaf2-compact-5c1ef2e01ca5.webp",
+      "src": "/asserts/tree/leaf2-compact-5c1ef2e01ca5.webp",
+      "width": 180,
+      "height": 180,
+      "bytes": 9780,
+      "sha256": "5c1ef2e01ca58b66c0aa8691125c83d4711bbef4ec14078f8a96a8681d13b122"
+    },
+    {
+      "name": "leaf2",
+      "quality": "full",
+      "file": "public/asserts/tree/leaf2-full-8f7a785500fc.webp",
+      "src": "/asserts/tree/leaf2-full-8f7a785500fc.webp",
+      "width": 220,
+      "height": 220,
+      "bytes": 12718,
+      "sha256": "8f7a785500fc970a91e0cfd9876cc6274cb8b73b4678cc1384c1b59976f05bea"
+    },
+    {
+      "name": "leaf3",
+      "quality": "compact",
+      "file": "public/asserts/tree/leaf3-compact-1f9718ac24a1.webp",
+      "src": "/asserts/tree/leaf3-compact-1f9718ac24a1.webp",
+      "width": 180,
+      "height": 180,
+      "bytes": 9290,
+      "sha256": "1f9718ac24a1c936cdc823139122dd330b9938f4b858f00a4e3fce9d0212d472"
+    },
+    {
+      "name": "leaf3",
+      "quality": "full",
+      "file": "public/asserts/tree/leaf3-full-19def541cd68.webp",
+      "src": "/asserts/tree/leaf3-full-19def541cd68.webp",
+      "width": 220,
+      "height": 220,
+      "bytes": 12176,
+      "sha256": "19def541cd680c3a262de021e697eee5881b4fd6870ddfad902bd51ac3b73d61"
+    },
+    {
+      "name": "leaf4",
+      "quality": "compact",
+      "file": "public/asserts/tree/leaf4-compact-498b04eaecf8.webp",
+      "src": "/asserts/tree/leaf4-compact-498b04eaecf8.webp",
+      "width": 180,
+      "height": 180,
+      "bytes": 2798,
+      "sha256": "498b04eaecf8baac539d7683960e2e603af56a7b2183689f740695877c049991"
+    },
+    {
+      "name": "leaf4",
+      "quality": "full",
+      "file": "public/asserts/tree/leaf4-full-2a457054207f.webp",
+      "src": "/asserts/tree/leaf4-full-2a457054207f.webp",
+      "width": 220,
+      "height": 220,
+      "bytes": 3428,
+      "sha256": "2a457054207fba1ea8ce47e08a90d0647e929c6d3233d24bb62593b1068217a4"
+    },
+    {
+      "name": "leafbunch1",
+      "quality": "compact",
+      "file": "public/asserts/tree/leafbunch1-compact-82d481ccd8bd.webp",
+      "src": "/asserts/tree/leafbunch1-compact-82d481ccd8bd.webp",
+      "width": 320,
+      "height": 301,
+      "bytes": 33476,
+      "sha256": "82d481ccd8bdf47f44b4d60e8e632ab9193c616c5e6711e63a384c41d09ef139"
+    },
+    {
+      "name": "leafbunch1",
+      "quality": "full",
+      "file": "public/asserts/tree/leafbunch1-full-c9536edbadf4.webp",
+      "src": "/asserts/tree/leafbunch1-full-c9536edbadf4.webp",
+      "width": 420,
+      "height": 395,
+      "bytes": 49776,
+      "sha256": "c9536edbadf4fa102866032c19d7fc0d297b0ba9aaa028057a7ed50ffa2d6680"
+    },
+    {
+      "name": "leafbunch2",
+      "quality": "compact",
+      "file": "public/asserts/tree/leafbunch2-compact-d32ae8913178.webp",
+      "src": "/asserts/tree/leafbunch2-compact-d32ae8913178.webp",
+      "width": 320,
+      "height": 254,
+      "bytes": 24564,
+      "sha256": "d32ae8913178ac6d85401b7f8b757426adf86787b5bcdba6794ca115ee635608"
+    },
+    {
+      "name": "leafbunch2",
+      "quality": "full",
+      "file": "public/asserts/tree/leafbunch2-full-260465baf383.webp",
+      "src": "/asserts/tree/leafbunch2-full-260465baf383.webp",
+      "width": 420,
+      "height": 333,
+      "bytes": 37352,
+      "sha256": "260465baf3833b8611e7e22f3b6e3bee9d7bd58b4b97fbc5f6c3977d61db0b6a"
+    },
+    {
+      "name": "leafbunch3",
+      "quality": "compact",
+      "file": "public/asserts/tree/leafbunch3-compact-957bf8f7ba61.webp",
+      "src": "/asserts/tree/leafbunch3-compact-957bf8f7ba61.webp",
+      "width": 320,
+      "height": 113,
+      "bytes": 16596,
+      "sha256": "957bf8f7ba61c431b15bcf6939451b1b09a9aca9ff37d06104d696cd939715f3"
+    },
+    {
+      "name": "leafbunch3",
+      "quality": "full",
+      "file": "public/asserts/tree/leafbunch3-full-6bcd20386298.webp",
+      "src": "/asserts/tree/leafbunch3-full-6bcd20386298.webp",
+      "width": 420,
+      "height": 148,
+      "bytes": 24970,
+      "sha256": "6bcd203862980d2a19bfe15c6cd8d7d709e2d751ac39ea6e7f8ae6b6ca68fb7d"
+    },
+    {
+      "name": "tree_grass",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree_grass-compact-9823cdc78cb4.webp",
+      "src": "/asserts/tree/tree_grass-compact-9823cdc78cb4.webp",
+      "width": 640,
+      "height": 213,
+      "bytes": 42638,
+      "sha256": "9823cdc78cb4cb729bed322fcae5a68efef76d7a534b1461d36669c00c249c00"
+    },
+    {
+      "name": "tree_grass",
+      "quality": "full",
+      "file": "public/asserts/tree/tree_grass-full-67037ba95863.webp",
+      "src": "/asserts/tree/tree_grass-full-67037ba95863.webp",
+      "width": 900,
+      "height": 300,
+      "bytes": 75790,
+      "sha256": "67037ba9586307200bc1df05fe8ae28049ca72f89bdf53238b6af9e4a44c1772"
+    },
+    {
+      "name": "trunk_column",
+      "quality": "compact",
+      "file": "public/asserts/tree/trunk_column-compact-b9813640302b.webp",
+      "src": "/asserts/tree/trunk_column-compact-b9813640302b.webp",
+      "width": 256,
+      "height": 768,
+      "bytes": 27686,
+      "sha256": "b9813640302ba3f79c71dde8882510f867c60e61d3eb7f25765d60c79d8a7f6e"
+    },
+    {
+      "name": "trunk_column",
+      "quality": "full",
+      "file": "public/asserts/tree/trunk_column-full-990fe80f29e9.webp",
+      "src": "/asserts/tree/trunk_column-full-990fe80f29e9.webp",
+      "width": 352,
+      "height": 1056,
+      "bytes": 43590,
+      "sha256": "990fe80f29e9f64f326498fd4884bfa487c484da634ba911283bb37cf4d326a4"
+    },
+    {
+      "name": "tree6_complete",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree6_complete-compact-6848cdb2af26.webp",
+      "src": "/asserts/tree/tree6_complete-compact-6848cdb2af26.webp",
+      "width": 660,
+      "height": 768,
+      "bytes": 143148,
+      "sha256": "6848cdb2af26e77129aaf5f2ace11e568aba76f8400898e248956d83691c48dc"
+    },
+    {
+      "name": "tree6_complete",
+      "quality": "full",
+      "file": "public/asserts/tree/tree6_complete-full-a1870191247f.webp",
+      "src": "/asserts/tree/tree6_complete-full-a1870191247f.webp",
+      "width": 908,
+      "height": 1056,
+      "bytes": 241440,
+      "sha256": "a1870191247f8c31db2aa05adb13ee8d641684f39626ce1c3c06238e71f2c42b"
+    },
+    {
+      "name": "tree7_complete",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree7_complete-compact-81d1d23fa11a.webp",
+      "src": "/asserts/tree/tree7_complete-compact-81d1d23fa11a.webp",
+      "width": 557,
+      "height": 768,
+      "bytes": 135890,
+      "sha256": "81d1d23fa11a92cd2bf8115f25a898133e86279584cb7335388535f7b439650e"
+    },
+    {
+      "name": "tree7_complete",
+      "quality": "full",
+      "file": "public/asserts/tree/tree7_complete-full-78639f797323.webp",
+      "src": "/asserts/tree/tree7_complete-full-78639f797323.webp",
+      "width": 766,
+      "height": 1056,
+      "bytes": 226934,
+      "sha256": "78639f79732366b6711a439dd095675690dc1707f241b13c6876c858c99c7b6e"
+    },
+    {
+      "name": "tree8_complete",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree8_complete-compact-7ee21d76ae22.webp",
+      "src": "/asserts/tree/tree8_complete-compact-7ee21d76ae22.webp",
+      "width": 645,
+      "height": 768,
+      "bytes": 141868,
+      "sha256": "7ee21d76ae22b4eac895d1de4a077bac191f05dd1bcae42f4e14e934398e7c9f"
+    },
+    {
+      "name": "tree8_complete",
+      "quality": "full",
+      "file": "public/asserts/tree/tree8_complete-full-e45f344fe26a.webp",
+      "src": "/asserts/tree/tree8_complete-full-e45f344fe26a.webp",
+      "width": 886,
+      "height": 1056,
+      "bytes": 236596,
+      "sha256": "e45f344fe26a66a6a9d811febed65ac44d16477d3210fb33c9a1251d5cbeb338"
+    },
+    {
+      "name": "tree9_complete",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree9_complete-compact-c63ba79ccb9a.webp",
+      "src": "/asserts/tree/tree9_complete-compact-c63ba79ccb9a.webp",
+      "width": 722,
+      "height": 768,
+      "bytes": 178436,
+      "sha256": "c63ba79ccb9ae49c1f9abd6f574393a428c8b881f9d037e17b06018883589da1"
+    },
+    {
+      "name": "tree9_complete",
+      "quality": "full",
+      "file": "public/asserts/tree/tree9_complete-full-f08389f4d76e.webp",
+      "src": "/asserts/tree/tree9_complete-full-f08389f4d76e.webp",
+      "width": 993,
+      "height": 1056,
+      "bytes": 308030,
+      "sha256": "f08389f4d76e5df931a57b50de870cc8df4be8689677125f521792fc888f707f"
+    },
+    {
+      "name": "leafbunch3_complete",
+      "quality": "compact",
+      "file": "public/asserts/tree/leafbunch3_complete-compact-31de439afc48.webp",
+      "src": "/asserts/tree/leafbunch3_complete-compact-31de439afc48.webp",
+      "width": 320,
+      "height": 160,
+      "bytes": 19324,
+      "sha256": "31de439afc48d4c0969ab5374cba0700f37c7945e45ebf1bfc1cbeb7137c7fd6"
+    },
+    {
+      "name": "leafbunch3_complete",
+      "quality": "full",
+      "file": "public/asserts/tree/leafbunch3_complete-full-20df23e4afc1.webp",
+      "src": "/asserts/tree/leafbunch3_complete-full-20df23e4afc1.webp",
+      "width": 420,
+      "height": 210,
+      "bytes": 28552,
+      "sha256": "20df23e4afc1627a5610b427efda5f8da42fe1a8accad623bc37ca1cacbf4071"
+    },
+    {
+      "name": "tree9_growth",
+      "quality": "compact",
+      "file": "public/asserts/tree/tree9_growth-compact-bc68304fc50a.webp",
+      "src": "/asserts/tree/tree9_growth-compact-bc68304fc50a.webp",
+      "width": 722,
+      "height": 768,
+      "bytes": 209494,
+      "sha256": "bc68304fc50a3afadedff585878d11ffd8fd3d917cadb3e247f7272dbf75fd54"
+    },
+    {
+      "name": "tree9_growth",
+      "quality": "full",
+      "file": "public/asserts/tree/tree9_growth-full-c8e7dc725f14.webp",
+      "src": "/asserts/tree/tree9_growth-full-c8e7dc725f14.webp",
+      "width": 992,
+      "height": 1056,
+      "bytes": 348630,
+      "sha256": "c8e7dc725f1453b9d94a92708b0637a30d36ddfa41e3af5d75403d7940c86e2f"
+    }
+  ],
+  "publishedBytes": 4551386
+}

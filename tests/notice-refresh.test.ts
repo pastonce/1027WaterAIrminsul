@@ -53,7 +53,7 @@ describe('整页重抽插图与声明暂停', () => {
     expect(reopened.getSnapshot().save.growth).toBe(20); expect(reopened.getSnapshot().save.dew).toBe(5);
   });
   it('浇灌中打开声明并跨面板切换，关闭后续播剩余演出', () => {
-    const { game } = testGame({ dew: 13 }); games.push(game); startScene(game); game.water(); vi.advanceTimersByTime(100);
+    const { game } = testGame({ dew: 20 }); games.push(game); startScene(game); game.water(); vi.advanceTimersByTime(100);
     game.openPanel('notice'); expect(game.getSnapshot()).toMatchObject({ mode: 'notice', presentationPaused: true });
     const speech = game.getSnapshot().speech; vi.advanceTimersByTime(20000); expect(game.getSnapshot().speech).toEqual(speech); expect(game.water()).toBe(false);
     game.openPanel('settings'); vi.advanceTimersByTime(10000); game.openPanel('notice'); game.closePanel();

@@ -3,7 +3,7 @@ import type { HidingMotion, InhabitantId } from '../../data/inhabitants';
 import { getStageBackground } from '../../data/backgrounds';
 import { backgroundProjection } from '../backgrounds/projection';
 import { backgroundParallax } from '../backgrounds/policy';
-import { crystalPlan } from './crystalflies';
+import { crystalPerches } from './crystalflies';
 import calibrated from '../../data/hiding.generated.json' with { type: 'json' };
 import type { DreamStageId, ForestEncounter } from '../../types/game';
 
@@ -64,8 +64,8 @@ export function creatureLayout(stage: DreamStageId, entries: ForestEncounter[], 
       actors.push({ ...box, id: asset, asset, kind: 'fixed', claimed: claimed.includes(asset) });
     });
   }
-  if ((viewport.growth ?? 0) >= 100) for (const [index, perch] of crystalPlan(viewport.seed).entries()) {
-    if (index > 0 && viewport.treeHeight < perch.threshold) continue;
+  if ((viewport.growth ?? 0) >= 100) for (const perch of crystalPerches(viewport.seed, viewport.growth ?? 0, stage === 'E' || stage === 'F')) {
+    if ((viewport.growth ?? 0) < perch.threshold) continue;
     const bounds = INHABITANT_ASSETS[perch.asset].bounds;
     const actorWidth = Math.max(30, perch.width * scale); const actorHeight = actorWidth * bounds.height / bounds.width;
     actors.push({ id: perch.id, asset: perch.asset, kind: 'crystal', animationPhase: perch.phase, left: width / 2 + perch.horizontal * scale - actorWidth / 2, top: viewport.root + offset - perch.elevation * scale - actorHeight / 2, width: actorWidth, height: actorHeight });

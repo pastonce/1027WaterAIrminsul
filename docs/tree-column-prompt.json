@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "job": {
+    "name": "trunk_column",
+    "source": "asserts/Tree of Wisdom/Split Sprites/tree9.png",
+    "primaryMaterialReference": "asserts/world-tree-redraw/tree9.png",
+    "prompt": "Use case: stylized-concept. Asset type: one modular, transparent RGBA vertical middle-trunk extension for a growing Irminsul world tree. Image 1 is the exact established MATERIAL / COLOR reference. Images 2–4 are the user's Irminsul art-direction references. Create ONE continuous very tall, slim, elegant middle tree-trunk column, around 1:4 width-to-height aspect ratio, front-view orthographic, isolated. Delicate interwoven flowing silver-ivory wood ribbons, warm pearl highlights, lavender shadows and fine softly luminous cyan sap veins, subtly organic curving sides. The column extends cleanly through the TOP and BOTTOM of the image, with matching near-identical top and bottom widths / center, so it can join a tree canopy above and roots below. No pointy ends. It is living ancient WOOD, not stone, crystal, metal, ribbon fabric, or a striped straight pillar. Broad natural intertwined wood grain should wind through the entire tall column, avoid tiny straight repetitive stripes. Small subtle taper / undulation to both outside edges. Maintain wood density and full continuous trunk. NO roots, NO canopy, NO leaves, NO branching arms, NO moss, NO ground, NO circles, NO faces or characters, NO text or watermark. Keep the whole very tall column centered and show clean outer silhouette with ample genuine transparent space on both sides; do not crop sides. Do not add a painted black/white/checker background, cast shadow or detached glow. High-quality painterly fantasy-game sprite, matching the existing 24 Irminsul components, actual transparent background."
+  }
+}

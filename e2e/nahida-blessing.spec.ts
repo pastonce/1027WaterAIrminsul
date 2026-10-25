@@ -34,17 +34,17 @@ async function channel(page: Page) {
   await expect(page.locator('.dendro-blessing')).toHaveAttribute('data-phase', 'channel');
 }
 
-test('严格 0.1 抽选，倒数第二浇保底 E 剩余 12 由纳西妲补满', async ({ page }) => {
+test('严格 0.13 抽选，倒数第二浇保底 E 剩余20由纳西妲补满', async ({ page }) => {
   await page.clock.install(); await page.addInitScript(() => { Math.random = () => Number(Reflect.get(window, '__visitTestRoll') ?? 0.99); });
   await seed(page, 'A', { growth: 26, wateringCounts: { A: 2 } });
-  await page.evaluate(() => { Reflect.set(window, '__visitTestRoll', 0.1); }); await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
+  await page.evaluate(() => { Reflect.set(window, '__visitTestRoll', 0.13); }); await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
   expect((await readSave(page)).pendingVisits).toEqual([]);
   await seed(page, 'A', { growth: 26, wateringCounts: { A: 2 } });
-  await page.evaluate(() => { Reflect.set(window, '__visitTestRoll', 0.099999); }); await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
+  await page.evaluate(() => { Reflect.set(window, '__visitTestRoll', 0.129999); }); await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
   expect((await readSave(page)).pendingVisits).toEqual(['visit-A']);
-  await seed(page, 'E', { growth: STAGES.E.growth.end - 25, wateringCounts: { E: 6 } });
+  await seed(page, 'E', { growth: STAGES.E.growth.end - 40, wateringCounts: { E: 6 } });
   await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
-  expect((await readSave(page)).growth).toBe(STAGES.E.growth.end - 12); expect((await readSave(page)).guaranteedVisits).toEqual(['visit-E']);
+  expect((await readSave(page)).growth).toBe(STAGES.E.growth.end - 20); expect((await readSave(page)).guaranteedVisits).toEqual(['visit-E']);
   await channel(page); await page.clock.fastForward(PRESENTATION_RULES.blessingTravelMs);
   expect((await readSave(page)).growth).toBe(STAGES.E.growth.end); expect((await readSave(page)).dew).toBe(0);
   await page.clock.fastForward(900); await page.clock.fastForward(8000); await page.clock.fastForward(500);
@@ -90,10 +90,10 @@ for (const narrow of [false, true]) test(`六阶段原向双落点、BDE 均在�
 });
 
 test('轮廓光效 → 花叶 → 素材扫描框 → 成长，暂停与一次结算不阻断浇灌', async ({ page }, testInfo) => {
-  await page.clock.install(); await page.addInitScript(() => { Math.random = () => 0.99; }); await seed(page, 'A'); await page.clock.runFor(3800);
+  await page.clock.install(); await page.addInitScript(() => { Math.random = () => 0.99; }); await seed(page, 'A', { growth: 20 }); await page.clock.runFor(3800);
   await page.locator('.debug-panel > summary').click(); await page.getByRole('button', { name: '触发纳西妲来访', exact: true }).click(); await page.locator('.debug-panel > summary').click();
-  await channel(page); expect((await readSave(page)).growth).toBe(0);
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 10));
+  await channel(page); expect((await readSave(page)).growth).toBe(20);
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 200));
   await expect(page.locator('.blessing-dendro-icon')).toHaveCount(1); await expect(page.locator('.blessing-pattern-piece')).toHaveCount(16);
   await expect(page.locator('.blessing-source, .blessing-circuit, .blessing-data-packet, .blessing-focus-frame, [data-piece=center_emblem]')).toHaveCount(0);
   const onTree = await page.locator('.blessing-target').evaluate((element) => {
@@ -120,18 +120,18 @@ test('轮廓光效 → 花叶 → 素材扫描框 → 成长，暂停与一次�
   await page.locator('.dendro-blessing, .nahida-companion').evaluateAll((elements) => { for (const element of elements) element.setAttribute('data-paused', 'false'); });
   const target = await page.locator('.blessing-target').getAttribute('transform');
   await openSettings(page); await page.clock.fastForward(30000);
-  await expect(page.locator('.dendro-blessing')).toHaveAttribute('data-paused', 'true'); expect((await readSave(page)).growth).toBe(0);
+  await expect(page.locator('.dendro-blessing')).toHaveAttribute('data-paused', 'true'); expect((await readSave(page)).growth).toBe(20);
   const states = await page.locator('.dendro-blessing').evaluate((element) => element.getAnimations({ subtree: true }).map((animation) => animation.playState)); expect(states.length).toBeGreaterThanOrEqual(10); expect(states.every((state) => state === 'paused')).toBe(true);
   expect(await page.locator('.nahida-companion .spine-host').evaluate((element) => element.getAnimations().every((animation) => animation.playState === 'paused'))).toBe(true);
   await page.getByRole('button', { name: '关闭', exact: true }).click(); await page.clock.fastForward(1500);
-  await expect(page.locator('.dendro-blessing')).toHaveAttribute('data-phase', 'bloom'); expect((await readSave(page)).growth).toBe(21); expect((await readSave(page)).blessedVisits).toEqual(['visit-A']);
+  await expect(page.locator('.dendro-blessing')).toHaveAttribute('data-phase', 'bloom'); expect((await readSave(page)).growth).toBe(40); expect((await readSave(page)).blessedVisits).toEqual(['visit-A']);
   expect(await page.locator('.blessing-target').getAttribute('transform')).toBe(target);
   expect(await page.locator('.dendro-blessing').evaluate((element) => getComputedStyle(element).pointerEvents)).toBe('none');
   await page.locator('.dendro-blessing').evaluate((element) => { for (const animation of element.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 250; } });
   mkdirSync('docs/screenshots/blessing', { recursive: true }); await page.screenshot({ path: `docs/screenshots/blessing/bloom-${testInfo.project.name}.png` });
   await page.clock.fastForward(900); await page.getByRole('button', { name: '梦中的树', exact: true }).focus(); await page.keyboard.press('Enter');
-  await expect(page.locator('.dialogue-bubble[data-speaker=tree]')).toBeVisible(); await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click(); expect((await readSave(page)).growth).toBe(34);
-  await page.reload(); await finishOpening(page, true); await page.clock.fastForward(3000); expect((await readSave(page)).growth).toBe(34);
+  await expect(page.locator('.dialogue-bubble[data-speaker=tree]')).toBeVisible(); await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click(); expect((await readSave(page)).growth).toBe(60);
+  await page.reload(); await finishOpening(page, true); await page.clock.fastForward(3000); expect((await readSave(page)).growth).toBe(60);
 });
 
 test('扫描框纹理失败不阻断中心扫描、浇灌及祝福结算', async ({ page }) => {
@@ -156,7 +156,7 @@ test('减少动态 / 无 WebGL 的来访仍祝福，光流中刷新不丢奖励'
   expect(await page.locator('.nahida-companion').getAttribute('data-flipped')).toBeNull();
   await expect(page.locator('.nahida-companion .character-static')).toHaveCSS('transform', 'none');
   await page.reload(); await finishOpening(page, true); await channel(page); await page.clock.fastForward(1500);
-  const expected = visitGrowth('C', STAGES.C.growth.start + 1, STAGES.C.growth.end, false);
+  const expected = visitGrowth('C', STAGES.C.growth.start + 1, STAGES.C.growth.end);
   expect((await readSave(page)).growth).toBe(expected); expect((await readSave(page)).blessedVisits).toContain('visit-C');
   await page.reload(); await finishOpening(page, true); await page.clock.fastForward(3000); expect((await readSave(page)).growth).toBe(expected);
 });

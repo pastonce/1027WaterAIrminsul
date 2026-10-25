@@ -1,0 +1,130 @@
+{
+  "tool": "built-in image_gen",
+  "outputs": [
+    {
+      "name": "tree01",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-8d4ebf25-0ff7-4281-a2f5-f6c128b668b0.png",
+      "raw": "asserts/world-tree-redraw/tree01.png"
+    },
+    {
+      "name": "tree1",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-c7535152-18ae-47be-a136-2d247c8b946a.png",
+      "raw": "asserts/world-tree-redraw/tree1.png"
+    },
+    {
+      "name": "tree2",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-7b9f2ad2-8bb6-4351-8110-d53359ee0d55.png",
+      "raw": "asserts/world-tree-redraw/tree2.png"
+    },
+    {
+      "name": "tree3",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-e99fd861-b3f1-465b-adf4-92e890ca3f6c.png",
+      "raw": "asserts/world-tree-redraw/tree3.png"
+    },
+    {
+      "name": "tree4",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-4817b55a-3ba2-4f0d-acff-52b1c0a592dc.png",
+      "raw": "asserts/world-tree-redraw/tree4.png"
+    },
+    {
+      "name": "tree5",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-3e19a29d-0702-4371-ace8-e9ace7475f8f.png",
+      "raw": "asserts/world-tree-redraw/tree5.png"
+    },
+    {
+      "name": "tree6",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-02deb681-b0f2-4609-8266-e0b77ee6d94f.png",
+      "raw": "asserts/world-tree-redraw/tree6.png"
+    },
+    {
+      "name": "tree7",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-796736c5-6e5a-48e9-90cb-993a320a32dd.png",
+      "raw": "asserts/world-tree-redraw/tree7.png"
+    },
+    {
+      "name": "tree8",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-bd56045e-a26e-4bad-8abe-274d10fc621a.png",
+      "raw": "asserts/world-tree-redraw/tree8.png"
+    },
+    {
+      "name": "tree9",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-5a97403a-1d1d-4803-bc18-2a535b24ab05.png",
+      "raw": "asserts/world-tree-redraw/tree9.png"
+    },
+    {
+      "name": "tree_overlay4",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-7db53528-2258-4973-801b-797ffd7287d2.png",
+      "raw": "asserts/world-tree-redraw/tree_overlay4.png"
+    },
+    {
+      "name": "tree_overlay5",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-7dd0bbfd-7a0e-4984-8f45-4b4ae8916705.png",
+      "raw": "asserts/world-tree-redraw/tree_overlay5.png"
+    },
+    {
+      "name": "tree_overlay6",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-628e4291-096b-4a3d-a3f2-024550e42af0.png",
+      "raw": "asserts/world-tree-redraw/tree_overlay6.png"
+    },
+    {
+      "name": "tree_overlay7",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-4e7d3245-a0e4-4ae7-95bc-ea3d4ba1ce58.png",
+      "raw": "asserts/world-tree-redraw/tree_overlay7.png"
+    },
+    {
+      "name": "tree_overlay8",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-a8d18c6b-1373-4fc8-a728-fe7150dd1049.png",
+      "raw": "asserts/world-tree-redraw/tree_overlay8.png"
+    },
+    {
+      "name": "tree_overlay9",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-5a0eec7c-b081-42ca-8f97-f1e55ec4c39c.png",
+      "raw": "asserts/world-tree-redraw/tree_overlay9.png"
+    },
+    {
+      "name": "leaf1",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-de9f0f17-fee0-475e-9809-8f6ecbc3a23c.png",
+      "raw": "asserts/world-tree-redraw/leaf1.png"
+    },
+    {
+      "name": "leaf2",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-4036250a-9841-4de3-ba12-fc25ef4f47c2.png",
+      "raw": "asserts/world-tree-redraw/leaf2.png"
+    },
+    {
+      "name": "leaf3",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-e9a25669-926b-4d1c-8785-3a7c0e2d85c0.png",
+      "raw": "asserts/world-tree-redraw/leaf3.png"
+    },
+    {
+      "name": "leaf4",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-f6c71f99-15a4-4084-a216-bfc44e9dcab2.png",
+      "raw": "asserts/world-tree-redraw/leaf4.png"
+    },
+    {
+      "name": "leafbunch1",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-e4171378-1318-460b-aa9d-ec99dc65bc19.png",
+      "raw": "asserts/world-tree-redraw/leafbunch1.png"
+    },
+    {
+      "name": "leafbunch2",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-3e63b17e-7d0e-4cd5-9001-89b97cc184ea.png",
+      "raw": "asserts/world-tree-redraw/leafbunch2.png"
+    },
+    {
+      "name": "leafbunch3",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-8d9a8a9c-db0a-444f-bdf9-f40eb8934533.png",
+      "raw": "asserts/world-tree-redraw/leafbunch3.png"
+    },
+    {
+      "name": "tree_grass",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-2e4a6ef0-a23c-4f3d-be06-eff847cc911a.png",
+      "raw": "asserts/world-tree-redraw/tree_grass.png"
+    },
+    {
+      "name": "trunk_column",
+      "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-e0596aec-2caf-4cc9-88c8-1c3e5b8d04b1.png",
+      "raw": "asserts/world-tree-redraw/trunk_column.png"
+    }
+  ]
+}

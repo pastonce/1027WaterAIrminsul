@@ -17,7 +17,7 @@ describe('存档校验与恢复', () => {
   });
   it('字段缺失、不合法数值和数组被修正', () => {
     const save = validateSave({ growth: -20, dew: 990, seed: NaN, completedStages: ['F', 7], unlockedSecrets: ['moon', 'invalid', 'moon'], settings: { textSpeed: -10 } });
-    expect(save.growth).toBe(0); expect(save.dew).toBe(13); expect(save.seed).toBe(1027);
+    expect(save.growth).toBe(0); expect(save.dew).toBe(990); expect(save.seed).toBe(1027);
     expect(save.completedStages).toEqual([]); expect(save.unlockedSecrets).toEqual(['moon']); expect(save.settings.textSpeed).toBe(10);
     expect(validateSave({ growth: Infinity, dew: null }).growth).toBe(0);
   });

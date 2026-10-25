@@ -25,7 +25,7 @@ function until(condition: () => boolean, maximum = 120000) {
 }
 
 function atBoundary() {
-  return testGame({ growth: 211, completedVisits: ['visit-A', 'visit-A-2'] }, new TestClock(Date.parse(SCHEDULE[1].at)));
+  return testGame({ growth: 180, completedStages: ['A'], completedVisits: ['visit-A', 'visit-A-2'] }, new TestClock(Date.parse(SCHEDULE[1].at)));
 }
 
 function ready(game: GameController) {
@@ -38,12 +38,12 @@ function ready(game: GameController) {
 
 describe('对白后才覆盖、切换及持久化', () => {
   it('日期与成长必须同时满足；设备日期不能替代服务器权限', () => {
-    const closed = testGame({ growth: 210, completedVisits: ['visit-A', 'visit-A-2'] });
+    const closed = testGame({ growth: 180, completedVisits: ['visit-A', 'visit-A-2'] });
     startScene(closed.game); vi.advanceTimersByTime(90000); expect(closed.game.getSnapshot().stageLoading).toBeNull(); closed.game.stop();
-    const insufficient = testGame({ growth: 197 }, new TestClock(Date.parse(SCHEDULE[1].at)));
+    const insufficient = testGame({ growth: 160 }, new TestClock(Date.parse(SCHEDULE[1].at)));
     startScene(insufficient.game); vi.advanceTimersByTime(90000); expect(insufficient.game.getSnapshot().stage).toBe('A'); expect(insufficient.game.getSnapshot().stageLoading).toBeNull(); insufficient.game.stop();
     class PermissionClock extends TestClock { permissionNow() { return Date.parse(SCHEDULE[0].at); } }
-    const unconfirmed = testGame({ growth: 210, completedVisits: ['visit-A', 'visit-A-2'] }, new PermissionClock(Date.parse(SCHEDULE[5].at)));
+    const unconfirmed = testGame({ growth: 180, completedVisits: ['visit-A', 'visit-A-2'] }, new PermissionClock(Date.parse(SCHEDULE[5].at)));
     startScene(unconfirmed.game); vi.advanceTimersByTime(90000); expect(unconfirmed.game.getSnapshot().stageLoading).toBeNull(); unconfirmed.game.stop();
   });
 
@@ -65,20 +65,19 @@ describe('对白后才覆盖、切换及持久化', () => {
     expect(game.getSnapshot().save.sceneStage).toBe('B'); expect(game.getSnapshot().speech?.entry.id).toBe('B3Z'); expect(game.getSnapshot().mode).toBe('idle'); expect(game.getSnapshot().presentationPaused).toBe(false); game.stop(); expect(vi.getTimerCount()).toBe(0);
   });
 
-  it('纳西妲补满不附加树回应，下一浇跨上限后才加载和播放转场句', () => {
-    const { game } = testGame({ growth: 195, dew: 13, wateringCounts: { A: 15 } }, new TestClock(Date.parse(SCHEDULE[1].at)));
+  it('纳西妲补满不附加树回应，来访完整结束后才加载和播放转场句', () => {
+    const { game } = testGame({ growth: 140, dew: 20, wateringCounts: { A: 15 } }, new TestClock(Date.parse(SCHEDULE[1].at)));
     startGame(game); game.water(); until(() => game.getSnapshot().blessing?.phase === 'channel');
     vi.advanceTimersByTime(PRESENTATION_RULES.blessingTravelMs);
-    expect(game.getSnapshot().save.growth).toBe(210); expect(game.getSnapshot().stage).toBe('A'); expect(game.getSnapshot().stageLoading).toBeNull();
+    expect(game.getSnapshot().save.growth).toBe(180); expect(game.getSnapshot().stage).toBe('A'); expect(game.getSnapshot().stageLoading).toBeNull();
     until(() => game.getSnapshot().save.completedVisits.includes('visit-A') && game.getSnapshot().companion === null);
     expect(game.getSnapshot().save.pendingWaterings).toEqual([]); expect(game.getSnapshot().save.completedVisits).toContain('visit-A');
-    expect(game.getSnapshot().stageLoading).toBeNull(); expect(game.getSnapshot().speech).toBeNull();
-    for (let attempt = 0; attempt < 10 && game.getSnapshot().save.dew < 13; attempt++) { game.spawnDew(); const particle = game.getSnapshot().dewParticles.find((entry) => !entry.collected && !entry.expiring); if (particle) game.collectDew(particle.id); }
-    expect(game.water()).toBe(true); ready(game); expect(game.getSnapshot().speech?.entry.id).toBe('B3Z'); game.stop();
+    expect(game.getSnapshot().speech).toBeNull();
+    ready(game); expect(game.getSnapshot().speech?.entry.id).toBe('B3Z'); game.stop();
   });
 
   it('已满时日期解锁后的浇灌替换旧树句，仍等最新回应结束才换景', () => {
-    const { game, clock } = testGame({ growth: 210, dew: 13, completedVisits: ['visit-A', 'visit-A-2'] }); startGame(game); game.talk();
+    const { game, clock } = testGame({ growth: 180, dew: 20, completedVisits: ['visit-A', 'visit-A-2'] }); startGame(game); game.talk();
     const line = game.getSnapshot().speech!.entry.id; clock.value = Date.parse(SCHEDULE[1].at); game.tick(); game.water();
     const latest = game.getSnapshot().speech!.entry.id; expect(latest).not.toBe(line); expect(game.getSnapshot().stageLoading).toBeNull(); expect(game.getSnapshot().stage).toBe('A');
     until(() => game.getSnapshot().stageLoading !== null); expect(game.getSnapshot().save.playedDialogues).toContain(latest); expect(game.getSnapshot().save.playedDialogues).not.toContain(line); ready(game); game.stop();
@@ -89,7 +88,7 @@ describe('对白后才覆盖、切换及持久化', () => {
     expect(game.getSnapshot().save.sceneStage).toBe('A'); game.stop();
     const restored = new GameController(new TimeGateService(clock), new SaveManager(storage), () => 0.99); startGame(restored);
     expect(restored.getSnapshot().stage).toBe('A'); expect(restored.getSnapshot().stageLoading?.phase).toBe('cover'); expect(restored.getSnapshot().speech).toBeNull();
-    ready(restored); expect(restored.getSnapshot().save.growth).toBe(211); expect(restored.getSnapshot().save.dew).toBe(0); restored.stop();
+    ready(restored); expect(restored.getSnapshot().save.growth).toBe(180); expect(restored.getSnapshot().save.dew).toBe(0); restored.stop();
     const completed = new GameController(new TimeGateService(clock), new SaveManager(storage)); startScene(completed);
     expect(completed.getSnapshot().stage).toBe('B'); expect(completed.getSnapshot().stageLoading).toBeNull(); completed.stop();
   });
@@ -109,7 +108,7 @@ describe('对白后才覆盖、切换及持久化', () => {
   it('最终梦醒也先覆盖再进入现实，G 入场对白在加载结束后播放', () => {
     const clock = new TestClock(Date.parse(SCHEDULE[5].at));
     const fixture = stageFixture('F', clock.now());
-    const { game } = testGame({ ...fixture, growth: 1028, completedVisits: [...fixture.completedVisits, 'visit-F', 'visit-F-2'], playedDialogues: [...fixture.playedDialogues, STAGES.F.transition.id] }, clock);
+    const { game } = testGame({ ...fixture, growth: 1027, completedStages: ['A', 'B', 'C', 'D', 'E', 'F'], completedVisits: [...fixture.completedVisits, 'visit-F', 'visit-F-2'], playedDialogues: [...fixture.playedDialogues, STAGES.F.transition.id] }, clock);
     startGame(game); until(() => game.getSnapshot().stageLoading !== null);
     expect(game.getSnapshot().stage).toBe('F'); expect(game.getSnapshot().stageLoading?.to).toBe('G'); expect(game.getSnapshot().speech).toBeNull();
     ready(game); expect(game.getSnapshot().mode).toBe('waking'); until(() => game.getSnapshot().waking === null); expect(game.getSnapshot().stage).toBe('G'); expect(game.getSnapshot().speech?.entry.id).toBe('G6N'); game.stop();

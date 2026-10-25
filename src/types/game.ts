@@ -88,6 +88,7 @@ export interface GameSave {
   sceneStage?: StageId;
   loadingArtChoices: Partial<Record<StageId, string>>;
   version: 2;
+  growthRulesVersion: 2;
   growth: number;
   dew: number;
   seed: number;

@@ -19,6 +19,7 @@ async function launch(page: Page, info: TestInfo, stage: StageId = 'A', patch: P
   await mockServerTime(page, OPEN); const now = new Date(OPEN);
   await page.clock.install({ time: now }); await page.clock.pauseAt(new Date(now.getTime() + 1000));
   await page.addInitScript(({ save, storage, date }) => {
+    localStorage.setItem('irminsul.notice.seen.v1', '1');
     if (!localStorage.getItem(storage)) localStorage.setItem(storage, JSON.stringify(save));
     sessionStorage.setItem('irminsul.development.clock', JSON.stringify({ offset: date - Date.now(), simulated: true }));
     const NativeAudio = window.Audio; const media: HTMLAudioElement[] = [];
@@ -125,11 +126,13 @@ test('音乐音量整合静音、保留上次音量并随存档恢复，原设�
 });
 
 test('留白、真实加载与缓冲均提示兰那罗练嗓，只有实际播放才旋转', async ({ page }, info) => {
+  await page.addInitScript(() => { Object.defineProperty(window, 'caches', { configurable: true, value: undefined }); });
+  await launch(page, info); const button = page.locator('.music-button');
+  await page.mouse.click(20, 120); await page.clock.runFor(100);
+  await expect(button).toHaveAttribute('title', '兰那罗们正在练嗓...');
   let release!: () => void; const requestGate = new Promise<void>((resolve) => { release = resolve; });
   await page.route('**/asserts/music/*.m4a', async (route) => { await requestGate; await route.continue(); });
-  await launch(page, info); const button = page.locator('.music-button');
-  await button.click(); await page.clock.runFor(100); await expect(button).toHaveAttribute('title', '兰那罗们正在练嗓...');
-  await page.clock.fastForward(8100); await expect(button).toHaveAttribute('data-music-phase', 'loading');
+  await button.click(); await page.clock.runFor(100); await expect(button).toHaveAttribute('data-music-phase', 'loading');
   await expect(button).toHaveAttribute('title', '兰那罗们正在练嗓...'); await expect(button).toHaveAttribute('aria-description', '兰那罗们正在练嗓...'); await expect(button).toHaveAttribute('aria-busy', 'true');
   await expect(button.locator('img')).toHaveCSS('animation-play-state', 'paused'); release(); await playing(page);
   await page.evaluate(() => (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0].dispatchEvent(new Event('waiting')));
@@ -138,11 +141,14 @@ test('留白、真实加载与缓冲均提示兰那罗练嗓，只有实际播�
   await expect(button).toHaveAttribute('title', '暂停背景音乐'); await expect(button).toHaveAttribute('aria-busy', 'false');
 });
 
-test('手势前不下载音乐，留白后仅当前曲播放并旋转，暂停静止且偏好可恢复', async ({ page }, info) => {
+test('开场仅预载当前音乐，主动播放立即复用压缩缓存，暂停静止且偏好可恢复', async ({ page }, info) => {
   const requests: string[] = []; page.on('request', (request) => { if (request.url().includes('/asserts/music/')) requests.push(request.url()); });
-  await launch(page, info); await page.clock.fastForward(30000); expect(requests).toEqual([]);
-  await page.getByRole('button', { name: '播放背景音乐', exact: true }).click(); await page.clock.runFor(100); await page.clock.fastForward(7700); expect(requests).toEqual([]);
-  await page.clock.fastForward(400); await playing(page); expect(requests.every((url) => url.endsWith(music.tracks.A.src))).toBe(true);
+  await launch(page, info); await page.clock.fastForward(30000);
+  expect(requests).toHaveLength(1); expect(requests.every((url) => url.endsWith(music.tracks.A.src))).toBe(true);
+  expect(await page.evaluate(() => (Reflect.get(window, '__musicMedia') as HTMLAudioElement[]).length)).toBe(0);
+  await page.getByRole('button', { name: '播放背景音乐', exact: true }).click(); await page.clock.runFor(100); await playing(page);
+  expect(requests).toHaveLength(1);
+  expect(await page.evaluate(() => (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0].currentSrc)).toMatch(/^blob:/);
   const button = page.locator('.music-button'); await expect(button.locator('img')).toHaveCSS('animation-play-state', 'running');
   await expect(button.locator('feFuncA')).toHaveAttribute('slope', '18'); expect((await button.locator('img').boundingBox())!.width).toBeGreaterThanOrEqual(25);
   await picture(page, info, 'playing');
@@ -172,7 +178,7 @@ test('真实音频曲尾后留白十二秒再单曲循环，设置暂停不丢�
 test('G 沿用留白与单曲播放，仅请求生日曲目，设置暂停后续播', async ({ page }, info) => {
   const requests: string[] = []; page.on('request', (request) => { if (request.url().includes('/asserts/music/')) requests.push(request.url()); });
   await launch(page, info, 'G'); await page.mouse.click(20, 120); await page.clock.runFor(100); await page.clock.runFor(7700);
-  expect(requests).toEqual([]); await page.clock.runFor(300); await playing(page);
+  expect(requests).toHaveLength(1); await expect(page.locator('.music-button')).toHaveAttribute('data-playing', 'false'); await page.clock.runFor(300); await playing(page);
   expect(requests.length).toBeGreaterThan(0); expect(requests.every((url) => url.endsWith(music.tracks.G.src))).toBe(true);
   await openSettings(page); await page.clock.runFor(350); await expect(page.locator('.music-button img')).toHaveCSS('animation-play-state', 'paused');
   await page.keyboard.press('Escape'); await playing(page); await picture(page, info, 'g-music');

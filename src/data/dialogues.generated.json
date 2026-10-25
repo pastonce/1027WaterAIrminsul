@@ -1,6 +1,6 @@
 {
   "source": "asserts/对白整合.md",
-  "sha256": "cfe19e6ca4e4045586a1592f672931419ab1a1cb65c9eb479947ecebc11643a8",
+  "sha256": "e0338e9e8f73f4e4fbe53cdc5b0832b677a653e44c52ba5b12aebc241a63b229",
   "pools": {
     "A/normal": [
       {
@@ -227,7 +227,7 @@
       },
       {
         "id": "A3Q",
-        "text": "░░世界░░░░░░遗忘我░░",
+        "text": "░世界░░░遗忘我░",
         "anchor": "tree"
       },
       {

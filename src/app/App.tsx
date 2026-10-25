@@ -61,7 +61,9 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
     game.prepareOpeningAssets();
     const width = portraitBlocked ? viewport.height : viewport.width;
     const height = portraitBlocked ? viewport.width : viewport.height;
-    setOpeningPlan(startupPlan(game.getSnapshot().save.loadingArtChoices, width, height, window.devicePixelRatio, reduced));
+    const save = game.getSnapshot().save;
+    const initialMusic = save.endingComplete ? 'G' : save.sceneStage ?? game.getSnapshot().stage;
+    setOpeningPlan(startupPlan(save.loadingArtChoices, width, height, window.devicePixelRatio, reduced, initialMusic));
   }, [game, opening, openingPlan, viewport.width, viewport.height, reduced, portraitBlocked]);
 
   const redeem = async (code: EasterCode) => {
@@ -88,9 +90,8 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
   useLayoutEffect(() => { configureSound(state); }, [state, opening, hidden, portraitBlocked]);
   useEffect(() => game.subscribeSound((kind) => { configureSound(game.getSnapshot()); void sound.play(kind); }), [game, opening, hidden, portraitBlocked]);
 
-  useLayoutEffect(() => {
-    music.configure({ stage: state.mode === 'intro' ? null : musicStage, enabled: state.save.settings.music, volume: state.save.settings.musicVolume, paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'notice', 'mail', 'loading', 'ending', 'waking'].includes(state.mode), immediate: hidden || portraitBlocked || opening });
-  }, [music, musicStage, state.save.settings.music, state.save.settings.musicVolume, state.mode, opening, hidden, portraitBlocked]);
+  const configureMusic = (snapshot: GameSnapshot) => music.configure({ stage: snapshot.mode === 'intro' ? null : snapshot.reviewStage ?? snapshot.stage, enabled: snapshot.save.settings.music, volume: snapshot.save.settings.musicVolume, paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'notice', 'mail', 'loading', 'ending', 'waking'].includes(snapshot.mode), immediate: hidden || portraitBlocked || opening });
+  useLayoutEffect(() => { configureMusic(state); }, [music, musicStage, state.save.settings.music, state.save.settings.musicVolume, state.mode, opening, hidden, portraitBlocked]);
 
   useLayoutEffect(() => { game.setSystemReducedMotion(systemReduced); }, [game, systemReduced]);
   useLayoutEffect(() => { if (state.mode !== 'intro') setIntroPanel(null); }, [state.mode]);
@@ -109,7 +110,11 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
     if (!opening && !hidden && !portraitBlocked && state.save.settings.music && musicStage && musicState.phase !== 'error') void music.unlock();
   };
   const toggleMusic = () => {
-    if (!state.save.settings.music || musicState.phase === 'blocked' || musicState.phase === 'error') { game.setSettings({ music: true, musicVolume: state.save.settings.musicVolume || 0.45 }); void music.unlock(); }
+    if (!state.save.settings.music || ['blocked', 'error', 'waiting'].includes(musicState.phase)) {
+      game.setSettings({ music: true, musicVolume: state.save.settings.musicVolume || 0.45 });
+      configureMusic(game.getSnapshot());
+      void music.requestPlay();
+    }
     else game.setSettings({ music: false });
   };
 
@@ -157,8 +162,8 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
       <header className="game-header" data-mail-open={state.mode === 'mail'}>
         <div className="game-brand"><Icon name="leaf" size={26}/><div><span><span>浇灌一棵世界树</span><BuildMarker/></span><small>WATER AN IRMINSUL</small></div></div>
         <div className="header-actions">
-          {!reality && <div key={state.dewFeedbackRevision} className={`dew-counter ${state.save.dew === GAME_RULES.dewCapacity ? 'is-full' : ''} ${state.dewFeedback ? 'dew-feedback' : ''}`} data-feedback={state.dewFeedback ?? undefined} aria-label={`梦露 ${state.save.dew} / ${GAME_RULES.dewCapacity}`}>
-            <Icon name="dew" size={22}/><b data-testid="dew-count">{state.save.dew}</b><span>/ {GAME_RULES.dewCapacity}</span>
+          {!reality && <div key={state.dewFeedbackRevision} className={`dew-counter ${state.save.dew === GAME_RULES.dewCapacity ? 'is-full' : ''} ${state.dewFeedback ? 'dew-feedback' : ''}`} data-feedback={state.dewFeedback ?? undefined} aria-label={`梦露 ${state.save.dew} / ${GAME_RULES.wateringCost}`}>
+            <Icon name="dew" size={22}/><b data-testid="dew-count">{state.save.dew}</b><span>/ {GAME_RULES.wateringCost}</span>
             {state.dewFeedback && <span className="sr-only" role="status">{state.dewFeedback === 'full' ? '梦露已满' : '梦露不足'}</span>}
           </div>}
           <button className="icon-button header-tool-button notice-button" onClick={() => game.openPanel('notice')} disabled={!['idle', 'watering', 'growing', 'journal', 'settings', 'notice'].includes(state.mode)} aria-label="公告与声明" title="公告与声明" data-notice-opener><Icon name="notice"/></button>

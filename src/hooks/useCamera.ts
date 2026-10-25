@@ -3,10 +3,11 @@ import gsap from 'gsap';
 import { CameraController } from '../game/camera/CameraController';
 import type { StageId } from '../types/game';
 
-export function useCamera(treeHeight: number, stage: StageId, revision: number, locked: boolean, reduced: boolean) {
+export function useCamera(treeHeight: number, stage: StageId, revision: number, locked: boolean, reduced: boolean, paused = false) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const model = useRef(new CameraController());
   const animation = useRef<gsap.core.Tween | null>(null);
+  const pauseState = useRef(paused); pauseState.current = paused;
   const drag = useRef<{ pointer: number; startX: number; startY: number; y: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
   const [offset, setOffset] = useState(0);
@@ -35,15 +36,16 @@ export function useCamera(treeHeight: number, stage: StageId, revision: number, 
     animation.current?.kill();
     camera.target = target === 'root' ? 0 : camera.maximum;
     animation.current = gsap.to(camera, {
-      position: camera.target, duration: reduced ? 0.08 : cinematic ? 2.4 : 1.2, ease: 'power2.inOut',
+      position: camera.target, duration: reduced ? 0.08 : cinematic ? 2.4 : 1.2, ease: 'power2.inOut', paused: pauseState.current,
       onUpdate: () => { camera.position = camera.clamp(camera.position); setOffset(camera.position); },
     });
   }, [reduced]);
 
   useEffect(() => {
-    goTo(['D', 'E', 'F'].includes(stage) ? 'crown' : 'root', true);
+    goTo(treeHeight * viewport.scale > viewport.height - 250 ? 'crown' : 'root', true);
     return () => { animation.current?.kill(); };
   }, [revision, stage, viewport, goTo]);
+  useEffect(() => { animation.current?.paused(paused); }, [paused]);
 
   useEffect(() => {
     const element = viewportRef.current;

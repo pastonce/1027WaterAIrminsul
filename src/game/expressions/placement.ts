@@ -1,12 +1,14 @@
-import { trunkX } from '../tree/geometry';
+import { treeCrown } from '../tree/model';
 import { EXPRESSION_RULES } from '../../data/expressions';
 import type { DreamStageId } from '../../types/game';
+import { treeGrowthStep } from '../tree/growth';
 
 export interface ExpressionAnchor { x: number; y: number; radiusX: number; radiusY: number }
 export interface ExpressionObstacle { left: number; top: number; width: number; height: number }
 
-export function treeExpressionAnchor(width: number, root: number, treeHeight: number, scale: number): ExpressionAnchor {
-  return { x: width / 2 + (trunkX(treeHeight) - 500) * scale, y: root - treeHeight * scale, radiusX: (130 + Math.min(130, treeHeight / 12)) * scale, radiusY: 110 * scale };
+export function treeExpressionAnchor(width: number, root: number, growth: number, scale: number, restoreCrown = false): ExpressionAnchor {
+  const crown = treeCrown(treeGrowthStep(growth), restoreCrown);
+  return { x: width / 2 + (crown.x - 500) * scale, y: root + (crown.y - 3300) * scale, radiusX: crown.radiusX * scale, radiusY: crown.radiusY * scale };
 }
 
 export function nahidaExpressionAnchor(character: ExpressionObstacle): ExpressionAnchor {

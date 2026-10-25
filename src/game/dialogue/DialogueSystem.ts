@@ -27,9 +27,11 @@ export function drawUnplayedDialogue(decks: DialogueDecks, key: string, excluded
 
 export function dreamDialogueCategory(roll: number, options: { visitAllowed: boolean; guaranteed: boolean; capped: boolean; story: number; mechanism: number }): DreamDialogueCategory {
   if (options.visitAllowed && options.guaranteed) return 'visit';
+  const storyEnd = DIALOGUE_RULES.visitChance + DIALOGUE_RULES.storyChance;
+  const mechanismEnd = storyEnd + DIALOGUE_RULES.mechanismChance;
   if (roll < DIALOGUE_RULES.visitChance) return options.visitAllowed ? 'visit' : 'normal';
-  if (roll < 0.17) return options.story < DIALOGUE_RULES.storyMaximum ? 'story' : 'normal';
-  if (roll < 0.21) return options.mechanism < DIALOGUE_RULES.mechanismMaximum ? 'mechanism' : 'normal';
-  if (options.capped && roll < 0.66) return 'limit';
+  if (roll < storyEnd) return options.story < DIALOGUE_RULES.storyMaximum ? 'story' : 'normal';
+  if (roll < mechanismEnd) return options.mechanism < DIALOGUE_RULES.mechanismMaximum ? 'mechanism' : 'normal';
+  if (options.capped && roll < mechanismEnd + DIALOGUE_RULES.limitChance) return 'limit';
   return 'normal';
 }

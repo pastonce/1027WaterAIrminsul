@@ -17,7 +17,7 @@ export class TimeGateService {
     const latest = available.at(-1);
     const next = SCHEDULE.find((entry) => now < Date.parse(entry.at)) ?? null;
     return {
-      cap: latest ? latest.cap + (next ? 0 : 1) : 0,
+      cap: latest?.cap ?? 0,
       available: available.map((entry) => entry.stage),
       next,
     };

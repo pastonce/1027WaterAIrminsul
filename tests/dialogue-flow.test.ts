@@ -104,28 +104,28 @@ describe('完整已读归档与权限', () => {
 
 describe('互斥概率与次数上限', () => {
   const options = { visitAllowed: true, guaranteed: false, capped: false, story: 0, mechanism: 0 };
-  it.each([[0, 'visit'], [0.099999, 'visit'], [0.1, 'story'], [0.169999, 'story'], [0.17, 'mechanism'], [0.209999, 'mechanism'], [0.21, 'normal'], [0.99, 'normal']] as const)('%s 落在 %s 独立区间', (roll, expected) => {
+  it.each([[0, 'visit'], [0.129999, 'visit'], [0.13, 'story'], [0.259999, 'story'], [0.26, 'mechanism'], [0.329999, 'mechanism'], [0.33, 'normal'], [0.99, 'normal']] as const)('%s 落在 %s 独立区间', (roll, expected) => {
     expect(dreamDialogueCategory(roll, options)).toBe(expected);
   });
   it('点击不来访，满额后新增 45% 上限区间，耗尽概率不重抽其他稀有分支', () => {
     expect(dreamDialogueCategory(0.01, { ...options, visitAllowed: false })).toBe('normal');
-    expect(dreamDialogueCategory(0.21, { ...options, visitAllowed: false, capped: true })).toBe('limit');
-    expect(dreamDialogueCategory(0.659999, { ...options, visitAllowed: false, capped: true })).toBe('limit');
-    expect(dreamDialogueCategory(0.66, { ...options, visitAllowed: false, capped: true })).toBe('normal');
-    expect(dreamDialogueCategory(0.12, { ...options, story: 2, capped: true })).toBe('normal');
-    expect(dreamDialogueCategory(0.18, { ...options, mechanism: 1, capped: true })).toBe('normal');
+    expect(dreamDialogueCategory(0.33, { ...options, visitAllowed: false, capped: true })).toBe('limit');
+    expect(dreamDialogueCategory(0.779999, { ...options, visitAllowed: false, capped: true })).toBe('limit');
+    expect(dreamDialogueCategory(0.78, { ...options, visitAllowed: false, capped: true })).toBe('normal');
+    expect(dreamDialogueCategory(0.2, { ...options, story: 2, capped: true })).toBe('normal');
+    expect(dreamDialogueCategory(0.3, { ...options, mechanism: 1, capped: true })).toBe('normal');
     expect(dreamDialogueCategory(0.99, { ...options, guaranteed: true })).toBe('visit');
   });
   it('树点击与浇灌共用剧情两次、机制一次；同一库无放回', () => {
     const { game, random } = setup(); drain(game);
-    random.mockReturnValue(0.12); game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\dQ$/); const first = game.getSnapshot().speech!.entry.id; drain(game);
+    random.mockReturnValue(0.2); game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\dQ$/); const first = game.getSnapshot().speech!.entry.id; drain(game);
     game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\dQ$/); expect(game.getSnapshot().speech!.entry.id).not.toBe(first); drain(game);
     game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\d\d$/); drain(game);
-    random.mockReturnValue(0.18); game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^X/); drain(game);
+    random.mockReturnValue(0.3); game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^X/); drain(game);
     game.talk(); expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\d\d$/); drain(game);
     expect(game.getSnapshot().save.dialogueCounts.A).toEqual({ story: 2, mechanism: 1 });
     expect(game.getSnapshot().save.pendingVisits).toEqual([]);
-    random.mockReturnValue(0.12); expect(game.water()).toBe(true); vi.advanceTimersByTime(1400);
+    random.mockReturnValue(0.2); expect(game.water()).toBe(true); vi.advanceTimersByTime(1400);
     expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\d\d$/);
   });
   it('浇灌触发来访只选该阶段一句，树点击不会预约，最多两访', () => {
@@ -142,18 +142,18 @@ describe('互斥概率与次数上限', () => {
     expect(game.getSnapshot().save.pendingVisits).toEqual([]);
     random.mockReturnValue(0.01); expect(game.water()).toBe(false); vi.advanceTimersByTime(600); expect(game.getSnapshot().speech?.entry.id).toMatch(/^C\d\d$/); drain(game);
     random.mockReturnValue(0.15); game.water(); vi.advanceTimersByTime(600); expect(game.getSnapshot().speech?.entry.id).toMatch(/^C\dQ$/); drain(game);
-    random.mockReturnValue(0.18); game.water(); vi.advanceTimersByTime(600); expect(game.getSnapshot().speech?.entry.id).toMatch(/^X/); drain(game);
+    random.mockReturnValue(0.3); game.water(); vi.advanceTimersByTime(600); expect(game.getSnapshot().speech?.entry.id).toMatch(/^X/); drain(game);
     random.mockReturnValue(0.4); game.water(); vi.advanceTimersByTime(600); expect(game.getSnapshot().speech?.entry.id).toMatch(/^L/);
     expect(game.getSnapshot().save.growth).toBe(STAGES.C.growth.end); expect(game.getSnapshot().save.dew).toBe(8); expect(game.getSnapshot().save.pendingVisits).toEqual([]);
   });
   it('已预定的剧情 / 普通句刷新恢复，不消耗额外一次抽签或重复扣露', () => {
-    const first = setup(); drain(first.game); first.random.mockReturnValue(0.12); first.game.water();
+    const first = setup(); drain(first.game); first.random.mockReturnValue(0.2); first.game.water();
     const pending = first.game.getSnapshot().save.pendingWaterings[0]; const decks = first.game.getSnapshot().save.dialogueDecks; first.game.stop();
     const restored = setup('A', {}, SCHEDULE[5].at, first.storage);
     until(() => restored.game.getSnapshot().event?.type === 'watering');
     expect(restored.game.getSnapshot().speech?.entry.id).toBe(pending.dialogueId);
     expect(restored.game.getSnapshot().save.dialogueDecks['A/story']).toEqual(decks['A/story']);
-    expect(restored.game.getSnapshot().save.dialogueCounts.A?.story).toBe(1); expect(restored.game.getSnapshot().save.growth).toBe(13); expect(restored.game.getSnapshot().save.dew).toBe(0);
+    expect(restored.game.getSnapshot().save.dialogueCounts.A?.story).toBe(1); expect(restored.game.getSnapshot().save.growth).toBe(20); expect(restored.game.getSnapshot().save.dew).toBe(0);
   });
   it('最后一行淡出时再次点击不会复用待播编号吞掉新回应', () => {
     const { game } = setup(); drain(game); game.talk();
@@ -185,8 +185,8 @@ describe('进入、待机、转场与祝福双句', () => {
     game.openPanel('settings'); vi.advanceTimersByTime(120000); expect(game.getSnapshot().speech).toBeNull(); game.closePanel();
     vi.advanceTimersByTime(59999); expect(game.getSnapshot().speech).toBeNull(); vi.advanceTimersByTime(1); expect(game.getSnapshot().speech?.entry.id).toMatch(/^I/);
   });
-  it('同批次等于上限不转段，再浇超过后加载；结束才播目标段 Z，刷新不重抽', () => {
-    const first = setup('A', { growth: 210, completedVisits: ['visit-A', 'visit-A-2'] }, SCHEDULE[0].at); drain(first.game);
+  it('同批次等于上限不转段，补浇不增长后加载；结束才播目标段 Z，刷新不重抽', () => {
+    const first = setup('A', { growth: 180, completedVisits: ['visit-A', 'visit-A-2'] }, SCHEDULE[0].at); drain(first.game);
     expect(first.game.getSnapshot().stageLoading).toBeNull(); first.clock.value = Date.parse(SCHEDULE[1].at); first.game.tick(); expect(first.game.getSnapshot().stageLoading).toBeNull();
     first.game.water(); until(() => first.game.getSnapshot().stageLoading !== null);
     const selected = first.game.getSnapshot().save.pendingDialogues.find((entry) => entry.kind === 'transition')!;
@@ -197,8 +197,8 @@ describe('进入、待机、转场与祝福双句', () => {
     restored.game.stageArtworkReady(loading.id, loading.artId); restored.game.stageSceneReady(loading.id, 'B'); until(() => restored.game.getSnapshot().stageLoading === null);
     expect(restored.game.getSnapshot().speech?.entry.id).toBe(selected.lines[0]); expect(restored.game.getSnapshot().speech?.anchor).toBe('tree'); expect(restored.game.getSnapshot().save.sceneStage).toBe('B');
   });
-  it.each(['A', 'B', 'C', 'D', 'E', 'F'] as const)('%s 严格越界后完成加载才播放目标段转场，最终梦醒同样适用', (stage) => {
-    const { game } = setup(stage, { growth: STAGES[stage].growth.end + 1, completedVisits: [...stageFixture(stage, Date.parse(SCHEDULE[5].at)).completedVisits, `visit-${stage}`, `visit-${stage}-2`] });
+  it.each(['A', 'B', 'C', 'D', 'E', 'F'] as const)('%s 完成收据后加载才播放目标段转场，最终梦醒同样适用', (stage) => {
+    const { game } = setup(stage, { growth: STAGES[stage].growth.end, completedStages: [...DREAM_STAGES.slice(0, DREAM_STAGES.indexOf(stage) + 1)], completedVisits: [...stageFixture(stage, Date.parse(SCHEDULE[5].at)).completedVisits, `visit-${stage}`, `visit-${stage}-2`] });
     until(() => game.getSnapshot().stageLoading?.phase === 'loading');
     const loading = game.getSnapshot().stageLoading!;
     expect(game.getSnapshot().speech).toBeNull();

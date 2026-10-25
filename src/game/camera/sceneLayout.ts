@@ -3,10 +3,12 @@ import type { CharacterVariant } from '../../data/assets';
 import { VISIT_EMITTERS, VISIT_PLACEMENTS } from '../../data/visits';
 import { dialogueWidth } from '../../data/dialogueLayout';
 import type { DreamStageId } from '../../types/game';
+import { treeCrown } from '../tree/model';
+import { treeGrowthStep } from '../tree/growth';
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 
-export function dreamLayout(width: number, height: number, scale: number, treeHeight: number, cameraOffset: number, groundRoot = height - 40 - 100 * scale, variant: CharacterVariant = 'dream', visitStage: DreamStageId = 'A', position: 0 | 1 = 0) {
+export function dreamLayout(width: number, height: number, scale: number, treeHeight: number, cameraOffset: number, groundRoot = height - 40 - 100 * scale, variant: CharacterVariant = 'dream', visitStage: DreamStageId = 'A', position: 0 | 1 = 0, growth = 0) {
   const center = width / 2;
   const root = groundRoot + cameraOffset;
   const crown = root - treeHeight * scale;
@@ -24,7 +26,8 @@ export function dreamLayout(width: number, height: number, scale: number, treeHe
     : compact ? height - characterHeight - 20 : clamp(root - characterHeight - 28, 100, height - characterHeight - 70);
   const characterTop = placement.side === 'left' ? clamp(baseTop - height * placement.elevation, 92, height - characterHeight - 20) : clamp(baseTop - height * placement.elevation, 92, height - characterHeight - (compact ? 62 : 75));
   const treeBubbleWidth = dialogueWidth(width, height);
-  const treeBubbleLeft = clamp(center + 44 * scale + 30, 20, width - treeBubbleWidth - 65);
+  const crownBounds = treeCrown(treeGrowthStep(growth), visitStage === 'E' || visitStage === 'F');
+  const treeBubbleLeft = clamp(center + (crownBounds.x - 500 + crownBounds.radiusX) * scale + 24, 20, width - treeBubbleWidth - 65);
   const characterBubbleWidth = treeBubbleWidth;
   const beside = variant !== 'dream';
   const bubbleRight = beside && placement.side === 'left' && (compact || characterLeft < characterBubbleWidth + 24);

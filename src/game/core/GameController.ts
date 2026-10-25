@@ -15,7 +15,9 @@ import { DEFAULT_DEW_VIEWPORT, isDewPositionSafe, placeDew, placeRewardDew } fro
 import type { DewObstacle, DewViewport } from '../dew/placement';
 import { EncounterDirector } from '../encounters/EncounterDirector';
 import { ENCOUNTER_RULES, FESTIVAL_ARANARA } from '../../data/inhabitants';
-import { stageVisitIds, visitGrowth } from '../../data/visits';
+import { stageVisitIds, visitGrowth, visitGrowthCap } from '../../data/visits';
+import { treeGrowthDuration, treeGrowthStep } from '../tree/growth';
+import { randomDewValue } from '../dew/value';
 import { DIALOGUE_RULES, dialogueEntry, transitionDialoguePool } from '../../data/dialogues';
 import { drawDialogue, drawUnplayedDialogue, dreamDialogueCategory } from '../dialogue/DialogueSystem';
 import { ExpressionDirector } from '../expressions/ExpressionDirector';
@@ -145,11 +147,11 @@ export class GameController {
       const batches = new Set(patch.dewParticles.flatMap((particle) => particle.portions?.map((portion) => portion.batch) ?? []));
       for (const [batch, timer] of this.rewardLifetimes) if (!batches.has(batch)) { timer.clear(); this.rewardLifetimes.delete(batch); }
     }
-    const grew = patch.growth !== undefined && patch.growth !== this.snapshot.growth;
+    const growthMs = patch.growth === undefined ? 0 : treeGrowthDuration(this.snapshot.growth, patch.growth);
     this.snapshot = { ...this.snapshot, ...patch };
     if (!('expression' in patch)) {
       this.syncExpressions();
-      if (grew && this.active) this.expressions.grew();
+      if (growthMs && this.active) this.expressions.grew(growthMs);
     }
     this.listeners.forEach((listener) => listener());
   }
@@ -278,7 +280,8 @@ export class GameController {
     const eligible = getActiveStage(this.snapshot.save, this.time);
     const restoreScene = restore || this.restoringScene && this.suspended && !this.snapshot.stageLoading;
     const stage = restoreScene ? getSceneStage(this.snapshot.save, this.time) : stageOrder(eligible) < stageOrder(this.snapshot.stage) ? eligible : this.snapshot.stage;
-    const growth = Math.min(this.snapshot.save.growth, this.time.getGate().cap, STAGES[stage].growth.end + 1);
+    const allowedGrowth = Math.min(this.snapshot.save.growth, this.time.getGate().cap, STAGES[stage].growth.end);
+    const growth = this.snapshot.mode === 'watering' && !restoreScene ? Math.min(this.snapshot.growth, allowedGrowth) : allowedGrowth;
     this.update({ stage, growth, now: this.time.now() });
     this.syncEncounters();
     this.syncDialogueIdle();
@@ -396,8 +399,9 @@ export class GameController {
     const ids = stageVisitIds(stage);
     const seen = ids.some((id) => save.completedVisits.includes(id) || save.pendingVisits.includes(id));
     const counts = save.dialogueCounts[stage] ?? { story: 0, mechanism: 0 };
-    const guaranteed = !seen && STAGES[stage].growth.end - growth <= GAME_RULES.growthPerWatering;
-    const visitAllowed = !clicked && !capped && this.time.isOpen(stage) && ids.some((id) => !save.completedVisits.includes(id) && !save.pendingVisits.includes(id));
+    const remaining = visitGrowthCap(stage, this.time.getGate().cap) - growth;
+    const guaranteed = !seen && remaining > 0 && remaining <= GAME_RULES.growthPerWatering;
+    const visitAllowed = !clicked && !capped && remaining > 0 && this.time.isOpen(stage) && ids.some((id) => !save.completedVisits.includes(id) && !save.pendingVisits.includes(id));
     let category = dreamDialogueCategory(this.random(), { visitAllowed, guaranteed, capped, ...counts });
     if (category === 'visit' && this.scheduleVisit(stage, guaranteed, watering)) return;
     if (category === 'visit') category = 'normal';
@@ -466,9 +470,11 @@ export class GameController {
     if (phase === 'bloom' && !(extra ? this.secretBlessed.has(event.id) : this.snapshot.save.blessedVisits.includes(event.id))) {
       const save = this.snapshot.save;
       if (extra) this.secretBlessed.add(event.id);
-      this.commit({ growth: visitGrowth(event.stage, save.growth, this.time.getGate().cap, !extra && save.guaranteedVisits.includes(event.id)), blessedVisits: extra ? save.blessedVisits : [...save.blessedVisits, event.id] });
+      const growth = visitGrowth(event.stage, save.growth, this.time.getGate().cap);
+      const animated = treeGrowthStep(growth) > treeGrowthStep(this.snapshot.growth);
+      this.commit({ growth, ...this.boundaryPatch(event.stage, growth), blessedVisits: extra ? save.blessedVisits : [...save.blessedVisits, event.id] });
       this.refreshProgress();
-      this.update({ growthRevision: this.snapshot.growthRevision + 1 });
+      if (animated) this.update({ growthRevision: this.snapshot.growthRevision + 1 });
     }
     this.update({ blessing: { id: event.id, stage: event.stage, phase } });
   }
@@ -540,7 +546,7 @@ export class GameController {
     if (!position) return;
     const particle = {
       id: ++this.particleSequence, ...position,
-      value: 2 + Math.floor(this.random() * 3), collected: false,
+      value: randomDewValue(this.random), collected: false,
     };
     this.update({ dewParticles: [...this.snapshot.dewParticles, particle] });
     const timer = new PausableTimer();
@@ -581,8 +587,10 @@ export class GameController {
     }
     const targets = added.length ? added : particles.filter((particle) => particle.kind === 'reward' && !particle.collected && !particle.expiring).map((particle) => ({ ...particle, portions: particle.portions?.slice() }));
     if (!targets.length) return false;
+    const values = targets.map(() => 0);
+    for (let index = 0; index < ENCOUNTER_RULES.rewardParticles; index++) values[index % targets.length] += randomDewValue(this.random);
     for (let index = 0; index < targets.length; index++) {
-      const value = Math.floor(ENCOUNTER_RULES.rewardValue / targets.length) + (index < ENCOUNTER_RULES.rewardValue % targets.length ? 1 : 0);
+      const value = values[index];
       targets[index].value += value; targets[index].portions = [...(targets[index].portions ?? []), { batch, value }];
     }
     const merged = added.length ? [...particles, ...targets] : particles.map((particle) => targets.find((target) => target.id === particle.id) ?? particle);
@@ -631,8 +639,10 @@ export class GameController {
     if (this.snapshot.mode !== 'idle' || this.suspended || this.snapshot.reviewStage || this.snapshot.stage === 'G') return false;
     this.activity();
     const stage = this.snapshot.stage;
-    if (this.snapshot.growth > STAGES[stage].growth.end && getActiveStage(this.snapshot.save, this.time) !== stage) return false;
-    const result = calculateWatering(this.snapshot.growth, this.snapshot.save.dew, Math.min(STAGES[stage].growth.end + 1, this.time.getGate().cap));
+    if (getActiveStage(this.snapshot.save, this.time) !== stage) return false;
+    const next = DREAM_STAGES[DREAM_STAGES.indexOf(stage) + 1];
+    const advanceOnly = this.snapshot.growth >= STAGES[stage].growth.end && (!next || this.time.isOpen(next));
+    const result = calculateWatering(this.snapshot.growth, this.snapshot.save.dew, Math.min(STAGES[stage].growth.end, this.time.getGate().cap), advanceOnly);
     if (!result.ok) {
       if (result.reason === 'insufficient') this.signalDew('insufficient');
       else {
@@ -649,15 +659,19 @@ export class GameController {
     this.interruptTreeReplies();
     this.update({ mode: 'watering', message: '', dewFeedback: null });
     this.emitSound('water');
+    const animated = treeGrowthStep(result.growth) > treeGrowthStep(this.snapshot.growth);
+    const growingMs = treeGrowthDuration(this.snapshot.growth, result.growth);
     const count = (this.snapshot.save.wateringCounts[stage] ?? 0) + 1;
-    const watering = { growth: result.growth, dew: result.dew, wateringCounts: { ...this.snapshot.save.wateringCounts, [stage]: count } };
+    const watering = { growth: result.growth, dew: result.dew, wateringCounts: { ...this.snapshot.save.wateringCounts, [stage]: count }, ...this.boundaryPatch(stage, result.growth, true) };
     this.respondDream(stage, watering);
     this.enqueueWaterings();
     this.playWateringReply();
     this.refreshProgress();
     this.cultivation.schedule(() => {
-      this.update({ mode: 'growing', growthRevision: this.snapshot.growthRevision + 1 });
-      this.cultivation.schedule(() => { this.update({ mode: 'idle' }); this.reconcile(); }, this.duration(GAME_RULES.growingMs));
+      this.update({ mode: animated ? 'growing' : 'idle', ...(animated ? { growthRevision: this.snapshot.growthRevision + 1 } : {}) });
+      this.refreshProgress();
+      if (animated) this.cultivation.schedule(() => { this.update({ mode: 'idle' }); this.reconcile(); }, this.duration(growingMs));
+      else this.reconcile();
     }, this.duration(GAME_RULES.wateringMs));
     return true;
   }
@@ -689,6 +703,16 @@ export class GameController {
 
   private enqueue(event: QueuedEvent) {
     if (!this.isDone(event) && this.snapshot.event?.id !== event.id && !this.queue.some((entry) => entry.id === event.id)) this.queue.push(event);
+  }
+
+  private boundaryPatch(stage: DreamStageId, growth: number, watered = false): Partial<GameSave> {
+    const next = DREAM_STAGES[DREAM_STAGES.indexOf(stage) + 1];
+    if (growth < STAGES[stage].growth.end || (next ? !this.time.isOpen(next) : !watered)) return {};
+    const save = this.snapshot.save;
+    return {
+      completedStages: [...new Set([...save.completedStages, stage])],
+      watchedStories: stage === 'F' ? save.watchedStories : [...new Set([...save.watchedStories, STAGES[stage].ending.id])],
+    };
   }
 
   private advanceBoundaries() {
@@ -763,7 +787,7 @@ export class GameController {
       this.beginStageLoading(target);
       return;
     }
-    if (this.snapshot.stage === 'F' && this.snapshot.growth > STAGES.F.growth.end && this.time.isOpen('F') && this.speech.canVisit && !this.queue.length) this.beginAwakening();
+    if (this.snapshot.stage === 'F' && this.snapshot.growth >= STAGES.F.growth.end && this.snapshot.save.completedStages.includes('F') && this.time.isOpen('F') && this.speech.canVisit && !this.queue.length) this.beginAwakening();
   }
 
   private beginStageLoading(to: StageId) {
@@ -954,7 +978,7 @@ export class GameController {
       const retained = this.snapshot.dewParticles.filter((particle) => particle.kind !== 'rainstorm');
       const positions = placeRainstorm(this.dewViewport, retained, this.random);
       if (positions.length !== EASTER_RULES.rainCount) return null;
-      const particles = positions.map((position) => ({ id: ++this.particleSequence, ...position, value: 2 + Math.floor(this.random() * 3), collected: false, kind: 'rainstorm' as const }));
+      const particles = positions.map((position) => ({ id: ++this.particleSequence, ...position, value: randomDewValue(this.random), collected: false, kind: 'rainstorm' as const }));
       this.update({ dewParticles: [...retained, ...particles] });
       if (this.snapshot.presentationPaused) this.pendingRainSound = true;
       else this.emitSound('rainstorm');

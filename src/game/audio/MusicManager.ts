@@ -1,6 +1,8 @@
 import assets from '../../data/music.generated.json' with { type: 'json' };
 import type { StageId } from '../../types/game';
 import { PausableTimer } from '../core/PausableTimer';
+import { cachedMusicSource } from './musicCache';
+import type { MusicSource } from './musicCache';
 
 export const MUSIC_RULES = { entryGapMs: 8000, loopGapMs: 12000, fadeInMs: 1800, fadeOutMs: 2200, sceneFadeMs: 1200, pauseFadeMs: 350, volume: 0.45 } as const;
 export type MusicPhase = 'silent' | 'blocked' | 'waiting' | 'loading' | 'buffering' | 'playing' | 'paused' | 'error';
@@ -33,8 +35,9 @@ export class MusicManager {
   private ending = false;
   private playSequence = 0;
   private starting: number | null = null;
+  private trackSource: MusicSource | null = null;
 
-  constructor(private readonly getContext: () => AudioContext | null, private readonly createAudio = () => new Audio()) {}
+  constructor(private readonly getContext: () => AudioContext | null, private readonly createAudio = () => new Audio(), private readonly prepareSource = cachedMusicSource) {}
 
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => this.listeners.delete(listener); };
   getSnapshot = () => this.state;
@@ -111,6 +114,16 @@ export class MusicManager {
     finally { this.warming = false; if (this.unlocked) this.sync(); }
   }
 
+  async requestPlay() {
+    if (this.disposed || !this.wanted()) return;
+    this.gap.clear(); this.gapScheduled = false; this.ready = true;
+    if (this.failed) { this.failed = false; this.resetSource(); }
+    await this.unlock();
+    if (this.disposed) return;
+    this.ready = true;
+    this.sync();
+  }
+
   private sync() {
     const release = this.loaded !== this.options.stage;
     this.gap.setPaused(!this.wanted() || !this.unlocked || this.failed);
@@ -149,7 +162,10 @@ export class MusicManager {
     this.publish('loading');
     try {
       if (this.loaded !== stage) {
-        this.media.src = assets.tracks[stage].src; this.loaded = stage;
+        const source = await this.prepareSource(assets.tracks[stage].src);
+        if (sequence !== this.playSequence || !this.wanted()) { source.release(); return; }
+        this.trackSource = source;
+        this.media.src = source.src; this.loaded = stage;
         this.media.load();
       }
       this.ending = false; this.setVolume(0);
@@ -238,6 +254,7 @@ export class MusicManager {
 
   private resetSource() {
     if (this.media) { this.media.pause(); this.media.removeAttribute('src'); this.media.load(); }
+    this.trackSource?.release(); this.trackSource = null;
     this.loaded = null; this.ending = false;
   }
 

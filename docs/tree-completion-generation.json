@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "tool": "built-in image_gen",
+  "purpose": "Complete cropped E/F tree assets without changing source growth timelines",
+  "jobs": [
+    {
+      "name": "tree6",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent 2D game tree sprite, completion of a cropped image, NOT a scene or a sprite sheet.\nInput image 1 is the EDIT TARGET, tree6: a silver-white Irminsul tree with icy cyan glowing grain and pale lavender/pink shadows. Its upper branches were cut by the upper image border. Preserve the existing lower trunk, root footprint, intertwined wood ribbons, asymmetric branch structure, rendering style and lighting. Extend and complete the missing upper branches into a graceful naturally tapered crown of BARE branches. Do not add foliage: the game supplies animated leaves separately. Do not turn it into a new species or a symmetrical logo.\nComposition/registration: portrait canvas, original target's root base near 96% canvas height; preserve original lower tree approximately within x=3%..97%, y=27%..98%. Use the added upper quarter to resolve ALL flat-cut branches into continuous forks and fine tapered tips. Keep width and trunk thickness of the lower original portion; no giant new trunk. Entire completed silhouette must fit with a small transparent margin at every edge. Delicate ivory/silver wood, thin cyan luminous veins, softly painted lavender shadows and pink rim light exactly matching the target. True transparent RGBA background, no ground, no scenery, no text, no border, no checkerboard, no repeated leaf rosettes, no floating fragments. One continuous complete tree skeleton.",
+      "inputs": [
+        "C:/Users/guoxu/Desktop/10.27纳西妲浇灌世界树生贺企划/asserts/world-tree-redraw/tree6.png"
+      ],
+      "originalRegion": {
+        "x": 0,
+        "y": 0.27,
+        "width": 1,
+        "height": 0.73
+      },
+      "output": {
+        "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-e268357d-7e73-4e1b-831f-c1ec1bdcc5cd.png",
+        "raw": "asserts/world-tree-completed/tree6.png"
+      }
+    },
+    {
+      "name": "tree7",
+      "prompt": "Use case: precise-object-edit.\nAsset type: a single transparent 2D game tree sprite; complete the cut-off tree7 image, not a scene or sprite sheet.\nImage 1 is the edit target. Its thick ivory/silver intertwined trunk, cyan glowing wood grain, lavender shadow, pink highlights and spreading roots must be preserved. The TOP of its central trunk and many upper branches are cut off. Continue those cut branches upwards into a natural BARE branching crown, with gracefully narrowing forks and intact fine tips. Original side branches and root silhouette should remain recognizable and continuous. Do NOT paste leaf rosettes on the cut edge. The game animates its leaves as separate sprites: no leaves on this tree.\nFraming: extend the original canvas upwards by roughly 45% of its original height, adding transparent space at the sides if necessary. Keep the existing trunk/root region at the original scale within the lower approximately 65% of the new canvas; the added upper portion supplies the missing tree. Overall silhouette should be broader and sturdier than tree6, not a thin sapling, not an indefinitely tall tree. Fit every tip with a small transparent margin; no horizontal cuts at the top or sides. Match original painted fantasy-game style and delicate luminous silver/cyan palette exactly. Genuinely transparent background; no terrain, scenery, extra objects, text, outlines, watermark, checkerboard, repeated clusters or a second tree.",
+      "inputs": [
+        "C:/Users/guoxu/Desktop/10.27纳西妲浇灌世界树生贺企划/asserts/world-tree-redraw/tree7.png"
+      ],
+      "output": {
+        "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-19c0c4d4-a65a-4cf9-828b-5e94151b49e4.png",
+        "raw": "asserts/world-tree-completed/tree7.png"
+      }
+    },
+    {
+      "name": "tree8",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent painted 2D game tree sprite, a completion of a cut-off tree, no background.\nImage 1 (tree8) is the EDIT TARGET: thick silver-white intertwined trunk with luminous cyan grain, lavender shadow and soft pink rim light. Keep the existing roots, trunk girth and the recognizable lower left and right branch architecture. Its upper trunk is abruptly cut by the border. Extend it UPWARD into a continuous, graceful tree whose broad BARE branching crown is complete. All cut limbs must taper naturally through branching forks; no flat endings, stumps, sawn surfaces or visible join. Use an expanded canvas above the original, roughly as much additional height as the original tree image. Retain the original trunk/root region at the same proportions in the lower half. The entire tree should have a broad balanced silhouette, organic asymmetry, not an extremely slender tall trunk. Leave clear transparent margins around every branch tip and root.\nArt invariants: exact original pearlescent ivory / silver bark, icy cyan thin luminous veins, lilac shadows, fine painterly fantasy-game detail. No foliage because this intermediate sprite receives leaves separately through existing animation. No copied rosettes, no new objects, no scenery, no terrain, no text or watermark. A single complete connected tree skeleton on true RGBA transparency.",
+      "inputs": [
+        "C:/Users/guoxu/Desktop/10.27纳西妲浇灌世界树生贺企划/asserts/world-tree-redraw/tree8.png"
+      ],
+      "output": {
+        "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-8ece2025-a0ee-4c38-b5e5-d3e9db076236.png",
+        "raw": "asserts/world-tree-completed/tree8.png"
+      }
+    },
+    {
+      "name": "tree9",
+      "prompt": "Use case: precise-object-edit.\nAsset type: one finished transparent 2D Irminsul world-tree game sprite.\nImage 1 is the EDIT TARGET, tree9: the cropped final, mature silver-white intertwined tree trunk and wide spreading roots. It is currently a flat-cut stump because the top half is missing. Complete this into ONE organically connected fully visible mature world-tree, with a branching crown and its OWN beautifully integrated broad umbrella of luminous pale cyan, mint-silver, and subtle blush leaves. This final tree must have foliage because the original game's final animation hides the separate leaf sprites. Do not place separate round leaf rosettes in a row at the cut edge; this must read as a complete living tree, with continuous tapering branches emerging from the original braided trunk into overlapping natural foliage masses of small pointed leaves. Thick sculpted pearl/ivory silver wood, thin cyan luminous grain, lilac shadows and warm pink edge light exactly as in image 1. Airy gently arched crown, organic asymmetric clusters, same softly painted fantasy-game finish, no harsh outlines.\nRegistration/framing: expand the canvas upwards and sideways. Preserve the original lower trunk and root shape, thickness, spiraling grain and root-to-trunk proportions in the lower half of the full image. The new upper half is the missing branching crown. Root base near the lower edge but leave a transparent margin. All leaf tips and roots fully inside canvas, no cuts or sawed-off branches. Overall silhouette should be broad and majestic but compact, not an infinitely tall tree. Actual transparent RGBA background. No scenery, sky, soil, ground shadow, pedestal, text, watermark, border, scattered effects, extra trees or characters.",
+      "inputs": [
+        "C:/Users/guoxu/Desktop/10.27纳西妲浇灌世界树生贺企划/asserts/world-tree-redraw/tree9.png"
+      ],
+      "output": {
+        "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-d99bc9d0-71a1-4d31-b242-873ae23e19bf.png",
+        "raw": "asserts/world-tree-completed/tree9.png"
+      }
+    },
+    {
+      "name": "leafbunch3",
+      "prompt": "Use case: precise-object-edit.\nAsset type: single transparent game foliage sprite, completing leafbunch3.\nImage 1 is the edit target, an iridescent mint/cyan/silver leaf canopy fringe whose entire top was chopped flat. Complete the missing upper foliage as a coherent gently domed, asymmetric branchless cluster with naturally layered pointed leaves. Keep the visible lower hanging leaves and recognizable cyan gradient, pale mint/ivory highlights, delicate pastel pink accents and luminous painterly texture. Add the missing upper arc of foliage rather than repeating little round rosettes along a horizontal seam. This sprite must be a whole, elegant foliage mass, no straight cut edge. The lower edge remains irregular with tapering individual leaves. WIDE composition, roughly twice as wide as high. The complete silhouette must have at least 5% genuinely transparent clear margin on ALL FOUR sides, especially the TOP; shrink it to fit if necessary. No visible trunk, no flower, no landscape, no ground, no text or watermark. Real RGBA transparent background, no checkerboard or opaque glow rectangle.",
+      "inputs": [
+        "C:/Users/guoxu/Desktop/10.27纳西妲浇灌世界树生贺企划/asserts/world-tree-redraw/leafbunch3.png"
+      ],
+      "output": {
+        "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-139f92ab-db17-4877-a467-65844659f87b.png",
+        "raw": "asserts/world-tree-completed/leafbunch3.png"
+      }
+    },
+    {
+      "name": "tree9-growth",
+      "asset": "tree9_growth",
+      "reference": "asserts/world-tree-redraw/tree9.png",
+      "registrationScale": 1.2,
+      "prompt": "Use case: precise-object-edit.\nAsset type: one transparent 2D game tree skeleton sprite, a leafless variant for separately animated foliage.\nInput image 1 is the EDIT TARGET, the completed mature silver/cyan/pink world-tree. Remove ONLY its painted foliage, revealing and finishing the connected branching wood that supports that foliage. Keep the existing lower intertwined trunk, visible major branch curves, spreading root footprint, pearl ivory/silver bark, thin cyan luminous veins, lilac shadows and soft pink rim lighting as unchanged as possible. Do not redesign, relocate or slim the trunk and roots. Keep the image's same framing and proportions, root base and branch-crown outline positions, with every tip inside the transparent canvas. Where leaves previously hid wood, continue the existing major branches naturally into fine gracefully tapered twigs following the existing crown silhouette. This is a full, continuous, graceful BARE mature tree, not a stump, not a new species, not a short sapling, not a leaf collage.\nThe game will grow separate bud, leaf and leaf-cluster sprites onto this wood; therefore absolutely NO leaves, flowers, hanging objects, particle effects, ground or scenery. Exactly match the existing softly painted luminous fantasy-game art style. One tree on genuinely transparent RGBA background, no checkerboard, no opaque glow rectangle, no text, watermark or border.",
+      "inputs": [
+        "C:/Users/guoxu/Desktop/10.27纳西妲浇灌世界树生贺企划/asserts/world-tree-completed/tree9.png"
+      ],
+      "output": {
+        "source": "C:\\Users\\guoxu\\.codex\\generated_images\\01a13e71-2378-7cf1-b0d5-392d6f3531bb\\exec-027552e7-bec6-4eef-b954-27e90e6c8932.png",
+        "raw": "asserts/world-tree-completed/tree9-growth.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+.dream-tree:focus-visible .tree-hit-target { fill: #dff7e5; fill-opacity: .12; stroke: #ecf9df; stroke-width: 2; }
+@media (forced-colors: active) {
+  .dream-tree:focus-visible .tree-hit-target { fill: Highlight; stroke: Highlight; }
+}

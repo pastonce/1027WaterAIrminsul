@@ -8,7 +8,6 @@ import { SaveManager, SAVE_KEYS } from '../src/game/save/SaveManager';
 import { TimeGateService } from '../src/game/time/TimeGateService';
 import { MemoryStorage, TestClock, testGame, startScene } from './support';
 import type { GameSave, StageId } from '../src/types/game';
-import { STAGES } from '../src/data/stages';
 import { openingSpinStop, OPENING_SPIN } from '../src/game/opening/choreography';
 
 const OPEN = Date.parse('2026-10-27T10:27:00+08:00');
@@ -49,12 +48,12 @@ describe('隐藏彩蛋代码与隔离测试', () => {
     expect(game.easterEgg('Nidaha')).toBeTruthy(); expect(game.getSnapshot().nahidaPlaceholder).toBe(true);
     expect(game.easterEgg('NIDAHA')).toBeTruthy(); expect(game.getSnapshot().nahidaPlaceholder).toBe(false);
   });
-  it('四十颗额外梦露独立三分钟，已存最多13、部分收取保留原寿命，设置暂停', () => {
-    const { game } = setup('C', { dew: 12 });
+  it('四十颗额外梦露独立三分钟，已存最多1027、部分收取保留原寿命，设置暂停', () => {
+    const { game } = setup('C', { dew: 1026 });
     expect(game.easterEgg('Rainstorm')).toBeTruthy();
     const drops = game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'rainstorm'); expect(drops).toHaveLength(40);
     const drop = drops[0]; game.collectDew(drop.id);
-    expect(game.getSnapshot().save.dew).toBe(13);
+    expect(game.getSnapshot().save.dew).toBe(1027);
     expect(game.getSnapshot().dewParticles.find((particle) => particle.id === drop.id)?.value).toBe(drop.value - 1);
     expect(game.collectDew(drop.id)).toBe(false);
     vi.advanceTimersByTime(100000); game.openPanel('settings'); vi.advanceTimersByTime(200000);
@@ -72,12 +71,12 @@ describe('隐藏彩蛋代码与隔离测试', () => {
     expect(drops.some((particle) => original.includes(particle.id))).toBe(false); expect(drops.filter((particle) => !particle.kind)).toEqual(ordinary);
     game.easterEgg('Nidaha'); game.reset(); expect(game.getSnapshot().dewParticles).toEqual([]); expect(game.getSnapshot().nahidaPlaceholder).toBe(false);
   });
-  it('额外来访不占两次自然来访收据，仍演出并赠原段1/10成长', () => {
+  it('额外来访不占两次自然来访收据，仍演出并赠固定20成长', () => {
     const { game } = setup('C', { completedVisits: ['visit-A', 'visit-B', 'visit-C', 'visit-C-2'], blessedVisits: ['visit-C', 'visit-C-2'] });
     const before = game.getSnapshot().save;
     expect(game.easterEgg('Nahida')).toBeTruthy();
     vi.advanceTimersByTime(25000);
-    expect(game.getSnapshot().save.growth).toBeCloseTo(before.growth + (STAGES.C.growth.end - STAGES.C.growth.start) / 10);
+    expect(game.getSnapshot().save.growth).toBeCloseTo(before.growth + 20);
     expect(game.getSnapshot().save.completedVisits).toEqual(before.completedVisits);
     expect(game.getSnapshot().save.blessedVisits).toEqual(before.blessedVisits);
     expect(game.getSnapshot().save.pendingVisits).toEqual(before.pendingVisits);

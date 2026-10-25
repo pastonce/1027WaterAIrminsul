@@ -23,7 +23,7 @@ afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 
 function setup(patch: Partial<GameSave> = {}, initialRoll = 0.99, clock = new TestClock()) {
   const storage = new MemoryStorage();
-  storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(clock.now()), introSeen: true, dew: 13, ...patch }));
+  storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(clock.now()), introSeen: true, dew: 20, ...patch }));
   let roll = initialRoll;
   const game = new GameController(new TimeGateService(clock), new SaveManager(storage), () => roll);
   startScene(game);
@@ -35,18 +35,18 @@ function until(condition: () => boolean) {
   expect(condition()).toBe(true);
 }
 
-describe('十成之一抽选、单次保底与两次上限', () => {
-  it.each([0, 0.099999, 0.1, 0.99])('随机值 %s 严格按 0.1 分界，不使用第三 / 第六次保底', (roll) => {
+describe('13%抽选、单次保底与两次上限', () => {
+  it.each([0, 0.129999, 0.13, 0.99])('随机值 %s 严格按 0.13 分界，不使用第三 / 第六次保底', (roll) => {
     const { game } = setup({ growth: 26, wateringCounts: { A: 2 } }, roll);
-    game.water(); expect(game.getSnapshot().save.pendingVisits).toHaveLength(roll < 0.1 ? 1 : 0); game.stop();
+    game.water(); expect(game.getSnapshot().save.pendingVisits).toHaveLength(roll < 0.13 ? 1 : 0); game.stop();
   });
 
-  it('倒数第二浇保底仅一次，E 剩余 12 也由祝福直接补满，不再第二次保底', () => {
+  it('倒数第二浇保底仅一次，E 剩余20由固定祝福补满，不再第二次保底', () => {
     const clock = new TestClock(Date.parse(SCHEDULE[4].at));
     const fixture = stageFixture('E', clock.now());
-    const { game } = setup({ ...fixture, growth: STAGES.E.growth.end - 25, wateringCounts: { E: 6 }, playedDialogues: [...fixture.playedDialogues, STAGES.E.transition.id] }, 0.99, clock);
+    const { game } = setup({ ...fixture, growth: STAGES.E.growth.end - 40, wateringCounts: { E: 6 }, playedDialogues: [...fixture.playedDialogues, STAGES.E.transition.id] }, 0.99, clock);
     expect(game.getSnapshot().save.pendingVisits).toEqual([]); game.water();
-    expect(game.getSnapshot().save.growth).toBe(STAGES.E.growth.end - 12); expect(game.getSnapshot().save.guaranteedVisits).toEqual(['visit-E']);
+    expect(game.getSnapshot().save.growth).toBe(STAGES.E.growth.end - 20); expect(game.getSnapshot().save.guaranteedVisits).toEqual(['visit-E']);
     until(() => game.getSnapshot().save.completedVisits.includes('visit-E'));
     expect(game.getSnapshot().save.growth).toBe(STAGES.E.growth.end); expect(game.getSnapshot().save.dew).toBe(0);
     vi.advanceTimersByTime(30000); expect(game.getSnapshot().save.completedVisits.filter((id) => id.startsWith('visit-E'))).toEqual(['visit-E']); game.stop();
@@ -82,8 +82,8 @@ describe('对白后的祝福、暂停与刷新事务', () => {
     }
   });
 
-  it.each(['A', 'B', 'C', 'D', 'E', 'F'] as const)('%s 普通祝福精确增加阶段总需求的 1/10，不消耗梦露', (stage) => {
-    expect(STAGES[stage].visit.chance).toBe(0.1);
+  it.each(['A', 'B', 'C', 'D', 'E', 'F'] as const)('%s 普通祝福精确增加固定20，不消耗梦露', (stage) => {
+    expect(STAGES[stage].visit.chance).toBe(0.13);
     const clock = new TestClock(Date.parse(SCHEDULE[5].at)); const fixture = stageFixture(stage, clock.now());
     const { game } = setup({ ...fixture, playedDialogues: [...fixture.playedDialogues, STAGES[stage].transition.id] }, 0.99, clock);
     let channelAt: number | undefined;
@@ -92,15 +92,15 @@ describe('对白后的祝福、暂停与刷新事务', () => {
     expect(game.getSnapshot().save.growth).toBe(fixture.growth); expect(game.getSnapshot().speech).toBeNull();
     vi.advanceTimersByTime(channelAt! + PRESENTATION_RULES.blessingTravelMs - Date.now() - 1); expect(game.getSnapshot().save.growth).toBe(fixture.growth);
     vi.advanceTimersByTime(1);
-    expect(game.getSnapshot().save.growth).toBe(Math.round((fixture.growth + (STAGES[stage].growth.end - STAGES[stage].growth.start) / 10) * 10) / 10);
-    expect(game.getSnapshot().save.dew).toBe(13); unsubscribe(); game.stop();
+    expect(game.getSnapshot().save.growth).toBe(fixture.growth + 20);
+    expect(game.getSnapshot().save.dew).toBe(20); unsubscribe(); game.stop();
   });
 
   it('聚光可暂停，恢复到达后只结算一次，停留开始后树对白 / 浇灌均可用', () => {
     const { game } = setup(); game.requestVisit(); until(() => game.getSnapshot().blessing?.phase === 'channel');
     vi.advanceTimersByTime(500); game.openPanel('settings'); vi.advanceTimersByTime(30000);
     expect(game.getSnapshot().save.growth).toBe(0); expect(game.getSnapshot().blessing?.phase).toBe('channel'); game.closePanel();
-    vi.advanceTimersByTime(1000); expect(game.getSnapshot().save.growth).toBe(21); expect(game.getSnapshot().save.blessedVisits).toEqual(['visit-A']);
+    vi.advanceTimersByTime(1000); expect(game.getSnapshot().save.growth).toBe(20); expect(game.getSnapshot().save.blessedVisits).toEqual(['visit-A']);
     vi.advanceTimersByTime(900); expect(game.getSnapshot().blessing).toBeNull(); expect(game.getSnapshot().companion).toBe('observe');
     game.talk(); expect(game.getSnapshot().speech?.anchor).toBe('tree'); expect(game.water()).toBe(true); game.stop(); expect(vi.getTimerCount()).toBe(0);
   });
@@ -108,14 +108,14 @@ describe('对白后的祝福、暂停与刷新事务', () => {
   it('光流中刷新恢复未结算祝福，落点后刷新不再重复赠送', () => {
     const { game, clock, storage } = setup(); game.requestVisit(); until(() => game.getSnapshot().blessing?.phase === 'channel'); game.stop();
     const restored = new GameController(new TimeGateService(clock), new SaveManager(storage), () => 0.99); startScene(restored);
-    until(() => restored.getSnapshot().blessing?.phase === 'bloom'); expect(restored.getSnapshot().save.growth).toBe(21); restored.stop();
+    until(() => restored.getSnapshot().blessing?.phase === 'bloom'); expect(restored.getSnapshot().save.growth).toBe(20); restored.stop();
     const completed = new GameController(new TimeGateService(clock), new SaveManager(storage), () => 0.99); startScene(completed);
-    until(() => completed.getSnapshot().save.completedVisits.includes('visit-A')); expect(completed.getSnapshot().save.growth).toBe(21);
+    until(() => completed.getSnapshot().save.completedVisits.includes('visit-A')); expect(completed.getSnapshot().save.growth).toBe(20);
     expect(completed.getSnapshot().blessing).toBeNull(); completed.stop();
   });
 
   it('只补所属阶段余量、不跨日期；权限收回、退出与重置不会由旧回调发奖', () => {
-    expect(visitGrowth('A', 208, 210, false)).toBe(210); expect(visitGrowth('B', 220, 210, false)).toBe(220);
+    expect(visitGrowth('A', 178, 180)).toBe(180); expect(visitGrowth('B', 220, 180)).toBe(220);
     const context = setup(); context.game.requestVisit(); until(() => context.game.getSnapshot().blessing?.phase === 'channel');
     context.clock.value = Date.parse(SCHEDULE[0].at) - 1; context.game.tick(); vi.advanceTimersByTime(10000);
     expect(context.game.getSnapshot().save.growth).toBe(0); expect(context.game.getSnapshot().blessing).toBeNull(); context.game.stop();
@@ -135,7 +135,7 @@ describe('对白后的祝福、暂停与刷新事务', () => {
     game.requestVisit(); until(() => game.getSnapshot().blessing?.phase === 'channel'); game.openPanel('journal'); game.review('A');
     expect(game.getSnapshot().blessing).toBeNull(); expect(game.getSnapshot().companion).toBeNull();
     vi.advanceTimersByTime(30000); expect(game.getSnapshot().save.growth).toBe(fixture.growth);
-    game.review(null); until(() => game.getSnapshot().save.blessedVisits.includes('visit-B')); expect(game.getSnapshot().save.growth).toBe(visitGrowth('B', fixture.growth, STAGES.B.growth.end, false)); game.stop();
+    game.review(null); until(() => game.getSnapshot().save.blessedVisits.includes('visit-B')); expect(game.getSnapshot().save.growth).toBe(visitGrowth('B', fixture.growth, STAGES.B.growth.end)); game.stop();
   });
 });
 
@@ -146,7 +146,7 @@ describe('每阶段两处姿态与气泡布局', () => {
     for (const position of [0, 1] as const) {
       const layout = dreamLayout(844, 390, 0.43, STAGES[stage].height.start, 0, undefined, VISIT_FORMS[stage] ?? 'dream', stage, position);
       expect(layout).not.toHaveProperty('characterFlipped'); expect(layout.characterEmission).toEqual(anchor);
-      const markup = renderToStaticMarkup(createElement(DendroBlessing, { width: 844, height: 390, scale: 0.43, root: 330, treeHeight: STAGES[stage].height.start, character: layout.character, emitter: layout.characterEmission, phase: 'channel', paused: false, reduced: false }));
+      const markup = renderToStaticMarkup(createElement(DendroBlessing, { width: 844, height: 390, scale: 0.43, root: 330, treeHeight: STAGES[stage].height.start, growth: STAGES[stage].growth.start, character: layout.character, emitter: layout.characterEmission, phase: 'channel', paused: false, reduced: false }));
       const start = `M${layout.character.left + layout.character.width * layout.characterEmission.x} ${layout.character.top + layout.character.height * layout.characterEmission.y}C`;
       expect(markup).toContain(`d="${start}`); expect(markup.split(start)).toHaveLength(12);
     }
@@ -157,7 +157,7 @@ describe('每阶段两处姿态与气泡布局', () => {
     expect(source.equals(published)).toBe(true); expect(createHash('sha256').update(source).digest('hex')).toBe(DENDRO_ICON.sha256);
     expect(source.readUInt32BE(16)).toBe(64); expect(source.readUInt32BE(20)).toBe(64);
     for (const reduced of [false, true]) {
-      const markup = renderToStaticMarkup(createElement(DendroBlessing, { width: 844, height: 390, scale: 0.43, root: 300, treeHeight: 140, character: { left: 460, top: 100, width: 180, height: 180 }, phase: 'channel', paused: false, reduced }));
+      const markup = renderToStaticMarkup(createElement(DendroBlessing, { width: 844, height: 390, scale: 0.43, root: 300, treeHeight: 140, growth: 100, character: { left: 460, top: 100, width: 180, height: 180 }, phase: 'channel', paused: false, reduced }));
       expect(markup.match(/class="blessing-dendro-icon"/g)).toHaveLength(1); expect(markup).toContain(DENDRO_ICON.src);
       expect(markup.match(/class="blessing-pattern-piece"/g)).toHaveLength(16); expect(markup).toContain('blessing-lattice');
       expect(markup).not.toMatch(/blessing-source|blessing-focus-frame|blessing-circuit|blessing-data-packet|center_emblem/);

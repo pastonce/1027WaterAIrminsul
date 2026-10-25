@@ -39,12 +39,12 @@ describe('来访中一次追加对白', () => {
     until(() => game.getSnapshot().speech?.entry.id === extra.dialogueId);
     expect(game.getSnapshot().expression).toMatchObject({ asset: extra.expression, anchor: 'nahida' });
     const grown = game.getSnapshot().save.growth;
-    expect(grown).toBeCloseTo(STAGES[stage].growth.start + (stage === 'A' ? 0 : 1) + (STAGES[stage].growth.end - STAGES[stage].growth.start) / 10, 1);
+    expect(grown).toBeCloseTo(STAGES[stage].growth.start + 20, 1);
     expect(game.getSnapshot().save.completedVisits).toContain(`visit-${stage}`);
     game.water(); expect(game.getSnapshot().speech?.entry.id).toBe(extra.dialogueId);
     until(() => game.getSnapshot().save.visitLines[`visit-${stage}`].followup?.read === true);
     expect(game.getSnapshot().save.blessedVisits.filter((id) => id === `visit-${stage}`)).toHaveLength(1);
-    expect(game.getSnapshot().save.growth).toBeCloseTo(grown + 13);
+    expect(game.getSnapshot().save.growth).toBeCloseTo(grown + 20);
     until(() => !game.getSnapshot().companion);
     expect(game.talkToCompanion()).toBe(false);
   });

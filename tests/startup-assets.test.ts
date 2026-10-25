@@ -17,6 +17,12 @@ const choices = completeLoadingArtChoices({}, () => .99);
 const simple: StartupPlan = { id: 'unit', dynamic: false, bytes: 12, files: [1, 2, 3, 4].map((id) => ({ url: `/file-${id}.png`, bytes: 3 })) };
 
 describe('开场集中预载计划', () => {
+  it.each(['A', 'C', 'F', 'G'] as const)('仅将当前%s曲目优先加入真实下载进度，其他六首不预载', (stage) => {
+    const plan = startupPlan(choices, 1440, 900, 1, false, stage);
+    const music = plan.files.filter((file) => file.url.endsWith('.m4a'));
+    expect(music).toEqual([{ url: MUSIC_ASSETS.tracks[stage].src, bytes: catalog.files[MUSIC_ASSETS.tracks[stage].src as keyof typeof catalog.files] }]);
+    expect(plan.files[0]).toEqual(music[0]);
+  });
   it.each([{ width: 1440, height: 900 }, { width: 844, height: 390 }])('$width×$height 仅选一种转场规格、排除BGM和罕用字、不创建所有场景', ({ width, height }) => {
     const plan = startupPlan(choices, width, height, 1, false);
     const urls = plan.files.map((file) => file.url);

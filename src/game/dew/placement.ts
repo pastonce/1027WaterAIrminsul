@@ -1,11 +1,12 @@
 import type { DewParticle } from '../../types/game';
+import { TREE_MAX_HALF_WIDTH } from '../../data/treeArt';
 
 export interface DewObstacle { left: number; top: number; width: number; height: number }
 export interface DewViewport { width: number; height: number; scale: number; blocked?: readonly DewObstacle[] }
 export interface DewPosition { x: number; y: number }
 interface SpawnRegion { left: number; right: number; top: number; bottom: number }
 
-export const TREE_BODY_HALF_WIDTH = 330;
+export const TREE_BODY_HALF_WIDTH = TREE_MAX_HALF_WIDTH;
 export const DEW_RADIUS = 26;
 const PARTICLE_SPACING = 60;
 export const DEFAULT_DEW_VIEWPORT: DewViewport = { width: 1200, height: 800, scale: 1 };

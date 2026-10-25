@@ -26,11 +26,11 @@ export class ExpressionDirector {
     } else if (interruptTree && this.playback?.anchor === 'tree') this.dismiss();
   }
 
-  grew() {
+  grew(milliseconds = 1200) {
     if (!this.stage || this.stage === 'G') return;
     this.settling = true; this.idle.setPaused(true);
     if (this.playback?.anchor === 'tree') this.dismiss();
-    this.growth.schedule(() => { this.settling = false; this.idle.setPaused(!this.eligible); }, 1200);
+    this.growth.schedule(() => { this.settling = false; this.idle.setPaused(!this.eligible); }, milliseconds);
   }
 
   private armIdle() {

@@ -9,7 +9,7 @@ async function walk(directory) {
   for (const entry of (await readdir(directory, { withFileTypes: true })).sort((first, second) => first.name.localeCompare(second.name, 'en'))) {
     const path = resolve(directory, entry.name);
     if (entry.isDirectory()) { await walk(path); continue; }
-    if (!/\.(?:png|jpe?g|webp|svg|json|atlas|woff2)$/i.test(entry.name) || path.includes(`${sep}music${sep}`)) continue;
+    if (!/\.(?:png|jpe?g|webp|svg|json|atlas|woff2|m4a)$/i.test(entry.name)) continue;
     const bytes = await readFile(path);
     const url = '/' + relative(root, path).split(sep).join('/');
     const sha256 = createHash('sha256').update(bytes).digest('hex');

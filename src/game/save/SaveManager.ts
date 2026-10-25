@@ -20,7 +20,7 @@ export const SAVE_KEYS = { player: 'irminsul.player.v2', development: 'irminsul.
 
 export function createSave(now = Date.now()): GameSave {
   return {
-    version: 2, growth: 0, dew: 0, seed: 1027, introSeen: false, sceneStage: 'A', loadingArtChoices: {},
+    version: 2, growthRulesVersion: 2, growth: 0, dew: 0, seed: 1027, introSeen: false, sceneStage: 'A', loadingArtChoices: {},
     completedStages: [], completedVisits: [], pendingVisits: [], visitPositions: {}, guaranteedVisits: [], blessedVisits: [], pendingWaterings: [], watchedStories: [], unlockedSecrets: [], playedDialogues: [], wateringCounts: {}, claimedAranara: [],
     dialogueDecks: {}, dialogueCounts: {}, dialogueSequence: 0, pendingDialogues: [], visitLines: {},
     endingComplete: false, nightComplete: false,
@@ -36,11 +36,14 @@ export function validateSave(input: unknown): GameSave {
   const source = record(input);
   if (typeof source.version === 'number' && source.version > 2) throw new Error('future-version');
   const fresh = createSave();
-  const growth = typeof source.growth === 'number' && Number.isFinite(source.growth) ? Math.round(Math.max(0, Math.min(STAGES.F.growth.end + 1, source.growth)) * 10) / 10 : 0;
+  let growth = typeof source.growth === 'number' && Number.isFinite(source.growth) ? Math.round(Math.max(0, Math.min(STAGES.F.growth.end, source.growth)) * 10) / 10 : 0;
+  const legacyCaps = [210, 313, 520, 725, 814, 1027];
   const claimed = validList(source.completedStages, [...DREAM_STAGES]);
   const completedStages: GameSave['completedStages'] = [];
   for (const stage of DREAM_STAGES) {
-    if (!claimed.includes(stage) || growth < STAGES[stage].growth.end) break;
+    const cap = source.growthRulesVersion === 2 ? STAGES[stage].growth.end : Math.min(STAGES[stage].growth.end, legacyCaps[DREAM_STAGES.indexOf(stage)]);
+    if (!claimed.includes(stage) || growth < cap) break;
+    growth = Math.max(growth, STAGES[stage].growth.end);
     completedStages.push(stage);
   }
   const settings = record(source.settings);

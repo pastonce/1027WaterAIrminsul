@@ -1,5 +1,7 @@
 # 本地预览、校时与发布
 
+世界树public/asserts/tree/保留62份哈希WebP，当前仍24组件单档；tree9_growth无叶成熟变体替代旧烘焙冠，连续展叶复用原叶图，不双份下载。treeAssets.generated.json、treeGrowth.generated.json及tree/timeline.ts / foliage.ts随src上传；原完整轨迹204,133B不改，叶片按成长重建、不新增存档。原25张PNG与六张E/F变体均保留在asserts/；大原图 / 8192图集无需部署。本地assets:tree和assets:tree-growth不加入云端prebuild，提示词 / 哈希和现有服务端上传规则保持，见TREE_SYSTEM.md / STARTUP_ASSETS.md。
+
 公告收据 `irminsul.notice.seen.v1` 与 v2 独立，首次加载 / 揭幕完成后才自动显示，清网站数据才恢复首次状态。Birthday 使用按输入加载的小分块 / 私有内存进度，不依赖修改服务器、账号或数据库；正常校时 API 仍必须发布，不可用静态 JSON 替代。
 
 ## 声明正文更新
@@ -27,7 +29,7 @@ npm install
 npm run dev
 ```
 
-开发客户端仍使用独立的模拟时钟和测试存档，默认 2026-10-25 10:27，适合提前测试后期内容。不会使用校时结果覆盖开发面板设置。 时间表以 project_prompt.md §4 为准：25 日 10:27 A→B→C（210 / 313 / 520），26 日 10:27 D→E（725 / 814），27 日 10:27 F（1027），G 在最终梦醒后进入。均为北京时间，同批权限仍逐段推进；整页权限上限为 0→520→814→1028，祝福不越所属段。
+开发客户端仍使用独立的模拟时钟和测试存档，默认 2026-10-25 10:27，适合提前测试后期内容。不会使用校时结果覆盖开发面板设置。 时间表以 project_prompt.md 最新交互修订（§七十四）为准：25 日 10:27 A→B→C（180 / 340 / 520），26 日 10:27 D→E（680 / 840），27 日 10:27 F（1027），G 在最终梦醒后进入。均为北京时间，同批权限仍逐段推进；整页权限上限为 0→520→840→1027，祝福不越所属段。
 
 ```sh
 npm run build
@@ -90,7 +92,7 @@ Pages Git构建：根目录本项目、Node24、命令 `npm run build`、输出 
 7. 补取的 forest/index_light.jpg、canopy/full_NPC.json / atlas / png、canopy/ground.png / ground.geometry.json，以及本轮 dunes/abd_smoke_diffuse.jpg、sanctuary/loading_flowMap.jpg 都必须随 public 副本进入 dist；dunes/mainview_caihong.png 也需携带。运行时不访问原站，不执行补取脚本。核对无全屏遮暗、A 入场可暂停续播且不阻断、B 左下 / 右侧飞沙和光晕 / 红色流动、D 下方流雾，以及横屏 / 减少动态终态。最新实际测试结果见 TEST_PLAN.md，原站差异见 BACKGROUND_FIDELITY.md，不代替线上真机验收。
 8. 冷缓存 / 热缓存点击入梦，开场到首帧不改变缩放；树苗先在画面下方，按原方式自动下移后出现在倒木前，慢加载不提前出现。核对普通梦露 5 秒、奖励梦露 60 秒后过期不可收，设置 / 后台 / 竖屏暂停剩余时间，已存梦露不被清空。这是表现寿命，不是服务器日期权限。
 9. 携带 `public/asserts/inhabitants/` 的 51 份三件套、17 张透明 poster，以及五套背景目录下的 hiding-band-* 和 A 的 hiding-light-1.webp。素材登记在 `docs/inhabitants/manifest.json`，43 份派生资源登记在 `hiding-layers.json`；改背景遮挡层次后运行 assets:hiding-layers 与 assets:hiding-calibration，仅改藏点坐标只需后者。本轮 C ground 上移 40 世界单位，重导静态分带 / poster；遮挡槽与藏点姿态不变、沿用校准。A / C / D / F 为 dream / wave / bouquet / swing，B / E、G 保持既有；角色全部 4.0。随机兰那罗共享背景原 GL 穿插，C 背景仍 4.1；常驻 / 晶蝶额外一个透明画布，不逐只建上下文。
-10. 复核来访每浇 0.1、单段最多两次、未抽中则倒数第二浇一次兜底补满，非强制两次；对白后随机 3～7 秒停留。每套六个分散物件点 + 四周点、真实遮挡、普通物件跳出钻回和中心散露，左右屏缘领奖腾空直出、不回落。复验 A1 / A2、C3 / C4 渐显及下方离屏、C6 渐显，D / E 的 1 / 2 / 6 短程柔和进退，C4 / C6 不被导航遮挡；树体透明空白须穿透、命中随实际高度变化。F 四常驻刷新不重复领；奖励不计七颗但已存不超 13，满额留场，飞行 / 退场 / 60 秒寿命可暂停。晶蝶成长 100 前不出现，之后按种子随机树高逐只新增、旧位置不变。减少动态 / 无 GL / 丢失恢复仍可点击，A 静态加色光不能出现暗色块。v2 与短时奖励不跨刷新规则不变；不得在正式站开启调试，见 INHABITANTS.md。
+10. 复核来访每浇 0.13、单段最多两次、未抽中则倒数第二浇一次兜底赠20，非强制两次；对白后随机 3～7 秒停留。每套六个分散物件点 + 四周点、真实遮挡、普通物件跳出钻回和中心散露，左右屏缘领奖腾空直出、不回落。复验 A1 / A2、C3 / C4 渐显及下方离屏、C6 渐显，D / E 的 1 / 2 / 6 短程柔和进退，C4 / C6 不被导航遮挡；树体透明空白须穿透、命中随实际高度变化。F 四常驻刷新不重复领；奖励不计七颗但已存不超1027，满额留场，飞行 / 退场 / 60 秒寿命可暂停。晶蝶成长 100 前不出现，之后按种子随机树高逐只新增、旧位置不变。减少动态 / 无 GL / 丢失恢复仍可点击，A 静态加色光不能出现暗色块。v2 与短时奖励不跨刷新规则不变；不得在正式站开启调试，见 INHABITANTS.md。
 11. 携带 loading/seven-elements.webp、loading/art/ 十一图双档、backgrounds/reality/ 和 ui/ 哈希 icon PNG / dialogue JPEG，登记见 page-assets.manifest.json。复核只取已选单规格、cover 铺满不留白 / CD2 右对齐，七元素原位置叠于插图，插图 / 新景双确认后解锁；失效白底。后台 / 省流量不预取，刷新 choices / sceneStage 保持，不重扣 / 重赠。
 12. 携带 `music.generated.json` 对应七个 M4A、`ui/music-button-*.png` 与 `fonts.generated.json` 对应两份 WOFF2；哈希见 music / font manifest，禁止把原 MP3 / TTF / `.asset-work/` 全量发布。音乐 M4A 按 `audio/mp4`、支持 Range / 206；WOFF2 用 `font/woff2`，哈希文件可长期缓存，HTML 不永久缓存。build 读取已生成副本，发布机无需 FFmpeg / fontTools；替换源文件先本地生成、检查派生。核对手势授权、G 曲目、按钮旋转 / 暂停、曲间留白与直接设置；音频失败不阻断游戏，见 AUDIO_AND_FONTS.md，音效数据包另见后项。
 

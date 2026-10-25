@@ -1,6 +1,14 @@
 # 正式素材替换指南
 
-当前开场统一下载本设备所需压缩资源与六张已选转场图，不预先创建未来场景实例；BGM流式、扩展字体按需。`assets:startup` 生成大小 / 哈希清单，`release:audit` 检查发布包。全部原始 asserts/ 保留，GitHub 需要自动对白与生日来信两份 Markdown 及 public/ 派生资源；见 STARTUP_ASSETS.md、DEPLOYMENT.md。
+E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原15处与原48处UV / 排程，另补48处真实外梢 / 二级枝端，不把簇继续堆在粗主干。新增48处在grow36实际cut后统一弹出正常嫩芽，再由leafAt在grow37～48每轮四处跨左右 / 高低舒叶，下一浇立即成簇；与旧48排程交错而非先两侧后中间。芽宽16～22、单叶36～54世界单位，新增小簇75～115；不出现超大单叶。旧身份 / 原63点不变，四body追加点均按真实PNG alpha≥230及发布outline校准；叶柄 / 簇承接点始终绑定当前实际木枝UV，随原完整仿射回弹，仅原attachment切图时同步延伸。单site单当前附件、无opacity生长或长期双图；芽 / 叶原0.5秒、簇原0.25秒，完整保留cut后播放时间与唯一GSAP游标。C/D校正、A/B不改、480半宽、grow51保留111处与最后7点矩阵完全不变，无新图片 / 网络 / Canvas / GL / RAF / 存档。原31稿 / 62份哈希WebP与24张单档不变，校准点位不得通过透明光晕取代实际木枝。
+
+## 世界树重绘
+
+最新枝叶复用原部件：C/D含grow17共享入口校正当前body叶柄，原附件 / 回弹保持；E/F为15继承点＋原48新枝＋新增48细梢，共111稳定site。原63UV / 旧48排程保持，新增点在grow36 cut后带芽、leafAt37～48每轮四处均匀舒叶，下一浇成簇。尺寸 / 排程在foliagePlan.ts，111点UV在foliageLayout.ts，模板与时长不变；无新图片 / 原稿修改或预载文件，逐浇 / 实测见TREE_SEQUENCE_REVIEW.md / TEST_PLAN.md。
+
+原24部件、旧长干及五张完整补绘均保留。为独立连续展叶，内置image_gen另从完整tree9生成去叶不改根干风格的tree9-growth.png（1,936,276B），原图不覆盖；提示词 / 输入 / 输出在tree-completion-generation.json，原稿及发布SHA在tree-assets.manifest.json。共31原稿 / 62份哈希WebP（4,551,386B），当前预载仍24张单档（桌面1,870,506B / 横屏1,131,772B），无叶成熟变体替代烘焙冠、其他叶图复用，不下载新旧两图。六份E/F透明变体共9,829,350B；本地assets:tree派生压缩、alpha / 中心线及根部注册，assets:tree-growth仅提取原轨迹，不加入云端prebuild，见TREE_SYSTEM.md。
+
+当前开场统一下载本设备所需压缩资源与六张已选转场图，不预先创建未来场景实例；仅当前BGM压缩预载、其余曲目和扩展字体按需。`assets:startup` 生成大小 / 哈希清单，`release:audit` 检查发布包。全部原始 asserts/ 保留，GitHub 需要自动对白与生日来信两份 Markdown 及 public/ 派生资源；见 STARTUP_ASSETS.md、DEPLOYMENT.md。
 
 ## 生日来信
 
@@ -42,9 +50,9 @@
 | 纳西妲草纹气泡底图 | `ui/dialogue-840.*.jpg` | dialog.jpg 原字节，约 66%～74% 浅层 / 墨绿字，仅草纹主题；G 用户 / 回复采用庆典框 |
 | 五套气泡装饰 | `DialogueOrnament.tsx`、`dialogue-themes.css` | 草元素徽记复用既有 effects/dendro.png，其余含糖果 / 缎带 / 花为小型静态 SVG，无新增图片 / 原稿改写 |
 | 十张表情气泡 | `public/asserts/expressions/`、expressionAssets.generated.json | asserts/表情包 0～9.png 原字节哈希副本，340px 透明图，合计 1,288,382 B，单次只请求选中单图；assets:expressions 再生成，独立 expression-assets.manifest.json |
-| 生长树 | `geometry.ts` 与 `TreeRenderer.tsx` | 确定性程序 SVG |
+| 生长树 | `public/asserts/tree/`、`tree/timeline.ts`、`leafAnchors.ts`、`foliagePlan.ts`、`foliageTiming.ts`与`TreeRenderer.tsx` | 原木质轨迹；C/D叶柄校准，E/F15继承+96新枝共111site，原48排程与新增48末梢leafAt交错，沿枝延伸 / 原秒数回弹 / 单site单附件，真实alpha命中、24张单档，见TREE_SYSTEM.md |
 | 森林轮廓、梦露、花瓣 | React / CSS / Canvas | 自绘占位；小生物现用登记的真实素材 |
-| 花朵 | `TreeRenderer.tsx` | 五片椭圆花瓣，已移除心形轮廓 |
+| 树冠装饰 | 原智慧树叶 / 簇附件、C/D校准叶柄与E/F63语义枝位 | A/B至grow16不改，C/D保持原槽附件并贴枝；E/F按原秒数模板逐次切图 / 沿枝延伸，内外冠错落重叠，无额外程序花朵或同site长期叠图 |
 | 交互音效 | `public/asserts/sfx/*-*.json`、sounds.generated.json、SoundManager.ts | 七份 AAC-LC / MP4、96 kb/s / 48 kHz 单声道，以 JSON / base64 兼容 IDM，约 196 KiB；水滴 / 浇水 / 叶声 / 弹跳 / 传送 / 来访竖琴 / 短暴雨，按动作请求，共用 BGM 上下文；来源 / 授权 / 双哈希见 sfx-assets.manifest.json，署名随 CREDITS.txt 发布 |
 | A～G 音乐 | `public/asserts/music/*.m4a`、music.generated.json | 同名 MP3 派生 AAC-LC 192 kb/s / 48 kHz 双声道，七首约 19.20 MB，仅当前场景流式加载；music-assets.manifest.json 登记哈希 |
 | 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 205,092 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
@@ -125,17 +133,17 @@ F 保留源 2400×1350 设计，相机中心 `(0, 0)`，14 张纹理未重压；
 
 不要用一张完整巨树图片在每个阶段缩小替换。保留真实高度、旧枝条 ID、历史印记和镜头关系，可把树干分段、枝叶簇与树冠改成手绘 SVG 或透明贴图。
 
-`createSkeleton(seed)` 定义稳定的枝条位置；`trunkPath(height)` 决定分段树干，`TreeRenderer` 只负责视觉。请保持第一片嫩叶和自由枝条对应的历史标记。若改世界高度，统一修改阶段 `height`，并让画布覆盖最高点与树冠的额外空间。
+主树木质仍由treeGrowth.generated.json原骨骼 / 附件及完整轨迹控制；C/D的leafAnchors.ts仅校正叶柄平移，保留原附件与线性回弹。E/F由foliage.ts接续15处并新增96处，foliagePlan.ts管理birth / leafAt / 宽度、foliageLayout.ts管理四图111点UV，沿对应木枝延伸。嫩芽grow25 / leaf4_1、大叶grow35 / leaf1_3、簇1 grow37 / bunch1_3、簇2 grow38 / bunch2与宽簇3 grow46 / bunch3_1保留原0.5 / 0.25秒；foliageTiming.ts统一max(body,delay+clip)，不压缩换干后的回弹。单site单当前附件，model.ts统一真实alpha命中，TreeRenderer共享原GSAP游标；grow49无源轨，250ms复用原簇。换图后assets:tree、原骨架变化后assets:tree-growth，再复验逐浇 / 过程 / 叶柄连接、速度、透明穿透、表情 / 祝福和晶蝶；stages.height从实际包络派生，不反向拉伸树体。无新资源 / 存档，维护见TREE_SYSTEM.md。
 
 命中仅使用当前绘制的树干 / 根 / 枝叶 / 花朵，跟随动画高度；SVG 空白、光晕和未显现叶片穿透。替换美术时同步适配可见几何命中，不恢复全高矩形或加宽透明路径，不以缩裁视口改变树的视觉变换原点；保留键盘和拖动镜头。
 
-梦露为树体保留半宽 330 世界单位及额外触摸间隔，配置在 `game/dew/placement.ts`。替换枝叶、树冠或增加横向大幅动画后，必须同步校准包络，并在根部、冠部和手机横屏验证梦露没有覆盖新美术。
+梦露为重绘树保留共享半宽480世界单位及触摸间隔，常量在data/treeArt.ts，由game/dew/placement.ts使用。替换枝叶、树冠或增加横向摆动后同步校准包络，复验根冠和手机横屏。
 
 可供后续生图的提示词：
 
 > 横屏幻想森林梦境，须弥草木与植物纹饰，青绿色薄雾、柔和淡金光束、暖白萤火，细腻手绘二次元游戏背景，画面中心留白放置可生长的小树，前景两侧深色草叶与树干框景，宁静温柔，层次清楚，无人物、无文字、无标志，16:9。
 
-> 透明背景的幻想古树枝叶组件，清透黄绿色叶片、温润浅金树皮、须弥式植物纹理，二次元手绘游戏插画，单独树干段、左右枝条、叶簇、花簇分开构图，正面视角，柔和光照，无背景、无字、无角色；保持统一比例，用于纵向连续拼接巨树。
+当前树不再用旧浅金树皮 / 黄绿叶占位提示词；准确执行的逐件银白木质 / 青蓝叶簇 / 粉白高光提示词与输入角色见tree-art-prompts.json，不用完整背景或假透明底代替部件。
 
 这些只是提示词；本轮未生成或假装接入外部生图文件。
 

@@ -71,7 +71,7 @@ test('生产包显示草元素图标与扫描框，服务器权限下祝福结�
   expect((await page.request.get('/asserts/effects/e-skill-frame.png')).ok()).toBe(true);
   await page.clock.fastForward(1500);
   const result = await page.evaluate(() => JSON.parse(localStorage.getItem('irminsul.player.v2')!));
-  const expected = visitGrowth('C', save.growth, STAGES.C.growth.end, false);
+  const expected = visitGrowth('C', save.growth, STAGES.C.growth.end);
   expect(result.growth).toBe(expected); expect(result.dew).toBe(13); expect(result.blessedVisits).toContain('visit-C');
   await page.reload(); await finishOpening(page, true); await page.clock.fastForward(3500); expect(await page.evaluate(() => JSON.parse(localStorage.getItem('irminsul.player.v2')!).growth)).toBe(expected);
   await expect(page.locator('.debug-panel, .growth-meter, .story-overlay')).toHaveCount(0);

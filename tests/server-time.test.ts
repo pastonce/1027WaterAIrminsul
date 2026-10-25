@@ -63,7 +63,7 @@ describe('服务器时间与离线权限', () => {
     expect(options).toMatchObject({ method: 'GET', cache: 'no-store', credentials: 'same-origin' });
   });
 
-  it.each([...new Set(SCHEDULE.map((entry) => entry.at))].map((at) => ({ name: at, boundary: Date.parse(at), cap: SCHEDULE.filter((entry) => entry.at === at).at(-1)!.cap + (at === SCHEDULE[5].at ? 1 : 0) })))('$name 批次边界仅在服务器确认后开放', async ({ boundary, cap }) => {
+  it.each([...new Set(SCHEDULE.map((entry) => entry.at))].map((at) => ({ name: at, boundary: Date.parse(at), cap: SCHEDULE.filter((entry) => entry.at === at).at(-1)!.cap })))('$name 批次边界仅在服务器确认后开放', async ({ boundary, cap }) => {
     const context = setup(boundary - 1);
     await context.start();
     const previous = context.time.getGate();
@@ -97,14 +97,14 @@ describe('服务器时间与离线权限', () => {
     context.server(Date.parse(SCHEDULE[3].at));
     await vi.advanceTimersByTimeAsync(TIME_SYNC_RULES.retryMs);
     expect(context.fetchTime).toHaveBeenCalledTimes(3);
-    expect(context.time.getGate().cap).toBe(814);
+    expect(context.time.getGate().cap).toBe(840);
   });
 
   it('同页离线继续已开放的成长，刷新后不从本地存档恢复日期权限', async () => {
     const context = setup();
     await context.start();
     const storage = new MemoryStorage();
-    storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(), introSeen: true, growth: 13, dew: 13 }));
+    storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(), introSeen: true, growth: 20, dew: 20 }));
     const game = new GameController(context.time, new SaveManager(storage), () => 0.99);
     cleanups.push(() => game.stop());
     game.start();
@@ -112,7 +112,7 @@ describe('服务器时间与离线权限', () => {
     await context.clock.synchronize();
     context.tick(7 * 86400000);
     expect(game.water()).toBe(true);
-    expect(game.getSnapshot().save.growth).toBe(26);
+    expect(game.getSnapshot().save.growth).toBe(40);
     expect(game.getSnapshot().save.dew).toBe(0);
     game.stop();
     const reloaded = setup();
@@ -122,10 +122,10 @@ describe('服务器时间与离线权限', () => {
     cleanups.push(() => restored.stop());
     restored.start();
     expect(restored.getSnapshot().growth).toBe(0);
-    expect(restored.getSnapshot().save.growth).toBe(26);
+    expect(restored.getSnapshot().save.growth).toBe(40);
     expect(restored.water()).toBe(false);
     expect(restored.getSnapshot().mode).toBe('intro');
-    expect(restored.getSnapshot().save.growth).toBe(26);
+    expect(restored.getSnapshot().save.growth).toBe(40);
     expect(restored.getSnapshot().save.dew).toBe(0);
   });
 

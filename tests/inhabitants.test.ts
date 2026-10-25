@@ -7,7 +7,7 @@ import { STAGES } from '../src/data/stages';
 import { SCHEDULE } from '../src/data/schedule';
 import { EncounterDirector } from '../src/game/encounters/EncounterDirector';
 import { creatureLayout } from '../src/game/encounters/layout';
-import { crystalPlan } from '../src/game/encounters/crystalflies';
+import { crystalPerches, crystalPlan } from '../src/game/encounters/crystalflies';
 import { roamingMotion } from '../src/game/encounters/motion';
 import { getTreeHeight } from '../src/game/growth/GrowthSystem';
 import { PRESENTATION_RULES } from '../src/data/presentation';
@@ -45,14 +45,23 @@ describe('当前用户独立素材与实际映射', () => {
     expect(FESTIVAL_ARANARA).toEqual(['aranara_07', 'aranara_08', 'aranara_09', 'aranara_10']); expect(CRYSTALFLIES).toHaveLength(3);
   });
 
-  it('晶蝶世界锚点不随生长重排，树长高逐层添加，跟随镜头而非屏幕', () => {
+  it('晶蝶身份不重排，E/F沿原枝组延伸，逐层添加并跟随镜头', () => {
     const base = { width: 1440, height: 900, scale: 1, offset: 0, root: 760, treeHeight: getTreeHeight(100), growth: 100, seed: 1027 };
     expect(creatureLayout('A', [], { ...base, growth: 99 }, []).filter((actor) => actor.kind === 'crystal')).toHaveLength(0);
     const early = creatureLayout('A', [], base, []).filter((actor) => actor.kind === 'crystal'); expect(early).toHaveLength(1);
-    const grown = creatureLayout('F', [], { ...base, treeHeight: 3100 }, []); expect(grown.filter((actor) => actor.kind === 'crystal')).toHaveLength(15);
-    for (const actor of early) expect(grown.find((entry) => entry.id === actor.id)).toEqual(actor);
+    const grown = creatureLayout('F', [], { ...base, treeHeight: getTreeHeight(1027), growth: 1027 }, []); expect(grown.filter((actor) => actor.kind === 'crystal')).toHaveLength(15);
+    for (const actor of early) {
+      const current = grown.find((entry) => entry.id === actor.id)!;
+      const perch = crystalPerches(base.seed, 1027, true).find((entry) => entry.id === actor.id)!;
+      expect(current.asset).toBe(actor.asset); expect(current.animationPhase).toBe(actor.animationPhase);
+      expect(current.width).toBe(actor.width); expect(current.height).toBe(actor.height);
+      expect(current.left).toBeCloseTo(base.width / 2 + perch.horizontal - actor.width / 2);
+      expect(current.top).toBeCloseTo(base.root - perch.elevation - actor.height / 2);
+    }
     const moved = creatureLayout('A', [], { ...base, offset: 150 }, []);
     early.forEach((actor) => expect(moved.find((entry) => entry.id === actor.id)!.top).toBeCloseTo(actor.top + 150));
+    const movedCrown = creatureLayout('F', [], { ...base, growth: 1027, offset: 150 }, []);
+    grown.filter((actor) => actor.kind === 'crystal').forEach((actor) => expect(movedCrown.find((entry) => entry.id === actor.id)!.top).toBeCloseTo(actor.top + 150));
     expect(grown.filter((actor) => actor.kind === 'fixed')).toHaveLength(4);
   });
 });
@@ -85,17 +94,17 @@ describe('兰那罗活动时间与退场', () => {
 });
 
 describe('奖励梦露、一次性互动与兼容存档', () => {
-  it('奖励不占七颗上限，合计 24 点；满额不收取、不丢弃部分余量', () => {
-    const { game } = testGame({ dew: 12 }); startScene(game); game.setDewViewport({ width: 844, height: 390, scale: 0.43 });
+  it('奖励不占七颗上限，每颗4～6点；满额不收取、不丢弃部分余量', () => {
+    const { game } = testGame({ dew: 1026 }); startScene(game); game.setDewViewport({ width: 844, height: 390, scale: 0.43 });
     for (let index = 0; index < 7; index++) game.spawnDew();
     game.spawnAranara(0); const id = game.getSnapshot().encounters[0].id;
     expect(game.interactAranara(id, { x: 20, y: 50 })).toBe(true); expect(game.interactAranara(id, { x: 20, y: 50 })).toBe(false);
     const state = game.getSnapshot(); const rewards = state.dewParticles.filter((particle) => particle.kind === 'reward');
-    expect(state.dewParticles.length).toBeGreaterThan(7); expect(rewards.reduce((total, particle) => total + particle.value, 0)).toBe(24);
+    expect(state.dewParticles.length).toBeGreaterThan(7); expect(rewards.reduce((total, particle) => total + particle.value, 0)).toBe(72);
     rewards.forEach((particle) => expect(isDewPositionSafe(particle, { width: 844, height: 390, scale: 0.43 }, [0, 100], state.dewParticles.filter((entry) => entry.id !== particle.id), true)).toBe(true));
     expect(game.collectDew(rewards[0].id)).toBe(false); vi.advanceTimersByTime(850);
-    game.collectDew(rewards[0].id); expect(game.getSnapshot().save.dew).toBe(13);
-    expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward' && !particle.collected).reduce((total, particle) => total + particle.value, 0)).toBe(23);
+    game.collectDew(rewards[0].id); expect(game.getSnapshot().save.dew).toBe(1027);
+    expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward' && !particle.collected).reduce((total, particle) => total + particle.value, 0)).toBe(71);
     expect(game.collectDew(rewards[1].id)).toBe(false); expect(game.getSnapshot().dewFeedback).toBe('full');
     game.water(); expect(game.collectDew(rewards[1].id)).toBe(true); game.stop(); expect(vi.getTimerCount()).toBe(0);
   });
@@ -106,17 +115,17 @@ describe('奖励梦露、一次性互动与兼容存档', () => {
     expect(game.getSnapshot().dewParticles.filter((particle) => ids.includes(particle.id) && !particle.expiring)).toHaveLength(ids.length);
     game.openPanel('settings'); vi.advanceTimersByTime(90000); game.closePanel();
     game.setDewViewport({ width: 640, height: 360, scale: 0.37 });
-    expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward' && !particle.collected).reduce((total, particle) => total + particle.value, 0)).toBe(24);
+    expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward' && !particle.collected).reduce((total, particle) => total + particle.value, 0)).toBe(72);
     vi.advanceTimersByTime(54999); expect(game.getSnapshot().dewParticles.some((particle) => particle.kind === 'reward' && !particle.expiring)).toBe(true);
     vi.advanceTimersByTime(1); expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward').every((particle) => particle.expiring)).toBe(true);
     vi.advanceTimersByTime(300); expect(game.getSnapshot().dewParticles.some((particle) => particle.kind === 'reward')).toBe(false); game.stop(); expect(vi.getTimerCount()).toBe(0);
   });
 
-  it('四只常驻连续奖励在拥挤屏幕保留全部 96 点，分别到期，领取记录刷新后保持', () => {
+  it('四只常驻连续奖励在拥挤屏幕保留全部288点，分别到期，领取记录刷新后保持', () => {
     const clock = new TestClock(Date.parse(SCHEDULE[5].at)); const { game, storage } = testGame(stageFixture('F', clock.now()), clock);
     startScene(game); game.setDewViewport({ width: 640, height: 360, scale: 0.37 });
     FESTIVAL_ARANARA.forEach((id) => expect(game.interactAranara(id, { x: 20, y: 50 })).toBe(true));
-    expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward').reduce((total, particle) => total + particle.value, 0)).toBe(96);
+    expect(game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward').reduce((total, particle) => total + particle.value, 0)).toBe(288);
     expect(game.getSnapshot().save.claimedAranara).toEqual([...FESTIVAL_ARANARA]); game.stop();
     const restored = new GameController(new TimeGateService(clock), new SaveManager(storage)); startScene(restored);
     FESTIVAL_ARANARA.forEach((id) => expect(restored.interactAranara(id, { x: 20, y: 50 })).toBe(false)); expect(restored.getSnapshot().dewParticles).toEqual([]); restored.stop();
@@ -127,11 +136,11 @@ describe('奖励梦露、一次性互动与兼容存档', () => {
     startScene(game); game.setDewViewport({ width: 640, height: 360, scale: 0.37 });
     const remaining = () => game.getSnapshot().dewParticles.filter((particle) => particle.kind === 'reward').reduce((total, particle) => total + particle.value, 0);
     FESTIVAL_ARANARA.slice(0, 3).forEach((id) => game.interactAranara(id, { x: 20, y: 50 })); vi.advanceTimersByTime(20000);
-    game.interactAranara('aranara_10', { x: 20, y: 50 }); expect(remaining()).toBe(96);
+    game.interactAranara('aranara_10', { x: 20, y: 50 }); expect(remaining()).toBe(288);
     expect(game.getSnapshot().dewParticles.some((particle) => (particle.portions?.length ?? 0) > 1)).toBe(true);
-    vi.advanceTimersByTime(39999); expect(remaining()).toBe(96);
-    vi.advanceTimersByTime(1); expect(remaining()).toBe(24);
-    vi.advanceTimersByTime(19999); expect(remaining()).toBe(24);
+    vi.advanceTimersByTime(39999); expect(remaining()).toBe(288);
+    vi.advanceTimersByTime(1); expect(remaining()).toBe(72);
+    vi.advanceTimersByTime(19999); expect(remaining()).toBe(72);
     vi.advanceTimersByTime(1); expect(remaining()).toBe(0);
     game.stop(); expect(vi.getTimerCount()).toBe(0);
   });
@@ -155,7 +164,7 @@ describe('两次来访、独立对白和额外停留', () => {
   });
 
   it('对白结束仍停留 3～7 秒，但允许树体对白和浇灌；停留可暂停', () => {
-    const { game } = testGame({ dew: 13 }); startScene(game); game.requestVisit(); until(() => game.getSnapshot().save.completedVisits.includes('visit-A'));
+    const { game } = testGame({ dew: 20 }); startScene(game); game.requestVisit(); until(() => game.getSnapshot().save.completedVisits.includes('visit-A'));
     expect(game.getSnapshot().companion).toBe('observe'); expect(game.getSnapshot().speech).toBeNull();
     game.openPanel('settings'); vi.advanceTimersByTime(30000); expect(game.getSnapshot().companion).toBe('observe'); game.closePanel();
     game.talk(); expect(game.getSnapshot().speech?.anchor).toBe('tree'); expect(game.water()).toBe(true);
@@ -215,14 +224,14 @@ describe('分散藏身、跳出钻入与独立晶蝶', () => {
     vi.advanceTimersByTime(1); expect(game.collectDew(rewards[0].id)).toBe(true); game.stop(); expect(vi.getTimerCount()).toBe(0);
   });
 
-  it('过百后每个随机树高阈值只新增一只，随机锚点 / 形象无三只一组的重复排列', () => {
+  it('过百后每个随机成长阈值只新增一只，原骨架不长高的添叶段仍可解锁晶蝶', () => {
     const plan = crystalPlan(1027); expect(plan).toHaveLength(15); expect(crystalPlan(1027)).toEqual(plan); expect(crystalPlan(1030)).not.toEqual(plan);
     expect(new Set(plan.map((entry) => `${entry.horizontal},${entry.elevation}`)).size).toBe(15);
     const viewport = { width: 1440, height: 900, scale: 1, offset: 0, root: 760, seed: 1027, growth: 1000, treeHeight: getTreeHeight(100) };
     for (let index = 1; index < plan.length; index++) {
       expect(plan[index].threshold).toBeGreaterThan(plan[index - 1].threshold); expect(plan[index].asset).not.toBe(plan[index - 1].asset);
-      expect(creatureLayout('F', [], { ...viewport, treeHeight: plan[index].threshold - 0.001 }, []).filter((actor) => actor.kind === 'crystal')).toHaveLength(index);
-      expect(creatureLayout('F', [], { ...viewport, treeHeight: plan[index].threshold }, []).filter((actor) => actor.kind === 'crystal')).toHaveLength(index + 1);
+      expect(creatureLayout('F', [], { ...viewport, growth: plan[index].threshold - 0.001, treeHeight: getTreeHeight(plan[index].threshold - .001) }, []).filter((actor) => actor.kind === 'crystal')).toHaveLength(index);
+      expect(creatureLayout('F', [], { ...viewport, growth: plan[index].threshold, treeHeight: getTreeHeight(plan[index].threshold) }, []).filter((actor) => actor.kind === 'crystal')).toHaveLength(index + 1);
     }
   });
 });

@@ -4,18 +4,22 @@ import { CHARACTER_ASSETS, ASSETS, FONT_ASSETS, DENDRO_ICON, E_SKILL_PATTERN, MU
 import { INHABITANT_ASSETS } from '../../data/inhabitants';
 import { EXPRESSION_ASSETS } from '../../data/expressions';
 import { getLoadingArt, loadingArtSource, LOADING_ICON } from '../../data/stageLoading';
-import type { GameSave } from '../../types/game';
+import type { GameSave, StageId } from '../../types/game';
 import { backgroundQuality } from '../backgrounds/policy';
 import soundAssets from '../../data/sounds.generated.json' with { type: 'json' };
 import { BIRTHDAY_LETTERS, MAIL_ASSETS, birthdayArt } from '../../data/birthdayMail';
+import { treeArtSources } from '../../data/treeArt';
 
 export interface StartupAsset { url: string; bytes: number }
 export interface StartupPlan { id: string; files: StartupAsset[]; dynamic: boolean; characterRuntime?: boolean; bytes: number }
 
-export function startupPlan(choices: GameSave['loadingArtChoices'], width: number, height: number, density: number, reduced: boolean): StartupPlan {
+export function startupPlan(choices: GameSave['loadingArtChoices'], width: number, height: number, density: number, reduced: boolean, musicStage: StageId | null = null): StartupPlan {
   const compact = backgroundQuality(width, height, density).compact;
   const urls = new Set<string>([ASSETS.dreamBackground.src, ASSETS.realityBackground.src, ASSETS.nahida.src, ASSETS.icon.src, FONT_ASSETS.common, DENDRO_ICON.src, E_SKILL_PATTERN.texture, NAHIDA_DIALOGUE_BACKGROUND, MUSIC_ASSETS.button, LOADING_ICON, '/asserts/gifts/date-candy.png', '/asserts/gifts/halvamazd.png', ...Object.values(EXPRESSION_ASSETS), ...Object.values(soundAssets).map((asset) => asset.src)]);
+  const music = musicStage ? MUSIC_ASSETS.tracks[musicStage].src : null;
+  if (music) urls.add(music);
   [MAIL_ASSETS.book, MAIL_ASSETS.arrow, MAIL_ASSETS.arrowHover, MAIL_ASSETS.point, MAIL_ASSETS.pointActive].forEach((url) => urls.add(url));
+  treeArtSources(height <= 600).forEach((url) => urls.add(url));
   BIRTHDAY_LETTERS.forEach((letter) => { const art = birthdayArt(letter.year, height <= 600 || width <= 900); if (art) urls.add(art); });
   for (const asset of Object.values(CHARACTER_ASSETS)) {
     if (asset.poster) urls.add(asset.poster);
@@ -45,7 +49,7 @@ export function startupPlan(choices: GameSave['loadingArtChoices'], width: numbe
     if (art) urls.add(loadingArtSource(art, width, height, density));
   }
   const sizes: Record<string, number> = catalog.files;
-  const files = [...urls].sort().map((url) => {
+  const files = [...urls].sort((first, second) => first === music ? -1 : second === music ? 1 : first.localeCompare(second, 'en')).map((url) => {
     if (!sizes[url]) throw new Error(`startup-asset-missing:${url}`);
     return { url, bytes: sizes[url] };
   });

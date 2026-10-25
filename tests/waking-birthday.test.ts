@@ -67,7 +67,7 @@ describe('梦醒三次睁眼', () => {
     director.start(2, true); vi.advanceTimersByTime(WAKING_REDUCED_MS); expect(completed).toHaveBeenCalledTimes(2); director.stop();
   });
   it('加载交接时先黑屏，完整醒来才记 G 收据、启动对白并开放输入', () => {
-    const { game } = setup('F', { growth: 1028 }); finishLoading(game);
+    const { game } = setup('F', { growth: 1027, completedStages: ['A', 'B', 'C', 'D', 'E', 'F'] }); finishLoading(game);
     expect(game.getSnapshot()).toMatchObject({ mode: 'waking', waking: { phase: 'black' }, stage: 'G', presentationPaused: true, speech: null });
     expect(game.getSnapshot().save.sceneStage).toBe('F');
     const sequence = game.getSnapshot().save.dialogueSequence;
@@ -78,16 +78,16 @@ describe('梦醒三次睁眼', () => {
     expect(game.getSnapshot().save.sceneStage).toBe('G'); expect(game.getSnapshot().speech?.anchor).toBe('nahida');
   });
   it('醒来中刷新保留原转场句与成长，重播未完成梦醒而不重复抽句', () => {
-    const context = setup('F', { growth: 1028 }); finishLoading(context.game); vi.advanceTimersByTime(3600);
+    const context = setup('F', { growth: 1027, completedStages: ['A', 'B', 'C', 'D', 'E', 'F'] }); finishLoading(context.game); vi.advanceTimersByTime(3600);
     const before = context.game.getSnapshot().save; const game = reload(context); finishLoading(game);
     expect(game.getSnapshot().mode).toBe('waking');
     expect(game.getSnapshot().save.pendingDialogues.filter((entry) => entry.kind === 'transition')).toEqual(before.pendingDialogues.filter((entry) => entry.kind === 'transition'));
-    expect(game.getSnapshot().save.growth).toBe(1028);
+    expect(game.getSnapshot().save.growth).toBe(1027);
     vi.advanceTimersByTime(WAKING_DURATION_MS); expect(game.getSnapshot().save.sceneStage).toBe('G');
   });
   it('既有 G 存档不眨眼，日期撤销与重置清除临时演出', () => {
     const existing = setup(); expect(existing.game.getSnapshot().waking).toBeNull();
-    const context = setup('F', { growth: 1028 }); finishLoading(context.game);
+    const context = setup('F', { growth: 1027, completedStages: ['A', 'B', 'C', 'D', 'E', 'F'] }); finishLoading(context.game);
     context.clock.value = Date.parse(SCHEDULE[3].at); context.game.tick(); expect(context.game.getSnapshot().waking).toBeNull(); expect(context.game.getSnapshot().stage).not.toBe('G');
     existing.game.sendWish(); existing.game.reset(); expect(existing.game.getSnapshot().birthday).toBeNull();
   });

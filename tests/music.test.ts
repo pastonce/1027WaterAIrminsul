@@ -28,6 +28,31 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(() => { managers.splice(0).forEach((manager) => manager.dispose()); expect(vi.getTimerCount()).toBe(0); vi.useRealTimers(); });
 
 describe('单播放器、留白与渐变', () => {
+  it('用户主动播放绕过初入和曲间留白，仍只加载当前一曲并渐入', async () => {
+    const { media, manager, factory } = await setup();
+    expect(media.src).toBe(''); await manager.requestPlay(); await vi.advanceTimersByTimeAsync(0);
+    expect(media.src).toBe(assets.tracks.A.src); expect(manager.getSnapshot().playing).toBe(true);
+    await vi.advanceTimersByTimeAsync(1800); expect(media.volume).toBeCloseTo(.45);
+    media.paused = true; media.onended?.(); expect(manager.getSnapshot().phase).toBe('waiting');
+    await manager.requestPlay(); await vi.advanceTimersByTimeAsync(0); expect(media.paused).toBe(false); expect(factory).toHaveBeenCalledOnce();
+  });
+  it('开场或面板挂起时主动播放也不取音频，暂停保留当前曲目位置', async () => {
+    const { media, manager } = await setup();
+    manager.configure({ ...options, paused: true }); await manager.requestPlay();
+    expect(media.src).toBe('');
+    manager.configure(options); await manager.requestPlay(); media.currentTime = 23;
+    manager.configure({ ...options, enabled: false }); await vi.advanceTimersByTimeAsync(350);
+    manager.configure(options); await manager.requestPlay(); expect(media.currentTime).toBe(23);
+  });
+  it('压缩缓存准备中换景，迟到Blob立即释放且不能播放旧曲', async () => {
+    const media = new FakeAudio(); let finish!: (source: { src: string; release(): void }) => void;
+    const manager = new MusicManager(() => null, () => media as unknown as HTMLAudioElement, () => new Promise((resolve) => { finish = resolve; }));
+    managers.push(manager); manager.configure(options); await manager.unlock();
+    await vi.advanceTimersByTimeAsync(8000); expect(manager.getSnapshot().phase).toBe('loading');
+    manager.configure({ ...options, stage: 'G', paused: true });
+    const release = vi.fn(); finish({ src: 'blob:old-music', release }); await vi.advanceTimersByTimeAsync(0);
+    expect(media.src).toBe(''); expect(release).toHaveBeenCalledOnce(); expect(manager.getSnapshot().playing).toBe(false);
+  });
   it('F→G 同一播放器延续八秒留白，读信暂停剩余时间，G 曲终留白十二秒', async () => {
     const { media, manager, factory } = await setup(); await vi.advanceTimersByTimeAsync(10000);
     manager.configure({ ...options, stage: 'G', paused: true }); await vi.advanceTimersByTimeAsync(30000);

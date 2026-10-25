@@ -50,6 +50,12 @@
   filter: drop-shadow(0 0 9px #f2cf9677);
   animation: resource-shake .65s ease-in-out;
 }
+.dew-counter.dew-feedback[data-feedback=insufficient] {
+  color: #ffcccc;
+  background: radial-gradient(ellipse, #d9474759, transparent 75%);
+  filter: drop-shadow(0 0 9px #ed6565b3);
+  outline-color: #ef7474;
+}
 
 .dream-tree {
   pointer-events: none;

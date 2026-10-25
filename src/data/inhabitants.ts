@@ -8,7 +8,7 @@ export const VISIT_FORMS: Partial<Record<StageId, NahidaForm>> = { A: 'nahida_dr
 export const ROAMING_ARANARA = Array.from({ length: 6 }, (_, index) => `aranara_0${index + 1}` as InhabitantId);
 export const FESTIVAL_ARANARA = ['aranara_07', 'aranara_08', 'aranara_09', 'aranara_10'] as const;
 export const CRYSTALFLIES = ['crystalfly_01', 'crystalfly_02', 'crystalfly_03'] as const;
-export const ENCOUNTER_RULES = { spawnMinMs: 15000, spawnMaxMs: 45000, lifetimeMs: 30000, arriveMs: 750, leaveMs: 700, celebrationMs: 1350, flightMs: 850, maximum: 3, rewardValue: 24, rewardParticles: 12, rewardLifetimeMs: 60000 };
+export const ENCOUNTER_RULES = { spawnMinMs: 15000, spawnMaxMs: 45000, lifetimeMs: 30000, arriveMs: 750, leaveMs: 700, celebrationMs: 1350, flightMs: 850, maximum: 3, rewardParticles: 12, rewardLifetimeMs: 60000 };
 
 export interface HidingMotion { arrival?: 'fade'; departure?: 'bottom'; travel?: number }
 export interface HidingPlace extends HidingMotion { x: number; y: number; name: string; depth?: 'middle' | 'log' | 'near'; edge?: 'left' | 'right' | 'top' | 'bottom'; burrow?: -1 | 1; allowed?: readonly InhabitantId[] }

@@ -178,12 +178,12 @@ describe('音效只跟随真实交互事务', () => {
     expect(game.water()).toBe(false); expect(cue).not.toHaveBeenCalled();
     game.spawnDew(); const id = game.getSnapshot().dewParticles[0].id;
     expect(game.collectDew(id)).toBe(true); expect(game.collectDew(id)).toBe(false); expect(cue).toHaveBeenCalledExactlyOnceWith('dew');
-    for (let index = 0; index < 20 && game.getSnapshot().save.dew < 13; index++) { game.spawnDew(); const particle = game.getSnapshot().dewParticles.find((entry) => !entry.collected); if (particle) game.collectDew(particle.id); }
+    for (let index = 0; index < 20 && game.getSnapshot().save.dew < 20; index++) { game.spawnDew(); const particle = game.getSnapshot().dewParticles.find((entry) => !entry.collected); if (particle) game.collectDew(particle.id); }
     cue.mockClear(); expect(game.water()).toBe(true); expect(game.water()).toBe(false); expect(cue).toHaveBeenCalledExactlyOnceWith('water'); game.stop();
   });
   it('日期锁定满额的免费浇灌仍发声，但面板与挂起不发声', () => {
     const clock = new TestClock(Date.parse(SCHEDULE[0].at)); const save = stageFixture('C', clock.now());
-    const { game } = testGame({ ...save, growth: 520, dew: 13 }, clock); const cue = vi.fn(); game.subscribeSound(cue); game.start();
+    const { game } = testGame({ ...save, growth: 520, dew: 20 }, clock); const cue = vi.fn(); game.subscribeSound(cue); game.start();
     game.water(); expect(cue).toHaveBeenCalledExactlyOnceWith('water');
     game.openPanel('settings'); cue.mockClear(); game.water(); game.spawnAranara(0); expect(cue).not.toHaveBeenCalled(); game.closePanel();
     game.setSuspended(true); game.water(); expect(cue).not.toHaveBeenCalled(); game.stop();
@@ -208,7 +208,7 @@ describe('音效只跟随真实交互事务', () => {
     expect(cue).toHaveBeenCalledExactlyOnceWith('aranara-jump'); expect(game.getSnapshot().save.claimedAranara).toContain('aranara_07'); game.stop();
   });
   it('实际覆盖加载页才发传送声，等待对白 / 等于上限 / 初入不发，进度变化不重响', () => {
-    const { game } = testGame({ growth: 210, dew: 13 }); const cue = vi.fn(); game.subscribeSound(cue); startScene(game);
+    const { game } = testGame({ growth: 180, dew: 20 }); const cue = vi.fn(); game.subscribeSound(cue); startScene(game);
     expect(cue).not.toHaveBeenCalled(); game.water(); expect(cue).toHaveBeenCalledExactlyOnceWith('water');
     for (let elapsed = 0; elapsed < 60000 && !game.getSnapshot().stageLoading; elapsed += 100) vi.advanceTimersByTime(100);
     expect(game.getSnapshot().stageLoading).not.toBeNull(); expect(cue.mock.calls.filter(([kind]) => kind === 'transition')).toHaveLength(1);

@@ -1,9 +1,10 @@
 import { useLayoutEffect, useRef } from 'react';
 import type { CSSProperties, RefObject } from 'react';
-import { trunkX } from '../game/tree/geometry';
+import { treeTrunkCenter } from '../game/tree/model';
 import { DENDRO_ICON, E_SKILL_PATTERN as pattern } from '../data/assets';
 import { PRESENTATION_RULES } from '../data/presentation';
 import { ESkillPiece } from './ESkillPiece';
+import { treeGrowthStep } from '../game/tree/growth';
 
 function SkillPattern({ size }: { size: number }) {
   const focusStart = PRESENTATION_RULES.blessingAuraMs + PRESENTATION_RULES.blessingFlowMs;
@@ -14,18 +15,21 @@ function Flower() {
   return <g className="blessing-flower">{[0, 90, 180, 270].map((angle) => <path key={angle} transform={`rotate(${angle})`} d="M0 0C-5-3-5-8 0-10C5-8 5-3 0 0Z"/>)}<circle r="1.6"/></g>;
 }
 
-export function DendroBlessing({ width, height, scale, root, treeHeight, character, characterRef, emitter = { x: 0.5, y: 0.5 }, phase, paused, reduced, groundFrame, entranceOffset = 0 }: {
-  width: number; height: number; scale: number; root: number; treeHeight: number;
+export function DendroBlessing({ width, height, scale, root, treeHeight, growth, completeTree = false, character, characterRef, emitter = { x: 0.5, y: 0.5 }, phase, paused, reduced, groundFrame, entranceOffset = 0 }: {
+  width: number; height: number; scale: number; root: number; treeHeight: number; growth: number; completeTree?: boolean;
   character: { left: number; top: number; width: number; height: number };
   characterRef?: RefObject<HTMLDivElement | null>; emitter?: { x: number; y: number };
   phase: 'channel' | 'bloom'; paused: boolean; reduced: boolean;
   groundFrame?: RefObject<((offset: number) => void) | null>; entranceOffset?: number;
 }) {
   const svg = useRef<SVGSVGElement>(null);
-  const anchor = useRef(Math.max(0, Math.min(treeHeight, (root - Math.max(112, Math.min(height - 105, root - treeHeight * scale + 30))) / scale)));
-  const targetY = Math.max(112, Math.min(height - 105, root - anchor.current * scale));
+  const arrivalStep = useRef(treeGrowthStep(growth));
+  const size = Math.min(196, Math.max(164, height * .42));
+  const targetBottom = height - size / 2 - 8;
+  const anchor = useRef(Math.max(0, Math.min(treeHeight, (root - Math.max(112, Math.min(targetBottom, root - treeHeight * scale + Math.min(130, treeHeight * .35) * scale))) / scale)));
+  const targetY = Math.max(112, Math.min(targetBottom, root - anchor.current * scale));
   const elevation = Math.max(0, Math.min(treeHeight, (root - targetY) / scale));
-  const targetX = width / 2 + (trunkX(elevation) - 500) * scale;
+  const targetX = width / 2 + (treeTrunkCenter(arrivalStep.current, elevation, completeTree) - 500) * scale;
   const sourceX = character.left + character.width * emitter.x;
   const sourceY = character.top + character.height * emitter.y;
   const distance = targetX - sourceX;
@@ -58,7 +62,6 @@ export function DendroBlessing({ width, height, scale, root, treeHeight, charact
     '--focus-wait': `${PRESENTATION_RULES.blessingAuraMs + PRESENTATION_RULES.blessingFlowMs}ms`,
     '--focus-duration': `${PRESENTATION_RULES.blessingFocusMs}ms`,
   } as CSSProperties;
-  const size = Math.min(196, Math.max(164, height * 0.42));
   return <svg ref={svg} className="dendro-blessing" data-phase={phase} data-paused={paused} data-reduced={reduced} viewBox={`0 0 ${width} ${height}`} style={timing} aria-hidden="true">
     <defs><filter id="blessing-soft-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2"/></filter><radialGradient id="blessing-light"><stop stopColor="#dbffb8" stopOpacity=".22"/><stop offset="1" stopColor="#b3f48c" stopOpacity="0"/></radialGradient><linearGradient id="blessing-scan-line"><stop stopColor="#dfffbd" stopOpacity="0"/><stop offset=".5" stopColor="#e5ffbf"/><stop offset="1" stopColor="#dfffbd" stopOpacity="0"/></linearGradient><clipPath id="blessing-scan-window"><rect x="-56" y="-56" width="112" height="112" rx="8"/></clipPath></defs>
     {!reduced && <g className="blessing-flow"><path className="blessing-flow-path blessing-flow-halo" d={flow} pathLength="1"/><path className="blessing-flow-path blessing-flow-thread" d={flow} pathLength="1"/>{Array.from({ length: 9 }, (_, index) => <g key={index} className="blessing-flow-particle" style={{ offsetPath: `path('${flow}')`, '--leaf-delay': `${index * 28}ms` } as CSSProperties}>{index % 3 === 0 ? <Flower/> : <path className="blessing-leaf" d="M-7 0Q0-7 8 0Q0 7-7 0ZM-5 0H6"/>}</g>)}</g>}

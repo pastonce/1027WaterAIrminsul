@@ -34,9 +34,9 @@ export function DreamTreeScene({ game, state, reduced, cameraRef, testing = fals
   const inhabitants = useMemo(() => new RoamingLayer(), []);
   const artworkPrefetch = useMemo(() => new StageArtPrefetcher(), []);
   const stage = STAGES[state.reviewStage ?? state.stage];
-  const height = getTreeHeight(state.reviewStage ? stage.growth.end : state.growth);
+  const height = getTreeHeight(state.reviewStage ? stage.growth.end : state.growth, stage.id);
   const locked = state.mode === 'ending' || state.mode === 'loading';
-  const camera = useCamera(height, stage.id, state.growthRevision, locked, reduced);
+  const camera = useCamera(height, stage.id, state.growthRevision, locked, reduced, state.presentationPaused);
   const background = getStageBackground(stage.id);
   const entrance = useRef({ asset: background, time: reduced ? Infinity : 0 });
   const sceneryReady = useRef<BackgroundAsset | null | undefined>(undefined);
@@ -71,8 +71,8 @@ export function DreamTreeScene({ game, state, reduced, cameraRef, testing = fals
     presentGround(background, reduced ? Infinity : entrance.current.asset === background ? entrance.current.time : 0);
   }, [background, presentGround, reduced]);
   const variant = VISIT_FORMS[state.companionStage ?? stage.id] ?? 'dream';
-  const layout = dreamLayout(camera.viewport.width, camera.viewport.height, camera.scale, height, camera.offset, ground?.root, variant, state.companionStage ?? stage.id as DreamStageId, state.companionPosition);
   const visibleGrowth = state.reviewStage ? stage.growth.end : state.growth;
+  const layout = dreamLayout(camera.viewport.width, camera.viewport.height, camera.scale, height, camera.offset, ground?.root, variant, state.companionStage ?? stage.id as DreamStageId, state.companionPosition, visibleGrowth);
   const creatureViewport = useMemo(() => ({ ...camera.viewport, offset: camera.offset, root: ground?.root ?? camera.viewport.height - 40 - 100 * camera.scale, treeHeight: height, seed: state.save.seed, growth: visibleGrowth }), [camera.viewport, camera.offset, camera.scale, ground?.root, height, state.save.seed, visibleGrowth]);
   useLayoutEffect(() => { game.setDewViewport(camera.viewport); }, [game, camera.viewport]);
   useEffect(() => { cameraRef.current = { goTo: camera.goTo }; return () => { cameraRef.current = null; }; }, [cameraRef, camera.goTo]);
@@ -82,7 +82,7 @@ export function DreamTreeScene({ game, state, reduced, cameraRef, testing = fals
     <div className="ground-light" style={{ top: ground ? ground.root - 42.5 : undefined, bottom: ground ? 'auto' : undefined, transform: `translateY(calc(${camera.offset}px + var(--ground-entrance-y, 0px)))` }}/>
     <div className="camera-world" style={{ transform: `translateY(calc(${camera.offset}px + var(--ground-entrance-y, 0px)))` }}>
       <div className="tree-world" style={{ bottom: ground ? camera.viewport.height - ground.root - 100 * camera.scale : undefined, transform: `translateX(-50%) scale(${camera.scale})` }}>
-        <TreeRenderer height={height} seed={state.save.seed} stage={stage} reduced={reduced} growing={state.mode === 'growing' || state.blessing?.phase === 'bloom'} onInteract={(keyboard) => { if (keyboard || !camera.consumeDragClick()) game.talk(); }}/>
+        <TreeRenderer growth={visibleGrowth} stage={stage.id} reduced={reduced} paused={state.presentationPaused} compact={camera.viewport.height <= 600} growing={state.mode === 'growing' || state.blessing?.phase === 'bloom'} onInteract={(keyboard) => { if (keyboard || !camera.consumeDragClick()) game.talk(); }}/>
       </div>
     </div>
     <ForestInhabitants game={game} state={state} stage={stage.id as DreamStageId} viewport={creatureViewport} reduced={reduced} inhabitants={inhabitants}/>
@@ -94,9 +94,9 @@ export function DreamTreeScene({ game, state, reduced, cameraRef, testing = fals
         onClick={() => game.collectDew(particle.id)}><span className="dew-visual"><Icon name="dew" size={23}/></span></button>)}
     </div>
     {state.companion && <div ref={companionRef} className="nahida-companion" data-position={state.companionPosition} data-blessing={state.blessing?.phase ?? 'none'} data-paused={state.presentationPaused} data-reduced={reduced} style={{ ...layout.character, '--blessing-duration': `${PRESENTATION_RULES.blessingTravelMs}ms` } as CSSProperties}><NahidaAvatar action={state.companion} variant={variant} paused={state.presentationPaused} reduced={reduced} placeholder={state.nahidaPlaceholder}/><button className="companion-interact" aria-label="和纳西妲说话" data-no-drag disabled={!state.companionCanTalk || state.presentationPaused || !['idle', 'watering', 'growing'].includes(state.mode)} onClick={(event) => { if (!event.detail || !camera.consumeDragClick()) game.talkToCompanion(); }}/></div>}
-    {state.blessing && <DendroBlessing width={camera.viewport.width} height={camera.viewport.height} scale={camera.scale} root={(ground?.root ?? camera.viewport.height - 40 - 100 * camera.scale) + camera.offset} treeHeight={height} character={layout.character} characterRef={companionRef} emitter={layout.characterEmission} phase={state.blessing.phase} paused={state.presentationPaused} reduced={reduced} groundFrame={blessingGround} entranceOffset={forestGround(background, camera.viewport.width, camera.viewport.height, entrance.current.time)?.entrance ?? 0}/>}
+    {state.blessing && <DendroBlessing width={camera.viewport.width} height={camera.viewport.height} scale={camera.scale} root={(ground?.root ?? camera.viewport.height - 40 - 100 * camera.scale) + camera.offset} treeHeight={height} growth={visibleGrowth} completeTree={stage.id === 'E' || stage.id === 'F'} character={layout.character} characterRef={companionRef} emitter={layout.characterEmission} phase={state.blessing.phase} paused={state.presentationPaused} reduced={reduced} groundFrame={blessingGround} entranceOffset={forestGround(background, camera.viewport.width, camera.viewport.height, entrance.current.time)?.entrance ?? 0}/>}
     {state.speech && !state.presentationPaused && <DialogueBubble speech={state.speech} reduced={reduced} testing={testing} position={state.speech.anchor === 'nahida' ? layout.characterBubble : layout.treeBubble} side={state.speech.anchor === 'nahida' ? layout.characterBubbleSide : 'left'} onSegments={game.setSpeechSegments} onHover={game.hoverSpeech} onReveal={game.revealExpression}/>}
-    {state.expression?.anchor === 'tree' && <ExpressionBubble key={state.expression.id} playback={state.expression} anchor={treeExpressionAnchor(camera.viewport.width, (ground?.root ?? camera.viewport.height - 40 - 100 * camera.scale) + camera.offset, height, camera.scale)} width={camera.viewport.width} height={camera.viewport.height} paused={state.presentationPaused} reduced={reduced} ground onReady={game.expressionReady} onDismiss={game.dismissExpression}/>}
+    {state.expression?.anchor === 'tree' && <ExpressionBubble key={state.expression.id} playback={state.expression} anchor={treeExpressionAnchor(camera.viewport.width, (ground?.root ?? camera.viewport.height - 40 - 100 * camera.scale) + camera.offset, visibleGrowth, camera.scale, stage.id === 'E' || stage.id === 'F')} width={camera.viewport.width} height={camera.viewport.height} paused={state.presentationPaused} reduced={reduced} ground onReady={game.expressionReady} onDismiss={game.dismissExpression}/>}
     {state.expression?.anchor === 'nahida' && state.companion && <ExpressionBubble key={state.expression.id} playback={state.expression} anchor={visitExpressionAnchor(layout.character, state.companionStage ?? stage.id as DreamStageId)} width={camera.viewport.width} height={camera.viewport.height} paused={state.presentationPaused} reduced={reduced} obstacles={state.speech ? [{ ...(state.speech.anchor === 'nahida' ? layout.characterBubble : layout.treeBubble), height: camera.viewport.height <= 600 ? 100 : 128 }] : []} onReady={game.expressionReady} onDismiss={game.dismissExpression}/>}
     {state.effects.includes('birthday') && <div className="birthday-sigil">10 <Icon name="spark" size={18}/> 27<span>愿慧梦成真</span></div>}
     {state.mode === 'watering' && <div className="watering-rain" aria-hidden="true"><i/><i/><i/><i/><i/></div>}

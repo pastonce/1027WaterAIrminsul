@@ -35,7 +35,7 @@ describe('每颗梦露的活动时间寿命', () => {
     expect(game.collectDew(id)).toBe(false); vi.advanceTimersByTime(1);
     expect(game.getSnapshot().dewParticles.find((particle) => particle.id === id)?.expiring).not.toBe(true);
     vi.advanceTimersByTime(500); expect(game.getSnapshot().dewParticles.some((particle) => particle.id === id)).toBe(false);
-    expect(game.getSnapshot().save.dew).toBe(4);
+    expect(game.getSnapshot().save.dew).toBe(6);
   });
 
   it.each(['settings', 'journal', 'background'] as const)('%s 暂停剩余寿命，返回后继续而非重新计算五秒', (pause) => {
@@ -49,11 +49,11 @@ describe('每颗梦露的活动时间寿命', () => {
   });
 
   it('盛满的失败点击不加资源也不延长寿命，淡出后新梦露继续生成', () => {
-    const game = startGame(13); const id = game.getSnapshot().dewParticles[0].id;
+    const game = startGame(1027); const id = game.getSnapshot().dewParticles[0].id;
     vi.advanceTimersByTime(4000); expect(game.collectDew(id)).toBe(false);
     vi.advanceTimersByTime(1300); expect(game.getSnapshot().dewParticles.some((particle) => particle.id === id)).toBe(false);
     vi.advanceTimersByTime(2000); expect(game.getSnapshot().dewParticles.some((particle) => !particle.expiring)).toBe(true);
-    expect(game.getSnapshot().save.dew).toBe(13);
+    expect(game.getSnapshot().save.dew).toBe(1027);
   });
 
   it('窗口重排不重置寿命，重置与停止清理所有到期回调', () => {

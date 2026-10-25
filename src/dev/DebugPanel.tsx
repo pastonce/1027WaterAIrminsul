@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SCHEDULE } from '../data/schedule';
+import { GAME_RULES, SCHEDULE } from '../data/schedule';
 import { STAGES } from '../data/stages';
 import { HIDING_PLACES } from '../data/inhabitants';
 import { DREAM_STAGES } from '../types/game';
@@ -26,13 +26,13 @@ export default function DebugPanel({ game, state, clock, onCamera, ephemeral = f
     <div className="debug-row"><button onClick={() => { clock.set(Date.parse(`${date}:00+08:00`)); game.tick(); }}>应用时间</button><button onClick={() => { clock.system(); game.tick(); }}>设备时间</button><button onClick={() => selectStage('A')}>从 A 开始</button></div>
     <div className="debug-stages">{([...DREAM_STAGES, 'G'] as StageId[]).map((stage) => <button key={stage} onClick={() => selectStage(stage)} aria-label={`调试切换到${stage}阶段`}>{stage}</button>)}</div>
     <label>成长值<input aria-label="调试成长值" type="number" step="0.1" min="0" max="1027" value={state.save.growth} onChange={(event) => game.restore({ ...state.save, growth: Number(event.target.value), introSeen: true })}/></label>
-    <label>梦露<input aria-label="调试梦露" type="number" min="0" max="13" value={state.save.dew} onChange={(event) => game.restore({ ...state.save, dew: Number(event.target.value), introSeen: true })}/></label>
-    <div className="debug-row"><button onClick={() => { game.restore({ ...state.save, dew: 13 }); game.water(); }}>补满并浇灌</button><button onClick={() => game.presentGrowth()}>重播生长动画与镜头</button></div>
+    <label>梦露<input aria-label="调试梦露" type="number" min="0" max={GAME_RULES.dewCapacity} value={state.save.dew} onChange={(event) => game.restore({ ...state.save, dew: Number(event.target.value), introSeen: true })}/></label>
+    <div className="debug-row"><button onClick={() => { game.restore({ ...state.save, dew: GAME_RULES.dewCapacity }); game.water(); }}>补满并浇灌</button><button onClick={() => game.presentGrowth()}>重播生长动画与镜头</button></div>
     <div className="debug-row"><button disabled={state.stage === 'G'} onClick={() => { const visit = STAGES[state.stage].visit; game.restore({ ...state.save, completedVisits: state.save.completedVisits.filter((id) => id !== visit.id), playedDialogues: state.save.playedDialogues.filter((id) => !visit.dialogue.some((entry) => entry.id === id)) }); game.requestVisit(); }}>触发纳西妲来访</button><button onClick={() => { if (state.stage !== 'G') game.restore({ ...state.save, growth: STAGES[state.stage].growth.end }); }}>推进到当前上限</button></div>
     <div className="debug-row"><button onClick={() => onCamera('root')}>镜头回到树根</button><button onClick={() => onCamera('crown')}>镜头返回树冠</button></div>
     <div className="debug-row"><button onClick={() => game.spawnAranara()}>召来一只兰那罗</button><button onClick={() => { game.spawnAranara(8); game.spawnAranara(0); game.spawnAranara(6); }}>查看三个藏身点</button></div>
     {state.stage !== 'G' && HIDING_PLACES[state.stage] && <div className="debug-row"><label>藏身点<select aria-label="调试藏身点" value={hidingSlot} onChange={(event) => setHidingSlot(Number(event.target.value))}>{HIDING_PLACES[state.stage]!.map((place, slot) => <option key={slot} value={slot}>{slot + 1} · {place.name}</option>)}</select></label><button onClick={() => { game.restore({ ...game.getSnapshot().save }); game.spawnAranara(hidingSlot); }}>查看指定藏身点</button></div>}
-    <div className="debug-row"><button onClick={() => { selectStage('F'); game.restore({ ...game.getSnapshot().save, growth: STAGES.F.growth.end - 12 }); }}>准备 F→G 最后浇灌</button><button onClick={() => { clock.set(Date.parse(SCHEDULE[0].at) - 1); game.tick(); }}>入梦开放前</button></div>
+    <div className="debug-row"><button onClick={() => { selectStage('F'); game.restore({ ...game.getSnapshot().save, growth: 1020 }); }}>准备 F→G 最后浇灌</button><button onClick={() => { clock.set(Date.parse(SCHEDULE[0].at) - 1); game.tick(); }}>入梦开放前</button></div>
     <button className="debug-reset" onClick={() => game.reset()}>重置测试存档</button><p>阶段：<span data-testid="debug-stage">{state.stage}</span> · 状态：{state.mode}<br/>队列事件：{state.event?.id ?? '无'}<br/>{ephemeral ? '不修改服务器时间或正式存档，刷新退出。' : '正式页面仅主动开启测试模式后显示本面板。'}</p>
   </div></details>;
 }
