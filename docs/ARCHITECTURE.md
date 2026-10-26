@@ -1,5 +1,7 @@
 # 工程架构 · 连续交互版
 
+2026-10-26后续优化：普通触树 / G角色连续点击保留最新句并打断旧句，树表情累计7秒；Past可再次输入退出，普通页不显示测试标记。公告、设置与读信继续播放BGM，底层演出仍暂停。手机首屏保留完整圆徽 / 种子，A～D施法图案统一72%；详见DIALOGUE_SYSTEM / EASTER_EGGS / AUDIO_AND_FONTS / NAHIDA_BLESSING与最新TEST_PLAN。
+
 本轮：Notice支持Markdown“> ”tagline并移到正文底部；N01由原稿生成。proceduralTree是GameSnapshot临时标志，TreeRenderer保留原唯一GSAP游标，通过proceduralGrowthAtFrame按当前58拍映射同等成长，替换实绘SVG枝叶；presentedTreeBounds统一两种形态的对白 / 表情 / 施法，晶蝶只换稳定落点，不改解锁。E技能采用clean-v2派生哈希纹理，原骨骼 / atlas / 时序保留，见PROCEDURAL_TREE.md / E_SKILL_CLEAN.md。
 
 2026-10-26呈现：InteractionCue以小SVG / CSS取代三处可见提示文字，保留读屏说明与暂停 / 减少动态；watering提示嵌在实际按钮内，不另估算屏幕落点。model按当前附件给tree01 / tree1及附着叶片统一16单位落地修正，timeline源矩阵不动；TreeRenderer共享一个固定根领局部mask / clip，融合独立前景硬边，不用于叶片生长。开发预览走原ExpressionDirector，仅临时播放，不改存档 / 概率 / 配额；见TREE_GROUNDING.md。
@@ -124,7 +126,7 @@ F最终浇灌到1027且有F完成收据、旧回应 / 来访 / 停留结束后�
 
 ## 自动对白与来访
 
-本轮新增 `ExpressionDirector`：复用 PausableTimer 管树的十秒活动累计 / .5 判断、真实树高收尾和单张图就绪 / 2.8s 寿命。GameController 根据既有 mode / speech / blessing / 暂停配置，不新增轮询；换景 / 回访 / 重置 / stop 释放，临时 expression 不写 v2。SpeechDirector 从 G 实际池元数据每原句选一个模式 / 图片、保留 fired 状态，沿原 reveal 时间线触发；DialogueBubble 回报可见游标兼容瞬时正文、只预载已选单张。ExpressionBubble 是一个指针穿透 / 读屏隐藏的普通 DOM 图片 / 单轮廓 SVG 气泡，96 / 70px、尾尖朝主体；真实树顶 / 头部为圆心十点至十三点随机，按包络留距与合法角度避开顶栏 / 正文，无合法位置则隐藏，不夹回树干；坐标复用树高、镜头 / 地面或角色布局，无新画布 / GL / RAF。见 EXPRESSION_SYSTEM.md。
+本轮新增 `ExpressionDirector`：复用 PausableTimer 管树的五秒活动累计 / .5 判断、真实树高收尾和单张图就绪 / 2.8s 寿命。GameController 根据既有 mode / speech / blessing / 暂停配置，不新增轮询；换景 / 回访 / 重置 / stop 释放，临时 expression 不写 v2。SpeechDirector 从 G 实际池元数据每原句选一个模式 / 图片、保留 fired 状态，沿原 reveal 时间线触发；DialogueBubble 回报可见游标兼容瞬时正文、只预载已选单张。ExpressionBubble 是一个指针穿透 / 读屏隐藏的普通 DOM 图片 / 单轮廓 SVG 气泡，96 / 70px、尾尖朝主体；真实树顶 / 头部为圆心十点至十三点随机，按包络留距与合法角度避开顶栏 / 正文，无合法位置则隐藏，不夹回树干；坐标复用树高、镜头 / 地面或角色布局，无新画布 / GL / RAF。见 EXPRESSION_SYSTEM.md。
 
 当前全部气泡桌面外宽 326 px / 正文 288 px，手机横屏外宽 236 px / 正文 212 px、字号 10.5 px；两行固定正文与较小内边距使手机约 74 px 高。sceneLayout 同时预留现实宽气泡空间、保持角色尺寸和旁侧关系；640×360 左侧气泡不改。全局已换 Irminsul 并复验真实量尺；测量 / 停顿规则集中在 DIALOGUE_SYSTEM.md，背景素材及 v2 模式不变。
 
@@ -156,7 +158,7 @@ G 不再有夜间彩蛋、月光入口或夜间日期权限。旧 v2 nightComple
 
 ## 梦露位置与反馈
 
-React场景通过setDewViewport传入真实视口 / 缩放。重绘树最大包络预留共享480世界单位半宽，再加26物理像素半径 / 间隔；贯穿屏幕的保守带兼容成长和固定地面，另避顶栏、调试及底部操作。露珠保守带不能当成兰那罗藏点新禁区。
+React场景通过setDewViewport传入真实视口 / 缩放与treeDewObstacles当前部件投影。静止合并实际附件，生长额外合并前一浇及沿途帧包络，普通 / 奖励 / Rainstorm统一避树；仅无树形几何的调用回退480世界单位半宽。这样释放平板中部未被树占据的空地，仍保留半径 / 触摸间隔及顶栏 / 底部 / 生物避让。按成长 / 状态 / 布局memo更新，不新建时钟或逐帧React更新，见TABLET_LAYOUT.md。
 
 普通梦露两侧随机采样保持至少 60 物理像素的粒子中心间距，拥挤时用网格兜底，没有空间则暂缓生成，不降级到树上。窗口变化后重排不安全粒子，保留编号、价值与资源数量。奖励用 44 px 命中 / 48 px 间距、混合至少 56 px 并可合并份额，详见“小生物与奖励生命周期”；两类都避开小生物热点。更换宽度更大的树美术时同步调整包络并复验。
 

@@ -161,7 +161,7 @@ test('开场仅预载当前音乐，主动播放立即复用压缩缓存，暂�
   await expect(page.getByRole('button', { name: '播放背景音乐', exact: true })).toBeVisible();
 });
 
-test('真实音频曲尾后留白十二秒再单曲循环，设置暂停不丢位置', async ({ page }, info) => {
+test('真实音频曲尾后留白十二秒再单曲循环，设置不打断播放', async ({ page }, info) => {
   await launch(page, info); await begin(page);
   await page.evaluate(() => { const media = (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0]; media.currentTime = media.duration - 0.25; });
   await expect.poll(() => page.evaluate(() => { const media = (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0]; return media.paused && media.currentTime === 0; })).toBe(true);
@@ -169,19 +169,50 @@ test('真实音频曲尾后留白十二秒再单曲循环，设置暂停不丢�
   await page.clock.fastForward(200); await playing(page);
   await page.evaluate(() => { (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0].currentTime = 30; });
   await openSettings(page); await page.clock.runFor(350);
-  expect(await page.evaluate(() => (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0].paused)).toBe(true);
+  expect(await page.evaluate(() => (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0].paused)).toBe(false);
   await page.clock.fastForward(30000); const position = await page.evaluate(() => (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0].currentTime);
   expect(position).toBeLessThan(32); await page.getByRole('button', { name: '关闭', exact: true }).click(); await playing(page);
   await expect(page.getByRole('button', { name: '设置', exact: true })).toBeFocused();
 });
 
-test('G 沿用留白与单曲播放，仅请求生日曲目，设置暂停后续播', async ({ page }, info) => {
+test('G沿用留白与单曲播放，仅请求生日曲目，设置中音乐继续', async ({ page }, info) => {
   const requests: string[] = []; page.on('request', (request) => { if (request.url().includes('/asserts/music/')) requests.push(request.url()); });
   await launch(page, info, 'G'); await page.mouse.click(20, 120); await page.clock.runFor(100); await page.clock.runFor(7700);
   expect(requests).toHaveLength(1); await expect(page.locator('.music-button')).toHaveAttribute('data-playing', 'false'); await page.clock.runFor(300); await playing(page);
   expect(requests.length).toBeGreaterThan(0); expect(requests.every((url) => url.endsWith(music.tracks.G.src))).toBe(true);
-  await openSettings(page); await page.clock.runFor(350); await expect(page.locator('.music-button img')).toHaveCSS('animation-play-state', 'paused');
+  await openSettings(page); await page.clock.runFor(350); await expect(page.locator('.music-button img')).toHaveCSS('animation-play-state', 'running');
   await page.keyboard.press('Escape'); await playing(page); await picture(page, info, 'g-music');
+});
+
+test('设置、公告与读信保持同一音频连续播放，不触发暂停或重复创建播放器', async ({ page }, info) => {
+  await launch(page, info, 'G'); await begin(page);
+  const initial = await page.evaluate(() => {
+    const audio = (Reflect.get(window, '__musicMedia') as HTMLAudioElement[])[0];
+    Reflect.set(window, '__panelPauseCount', 0);
+    audio.addEventListener('pause', () => Reflect.set(window, '__panelPauseCount', Number(Reflect.get(window, '__panelPauseCount')) + 1));
+    return { source: audio.currentSrc, position: audio.currentTime };
+  });
+  for (const name of ['设置', '公告与声明']) {
+    await page.getByRole('button', { name, exact: true }).click();
+    await expect(page.getByRole('dialog')).toBeVisible(); await page.clock.runFor(1000);
+    await expect(page.locator('.music-button')).toHaveAttribute('data-playing', 'true');
+    await page.waitForTimeout(250);
+    const current = await page.evaluate(() => {
+      const list = Reflect.get(window, '__musicMedia') as HTMLAudioElement[]; const audio = list[0];
+      return { source: audio.currentSrc, position: audio.currentTime, paused: audio.paused, count: list.length, pauses: Reflect.get(window, '__panelPauseCount') };
+    });
+    expect(current.source).toBe(initial.source); expect(current.position).toBeGreaterThan(initial.position);
+    expect(current.paused).toBe(false); expect(current.count).toBe(1); expect(current.pauses).toBe(0);
+    await page.keyboard.press('Escape');
+  }
+  await page.getByRole('button', { name: '展开 2023 年生日来信', exact: true }).click();
+  await page.clock.runFor(1000); await expect(page.getByTestId('birthday-mail')).toHaveAttribute('data-phase', 'reading');
+  await expect(page.locator('.music-button')).toHaveAttribute('data-playing', 'true');
+  expect(await page.evaluate(() => {
+    const list = Reflect.get(window, '__musicMedia') as HTMLAudioElement[];
+    return { paused: list[0].paused, source: list[0].currentSrc, count: list.length, pauses: Reflect.get(window, '__panelPauseCount') };
+  })).toEqual({ paused: false, source: initial.source, count: 1, pauses: 0 });
+  await page.keyboard.press('Escape'); await page.clock.runFor(1500); await expect(page.getByTestId('birthday-mail')).toHaveCount(0);
 });
 
 test('全部文字使用新字体，常用包独立加载，扩展字按需加载且设置仍可访问', async ({ page }, info) => {

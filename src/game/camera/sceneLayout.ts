@@ -5,6 +5,7 @@ import { dialogueWidth } from '../../data/dialogueLayout';
 import type { DreamStageId } from '../../types/game';
 import { presentedTreeBounds } from '../tree/presentation';
 import { treeCanopyFocus } from '../tree/scenePlacement';
+import { visitExpressionAnchor } from '../expressions/placement';
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 
@@ -29,17 +30,30 @@ export function dreamLayout(width: number, height: number, scale: number, treeHe
   const focus = treeCanopyFocus(presentedTreeBounds(growth, procedural, seed), width, height, root, scale);
   const treeBubbleLeft = clamp(focus.x + Math.min(focus.radiusX * .22, compact ? 32 : 78) + (compact ? 22 : 38), 20, width - treeBubbleWidth - 24);
   const characterBubbleWidth = treeBubbleWidth;
-  const beside = variant !== 'dream';
+  const beside = variant !== 'dream' || visitStage === 'B' || visitStage === 'E';
   const bubbleRight = beside && placement.side === 'left' && (compact || characterLeft < characterBubbleWidth + 24);
+  let characterBubbleLeft = beside ? bubbleRight ? clamp(characterLeft + characterWidth * 0.85 + 8, 20, width - characterBubbleWidth - 60) : Math.max(20, characterLeft + characterWidth * 0.1 - characterBubbleWidth - 8) : compact ? clamp(characterLeft + characterWidth * 0.52 - characterBubbleWidth / 2, 20, width - characterBubbleWidth - 20) : Math.max(20, characterLeft + characterWidth * 0.42 - characterBubbleWidth - 8);
+  let characterBubbleTop = compact && !beside ? Math.max(86, characterTop - 100) : clamp(characterTop + characterHeight * (hanging ? 0.48 : 0.12), 100, height - 150);
+  let characterBubbleSide: 'left' | 'right' | 'bottom' = beside ? bubbleRight ? 'left' : 'right' : compact ? 'bottom' : 'right';
+  if (variant === 'dream' && (visitStage === 'B' || visitStage === 'E')) {
+    const head = visitExpressionAnchor({ left: characterLeft, top: characterTop, width: characterWidth, height: characterHeight }, visitStage);
+    const bubbleHeight = compact ? 96 : 128;
+    if (characterBubbleLeft < head.x + head.radiusX + 12 && characterBubbleLeft + characterBubbleWidth > head.x - head.radiusX - 12 && characterBubbleTop < head.y + head.radiusY + 12 && characterBubbleTop + bubbleHeight > head.y - head.radiusY - 12) {
+      const right = head.x + head.radiusX + 12;
+      const left = head.x - head.radiusX - characterBubbleWidth - 12;
+      if (right + characterBubbleWidth <= width - 20) { characterBubbleLeft = right; characterBubbleSide = 'left'; }
+      else if (left >= 20) { characterBubbleLeft = left; characterBubbleSide = 'right'; }
+      else { characterBubbleTop = Math.max(84, head.y - head.radiusY - bubbleHeight - 12); characterBubbleSide = 'bottom'; }
+    }
+  }
   return {
     character: { left: characterLeft, top: characterTop, width: characterWidth, height: characterHeight },
     characterEmission: { ...emitter },
     treeBubble: { left: treeBubbleLeft, top: clamp(focus.y + (compact ? 12 : 22), compact ? 84 : 104, compact ? height - 190 : height - 160), width: treeBubbleWidth },
     characterBubble: {
-      left: beside ? bubbleRight ? clamp(characterLeft + characterWidth * 0.85 + 8, 20, width - characterBubbleWidth - 60) : Math.max(20, characterLeft + characterWidth * 0.1 - characterBubbleWidth - 8) : compact ? clamp(characterLeft + characterWidth * 0.52 - characterBubbleWidth / 2, 20, width - characterBubbleWidth - 20) : Math.max(20, characterLeft + characterWidth * 0.42 - characterBubbleWidth - 8),
-      top: compact && !beside ? Math.max(86, characterTop - 100) : clamp(characterTop + characterHeight * (hanging ? 0.48 : 0.12), 100, height - 150), width: characterBubbleWidth,
+      left: characterBubbleLeft, top: characterBubbleTop, width: characterBubbleWidth,
     },
-    characterBubbleSide: beside ? bubbleRight ? 'left' as const : 'right' as const : compact ? 'bottom' as const : 'right' as const,
+    characterBubbleSide,
   };
 }
 

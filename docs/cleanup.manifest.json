@@ -634,5 +634,21 @@
       }
     ],
     "netBytesSaved": 18641525
+  },
+  "interactionRefinementsFontRefresh": {
+    "date": "2026-10-26",
+    "removed": [
+      {
+        "path": "public/asserts/fonts/irminsul-common-689b69eda0be.woff2",
+        "bytes": 208748,
+        "sha256": "689b69eda0be34b4e15fb60db7253365b3b5c60616cf06748945049405d57e72"
+      },
+      {
+        "path": "public/asserts/fonts/irminsul-extended-cb9b0f595ebd.woff2",
+        "bytes": 3313164,
+        "sha256": "cb9b0f595ebd4a545cbd8a6e8e23720f84ec60f79ca263085e943ab9ae6a7c13"
+      }
+    ],
+    "reason": "Only superseded font subsets after new test-exit feedback. Current source TTF and generated subsets preserved."
   }
 }

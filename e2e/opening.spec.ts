@@ -15,6 +15,7 @@ async function pausedClock(page: Page) {
 }
 
 async function seek(page: Page, time: number) {
+  await page.locator('.opening-shell').evaluate((element, reveal) => { element.setAttribute('data-opening-phase', reveal ? 'reveal' : 'throw'); }, time >= OPENING_RULES.splitMs);
   await page.locator('.opening-content, .opening-flight, .opening-flight-travel, .opening-flight-bounce, .opening-frame, .opening-center, .opening-structure, .opening-scan, [data-opening-corner]').evaluateAll((elements, time) => {
     for (const element of elements) for (const animation of element.getAnimations()) { animation.pause(); animation.currentTime = time; }
   }, time);
@@ -106,13 +107,14 @@ test('黑屏、弹跳翻转、四角成框、真实页面揭示、等比扩框�
       const geometry = openingGeometry(page.viewportSize()!.width, page.viewportSize()!.height);
       const actual = await page.evaluate(() => {
         const content = getComputedStyle(document.querySelector('.opening-content')!);
-        const verticalInset = Number(content.clipPath.match(/-?[\d.]+/)![0]);
+        const halfEdge = Number(content.clipPath.match(/50%\s*-\s*([\d.]+)px/)?.[1] ?? 0);
         const scale = new DOMMatrix(getComputedStyle(document.querySelector('.opening-frame')!).transform).a;
-        return { edge: window.innerHeight - verticalInset * 2, scale };
+        return { edge: halfEdge * 2, scale };
       });
       expect(Math.abs(actual.edge - geometry.edge * actual.scale)).toBeLessThan(0.2);
     }
   }
+  await shell.evaluate((element) => { element.setAttribute('data-opening-phase', 'throw'); });
   await finishOpening(page, true);
   await expect(shell).toHaveAttribute('data-opening', 'false');
   await expect(page.locator('.opening-overlay')).toHaveCount(0);

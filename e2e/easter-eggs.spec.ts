@@ -27,7 +27,7 @@ async function avatarReady(page: Page) { await expect.poll(async () => { await p
 test('隐藏键盘代码、40颗额外梦露、形象开关、正确反馈和手机空输入框', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
   await launch(page, info, 'C');
-  await expect(page.locator('.game-brand .build-marker')).toHaveText('（开发测试中）');
+  await expect(page.locator('.game-brand .build-marker')).toHaveCount(0);
   await page.keyboard.type('RaInStOrM'); await expect(page.locator('[data-dew-kind=rainstorm]')).toHaveCount(40);
   await page.keyboard.type('ArAnArA'); await expect(page.locator('.creature-roaming')).toHaveCount(1);
   await page.keyboard.type('NaHiDa'); await avatarReady(page);
@@ -47,13 +47,14 @@ test('隐藏键盘代码、40颗额外梦露、形象开关、正确反馈和手
   expect(errors).toEqual([]);
 });
 
-test('Past 切段和改时间只作用于内存，刷新后退出并恢复原进度', async ({ page }, info) => {
+test('Past切段与改时间隔离，再次输入退出、重入与刷新还原', async ({ page }, info) => {
   await launch(page, info, 'D');
   const before = await saved(page, info);
   const time = await page.evaluate(() => sessionStorage.getItem('irminsul.development.clock'));
   if (info.project.name.startsWith('production')) await expect(page.locator('.debug-panel')).toHaveCount(0);
   await page.keyboard.type('test'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'false');
   await page.keyboard.type('pAsT'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
+  await expect(page.locator('.game-brand .build-marker')).toHaveText('（开发测试中）');
   await expect.poll(async () => { await page.clock.runFor(100); return page.locator('.debug-panel').count(); }).toBe(1);
   await page.locator('.debug-panel > summary').click();
   await expect(page.getByText('本页测试 · 内存存档，刷新后退出', { exact: true })).toBeVisible();
@@ -65,6 +66,15 @@ test('Past 切段和改时间只作用于内存，刷新后退出并恢复原进
   await page.getByLabel('调试梦露', { exact: true }).fill('6');
   expect(await saved(page, info)).toEqual(before); expect(await page.evaluate(() => sessionStorage.getItem('irminsul.development.clock'))).toBe(time);
   mkdirSync('docs/screenshots/secrets', { recursive: true }); await page.screenshot({ path: `docs/screenshots/secrets/test-${info.project.name}.png` });
+  await page.locator('.debug-panel > summary').click(); await page.keyboard.type('PAST');
+  await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'false');
+  await expect(page.locator('.build-marker')).toHaveCount(0);
+  await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening', 'false');
+  await expect(page.locator('.theme-dawn')).toBeVisible();
+  expect(await saved(page, info)).toEqual(before);
+  expect(await page.evaluate(() => sessionStorage.getItem('irminsul.development.clock'))).toBe(time);
+  await openSettings(page); await page.locator('.hidden-code-entry input').fill('Past');
+  await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
   await page.reload(); await finishOpening(page, true);
   await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'false');
   expect((await saved(page, info)).sceneStage).toBe('D'); expect((await saved(page, info)).growth).toBe(before.growth);
@@ -86,7 +96,7 @@ test('开场等候真实预载、缓转、不可交互、无批量GL，完成后
   expect(spin?.duration).toBe(4000);
   expect(requested.some((url) => url.includes('/music/'))).toBe(false); expect(requested.some((url) => url.includes('irminsul-extended'))).toBe(false);
   release(); await finishOpening(page, true);
-  await expect(shell).toHaveAttribute('data-preload-failed', '0'); await expect(page.locator('.intro-brand .build-marker')).toHaveText('（开发测试中）');
+  await expect(shell).toHaveAttribute('data-preload-failed', '0'); await expect(page.locator('.intro-brand .build-marker')).toHaveCount(0);
   await expect(page.locator('.opening-overlay')).toHaveCount(0);
   expect(requested.filter((url) => url.includes('/loading/art/'))).toHaveLength(6);
   const count = requested.filter((url) => url.endsWith('/festival/image_2_14.png')).length;

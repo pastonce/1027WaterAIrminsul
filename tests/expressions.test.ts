@@ -66,34 +66,34 @@ describe('表情资源与原稿标记', () => {
   });
 });
 
-describe('树的十秒累积与弹出生命周期', () => {
-  it('累计满十秒仅抽一次、成功后从该阶段候选选择，读图后显示 2.8 秒', () => {
+describe('树的七秒累积与弹出生命周期', () => {
+  it('累计满七秒仅抽一次、成功后从该阶段候选选择，读图后显示 2.8 秒', () => {
     const { director, state } = expressionScene(); director.configure('A', true, false, false);
-    vi.advanceTimersByTime(9999); expect(state.playback).toBeNull(); vi.advanceTimersByTime(1);
+    vi.advanceTimersByTime(6999); expect(state.playback).toBeNull(); vi.advanceTimersByTime(1);
     expect(state.playback).toMatchObject({ asset: 1, anchor: 'tree', angle: -60, ready: false });
     const id = state.playback!.id; director.ready(id); vi.advanceTimersByTime(2799); expect(state.playback?.ready).toBe(true);
-    vi.advanceTimersByTime(1); expect(state.playback).toBeNull(); vi.advanceTimersByTime(7200); expect(state.playback!.id).toBeGreaterThan(id);
+    vi.advanceTimersByTime(1); expect(state.playback).toBeNull(); vi.advanceTimersByTime(4200); expect(state.playback!.id).toBeGreaterThan(id);
   });
-  it('0.5 边界不触发，失败也从零重新累计十秒', () => {
+  it('0.5 边界不触发，失败也从零重新累计七秒', () => {
     const random = vi.fn(() => .5); const { director, state } = expressionScene(random); director.configure('B', true, false, false);
-    vi.advanceTimersByTime(19999); expect(random).toHaveBeenCalledOnce(); expect(state.playback).toBeNull();
+    vi.advanceTimersByTime(13999); expect(random).toHaveBeenCalledOnce(); expect(state.playback).toBeNull();
     vi.advanceTimersByTime(1); expect(random).toHaveBeenCalledTimes(2);
   });
   it('对白 / 面板中暂停累计而非清零，恢复只补余量；显示时间同样可暂停', () => {
-    const { director, state } = expressionScene(); director.configure('C', true, false, false); vi.advanceTimersByTime(6000);
+    const { director, state } = expressionScene(); director.configure('C', true, false, false); vi.advanceTimersByTime(3000);
     director.configure('C', false, true, false); vi.advanceTimersByTime(30000); expect(state.playback).toBeNull();
     director.configure('C', true, false, false); vi.advanceTimersByTime(3999); expect(state.playback).toBeNull(); vi.advanceTimersByTime(1);
     director.ready(state.playback!.id); vi.advanceTimersByTime(1000); director.configure('C', false, true, false); vi.advanceTimersByTime(20000);
     expect(state.playback?.ready).toBe(true); director.configure('C', true, false, false); vi.advanceTimersByTime(1800); expect(state.playback).toBeNull();
   });
   it('树高动画真实收尾前不累计，开始生长或对白打断树表情', () => {
-    const { director, state } = expressionScene(); director.configure('D', true, false, false); vi.advanceTimersByTime(9000); director.grew();
+    const { director, state } = expressionScene(); director.configure('D', true, false, false); vi.advanceTimersByTime(6000); director.grew();
     director.configure('D', true, false, false); vi.advanceTimersByTime(2199); expect(state.playback).toBeNull(); vi.advanceTimersByTime(1);
     expect(state.playback).not.toBeNull(); director.configure('D', false, false, true); expect(state.playback).toBeNull();
   });
-  it('换场 / 重置撤销旧候选与读图回调，G 不运行十秒随机', () => {
+  it('换场 / 重置撤销旧候选与读图回调，G 不运行七秒随机', () => {
     const random = vi.fn(() => 0); const { director, state } = expressionScene(random); director.configure('A', true, false, false);
-    vi.advanceTimersByTime(10000); const old = state.playback!.id; director.configure('F', true, false, false); director.ready(old); expect(state.playback).toBeNull();
+    vi.advanceTimersByTime(7000); const old = state.playback!.id; director.configure('F', true, false, false); director.ready(old); expect(state.playback).toBeNull();
     director.configure('G', true, false, false); random.mockClear(); vi.advanceTimersByTime(60000); expect(random).not.toHaveBeenCalled();
     director.show(3, 'tree'); expect(state.playback).toBeNull(); director.show(3, 'nahida'); expect(state.playback?.asset).toBe(3);
     director.reset(); expect(state.playback).toBeNull(); expect(vi.getTimerCount()).toBe(0);

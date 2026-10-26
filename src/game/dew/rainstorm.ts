@@ -14,7 +14,7 @@ export function placeRainstorm(viewport: DewViewport, occupied: DewParticle[], r
       for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) {
         const horizontal = region.left + (region.right - region.left) * (columns === 1 ? 0.5 : column / (columns - 1));
         const vertical = region.top + (region.bottom - region.top) * (rows === 1 ? 0.5 : row / (rows - 1));
-        if ((viewport.blocked ?? []).some((area) => horizontal + radius > area.left && horizontal - radius < area.left + area.width && vertical + radius > area.top && vertical - radius < area.top + area.height)) continue;
+        if ([...(viewport.tree ?? []), ...(viewport.blocked ?? [])].some((area) => horizontal + radius > area.left && horizontal - radius < area.left + area.width && vertical + radius > area.top && vertical - radius < area.top + area.height)) continue;
         if (occupied.some((particle) => !particle.collected && !particle.expiring && Math.hypot(horizontal - particle.x * viewport.width / 100, vertical - particle.y * viewport.height / 100) < 28)) continue;
         points.push({ x: horizontal / viewport.width * 100, y: vertical / viewport.height * 100 });
       }

@@ -32,7 +32,7 @@
 
 最新：G 远 / 近树影 SVG 不再挂载，不删除 A～F 回退代码；祝福复用两张甜点图各 3 / 4 份，不增加下载 URL。新增来访竖琴与短雨声源 / 哈希 / 许可见 sfx-assets.manifest.json；本轮仅编码与更新清单，不作验证通过声明。
 
-两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 6 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 208,748 B / 扩展 3,313,164 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
+两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 6 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 208,828 B / 扩展 3,313,096 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
 
 | 资源 | 已使用路径 | 来源 / 状态 |
 | --- | --- | --- |
@@ -63,7 +63,7 @@
 | 树冠装饰 | 原智慧树叶 / 簇附件、原叶柄校正与111语义枝位 | 实际grow34 / D580起接续15原叶及96新枝，原0.5秒叶 / 0.25秒簇完整，42～48簇独立一拍，沿枝延伸、单site单附件，无程序花朵或长期叠图 |
 | 交互音效 | `public/asserts/sfx/*-*.json`、sounds.generated.json、SoundManager.ts | 七份 AAC-LC / MP4、96 kb/s / 48 kHz 单声道，以 JSON / base64 兼容 IDM，约 196 KiB；水滴 / 浇水 / 叶声 / 弹跳 / 传送 / 来访竖琴 / 短暴雨，按动作请求，共用 BGM 上下文；来源 / 授权 / 双哈希见 sfx-assets.manifest.json，署名随 CREDITS.txt 发布 |
 | A～G 音乐 | `public/asserts/music/*.m4a`、music.generated.json | 同名 MP3 派生 AAC-LC 192 kb/s / 48 kHz 双声道，七首约 19.20 MB，仅当前场景流式加载；music-assets.manifest.json 登记哈希 |
-| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 208,748 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
+| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 208,828 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
 
 背景与梦境角色从原始目录复制，现实角色直接使用用户在发布目录替换的 JSON / atlas / 打包纹理。没有复制 MP4、Spine 工程或散件图目录，没有引用远程资源站。此前原始目录保留；player 的旧 Unity 备份已按用户后续明确要求清空，完整成品 `asserts/player/` 保持哈希不变，另从中提取独立角色。
 
@@ -145,7 +145,7 @@ F 保留源 2400×1350 设计，相机中心 `(0, 0)`，14 张纹理未重压；
 
 命中仅使用当前绘制的树干 / 根 / 枝叶 / 花朵，跟随动画高度；SVG 空白、光晕和未显现叶片穿透。替换美术时同步适配可见几何命中，不恢复全高矩形或加宽透明路径，不以缩裁视口改变树的视觉变换原点；保留键盘与轻扫误触保护，固定树根视角。
 
-梦露为重绘树保留共享半宽480世界单位及触摸间隔，常量在data/treeArt.ts，由game/dew/placement.ts使用。替换枝叶、树冠或增加横向摆动后同步校准包络，复验根冠和手机横屏。
+梦露运行时由game/dew/treeSpace.ts投影当前presentation附件包络，生长合并前一浇及沿途采样；程序化树按实际根干冠避让。data/treeArt.ts的480半宽仅供缺少几何信息时保守回退，保留触摸间隔。替换枝叶 / 树冠或增加横向摆动后同步校准当前包络，复验桌面 / 平板 / 手机横屏；详见TABLET_LAYOUT.md。
 
 可供后续生图的提示词：
 

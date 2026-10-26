@@ -247,7 +247,11 @@ export class SpeechDirector {
   restartLine() { if (this.playback && this.playback.phase !== 'fading') this.playPart(); }
 
   interruptTree() {
-    if (!this.current || this.current.visit || this.current.anchor !== 'tree') return false;
+    return this.interrupt('tree');
+  }
+
+  interrupt(anchor: SpeechAnchor) {
+    if (!this.current || this.current.visit || this.current.anchor !== anchor) return false;
     this.timer.clear(); this.hold.clear(); this.expression.clear();
     this.hovered = false;
     this.current = null;

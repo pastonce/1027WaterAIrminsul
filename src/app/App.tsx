@@ -34,7 +34,7 @@ import type { SeedOrigin } from '../data/seed';
 
 const DebugPanel = PUBLIC_TESTING ? lazy(() => import('../dev/DebugPanel')) : null;
 
-export function App({ game, clock, timeSync, testing = false, previewing = false, skipOpening = false, onTesting, onBirthday, firstNotice }: { game: GameController; clock: Clock; timeSync?: ServerClock; testing?: boolean; previewing?: boolean; skipOpening?: boolean; onTesting?: () => Promise<boolean>; onBirthday?: () => Promise<boolean>; firstNotice: FirstVisitNotice }) {
+export function App({ game, clock, timeSync, testing = false, previewing = false, skipOpening = false, sessionNotice, onTesting, onBirthday, firstNotice }: { game: GameController; clock: Clock; timeSync?: ServerClock; testing?: boolean; previewing?: boolean; skipOpening?: boolean; sessionNotice?: string; onTesting?: () => Promise<boolean>; onBirthday?: () => Promise<boolean>; firstNotice: FirstVisitNotice }) {
   const state = useSyncExternalStore(game.subscribe, game.getSnapshot);
   const systemReduced = useReducedMotion();
   const reduced = systemReduced || state.save.settings.reducedMotion;
@@ -44,7 +44,7 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
   const [openingPlan, setOpeningPlan] = useState<StartupPlan | null>(null);
   const [introPanel, setIntroPanel] = useState<'settings' | 'notice' | null>(null);
   const [firstNoticePending, setFirstNoticePending] = useState(firstNotice.pending);
-  const [secretNotice, setSecretNotice] = useState<{ text: string } | null>(testing ? { text: '本页测试已开启，刷新后回到原来的梦。' } : null);
+  const [secretNotice, setSecretNotice] = useState<{ text: string } | null>(sessionNotice ? { text: sessionNotice } : testing ? { text: '本页测试已开启，刷新后回到原来的梦。' } : null);
   const noticeTimer = useRef(new PausableTimer());
   const seedOrigin = useRef<SeedOrigin | null>(null);
   const [hidden, setHidden] = useState(document.hidden);
@@ -76,7 +76,7 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
     if (code === 'birthday') return Boolean(onBirthday && await onBirthday());
     if (code === 'past') {
       if (!PUBLIC_TESTING || !onTesting || !await onTesting()) return false;
-      setSecretNotice({ text: '本页测试已开启，刷新后回到原来的梦。' }); return true;
+      setSecretNotice({ text: testing ? '已退出本页测试，回到原来的梦。' : '本页测试已开启，刷新后回到原来的梦。' }); return true;
     }
     const feedback = game.easterEgg(code);
     if (!feedback) return false;
@@ -96,7 +96,7 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
   useLayoutEffect(() => { configureSound(state); }, [state, opening, hidden, portraitBlocked]);
   useEffect(() => game.subscribeSound((kind) => { configureSound(game.getSnapshot()); void sound.play(kind); }), [game, opening, hidden, portraitBlocked]);
 
-  const configureMusic = (snapshot: GameSnapshot) => music.configure({ stage: snapshot.mode === 'intro' ? null : snapshot.reviewStage ?? snapshot.stage, enabled: snapshot.save.settings.music, volume: snapshot.save.settings.musicVolume, paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'settings', 'notice', 'mail', 'loading', 'ending', 'waking'].includes(snapshot.mode), immediate: hidden || portraitBlocked || opening });
+  const configureMusic = (snapshot: GameSnapshot) => music.configure({ stage: snapshot.mode === 'intro' ? null : snapshot.reviewStage ?? snapshot.stage, enabled: snapshot.save.settings.music, volume: snapshot.save.settings.musicVolume, paused: opening || hidden || portraitBlocked || ['intro', 'journal', 'loading', 'ending', 'waking'].includes(snapshot.mode), immediate: hidden || portraitBlocked || opening });
   useLayoutEffect(() => { configureMusic(state); }, [music, musicStage, state.save.settings.music, state.save.settings.musicVolume, state.mode, opening, hidden, portraitBlocked]);
 
   useLayoutEffect(() => { game.setSystemReducedMotion(systemReduced); }, [game, systemReduced]);
@@ -163,10 +163,10 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
 
   return <OpeningReveal active={opening} reduced={reduced} paused={hidden || portraitBlocked} plan={openingPlan} onComplete={() => setOpening(false)}><div className={`game-app ${reduced ? 'reduced-motion' : ''} ${state.mode === 'ending' ? 'is-awakening' : ''}`} data-testing={testing} data-previewing={previewing} data-first-notice={firstNoticePending ? 'pending' : 'complete'} onPointerDownCapture={(event) => { game.activity(); unlockMusic(event.target); }} onClickCapture={(event) => { game.activity(); unlockMusic(event.target); }} onKeyDownCapture={(event) => { if (!event.repeat) { game.activity(); unlockMusic(event.target); } }}>
     <div className="game-content" inert={inputBlocked} aria-hidden={inputBlocked || undefined}>
-    {state.mode === 'intro' ? <><IntroScene message={state.message} unplanted={!state.save.seedPlanted} onEnter={enterDream} onSettings={() => setIntroPanel('settings')} onNotice={() => setIntroPanel('notice')}/>{introPanel === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem} onClose={() => setIntroPanel(null)}/>} {introPanel === 'notice' && <Notice reduced={reduced} onClose={() => setIntroPanel(null)}/>}</> : <>
+    {state.mode === 'intro' ? <><IntroScene message={state.message} testing={testing} unplanted={!state.save.seedPlanted} onEnter={enterDream} onSettings={() => setIntroPanel('settings')} onNotice={() => setIntroPanel('notice')}/>{introPanel === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem} onClose={() => setIntroPanel(null)}/>} {introPanel === 'notice' && <Notice reduced={reduced} onClose={() => setIntroPanel(null)}/>}</> : <>
       {reality ? <RealityScene game={game} state={state} reduced={reduced} testing={testing} suspended={opening || hidden || portraitBlocked}/> : <DreamTreeScene game={game} state={state} reduced={reduced} seedOrigin={seedOrigin.current} testing={testing}/>}
       <header className="game-header" data-mail-open={state.mode === 'mail'}>
-        <div className="game-brand"><Icon name="leaf" size={26}/><div><span><span>浇灌一棵世界树</span><BuildMarker/></span><small>WATER AN IRMINSUL</small></div></div>
+        <div className="game-brand"><Icon name="leaf" size={26}/><div><span><span>浇灌一棵世界树</span><BuildMarker testing={testing}/></span><small>WATER AN IRMINSUL</small></div></div>
         <div className="header-actions">
           {!reality && <div key={state.dewFeedbackRevision} className={`dew-counter ${state.save.dew === GAME_RULES.dewCapacity ? 'is-full' : ''} ${state.dewFeedback ? 'dew-feedback' : ''}`} data-feedback={state.dewFeedback ?? undefined} aria-label={`梦露 ${state.save.dew} / ${GAME_RULES.wateringCost}`}>
             <Icon name="dew" size={22}/><b data-testid="dew-count">{state.save.dew}</b><span>/ {GAME_RULES.wateringCost}</span>

@@ -75,25 +75,38 @@
 }
 .intro-footer > span:last-child { text-align: right; }
 @media (max-height: 600px) and (orientation: landscape) {
-  .intro-scene { padding-bottom: calc(56px + env(safe-area-inset-bottom) * 2); }
+  .intro-scene { padding: max(56px, calc(env(safe-area-inset-top) + 44px)) 0 max(30px, calc(env(safe-area-inset-bottom) + 22px)); }
   .intro-brand { top: max(16px, env(safe-area-inset-top)); left: max(24px, calc(env(safe-area-inset-left) + 12px)); font-size: 12px; gap: 10px; }
-  .intro-brand > svg { width: 21px; height: 21px; }
-  .intro-content { width: min(620px, calc(100% - 64px)); margin-top: 0; }
-  .intro-emblem { width: 46px; height: 46px; margin-bottom: 14px; outline-offset: 6px; }
-  .intro-emblem > svg { width: 28px; height: 28px; }
-  .intro-emblem::after { width: 17px; height: 17px; bottom: -8px; font-size: 9px; }
+  .intro-brand > svg { width: 21px; height: 21px; flex-shrink: 0; overflow: visible; }
+  .intro-content { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: min(620px, calc(100% - 64px)); margin-top: 0; }
+  .intro-content > * { flex-shrink: 0; }
+  .intro-scene .intro-emblem { display: flex; }
+  .intro-emblem { width: 32px; height: 32px; margin: 0 auto 10px; outline-offset: 4px; }
+  .intro-emblem > svg { width: 22px; height: 22px; }
+  .intro-emblem::after { width: 13px; height: 13px; bottom: -6px; font-size: 8px; }
   .intro-content > .eyebrow { font-size: 8px; letter-spacing: .2em; }
-  .intro-content h1 { font-size: 26px; line-height: 1.5; margin: 12px 0 16px; }
-  .intro-content .intro-invitation { font-size: 11px; line-height: 2; letter-spacing: .06em; }
-  .intro-scene .enter-dream { min-width: 198px; min-height: 42px; padding: 10px 22px; margin-top: 22px; font-size: 12px; }
+  .intro-content h1 { font-size: 22px; line-height: 1.35; margin: 8px 0 10px; }
+  .intro-content .intro-invitation { font-size: 11px; line-height: 1.8; letter-spacing: .06em; }
+  .intro-scene .enter-dream { min-width: 198px; min-height: 38px; padding: 8px 22px; margin-top: 14px; font-size: 12px; }
+  .intro-scene .intro-seed { width: 28px; height: 40px; margin-top: 4px; }
   .intro-footer { left: max(24px, calc(env(safe-area-inset-left) + 12px)); right: max(24px, calc(env(safe-area-inset-right) + 12px)); bottom: max(12px, env(safe-area-inset-bottom)); font-size: 8.5px; gap: 16px; }
   .intro-scene .intro-notice { bottom: calc(32px + env(safe-area-inset-bottom)); }
 }
 @media (max-height: 360px) and (orientation: landscape) {
-  .intro-emblem { display: none; }
-  .intro-content h1 { font-size: 24px; line-height: 1.45; margin: 12px 0 14px; }
-  .intro-content .intro-invitation { font-size: 10.5px; }
-  .intro-scene .enter-dream { min-height: 40px; margin-top: 18px; }
+  .intro-emblem { width: 28px; height: 28px; margin-bottom: 8px; }
+  .intro-emblem > svg { width: 19px; height: 19px; }
+  .intro-content h1 { font-size: 20px; line-height: 1.35; margin: 6px 0 8px; }
+  .intro-content .intro-invitation { font-size: 10.5px; line-height: 1.8; }
+  .intro-scene .enter-dream { min-height: 36px; margin-top: 12px; }
+  .intro-scene .intro-seed { width: 25px; height: 36px; }
+}
+@media (max-height: 340px) and (orientation: landscape) {
+  .intro-emblem { width: 26px; height: 26px; margin-bottom: 6px; }
+  .intro-content > .eyebrow { font-size: 7.5px; }
+  .intro-content h1 { font-size: 19px; line-height: 1.3; margin: 6px 0 8px; }
+  .intro-content .intro-invitation { line-height: 1.65; }
+  .intro-scene .enter-dream { min-height: 34px; margin-top: 10px; }
+  .intro-scene .intro-seed { width: 22px; height: 32px; margin-top: 3px; }
 }
 @media (forced-colors: active) {
   .intro-scene { background: Canvas; }

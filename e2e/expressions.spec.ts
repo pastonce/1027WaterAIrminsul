@@ -66,18 +66,20 @@ test('成熟固定视角的表情与对白靠近可见冠部，根部仍在画�
   expect(bounds.y).toBeGreaterThanOrEqual(80); expect(bounds.y + bounds.height).toBeLessThan(geometry.height);
 });
 
-test('树累积十秒才作半概率判断，失败重计、成功只请求选中图片且不阻断操作', async ({ page }, info) => {
+test('树累积七秒才作半概率判断，失败重计、预载后只展示当前表情且不阻断操作', async ({ page }, info) => {
   const requests: string[] = []; page.on('request', (request) => { if (request.url().includes('/asserts/expressions/')) requests.push(request.url()); });
-  await launch(page, info); await drain(page); expect(requests).toEqual([]);
-  await roll(page, .5); await page.clock.fastForward(10000); await expect(expression(page)).toHaveCount(0);
-  await roll(page, .01); await page.clock.fastForward(9999); await expect(expression(page)).toHaveCount(0);
-  await page.clock.fastForward(1); await ready(page, '1'); await inspect(page);
-  expect(new Set(requests).size).toBe(1); await expect(page.getByRole('button', { name: '浇灌梦中的树', exact: true })).toBeEnabled();
+  await launch(page, info); await drain(page);
+  expect(new Set(requests).size).toBe(10); requests.length = 0;
+  await roll(page, .5); await page.clock.fastForward(7000); await expect(expression(page)).toHaveCount(0);
+  await roll(page, .01); await page.clock.fastForward(6700); await expect(expression(page)).toHaveCount(0);
+  await page.clock.fastForward(300); await ready(page, '1'); await inspect(page);
+  expect(new Set(requests).size).toBeLessThanOrEqual(1); await expect(expression(page).locator('img')).toHaveCount(1);
+  await expect(page.getByRole('button', { name: '浇灌梦中的树', exact: true })).toBeEnabled();
   await capture(page, info, 'tree'); await page.clock.fastForward(2800); await expect(expression(page)).toHaveCount(0);
 });
 
 test('树的空闲累积与已弹出表情在设置中暂停，关闭只走余量', async ({ page }, info) => {
-  await launch(page, info); await drain(page); await roll(page, .01); await page.clock.fastForward(6000); await openSettings(page);
+  await launch(page, info); await drain(page); await roll(page, .01); await page.clock.fastForward(3000); await openSettings(page);
   await page.clock.fastForward(30000); await expect(expression(page)).toHaveCount(0); await page.getByRole('button', { name: '关闭', exact: true }).click();
   await page.clock.fastForward(3999); await expect(expression(page)).toHaveCount(0); await page.clock.fastForward(1); await ready(page, '1');
   await page.clock.fastForward(1000); await openSettings(page); await page.clock.fastForward(20000);

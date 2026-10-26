@@ -527,6 +527,17 @@ export class GameController {
     if (skipped.size) this.commit({ pendingWaterings: [], pendingDialogues: save.pendingDialogues.filter((pending) => !skipped.has(`dialogue-${pending.id}`)) });
   }
 
+  private interruptRealityReplies() {
+    const save = this.snapshot.save;
+    const skipped = new Set(save.pendingDialogues.filter((pending) => pending.stage === 'G' && (pending.kind === 'reality' || pending.kind === 'idle')).map((pending) => `dialogue-${pending.id}`));
+    if (this.snapshot.event && skipped.has(this.snapshot.event.id) && this.speech.interrupt('nahida')) {
+      if (this.snapshot.expression?.anchor === 'nahida') this.expressions.dismiss();
+      this.update({ event: null });
+    }
+    this.queue = this.queue.filter((event) => !skipped.has(event.id));
+    if (skipped.size) this.commit({ pendingDialogues: save.pendingDialogues.filter((pending) => !skipped.has(`dialogue-${pending.id}`)) });
+  }
+
   private playWateringReply() {
     if (this.snapshot.event || this.speech.busy) return;
     const index = this.queue.findIndex((event) => event.type === 'watering' && event.stage === this.snapshot.stage);
@@ -918,14 +929,21 @@ export class GameController {
     if (!this.canExplore()) return;
     this.activity();
     const stage = this.snapshot.reviewStage ?? this.snapshot.stage;
-    if (stage === 'G') this.queueDialogue(stage, 'reality', ['G/nahida']);
+    if (stage === 'G') {
+      this.interruptRealityReplies();
+      this.queueDialogue(stage, 'reality', ['G/nahida']);
+    }
     else if (this.snapshot.reviewStage) {
+      this.speech.interruptTree();
       if (this.speech.busy) return;
       const selected = drawDialogue(this.snapshot.save.dialogueDecks, `${stage}/normal`, this.random);
       this.commit({ dialogueDecks: selected.decks });
       this.speech.start([selected.entry], 'tree', () => this.reconcile());
       return;
-    } else this.respondDream(stage, {}, true);
+    } else {
+      this.interruptTreeReplies();
+      this.respondDream(stage, {}, true);
+    }
     this.reconcile();
   }
 

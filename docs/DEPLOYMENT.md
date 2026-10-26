@@ -50,7 +50,7 @@ Pages Git集成构建命令为 `npm run build`、输出为 `dist`，保留项目
 
 ## 配置与缓存
 
-当前为公测，默认 `VITE_PUBLIC_TESTING=true`：保留标题标记，隐藏测试代码为Past（不区分大小写），旧test无效。以后设为false重新构建可关闭公开测试入口 / 标记；开发模式仍有原调试工具，其他彩蛋不受影响。
+当前为公测，默认 `VITE_PUBLIC_TESTING=true`：仅测试会话显示标题标记，隐藏测试代码为Past（不区分大小写），旧test无效。再次输入Past可退出，刷新亦退出；以后设为false重新构建可关闭公开测试入口；开发模式仍有原调试工具，其他彩蛋不受影响。
 
 哈希资源允许长期缓存，HTML与 `/api/time` 不永久缓存；非哈希Spine / poster等更新时应刷新缓存。音频M4A保持`audio/mp4`及Range支持，字体为`font/woff2`。当前缓存只覆盖选定静态资源 / 当前曲目，不是离线PWA或云端存档。
 

@@ -2,7 +2,7 @@ import type { DewParticle } from '../../types/game';
 import { TREE_MAX_HALF_WIDTH } from '../../data/treeArt';
 
 export interface DewObstacle { left: number; top: number; width: number; height: number }
-export interface DewViewport { width: number; height: number; scale: number; blocked?: readonly DewObstacle[] }
+export interface DewViewport { width: number; height: number; scale: number; blocked?: readonly DewObstacle[]; tree?: readonly DewObstacle[] }
 export interface DewPosition { x: number; y: number }
 interface SpawnRegion { left: number; right: number; top: number; bottom: number }
 
@@ -19,6 +19,7 @@ export function dewSpawnRegions(viewport: DewViewport, range: [number, number], 
   const top = Math.max(reward ? 100 : height <= 600 ? 124 : 152, height * range[0] / 100);
   const bottom = Math.min(height - (reward ? 88 : 104), height * range[1] / 100);
   if (bottom < top) return [];
+  if (viewport.tree) return [{ left: edge, right: width * .96 - 82, top, bottom }].filter((region) => region.right >= region.left);
   return [
     { left: edge, right: width / 2 - clearance, top, bottom },
     { left: width / 2 + clearance, right: width * 0.96 - 82, top, bottom },
@@ -28,7 +29,7 @@ export function dewSpawnRegions(viewport: DewViewport, range: [number, number], 
 function spacing(reward: boolean, particle: DewParticle) { return particle.kind === 'rainstorm' ? 38 : reward && particle.kind === 'reward' ? 48 : reward || particle.kind === 'reward' ? 56 : PARTICLE_SPACING; }
 function avoidsObstacles(horizontal: number, vertical: number, viewport: DewViewport, reward: boolean) {
   const clearance = (reward ? 22 : DEW_RADIUS) + 8;
-  return (viewport.blocked ?? []).every((area) => horizontal + clearance <= area.left || horizontal - clearance >= area.left + area.width || vertical + clearance <= area.top || vertical - clearance >= area.top + area.height);
+  return [...(viewport.tree ?? []), ...(viewport.blocked ?? [])].every((area) => horizontal + clearance <= area.left || horizontal - clearance >= area.left + area.width || vertical + clearance <= area.top || vertical - clearance >= area.top + area.height);
 }
 
 export function isDewPositionSafe(position: DewPosition, viewport: DewViewport, range: [number, number], occupied: DewParticle[] = [], reward = false) {

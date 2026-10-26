@@ -1,5 +1,5 @@
 {
-  "revision": "11cf4171040df970",
+  "revision": "7370d1f02a25e281",
   "files": [
     {
       "url": "/asserts/backgrounds/canopy/bg.png",
@@ -932,14 +932,14 @@
       "sha256": "5e1379064253bb564b391af8d89cd72177d0dc33d2edd273d9afa2c3dbec1cf7"
     },
     {
-      "url": "/asserts/fonts/irminsul-common-689b69eda0be.woff2",
-      "bytes": 208748,
-      "sha256": "689b69eda0be34b4e15fb60db7253365b3b5c60616cf06748945049405d57e72"
+      "url": "/asserts/fonts/irminsul-common-d4f0bcc4f3e6.woff2",
+      "bytes": 208828,
+      "sha256": "d4f0bcc4f3e61748b49456c540a1ef4d5d79c9deb3e385728b3d19327c602428"
     },
     {
-      "url": "/asserts/fonts/irminsul-extended-cb9b0f595ebd.woff2",
-      "bytes": 3313164,
-      "sha256": "cb9b0f595ebd4a545cbd8a6e8e23720f84ec60f79ca263085e943ab9ae6a7c13"
+      "url": "/asserts/fonts/irminsul-extended-5a47043ac03f.woff2",
+      "bytes": 3313096,
+      "sha256": "5a47043ac03f673631aa953b4af6bf56d00ae85fd4b5673634c80e41f0d98e36"
     },
     {
       "url": "/asserts/gifts/date-candy.png",

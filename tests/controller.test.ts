@@ -128,13 +128,15 @@ describe('持续交互与自动对白', () => {
     expect(game.collectDew(particle.id)).toBe(true); expect(game.collectDew(particle.id)).toBe(false); expect(game.getSnapshot().save.dew).toBe(1027); game.stop();
   });
 
-  it('对白自动播放并消失，重复点击不会不断重置对白', () => {
+  it('对白自动播放并消失，重复点击立即改播新句', () => {
     const { game } = testGame(); startGame(game); game.talk();
     const speech = game.getSnapshot().speech!;
     expect(speech.anchor).toBe('tree'); expect(game.getSnapshot().mode).toBe('idle');
-    vi.advanceTimersByTime(500); game.talk(); expect(game.getSnapshot().speech?.sequence).toBe(speech.sequence);
+    vi.advanceTimersByTime(500); game.talk(); const replacement = game.getSnapshot().speech!;
+    expect(replacement.sequence).toBeGreaterThan(speech.sequence);
     advanceUntil(() => game.getSnapshot().speech === null);
-    expect(game.getSnapshot().save.playedDialogues).toContain(speech.entry.id); expect(game.getSnapshot().mode).toBe('idle'); game.stop();
+    expect(game.getSnapshot().save.playedDialogues).not.toContain(speech.entry.id);
+    expect(game.getSnapshot().save.playedDialogues).toContain(replacement.entry.id); expect(game.getSnapshot().mode).toBe('idle'); game.stop();
   });
 
   it('对白期间仍能收露、浇灌，资源可以在生长动画中继续收集', () => {

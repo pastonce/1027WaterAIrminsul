@@ -67,7 +67,7 @@ export function openingSpinStop(elapsedMs: number) {
 export function openingTracks(width: number, height: number): OpeningTrack[] {
   const geometry = openingGeometry(width, height);
   const offset = (milliseconds: number) => milliseconds / OPENING_RULES.durationMs;
-  const aperture = (edge: number) => `inset(${(height - edge) / 2}px ${(width - edge) / 2}px)`;
+  const aperture = (edge: number) => `inset(calc(50% - ${edge / 2}px) calc(50% - ${edge / 2}px))`;
   const easeOut = 'cubic-bezier(.18,.78,.26,1)';
   const expand = 'cubic-bezier(.62,0,.22,1)';
   const fall = 'cubic-bezier(.3333333333,0,.6666666667,.3333333333)';
@@ -87,12 +87,12 @@ export function openingTracks(width: number, height: number): OpeningTrack[] {
   const throwHeight = OPENING_RULES.dropHeight * (1 - (OPENING_RULES.dropStartMs / (OPENING_RULES.firstBounceMs - OPENING_RULES.dropStartMs)) ** 2);
   const tracks: OpeningTrack[] = [
     { selector: '.opening-content', frames: [
-      { offset: 0, clipPath: aperture(0) },
-      { offset: offset(OPENING_RULES.revealMs), clipPath: aperture(0), easing: easeOut },
-      { offset: offset(OPENING_RULES.windowMs), clipPath: aperture(geometry.edge) },
-      { offset: offset(OPENING_RULES.expandMs), clipPath: aperture(geometry.edge), easing: expand },
-      { offset: offset(OPENING_RULES.expandedMs), clipPath: aperture(geometry.expandedEdge) },
-      { offset: 1, clipPath: aperture(geometry.expandedEdge) },
+      { offset: 0, clipPath: aperture(0), opacity: 0 },
+      { offset: offset(OPENING_RULES.revealMs), clipPath: aperture(0), opacity: 0, easing: easeOut },
+      { offset: offset(OPENING_RULES.windowMs), clipPath: aperture(geometry.edge), opacity: 1 },
+      { offset: offset(OPENING_RULES.expandMs), clipPath: aperture(geometry.edge), opacity: 1, easing: expand },
+      { offset: offset(OPENING_RULES.expandedMs), clipPath: aperture(geometry.expandedEdge), opacity: 1 },
+      { offset: 1, clipPath: aperture(geometry.expandedEdge), opacity: 1 },
     ] },
     { selector: '.opening-flight', frames: [
       ...motion.map((point, index) => {

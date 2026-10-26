@@ -1,5 +1,7 @@
 # 阶段收尾后待办
 
+2026-10-26后续优化：普通触树 / G角色连续点击保留最新句并打断旧句，树表情累计7秒；Past可再次输入退出，普通页不显示测试标记。公告、设置与读信继续播放BGM，底层演出仍暂停。手机首屏保留完整圆徽 / 种子，A～D施法图案统一72%；详见DIALOGUE_SYSTEM / EASTER_EGGS / AUDIO_AND_FONTS / NAHIDA_BLESSING与最新TEST_PLAN。
+
 当前已完成：Past替换测试入口、F/G 2026-10-27 13:27开放、最新X11与N01、Irminsul、E技能分离、种子流程、原58拍树体及各交互。清理与当前基线见 [PHASE_HANDOFF](PHASE_HANDOFF.md)，实际验证见 [TEST_PLAN](TEST_PLAN.md)。
 
 ## 等待内容
