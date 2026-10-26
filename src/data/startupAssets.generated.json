@@ -1,5 +1,5 @@
 {
-  "revision": "7370d1f02a25e281",
+  "revision": "79cc89faaa90a68a",
   "files": {
     "/asserts/backgrounds/canopy/bg.png": 360596,
     "/asserts/backgrounds/canopy/close_bottle.atlas": 107,
@@ -168,6 +168,7 @@
     "/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp": 163782,
     "/asserts/birthday-mail/point-66-14a4be2a832f.webp": 5626,
     "/asserts/birthday-mail/pointActive-66-dd45f0f24441.webp": 6328,
+    "/asserts/characters/dream/poster-7972c211adcd.webp": 48832,
     "/asserts/characters/dream/shouye_caoshen.atlas": 2571,
     "/asserts/characters/dream/shouye_caoshen.json": 815002,
     "/asserts/characters/dream/shouye_caoshen.png": 665097,
@@ -175,6 +176,7 @@
     "/asserts/characters/reality/naxida.3807ce40.png": 2264477,
     "/asserts/characters/reality/naxida.atlas": 5644,
     "/asserts/characters/reality/naxida.json": 2292415,
+    "/asserts/characters/reality/poster-9a6dd0855a23.webp": 50438,
     "/asserts/effects/dendro.png": 2164,
     "/asserts/effects/e-skill-frame-clean-7e78729b722f.png": 84838,
     "/asserts/expressions/0-53e10bb82cff.png": 115853,
@@ -187,8 +189,8 @@
     "/asserts/expressions/7-269605e1f34e.png": 119353,
     "/asserts/expressions/8-d1334a381d42.png": 131756,
     "/asserts/expressions/9-5e1379064253.png": 160353,
-    "/asserts/fonts/irminsul-common-d4f0bcc4f3e6.woff2": 208828,
-    "/asserts/fonts/irminsul-extended-5a47043ac03f.woff2": 3313096,
+    "/asserts/fonts/irminsul-common-1c964466395d.woff2": 208564,
+    "/asserts/fonts/irminsul-extended-66c88ce988a2.woff2": 3313532,
     "/asserts/gifts/date-candy.png": 1090545,
     "/asserts/gifts/halvamazd.png": 1229807,
     "/asserts/inhabitants/aranara/aranara_01/aranara_01.atlas": 1231,

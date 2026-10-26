@@ -1,4 +1,5 @@
 import catalog from '../../data/startupAssets.generated.json' with { type: 'json' };
+import { boundedAsset, CACHE_IO_MS, readCachedAsset } from './requests';
 
 export const ASSET_CACHE_NAME = `irminsul-assets-${catalog.revision}`;
 const files: Record<string, number> = catalog.files;
@@ -7,7 +8,7 @@ let storage: Promise<Cache | null> | undefined;
 export function assetCache(): Promise<Cache | null> {
   try {
     if (typeof caches === 'undefined') return Promise.resolve(null);
-    return storage ??= caches.open(ASSET_CACHE_NAME).catch(() => null);
+    return storage ??= boundedAsset(caches.open(ASSET_CACHE_NAME), CACHE_IO_MS).catch(() => null);
   } catch { return Promise.resolve(null); }
 }
 
@@ -26,9 +27,10 @@ export async function fetchAsset(input: RequestInfo | URL, init?: RequestInit): 
   const check = () => { if (init?.signal?.aborted) throw new DOMException('Asset cancelled', 'AbortError'); };
   check();
   try {
-    const cached = await (await assetCache())?.match(path);
+    const cache = await assetCache();
+    const cached = cache ? await readCachedAsset(cache, path, files[path], init?.signal ?? undefined) : null;
     check();
     if (cached) return cached;
-  } catch { check(); }
+  } catch { check(); storage = Promise.resolve(null); }
   return fetch(input, { cache: 'no-cache', ...init });
 }

@@ -8,7 +8,9 @@
 - 21张hiding-back / hiding-foreground / hiding-after-*只是离线遮挡分析与校准输入，移到 `asserts/calibration/backgrounds/`。实际运行用的22份poster / hiding-band-* / hiding-light-*继续发布；`hiding-band-0`虽不在集中预载中，也是真实静态回退依赖，保留。
 - 两类处理合计从发布目录排除18,641,265字节。本轮X11 / Past字体重生后另删除2份被替代字体，清单另记；计入新字体替换后的发布素材净减少18,641,525字节，该次收尾369个文件 / 101,608,077字节。
 
-后续交互优化因新增测试退出反馈重生两份字体，清理对应旧哈希（另记interactionRefinementsFontRefresh），当前369个发布素材 / 101,608,089字节；没有重新加入此前移出的校准板或旧技能图集。
+后续交互优化因新增测试退出反馈重生两份字体，清理对应旧哈希（另记interactionRefinementsFontRefresh），前轮369个发布素材 / 101,608,089字节；没有重新加入此前移出的校准板或旧技能图集。
+
+本轮加载修复新增B/E与G两张正确透明角色poster共99,270B，并更新当前两份字体，清理旧生成子集（loadingRecoveryFontRefresh）。当前371素材 / 101,707,531B；原源图 / TTF / 音频未改，startup共363文件。
 
 ## 保留理由
 

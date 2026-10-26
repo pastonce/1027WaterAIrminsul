@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "runtime": "spine-player-4-0",
+  "method": "Original animation at 0.7 seconds, original auto viewport with 8% padding, transparent 640px height WebP quality .88.",
+  "files": [
+    {
+      "id": "dream",
+      "url": "/asserts/characters/dream/poster-7972c211adcd.webp",
+      "bytes": 48832,
+      "sha256": "7972c211adcdf15e0660aff1f028dcb0944b5fce9725c4479bd6be128b533c44",
+      "width": 1166,
+      "height": 640,
+      "visiblePixels": 84776,
+      "sources": [
+        {
+          "path": "public/asserts/characters/dream/shouye_caoshen.json",
+          "sha256": "fc78030a0d247f71af57780f1c515b23ebf23a7accf9a2a2d2699d078a2a2bbf",
+          "bytes": 815002
+        },
+        {
+          "path": "public/asserts/characters/dream/shouye_caoshen.atlas",
+          "sha256": "56a26da69fc7d29865f82f2974d2338a853cb3f7876e7c0fab39f33b2ea42239",
+          "bytes": 2571
+        },
+        {
+          "path": "public/asserts/characters/dream/shouye_caoshen.png",
+          "sha256": "6c85ac00e5a2cc41117a89e237c448cafa376458e2066e5c9ed0529bd31bfe38",
+          "bytes": 665097
+        }
+      ]
+    },
+    {
+      "id": "reality",
+      "url": "/asserts/characters/reality/poster-9a6dd0855a23.webp",
+      "bytes": 50438,
+      "sha256": "9a6dd0855a23e928e07ac3170c9fc0e198f48cb84a1990bca6eb359b1023f08a",
+      "width": 515,
+      "height": 640,
+      "visiblePixels": 89589,
+      "sources": [
+        {
+          "path": "public/asserts/characters/reality/naxida.json",
+          "sha256": "6502c216cfdc75e711e4536435e66d9ea477191e6c159803d5afa67201402751",
+          "bytes": 2292415
+        },
+        {
+          "path": "public/asserts/characters/reality/naxida.atlas",
+          "sha256": "5a7559e37eed168ea1da3de8affa6304f567fa3aea6c226b8806fc2c44d9c5f2",
+          "bytes": 5644
+        },
+        {
+          "path": "public/asserts/characters/reality/naxida.3807ce40.png",
+          "sha256": "9f3da7bab5d70e88261fe8faa45ca72828761967c4fa7042f6414d20b2a98e98",
+          "bytes": 2264477
+        }
+      ]
+    }
+  ]
+}

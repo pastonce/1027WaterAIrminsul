@@ -1,9 +1,11 @@
 .opening-shell{position:relative;width:100%;height:100%;overflow:hidden;background:#000;isolation:isolate}
 .opening-content{width:100%;height:100%;outline:none}
+.opening-shell[data-opening=true]{position:fixed;inset:0;width:auto;height:auto}
+.opening-shell[data-opening=true]>.opening-content{position:absolute;inset:0}
 .opening-shell[data-opening=true]>.opening-content{clip-path:inset(50% 50%);pointer-events:none;user-select:none}
 .opening-shell[data-opening=true]:not([data-opening-phase=reveal])>.opening-content{opacity:0}
 .opening-shell[data-opening=true]:not([data-opening-phase=reveal])>.opening-overlay{background:#000}
-.opening-overlay{position:fixed;inset:0;z-index:1000;overflow:hidden;touch-action:none;user-select:none;outline:none;cursor:default}
+.opening-overlay{position:absolute;inset:0;z-index:1000;overflow:hidden;touch-action:none;user-select:none;outline:none;cursor:default}
 .opening-anchor{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
 .opening-flight-travel,.opening-flight-bounce{position:absolute;width:0;height:0;will-change:transform}
 .opening-art{position:absolute;width:var(--opening-art-size);height:var(--opening-art-size);left:calc(var(--opening-art-size)/-2);top:calc(var(--opening-art-size)/-2);overflow:visible;transform-origin:50% 50%;pointer-events:none}
@@ -18,3 +20,4 @@
 .opening-progress>span{display:block;height:100%;background:linear-gradient(90deg,#6a9d55,#d1e9a0);box-shadow:0 0 10px #c8eaa25c}
 .opening-percentage{display:block;margin-top:11px;color:#d9e9bb;font-size:12px;line-height:1.4;letter-spacing:.09em;font-variant-numeric:tabular-nums;text-shadow:0 0 8px #b3d89540}
 @media(forced-colors:active){.opening-progress{background:Canvas;border:1px solid CanvasText}.opening-progress>span{background:Highlight}.opening-percentage{color:CanvasText}}
+.opening-load-error{margin-top:16px;color:#e4eccc;font-size:12px;line-height:1.6}.opening-load-error p{margin:0 0 10px}.opening-retry{min-height:40px;padding:8px 20px;border:1px solid #b9d48c;border-radius:4px;background:#243c28;color:#f0edce;touch-action:manipulation}.opening-retry:focus-visible{outline:2px solid #f1ecc8;outline-offset:4px}@media(forced-colors:active){.opening-load-error{color:CanvasText}.opening-retry{background:ButtonFace;color:ButtonText;border-color:ButtonText}}

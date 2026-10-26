@@ -21,6 +21,31 @@ async function seek(page: Page, time: number) {
   }, time);
 }
 
+for (const viewport of [{ width: 1024, height: 768 }, { width: 1180, height: 820 }]) test(`平板${viewport.width}黑区与技能框共享视口，祖先尺寸和工具栏变化不使方窗错位`, async ({ page }) => {
+  await page.setViewportSize(viewport); await pausedClock(page); await page.goto('/');
+  await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'playing');
+  await page.locator('#root').evaluate((element) => { Object.assign((element as HTMLElement).style, { width: `${innerWidth + 96}px`, height: `${innerHeight + 128}px` }); });
+  for (const height of [viewport.height, viewport.height - 64]) {
+    await page.setViewportSize({ width: viewport.width, height }); await page.clock.runFor(32);
+    await seek(page, (OPENING_RULES.expandMs + OPENING_RULES.expandedMs) / 2);
+    const geometry = await page.evaluate(() => {
+      const content = document.querySelector<HTMLElement>('.opening-content')!;
+      const overlay = document.querySelector<HTMLElement>('.opening-overlay')!;
+      const frame = document.querySelector<SVGSVGElement>('.opening-frame')!;
+      const bounds = content.getBoundingClientRect(); const screen = overlay.getBoundingClientRect();
+      const halfEdge = Number(getComputedStyle(content).clipPath.match(/50%\s*-\s*([\d.]+)px/)?.[1] ?? 0);
+      const topLeft = new DOMPoint(-261, -261).matrixTransform(frame.getScreenCTM()!);
+      const bottomRight = new DOMPoint(261, 261).matrixTransform(frame.getScreenCTM()!);
+      return { width: bounds.width, height: bounds.height, screenWidth: screen.width, screenHeight: screen.height,
+        window: [bounds.x + bounds.width / 2 - halfEdge, bounds.y + bounds.height / 2 - halfEdge, bounds.x + bounds.width / 2 + halfEdge, bounds.y + bounds.height / 2 + halfEdge],
+        border: [topLeft.x, topLeft.y, bottomRight.x, bottomRight.y] };
+    });
+    expect(geometry.width).toBe(viewport.width); expect(geometry.height).toBe(height);
+    expect(geometry.screenWidth).toBe(geometry.width); expect(geometry.screenHeight).toBe(geometry.height);
+    for (let index = 0; index < geometry.window.length; index++) expect(Math.abs(geometry.window[index] - geometry.border[index])).toBeLessThan(.25);
+  }
+});
+
 test.beforeEach(async ({ page }, testInfo) => {
   if (testInfo.project.name.startsWith('production')) await mockServerTime(page, '2026-10-27T13:27:00+08:00');
 });
@@ -185,17 +210,22 @@ test('系统与存档减少动态使用短淡入，竖屏开场不会锁住转�
   await finishOpening(page, true); await expect(page.locator('.opening-overlay')).toHaveCount(0);
 });
 
-test('图集损坏或超过等待上限时自动解锁，不留下黑屏与输入拦截', async ({ page }) => {
+test('图集视觉降级不绕过完整预载，失败可重试，缓存齐全时正常安全揭幕', async ({ page }) => {
   await pausedClock(page);
   await page.route(`**${E_SKILL_PATTERN.texture}`, (route) => route.abort());
   await page.goto('/'); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'fallback');
-  await finishOpening(page, true); await expect(page.getByRole('button', { name: '沉入梦乡' })).toBeEnabled();
+  await expect.poll(async () => { await page.clock.fastForward(500); return page.locator('.opening-retry').count(); }, { timeout: 20000, intervals: [100] }).toBe(1);
+  await expect(page.locator('.opening-retry')).toBeVisible();
+  await expect(page.locator('.opening-shell')).toHaveAttribute('data-preload-complete', 'false');
+  await expect(page.locator('.opening-content')).toHaveAttribute('inert');
   await page.unroute(`**${E_SKILL_PATTERN.texture}`);
+  await page.locator('.opening-retry').click(); await finishOpening(page, true);
+  await expect(page.getByRole('button', { name: '沉入梦乡' })).toBeEnabled();
   const held: Route[] = []; await page.route(`**${E_SKILL_PATTERN.texture}`, (route) => { held.push(route); });
   await page.reload({ waitUntil: 'domcontentloaded' }); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'loading');
   await page.clock.runFor(OPENING_RULES.assetWaitMs); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'fallback');
-  await page.clock.runFor(11000); await finishOpening(page, true); await expect(page.locator('.opening-overlay')).toHaveCount(0);
-  for (const route of held) await route.abort();
+  await finishOpening(page, true); await expect(page.locator('.opening-overlay')).toHaveCount(0);
+  for (const route of held) await route.abort().catch(() => {});
   await page.getByRole('button', { name: '沉入梦乡' }).click(); await expect(page.getByTestId('dream-scene')).toBeVisible();
 });
 

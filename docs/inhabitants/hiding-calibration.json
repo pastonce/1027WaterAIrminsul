@@ -868,54 +868,54 @@
     "slot": 4,
     "name": "左侧栏尾",
     "asset": "aranara_01",
-    "ratio": 0.2449,
-    "horizontal": 0,
-    "vertical": -80
+    "ratio": 0.2643,
+    "horizontal": -35,
+    "vertical": 40
   },
   {
     "stage": "D",
     "slot": 4,
     "name": "左侧栏尾",
     "asset": "aranara_02",
-    "ratio": 0.2793,
-    "horizontal": 0,
-    "vertical": 0
+    "ratio": 0.3406,
+    "horizontal": -70,
+    "vertical": 40
   },
   {
     "stage": "D",
     "slot": 4,
     "name": "左侧栏尾",
     "asset": "aranara_03",
-    "ratio": 0.2862,
+    "ratio": 0.3223,
     "horizontal": -70,
-    "vertical": -80
+    "vertical": 40
   },
   {
     "stage": "D",
     "slot": 4,
     "name": "左侧栏尾",
     "asset": "aranara_04",
-    "ratio": 0.2695,
-    "horizontal": -35,
-    "vertical": -80
+    "ratio": 0.3635,
+    "horizontal": -70,
+    "vertical": 40
   },
   {
     "stage": "D",
     "slot": 4,
     "name": "左侧栏尾",
     "asset": "aranara_05",
-    "ratio": 0.2606,
-    "horizontal": 0,
-    "vertical": -40
+    "ratio": 0.3073,
+    "horizontal": -35,
+    "vertical": 80
   },
   {
     "stage": "D",
     "slot": 4,
     "name": "左侧栏尾",
     "asset": "aranara_06",
-    "ratio": 0.2556,
-    "horizontal": 0,
-    "vertical": 40
+    "ratio": 0.302,
+    "horizontal": -70,
+    "vertical": 80
   },
   {
     "stage": "D",
@@ -1192,54 +1192,54 @@
     "slot": 4,
     "name": "左青灰栏尾",
     "asset": "aranara_01",
-    "ratio": 0.2449,
-    "horizontal": 0,
-    "vertical": -80
+    "ratio": 0.2643,
+    "horizontal": -35,
+    "vertical": 40
   },
   {
     "stage": "E",
     "slot": 4,
     "name": "左青灰栏尾",
     "asset": "aranara_02",
-    "ratio": 0.2793,
-    "horizontal": 0,
-    "vertical": 0
+    "ratio": 0.3406,
+    "horizontal": -70,
+    "vertical": 40
   },
   {
     "stage": "E",
     "slot": 4,
     "name": "左青灰栏尾",
     "asset": "aranara_03",
-    "ratio": 0.2862,
+    "ratio": 0.3223,
     "horizontal": -70,
-    "vertical": -80
+    "vertical": 40
   },
   {
     "stage": "E",
     "slot": 4,
     "name": "左青灰栏尾",
     "asset": "aranara_04",
-    "ratio": 0.2695,
-    "horizontal": -35,
-    "vertical": -80
+    "ratio": 0.3635,
+    "horizontal": -70,
+    "vertical": 40
   },
   {
     "stage": "E",
     "slot": 4,
     "name": "左青灰栏尾",
     "asset": "aranara_05",
-    "ratio": 0.2606,
-    "horizontal": 0,
-    "vertical": -40
+    "ratio": 0.3073,
+    "horizontal": -35,
+    "vertical": 80
   },
   {
     "stage": "E",
     "slot": 4,
     "name": "左青灰栏尾",
     "asset": "aranara_06",
-    "ratio": 0.2556,
-    "horizontal": 0,
-    "vertical": 40
+    "ratio": 0.302,
+    "horizontal": -70,
+    "vertical": 80
   },
   {
     "stage": "E",

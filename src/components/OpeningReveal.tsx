@@ -19,6 +19,7 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
   const phaseRef = useRef<OpeningPhase>('throw');
   const [held, setHeld] = useState(false);
   const [progress, setProgress] = useState<StartupProgress>({ progress: 0, completed: 0, total: 0, failed: 0, done: false });
+  const [retry, setRetry] = useState(0);
   const players = useRef<Array<{ animation: Animation; selector: string }>>([]);
   const spinner = useRef<Animation | null>(null);
   const restAngle = useRef(0);
@@ -35,17 +36,23 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
     }
     if (pausedRef.current) spinner.current?.pause(); else spinner.current?.play();
   };
+  const viewport = () => {
+    const bounds = host.current?.getBoundingClientRect();
+    return { width: bounds?.width || window.innerWidth, height: bounds?.height || window.innerHeight };
+  };
   const rotation = () => {
-    const frame = openingTracks(window.innerWidth, window.innerHeight).find((track) => track.selector === '.opening-flight')!.frames.find((frame) => frame.offset === OPENING_RULES.arriveMs / OPENING_RULES.durationMs)!;
+    const { width, height } = viewport();
+    const frame = openingTracks(width, height).find((track) => track.selector === '.opening-flight')!.frames.find((frame) => frame.offset === OPENING_RULES.arriveMs / OPENING_RULES.durationMs)!;
     return Number(String(frame.transform).match(/-?[\d.]+/)![0]);
   };
   const updateTracks = () => {
     const root = host.current;
     if (!root) return;
-    const { artSize, leafSize } = openingGeometry(window.innerWidth, window.innerHeight);
+    const { width, height } = viewport();
+    const { artSize, leafSize } = openingGeometry(width, height);
     root.style.setProperty('--opening-art-size', `${artSize}px`);
     root.style.setProperty('--opening-leaf-size', `${leafSize}px`);
-    const tracks = openingTracks(window.innerWidth, window.innerHeight);
+    const tracks = openingTracks(width, height);
     for (const player of players.current) {
       const track = tracks.find((entry) => entry.selector === player.selector);
       if (!track || !(player.animation.effect instanceof KeyframeEffect)) continue;
@@ -59,7 +66,7 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
     const loader = new StartupLoader();
     void loader.load(plan, setProgress);
     return () => loader.cancel();
-  }, [active, plan]);
+  }, [active, plan, retry]);
 
   useEffect(() => {
     if (!active) return;
@@ -84,7 +91,8 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
       changePhase('loading'); content.current.style.opacity = '0';
     } else {
       try {
-        for (const track of openingTracks(window.innerWidth, window.innerHeight)) {
+        const { width, height } = viewport();
+        for (const track of openingTracks(width, height)) {
           const target = host.current.querySelector(track.selector);
           if (target) players.current.push({ selector: track.selector, animation: target.animate(track.frames, { duration: OPENING_RULES.durationMs, fill: 'both' }) });
         }
@@ -103,7 +111,10 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
       } catch { setMode('fallback'); }
     }
     window.addEventListener('resize', updateTracks);
+    const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(updateTracks) : null;
+    observer?.observe(host.current);
     return () => {
+      observer?.disconnect();
       window.removeEventListener('resize', updateTracks);
       timer.current.clear(); spinner.current?.cancel(); spinner.current = null;
       players.current.forEach((player) => player.animation.cancel()); players.current = [];
@@ -154,6 +165,9 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
     const keys = (event: KeyboardEvent) => {
       if (event.ctrlKey || event.metaKey || event.altKey || /^F\d+$/.test(event.key)) return;
       if (event.target instanceof Element && event.target.closest('.rotate-overlay')) return;
+      const retryButton = host.current?.querySelector<HTMLButtonElement>('.opening-retry');
+      if (retryButton && event.key === 'Tab') { event.preventDefault(); retryButton.focus(); return; }
+      if (retryButton?.contains(event.target as Node) && ['Enter', ' '].includes(event.key)) return;
       if (window.innerWidth <= 900 && window.innerHeight > window.innerWidth && event.key === 'Tab') {
         event.preventDefault(); document.querySelector<HTMLButtonElement>('.rotate-overlay button')?.focus(); return;
       }
@@ -188,7 +202,7 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
         </svg>
         <svg className="opening-center opening-art" viewBox={pattern.viewBox.join(' ')}><g transform={recenter}><g transform={`matrix(${pattern.openingCenter.matrix.join(' ')})`}><ESkillPiece piece={pattern.openingCenter}/></g></g></svg>
       </div>}
-      {mode !== 'loading' && (phase === 'loading' || mode === 'fallback' && phase !== 'reveal') && <div className="opening-loading"><div className="opening-progress" role="progressbar" aria-label="梦境准备" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.floor(progress.progress * 100)}><span style={{ width: `${progress.progress * 100}%` }}/></div><span className="opening-percentage" aria-hidden="true">{Math.floor(progress.progress * 100)}%</span></div>}
+      {mode !== 'loading' && (phase === 'loading' || mode === 'fallback' && phase !== 'reveal') && <div className="opening-loading"><div className="opening-progress" role="progressbar" aria-label="梦境准备" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.floor(progress.progress * 100)}><span style={{ width: `${progress.progress * 100}%` }}/></div><span className="opening-percentage" aria-hidden="true">{Math.floor(progress.progress * 100)}%</span>{progress.blocked && <div className="opening-load-error" role="alert"><p>部分素材未能加载</p><button className="opening-retry" onClick={() => { setProgress({ progress: 0, completed: 0, total: plan?.files.length ?? 0, failed: 0, done: false }); setRetry((value) => value + 1); }}>重试加载</button></div>}</div>}
     </div>}
   </div>;
 }

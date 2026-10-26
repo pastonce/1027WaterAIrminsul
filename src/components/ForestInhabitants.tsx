@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import { HIDING_PLACES, INHABITANT_ASSETS, ROAMING_ARANARA } from '../data/inhabitants';
+import { INHABITANT_ASSETS } from '../data/inhabitants';
 import type { InhabitantId } from '../data/inhabitants';
 import { creatureLayout } from '../game/encounters/layout';
 import type { CreatureViewport } from '../game/encounters/layout';
@@ -11,6 +11,7 @@ import type { RoamingLayer } from '../game/encounters/RoamingLayer';
 import { getStageBackground } from '../data/backgrounds';
 import { backgroundParallax, BACKGROUND_RULES } from '../game/backgrounds/policy';
 import { roamingVariables } from '../game/encounters/motion';
+import { availableHidingSlots } from '../game/encounters/hidingSafety';
 
 export function ForestInhabitants({ game, state, stage, viewport, reduced, inhabitants }: { game: GameController; state: GameSnapshot; stage: DreamStageId; viewport: CreatureViewport; reduced: boolean; inhabitants: RoamingLayer }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -27,16 +28,8 @@ export function ForestInhabitants({ game, state, stage, viewport, reduced, inhab
   useLayoutEffect(() => { inhabitants.setActors(reduced ? [] : roaming.map((actor) => ({ ...actor, top: actor.top - parallax })), viewport.width, viewport.height); }, [inhabitants, roaming, parallax, viewport.width, viewport.height, reduced]);
   useEffect(() => () => inhabitants.setActors([], 1, 1), [inhabitants]);
   useLayoutEffect(() => {
-    const probes = creatureLayout(stage, (HIDING_PLACES[stage] ?? []).flatMap((anchor, slot) => (anchor.allowed ?? ROAMING_ARANARA).map((asset) => ({ id: slot, slot, asset, phase: 'watching' }))), viewport, []);
-    const visible = (actor: (typeof probes)[number]) => {
-      const area = actor.hit; if (!area) return false;
-      const corridor = viewport.width / 2; const clearance = 330 * viewport.scale + 8;
-      if (actor.edge === 'top') return area.left > 205 && area.left + 44 < viewport.width - 230;
-      if (actor.edge === 'bottom') return area.left + 44 < viewport.width - 190 && (area.left + 44 < corridor - clearance || area.left > corridor + clearance);
-      return area.left >= 4 && area.left + area.width <= viewport.width - 8 && area.top >= 112 && area.top + area.height <= viewport.height - 92
-        && (area.left + area.width < corridor - clearance || area.left > corridor + clearance);
-    };
-    game.setAranaraSlots((HIDING_PLACES[stage] ?? []).flatMap((_, slot) => probes.filter((actor) => actor.encounter === slot).every(visible) ? [slot] : []));
+    const blocked = [...document.querySelectorAll('.game-brand, .header-actions, .water-action, .debug-panel > summary')].map((element) => element.getBoundingClientRect()).filter((area) => area.width > 0 && area.height > 0);
+    game.setAranaraSlots(availableHidingSlots(stage, viewport, blocked));
   }, [game, stage, viewport]);
   useEffect(() => () => game.setAranaraSlots(null), [game]);
   useLayoutEffect(() => {

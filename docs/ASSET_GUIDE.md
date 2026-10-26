@@ -1,5 +1,7 @@
 # 正式素材替换指南
 
+2026-10-26加载修订：全部所选资源下载完整且模块导入成功才揭幕；健康慢网不受旧60秒总限，30秒无进展检测 / 有限重试，失败保留加载层并提供重试。坏缓存按长度校验，缓存IO有界。正常角色只用自身透明poster，Nidaha彩蛋SVG不作默认回退。平板黑区与技能框共享实际host包络，详见STARTUP_ASSETS / CHARACTER_LOADING / OPENING_ANIMATION。
+
 当前阶段已于2026-10-26收尾；最新日期、Past入口与清理边界以 [PHASE_HANDOFF](PHASE_HANDOFF.md) / [RELEASE_RESOURCES](RELEASE_RESOURCES.md) 为准。以下带日期的记录保留实现演变，不覆盖当前基线。
 
 本轮根部复核不重绘或替换位图：实际root前景为既有tree_overlay世界树重绘WebP，异常来自独立根颈和主干自带根直接叠接。现用原SVG内单个局部mask柔化上沿；早期树苗与叶片下移由model承担，源素材、注册元数据、31原稿 / 62发布副本保持。三处引导使用代码SVG，不新增图片，详见TREE_GROUNDING.md。
@@ -32,7 +34,7 @@
 
 最新：G 远 / 近树影 SVG 不再挂载，不删除 A～F 回退代码；祝福复用两张甜点图各 3 / 4 份，不增加下载 URL。新增来访竖琴与短雨声源 / 哈希 / 许可见 sfx-assets.manifest.json；本轮仅编码与更新清单，不作验证通过声明。
 
-两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 6 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 208,828 B / 扩展 3,313,096 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
+两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 6 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 208,564 B / 扩展 3,313,532 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
 
 | 资源 | 已使用路径 | 来源 / 状态 |
 | --- | --- | --- |
@@ -63,7 +65,7 @@
 | 树冠装饰 | 原智慧树叶 / 簇附件、原叶柄校正与111语义枝位 | 实际grow34 / D580起接续15原叶及96新枝，原0.5秒叶 / 0.25秒簇完整，42～48簇独立一拍，沿枝延伸、单site单附件，无程序花朵或长期叠图 |
 | 交互音效 | `public/asserts/sfx/*-*.json`、sounds.generated.json、SoundManager.ts | 七份 AAC-LC / MP4、96 kb/s / 48 kHz 单声道，以 JSON / base64 兼容 IDM，约 196 KiB；水滴 / 浇水 / 叶声 / 弹跳 / 传送 / 来访竖琴 / 短暴雨，按动作请求，共用 BGM 上下文；来源 / 授权 / 双哈希见 sfx-assets.manifest.json，署名随 CREDITS.txt 发布 |
 | A～G 音乐 | `public/asserts/music/*.m4a`、music.generated.json | 同名 MP3 派生 AAC-LC 192 kb/s / 48 kHz 双声道，七首约 19.20 MB，仅当前场景流式加载；music-assets.manifest.json 登记哈希 |
-| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 208,828 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
+| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 208,564 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
 
 背景与梦境角色从原始目录复制，现实角色直接使用用户在发布目录替换的 JSON / atlas / 打包纹理。没有复制 MP4、Spine 工程或散件图目录，没有引用远程资源站。此前原始目录保留；player 的旧 Unity 备份已按用户后续明确要求清空，完整成品 `asserts/player/` 保持哈希不变，另从中提取独立角色。
 

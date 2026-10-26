@@ -1,5 +1,7 @@
 # 可移用的独立 Spine 角色
 
+2026-10-26加载修复：正常加载 / 失败一律使用当前姿态透明poster，不再以nahida-placeholder.svg回退；该SVG仅供显式Nidaha彩蛋。B/E和G补齐正确首帧，四个提取形态沿用本批原poster；形态切换隔离旧状态，手机解码 / 上下文回收有限恢复，见CHARACTER_LOADING.md。
+
 当前17套原始素材不改。开场按本设备资源计划下载压缩文件，不批量实例化；随机生物 / 常驻 / 晶蝶的原动作与层次保持。Nidaha 仅替换纳西妲运行时形象，不改角色源文件；见 EASTER_EGGS.md、STARTUP_ASSETS.md。
 
 已按用户要求清空 `asserts/player-source/`，保留空目录。完整壁纸 `asserts/player/` 及五张参考图保持原样；本次提取结果在 **`asserts/player-extracted/`**，可以整体复制，也可以只取某个角色文件夹。

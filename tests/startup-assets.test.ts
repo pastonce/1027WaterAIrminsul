@@ -55,8 +55,9 @@ describe('开场集中预载计划', () => {
   });
 });
 
-describe('下载并发、真实字节与有界放行', () => {
+describe('下载并发、真实成功门控与重试', () => {
   it('三路下载，进度单调按字节推进，结束后不保留所有解码图像', async () => {
+    expect(STARTUP_RULES.concurrency).toBe(3);
     let active = 0; let maximum = 0;
     const download = vi.fn(async () => {
       active++; maximum = Math.max(maximum, active); await Promise.resolve(); active--;
@@ -71,44 +72,91 @@ describe('下载并发、真实字节与有界放行', () => {
   });
   it('压缩文件已在本版本磁盘缓存时不再次请求，仅预热模块、不创建播放器', async () => {
     const download = vi.fn(); const warm = vi.fn(async () => {});
-    const cache = { match: vi.fn(async () => new Response('cached')) } as unknown as Cache;
+    const cache = { match: vi.fn(async () => new Response('abc')) } as unknown as Cache;
     const updates: StartupProgress[] = [];
     await new StartupLoader(download, async () => cache, warm).load({ ...simple, dynamic: true }, (state) => updates.push(state));
     expect(download).not.toHaveBeenCalled(); expect(warm).toHaveBeenCalledTimes(1); expect(updates.at(-1)?.failed).toBe(0);
   });
-  it('失败、204和空响应不进入缓存且不阻断揭幕', async () => {
-    const download = vi.fn().mockResolvedValueOnce(new Response(null, { status: 204 })).mockRejectedValueOnce(new Error('offline')).mockResolvedValueOnce(new Response('')).mockResolvedValueOnce(new Response('abc'));
+  it('失败、204和空响应重试后仍失败就停在加载页，不伪造100%', async () => {
+    vi.useFakeTimers();
+    const download = vi.fn(async (url: RequestInfo | URL) => {
+      if (url === '/file-1.png') return new Response('abc');
+      if (url === '/file-2.png') throw new Error('offline');
+      return url === '/file-3.png' ? new Response('') : new Response(null, { status: 204 });
+    });
     const updates: StartupProgress[] = [];
     const put = vi.fn(async () => {});
     const cache = { match: async () => undefined, put } as unknown as Cache;
-    await new StartupLoader(download, async () => cache).load(simple, (state) => updates.push(state));
-    expect(updates.at(-1)).toMatchObject({ progress: 1, failed: 3, done: true });
+    const pending = new StartupLoader(download, async () => cache).load(simple, (state) => updates.push(state));
+    await vi.runAllTimersAsync(); await pending;
+    expect(updates.at(-1)).toMatchObject({ completed: 1, failed: 3, done: false, blocked: true });
+    expect(updates.at(-1)!.progress).toBeLessThan(1);
     expect(put).toHaveBeenCalledTimes(1);
+    expect(download).toHaveBeenCalledTimes(10);
   });
-  it('全局一分钟上限覆盖不响应的请求与模块，不会永远锁住首屏', async () => {
+  it('不响应的请求与模块最终提供重试，不会当作资源准备成功', async () => {
     vi.useFakeTimers(); const download = vi.fn(() => new Promise<Response>(() => {})); const updates: StartupProgress[] = [];
     const pending = new StartupLoader(download, async () => null, () => new Promise<void>(() => {})).load({ ...simple, dynamic: true }, (state) => updates.push(state));
-    await vi.advanceTimersByTimeAsync(STARTUP_RULES.totalTimeoutMs); await pending;
-    expect(updates.at(-1)).toMatchObject({ failed: 4, progress: 1, done: true }); expect(vi.getTimerCount()).toBe(0);
+    await vi.runAllTimersAsync(); await pending;
+    expect(updates.at(-1)).toMatchObject({ failed: 5, completed: 0, done: false, blocked: true }); expect(vi.getTimerCount()).toBe(0);
   });
-  it('逐文件十秒超时失败后继续，卸载后没有进度回调', async () => {
+  it('逐文件无进展三十秒后重试，卸载后没有进度回调或遗留时钟', async () => {
     vi.useFakeTimers(); const updates: StartupProgress[] = [];
     const download = vi.fn((_url: RequestInfo | URL, options?: RequestInit) => new Promise<Response>((_resolve, reject) => options?.signal?.addEventListener('abort', () => reject(new Error('aborted')))));
     const loader = new StartupLoader(download, async () => null);
     const pending = loader.load(simple, (state) => updates.push(state));
-    await vi.advanceTimersByTimeAsync(STARTUP_RULES.fileTimeoutMs * 2 + 1); await pending;
+    await vi.runAllTimersAsync(); await pending;
     expect(updates.at(-1)?.failed).toBe(4);
     const next = new StartupLoader(download, async () => null);
     const stopped = next.load(simple, (state) => updates.push(state));
     await Promise.resolve(); const count = updates.length; next.cancel();
-    await vi.advanceTimersByTimeAsync(STARTUP_RULES.totalTimeoutMs); await stopped;
-    expect(updates).toHaveLength(count);
+    await vi.runAllTimersAsync(); await stopped;
+    expect(updates).toHaveLength(count); expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('持续有真实字节进展的慢下载超过一分钟仍等待完整资源', async () => {
+    vi.useFakeTimers(); const updates: StartupProgress[] = [];
+    const download = vi.fn(async () => new Response(new ReadableStream({ start(controller) {
+      for (let index = 1; index <= 4; index++) setTimeout(() => { controller.enqueue(new Uint8Array([index])); if (index === 4) controller.close(); }, index * 20000);
+    } })));
+    const pending = new StartupLoader(download, async () => null).load({ ...simple, bytes: 4, files: [{ url: '/slow', bytes: 4 }] }, (state) => updates.push(state));
+    await vi.advanceTimersByTimeAsync(60001);
+    expect(updates.at(-1)).toMatchObject({ done: false, completed: 0, failed: 0 });
+    expect(updates.at(-1)!.progress).toBe(.75);
+    await vi.advanceTimersByTimeAsync(20000); await pending;
+    expect(updates.at(-1)).toMatchObject({ done: true, completed: 1, failed: 0, progress: 1 });
+    expect(download).toHaveBeenCalledTimes(1); expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('截断200和旧缓存截断响应不被信任，重新下载完整字节才计成功', async () => {
+    vi.useFakeTimers(); const updates: StartupProgress[] = [];
+    const remove = vi.fn(async () => true); const put = vi.fn<Cache['put']>(async () => {});
+    const cache = { match: async () => new Response('a'), delete: remove, put } as unknown as Cache;
+    const download = vi.fn().mockResolvedValueOnce(new Response('ab')).mockResolvedValueOnce(new Response('abc', { headers: { 'Content-Encoding': 'gzip' } }));
+    const pending = new StartupLoader(download, async () => cache).load({ ...simple, bytes: 3, files: [simple.files[0]] }, (state) => updates.push(state));
+    await vi.runAllTimersAsync(); await pending;
+    expect(remove).toHaveBeenCalledWith('/file-1.png'); expect(download).toHaveBeenCalledTimes(2);
+    expect(updates.at(-1)).toMatchObject({ done: true, completed: 1, failed: 0 });
+    const stored = put.mock.calls[0][1] as Response;
+    expect(stored.headers.get('Content-Encoding')).toBeNull(); expect(stored.headers.get('Content-Length')).toBe('3');
+    expect(await stored.text()).toBe('abc');
+  });
+
+  it.each(['open', 'match', 'put'] as const)('CacheStorage %s悬挂不阻塞完整HTTP下载', async (mode) => {
+    vi.useFakeTimers(); const updates: StartupProgress[] = [];
+    const never = () => new Promise<never>(() => {});
+    const cache = { match: mode === 'match' ? never : async () => undefined, put: mode === 'put' ? never : async () => {} } as unknown as Cache;
+    const download = vi.fn(async () => new Response('abc'));
+    const pending = new StartupLoader(download, mode === 'open' ? never : async () => cache).load(simple, (state) => updates.push(state));
+    await vi.runAllTimersAsync(); await pending;
+    expect(updates.at(-1)).toMatchObject({ done: true, completed: 4, failed: 0 }); expect(download).toHaveBeenCalledTimes(4);
+    expect(vi.getTimerCount()).toBe(0);
   });
 });
 
 describe('版本缓存与浏览器兼容', () => {
   it('已缓存素材直接读取，兼容没有 throwIfAborted 的信号，API永不经过素材缓存', async () => {
-    vi.resetModules(); const match = vi.fn(async () => new Response('cached'));
+    vi.resetModules(); const match = vi.fn(async () => new Response('cached', { headers: { 'X-Irminsul-Bytes': String(catalog.files[FONT_ASSETS.common as keyof typeof catalog.files]) } }));
     vi.stubGlobal('caches', { open: vi.fn(async () => ({ match })) });
     const download = vi.fn(async () => new Response('network')); vi.stubGlobal('fetch', download);
     const { fetchAsset } = await import('../src/game/assets/cache');
@@ -122,6 +170,17 @@ describe('版本缓存与浏览器兼容', () => {
     const download = vi.fn(async () => new Response('http')); vi.stubGlobal('fetch', download);
     const { fetchAsset } = await import('../src/game/assets/cache');
     expect(await (await fetchAsset(FONT_ASSETS.common)).text()).toBe('http'); expect(download).toHaveBeenCalledTimes(1);
+  });
+  it('运行时CacheStorage匹配悬挂在800ms后回退网络，且取消仍生效', async () => {
+    vi.useFakeTimers(); vi.resetModules();
+    vi.stubGlobal('caches', { open: async () => ({ match: () => new Promise(() => {}) }) });
+    const download = vi.fn(async () => new Response('network')); vi.stubGlobal('fetch', download);
+    const { fetchAsset } = await import('../src/game/assets/cache');
+    const pending = fetchAsset(FONT_ASSETS.common);
+    await vi.advanceTimersByTimeAsync(801); expect(await (await pending).text()).toBe('network');
+    const controller = new AbortController(); controller.abort();
+    await expect(fetchAsset(FONT_ASSETS.common, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(download).toHaveBeenCalledTimes(1);
   });
   it('只清理自有旧版本，保留当前、最近上一版和其他缓存', async () => {
     vi.resetModules(); const remove = vi.fn(async () => true);

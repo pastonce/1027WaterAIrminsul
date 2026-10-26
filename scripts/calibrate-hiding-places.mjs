@@ -6,7 +6,7 @@ const plates = JSON.parse(readFileSync('docs/inhabitants/hiding-layers.json', 'u
 const calibration = Object.fromEntries(plates.map((file) => [file.file.replace('asserts/calibration/backgrounds/', '/asserts/backgrounds/'), `data:image/webp;base64,${readFileSync(file.file).toString('base64')}`]));
 let result;
 try {
-  const page = await browser.newPage(); await page.goto('http://127.0.0.1:5173');
+  const page = await browser.newPage(); await page.goto(process.env.CALIBRATION_BASE_URL ?? 'http://127.0.0.1:5173');
   result = await page.evaluate(async (calibration) => {
     const [{ HIDING_PLACES, INHABITANT_ASSETS, ROAMING_ARANARA }, { getStageBackground }, { creatureLayout }] = await Promise.all([import('/src/data/inhabitants.ts'), import('/src/data/backgrounds.ts'), import('/src/game/encounters/layout.ts')]);
     const image = async (url) => { const source = new Image(); source.src = calibration[url] ?? url; await source.decode(); const canvas = document.createElement('canvas'); canvas.width = source.width; canvas.height = source.height; const context = canvas.getContext('2d'); context.drawImage(source, 0, 0); return { source, canvas, context, pixels: context.getImageData(0, 0, source.width, source.height).data }; };
@@ -40,13 +40,24 @@ try {
             });
             const ratio = visible.length / samples.length;
             const center = visible.reduce((sum, point) => sum + point.vertical, 0) / Math.max(1, visible.length);
-            const score = Math.abs(ratio - 0.28) * 4 + (offsetX * offsetX + offsetY * offsetY) * 0.000005 + (center > (anchor.burrow ? 0.75 : 0.55) ? 1 : 0);
+            const score = Math.abs(ratio - 0.28) * 4 + (offsetX * offsetX + offsetY * offsetY) * 0.000005 + (center > (anchor.burrow ? 0.75 : 0.55) ? 1 : 0) + (ratio < 0.08 ? 100 : 0);
             if (!best || score < best.score) best = { offsetX, offsetY, score, ratio, visible };
           }
           const visible = best.visible;
           const horizontal = visible.reduce((sum, point) => sum + point.horizontal, 0) / Math.max(1, visible.length);
           const vertical = visible.reduce((sum, point) => sum + point.vertical, 0) / Math.max(1, visible.length);
-          fits[key][id] = { horizontal: best.offsetX, vertical: best.offsetY, hitX: horizontal, hitY: vertical };
+          const peekPoints = [];
+          if (visible.length) {
+            const left = Math.min(...visible.map((point) => point.horizontal)); const right = Math.max(...visible.map((point) => point.horizontal));
+            const top = Math.min(...visible.map((point) => point.vertical)); const bottom = Math.max(...visible.map((point) => point.vertical));
+            for (const x of [0, 0.5, 1]) for (const y of [0, 0.5, 1]) {
+              const target = { horizontal: left + (right - left) * x, vertical: top + (bottom - top) * y };
+              const point = visible.reduce((nearest, candidate) => Math.hypot(candidate.horizontal - target.horizontal, candidate.vertical - target.vertical) < Math.hypot(nearest.horizontal - target.horizontal, nearest.vertical - target.vertical) ? candidate : nearest);
+              const pair = [Number(point.horizontal.toFixed(4)), Number(point.vertical.toFixed(4))];
+              if (!peekPoints.some((entry) => entry[0] === pair[0] && entry[1] === pair[1])) peekPoints.push(pair);
+            }
+          }
+          fits[key][id] = { horizontal: best.offsetX, vertical: best.offsetY, hitX: horizontal, hitY: vertical, peekPoints };
           report.push({ stage, slot, name: anchor.name, asset: id, ratio: Number(best.ratio.toFixed(4)), horizontal: best.offsetX, vertical: best.offsetY });
         }
       }

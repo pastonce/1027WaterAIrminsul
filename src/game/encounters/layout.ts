@@ -43,17 +43,23 @@ export function creatureLayout(stage: DreamStageId, entries: ForestEncounter[], 
       const horizontal = clamp(width * placeData.x, 240, width - 280);
       const bottomHorizontal = width < 700 && placeData.x > 0.5 ? width * 0.23 : width * placeData.x;
       const left = placeData.edge === 'left' ? -actorWidth * 0.53 : placeData.edge === 'right' ? width - actorWidth * 0.47 : (placeData.edge === 'top' ? horizontal : bottomHorizontal) - actorWidth / 2;
-      const top = placeData.edge === 'top' ? -actorHeight * 0.4 : placeData.edge === 'bottom' ? height - actorHeight * 0.56 : clamp(height * placeData.y - actorHeight / 2, 112, height - 150);
+      const top = placeData.edge === 'top' ? -actorHeight * 0.4 : placeData.edge === 'bottom' ? height - actorHeight * 0.56 : clamp(height * placeData.y - actorHeight / 2, 112, stage === 'F' && placeData.edge === 'left' ? height - actorHeight : height - 150);
       const hit = { left: placeData.edge === 'left' ? 1 : placeData.edge === 'right' ? width - 45 : left + actorWidth / 2 - 22, top: placeData.edge === 'top' ? 1 : placeData.edge === 'bottom' ? height - 45 : top + actorHeight * 0.3, width: 44, height: 44 };
       actors.push({ id: `roaming-${entry.id}`, asset, kind: 'roaming', phase: entry.phase, encounter: entry.id, celebrated: entry.celebrated, left, top, width: actorWidth, height: actorHeight, hit, depth: 'edge', edge: placeData.edge });
       continue;
     }
     const actorHeight = (asset === 'aranara_04' ? 270 : 220) * projection;
     const actorWidth = actorHeight * bounds.width / bounds.height;
-    const fit = (calibrated as Record<string, Partial<Record<InhabitantId, { horizontal: number; vertical: number; hitX: number; hitY: number }>>>)[`${stage}-${entry.slot}`]?.[asset];
+    const fit = (calibrated as Record<string, Partial<Record<InhabitantId, { horizontal: number; vertical: number; hitX: number; hitY: number; peekPoints?: number[][] }>>>)[`${stage}-${entry.slot}`]?.[asset];
     const left = width / 2 + (placeData.x + (fit?.horizontal ?? 0)) * projection - actorWidth * (placeData.burrow === 1 ? 0.4 : placeData.burrow === -1 ? 0.6 : 0.5);
     const top = height / 2 - (placeData.y + (fit?.vertical ?? 0)) * projection - actorHeight * (placeData.burrow ? 0.55 : 0.4) + parallax;
     const hit = { left: left + actorWidth * (fit?.hitX ?? 0.5) - 22, top: top + actorHeight * (fit?.hitY ?? 0.2) - 22, width: 44, height: 44 };
+    if (hit.left < 0 || hit.left + 44 > width || hit.top < 0 || hit.top + 44 > height) {
+      const visible = (fit?.peekPoints ?? []).map(([x, y]) => ({ x: left + actorWidth * x, y: top + actorHeight * y }))
+        .filter((point) => point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height)
+        .sort((first, second) => Math.hypot(first.x - hit.left - 22, first.y - hit.top - 22) - Math.hypot(second.x - hit.left - 22, second.y - hit.top - 22));
+      if (visible.length) { hit.left = clamp(visible[0].x - 22, 0, width - 44); hit.top = clamp(visible[0].y - 22, 0, height - 44); }
+    }
     actors.push({ id: `roaming-${entry.id}`, asset, kind: 'roaming', phase: entry.phase, encounter: entry.id, celebrated: entry.celebrated, left, top, width: actorWidth, height: actorHeight, hit, burrow: placeData.burrow, depth: placeData.depth ?? 'middle', arrival: placeData.arrival, departure: placeData.departure, travel: placeData.travel, exitDistance: placeData.departure === 'bottom' ? Math.max(1.2, (height + actorHeight + 48 - top) / actorHeight) : undefined });
   }
   if (stage === 'F') {

@@ -650,5 +650,21 @@
       }
     ],
     "reason": "Only superseded font subsets after new test-exit feedback. Current source TTF and generated subsets preserved."
+  },
+  "loadingRecoveryFontRefresh": {
+    "date": "2026-10-26",
+    "removed": [
+      {
+        "path": "public/asserts/fonts/irminsul-common-d4f0bcc4f3e6.woff2",
+        "bytes": 208828,
+        "sha256": "d4f0bcc4f3e61748b49456c540a1ef4d5d79c9deb3e385728b3d19327c602428"
+      },
+      {
+        "path": "public/asserts/fonts/irminsul-extended-5a47043ac03f.woff2",
+        "bytes": 3313096,
+        "sha256": "5a47043ac03f673631aa953b4af6bf56d00ae85fd4b5673634c80e41f0d98e36"
+      }
+    ],
+    "reason": "Superseded generated subsets after loading/retry text and character recovery. Original TTF retained."
   }
 }

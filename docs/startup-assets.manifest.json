@@ -1,5 +1,5 @@
 {
-  "revision": "7370d1f02a25e281",
+  "revision": "79cc89faaa90a68a",
   "files": [
     {
       "url": "/asserts/backgrounds/canopy/bg.png",
@@ -837,6 +837,11 @@
       "sha256": "dd45f0f2444116548fd3e0713119ce545daffdaeb6b939d9299f53cff18ba037"
     },
     {
+      "url": "/asserts/characters/dream/poster-7972c211adcd.webp",
+      "bytes": 48832,
+      "sha256": "7972c211adcdf15e0660aff1f028dcb0944b5fce9725c4479bd6be128b533c44"
+    },
+    {
       "url": "/asserts/characters/dream/shouye_caoshen.atlas",
       "bytes": 2571,
       "sha256": "56a26da69fc7d29865f82f2974d2338a853cb3f7876e7c0fab39f33b2ea42239"
@@ -870,6 +875,11 @@
       "url": "/asserts/characters/reality/naxida.json",
       "bytes": 2292415,
       "sha256": "6502c216cfdc75e711e4536435e66d9ea477191e6c159803d5afa67201402751"
+    },
+    {
+      "url": "/asserts/characters/reality/poster-9a6dd0855a23.webp",
+      "bytes": 50438,
+      "sha256": "9a6dd0855a23e928e07ac3170c9fc0e198f48cb84a1990bca6eb359b1023f08a"
     },
     {
       "url": "/asserts/effects/dendro.png",
@@ -932,14 +942,14 @@
       "sha256": "5e1379064253bb564b391af8d89cd72177d0dc33d2edd273d9afa2c3dbec1cf7"
     },
     {
-      "url": "/asserts/fonts/irminsul-common-d4f0bcc4f3e6.woff2",
-      "bytes": 208828,
-      "sha256": "d4f0bcc4f3e61748b49456c540a1ef4d5d79c9deb3e385728b3d19327c602428"
+      "url": "/asserts/fonts/irminsul-common-1c964466395d.woff2",
+      "bytes": 208564,
+      "sha256": "1c964466395defb9a722d26f8b06fdeeb8b3bc575ee530225a64073eacd9fae6"
     },
     {
-      "url": "/asserts/fonts/irminsul-extended-5a47043ac03f.woff2",
-      "bytes": 3313096,
-      "sha256": "5a47043ac03f673631aa953b4af6bf56d00ae85fd4b5673634c80e41f0d98e36"
+      "url": "/asserts/fonts/irminsul-extended-66c88ce988a2.woff2",
+      "bytes": 3313532,
+      "sha256": "66c88ce988a21c40689dea0fad47596371ed199aeb2c67ed2fed227f6f73072a"
     },
     {
       "url": "/asserts/gifts/date-candy.png",

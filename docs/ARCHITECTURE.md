@@ -1,5 +1,7 @@
 # 工程架构 · 连续交互版
 
+2026-10-26加载修订：全部所选资源下载完整且模块导入成功才揭幕；健康慢网不受旧60秒总限，30秒无进展检测 / 有限重试，失败保留加载层并提供重试。坏缓存按长度校验，缓存IO有界。正常角色只用自身透明poster，Nidaha彩蛋SVG不作默认回退。平板黑区与技能框共享实际host包络，详见STARTUP_ASSETS / CHARACTER_LOADING / OPENING_ANIMATION。
+
 2026-10-26后续优化：普通触树 / G角色连续点击保留最新句并打断旧句，树表情累计7秒；Past可再次输入退出，普通页不显示测试标记。公告、设置与读信继续播放BGM，底层演出仍暂停。手机首屏保留完整圆徽 / 种子，A～D施法图案统一72%；详见DIALOGUE_SYSTEM / EASTER_EGGS / AUDIO_AND_FONTS / NAHIDA_BLESSING与最新TEST_PLAN。
 
 本轮：Notice支持Markdown“> ”tagline并移到正文底部；N01由原稿生成。proceduralTree是GameSnapshot临时标志，TreeRenderer保留原唯一GSAP游标，通过proceduralGrowthAtFrame按当前58拍映射同等成长，替换实绘SVG枝叶；presentedTreeBounds统一两种形态的对白 / 表情 / 施法，晶蝶只换稳定落点，不改解锁。E技能采用clean-v2派生哈希纹理，原骨骼 / atlas / 时序保留，见PROCEDURAL_TREE.md / E_SKILL_CLEAN.md。
