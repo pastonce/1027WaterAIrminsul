@@ -20,7 +20,7 @@ export const SAVE_KEYS = { player: 'irminsul.player.v2', development: 'irminsul.
 
 export function createSave(now = Date.now()): GameSave {
   return {
-    version: 2, growthRulesVersion: 2, growth: 0, dew: 0, seed: 1027, introSeen: false, sceneStage: 'A', loadingArtChoices: {},
+    version: 2, growthRulesVersion: 2, growth: 0, dew: 0, seed: 1027, introSeen: false, seedPlanted: false, sceneStage: 'A', loadingArtChoices: {},
     completedStages: [], completedVisits: [], pendingVisits: [], visitPositions: {}, guaranteedVisits: [], blessedVisits: [], pendingWaterings: [], watchedStories: [], unlockedSecrets: [], playedDialogues: [], wateringCounts: {}, claimedAranara: [],
     dialogueDecks: {}, dialogueCounts: {}, dialogueSequence: 0, pendingDialogues: [], visitLines: {},
     endingComplete: false, nightComplete: false,
@@ -110,6 +110,7 @@ export function validateSave(input: unknown): GameSave {
     sceneStage: [...DREAM_STAGES, 'G'].includes(source.sceneStage as StageId) ? source.sceneStage as StageId : undefined,
     loadingArtChoices: validateLoadingArtChoices(source.loadingArtChoices),
     seed: bounded(source.seed, 2147483647, 1027), introSeen: source.introSeen === true,
+    seedPlanted: growth > 0 || completedStages.length > 0 || source.seedPlanted === true || source.seedPlanted === undefined && source.introSeen === true,
     completedStages, completedVisits,
     pendingVisits, visitPositions,
     guaranteedVisits: validList(source.guaranteedVisits, visitIds).filter((id) => completedVisits.includes(id) || pendingVisits.includes(id)),

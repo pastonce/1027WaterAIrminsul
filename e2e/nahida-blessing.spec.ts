@@ -1,4 +1,5 @@
 import { openSettings } from './settings-support';
+import { E_SKILL_PATTERN } from '../src/data/assets';
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
@@ -10,6 +11,8 @@ import { VISIT_EMITTERS, visitGrowth } from '../src/data/visits';
 import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 import type { DreamStageId, GameSave } from '../src/types/game';
+import { createTreeGrowthModel } from '../src/game/tree/presentation';
+import { treeCanopyFocus } from '../src/game/tree/scenePlacement';
 
 const readSave = (page: Page): Promise<GameSave> => page.evaluate(() => JSON.parse(localStorage.getItem('irminsul.development.v2')!));
 
@@ -96,13 +99,15 @@ test('轮廓光效 → 花叶 → 素材扫描框 → 成长，暂停与一次�
   await page.clock.pauseAt(await page.evaluate(() => Date.now() + 200));
   await expect(page.locator('.blessing-dendro-icon')).toHaveCount(1); await expect(page.locator('.blessing-pattern-piece')).toHaveCount(16);
   await expect(page.locator('.blessing-source, .blessing-circuit, .blessing-data-packet, .blessing-focus-frame, [data-piece=center_emblem]')).toHaveCount(0);
-  const onTree = await page.locator('.blessing-target').evaluate((element) => {
-    const target = element as SVGGElement; const tree = document.querySelector('.dream-tree') as SVGSVGElement;
-    const screen = new DOMPoint(0, 0).matrixTransform(target.getScreenCTM()!); const local = screen.matrixTransform(tree.getScreenCTM()!.inverse());
-    return (tree.querySelector('.tree-hit-target') as SVGPathElement).isPointInFill(local);
-  }); expect(onTree).toBe(true);
+  const alignment = await page.locator('.blessing-target').evaluate((element) => {
+    const tree = document.querySelector('.dream-tree') as SVGSVGElement; const matrix = tree.getScreenCTM()!;
+    const root = new DOMPoint(500, 3300).matrixTransform(matrix); const target = new DOMPoint(0, 0).matrixTransform((element as SVGGElement).getScreenCTM()!);
+    return { x: target.x, y: target.y, root: root.y, scale: Math.hypot(matrix.a, matrix.b), width: innerWidth, height: innerHeight };
+  });
+  const focus = treeCanopyFocus(createTreeGrowthModel((await readSave(page)).growth), alignment.width, alignment.height, alignment.root, alignment.scale);
+  expect(alignment.x).toBeCloseTo(focus.x, 1); expect(alignment.y).toBeCloseTo(focus.y, 1);
   expect((await page.request.get('/asserts/effects/dendro.png')).ok()).toBe(true);
-  expect((await page.request.get('/asserts/effects/e-skill-frame.png')).ok()).toBe(true);
+  expect((await page.request.get(E_SKILL_PATTERN.texture)).ok()).toBe(true);
   const scan = await page.locator('.blessing-scan').evaluate((element) => { const animation = element.getAnimations()[0]; animation.currentTime = 900; const start = getComputedStyle(element).transform; animation.currentTime = 1350; const end = getComputedStyle(element).transform; return { start, end }; });
   expect(scan.start).not.toBe(scan.end);
   const flow = await page.locator('.blessing-flow-particle').first().evaluate((element) => { const animation = element.getAnimations()[0]; animation.currentTime = 400; const start = getComputedStyle(element).offsetDistance; animation.currentTime = 700; const end = getComputedStyle(element).offsetDistance; return { start, end }; });
@@ -134,8 +139,24 @@ test('轮廓光效 → 花叶 → 素材扫描框 → 成长，暂停与一次�
   await page.reload(); await finishOpening(page, true); await page.clock.fastForward(3000); expect((await readSave(page)).growth).toBe(60);
 });
 
+test('固定视角的成熟树冠中部接收纳西妲技能，扫描框不落在根部', async ({ page }, info) => {
+  await page.clock.install(); await seed(page, 'E', { growth: 800, pendingVisits: ['visit-E'], completedVisits: [], blessedVisits: [] });
+  await channel(page);
+  const alignment = await page.locator('.blessing-target').evaluate((element) => {
+    const matrix = (document.querySelector('.dream-tree') as SVGSVGElement).getScreenCTM()!;
+    const root = new DOMPoint(500, 3300).matrixTransform(matrix); const target = new DOMPoint(0, 0).matrixTransform((element as SVGGElement).getScreenCTM()!);
+    return { x: target.x, y: target.y, root: root.y, scale: Math.hypot(matrix.a, matrix.b), width: innerWidth, height: innerHeight };
+  });
+  const focus = treeCanopyFocus(createTreeGrowthModel(800), alignment.width, alignment.height, alignment.root, alignment.scale);
+  expect(alignment.x).toBeCloseTo(focus.x, 1); expect(alignment.y).toBeCloseTo(focus.y, 1);
+  expect(alignment.y).toBeLessThan(alignment.root - 40);
+  await expect(page.getByTestId('dream-scene')).toHaveAttribute('data-camera-offset', '0');
+  await page.locator('.dendro-blessing').evaluate((element) => { for (const animation of element.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 1250; } });
+  mkdirSync('artifacts/fixed-root', { recursive: true }); await page.screenshot({ path: `artifacts/fixed-root/${info.project.name}-canopy-skill.png` });
+});
+
 test('扫描框纹理失败不阻断中心扫描、浇灌及祝福结算', async ({ page }) => {
-  await page.clock.install(); await page.route('**/e-skill-frame.png', (route) => route.abort());
+  await page.clock.install(); await page.route(`**${E_SKILL_PATTERN.texture}`, (route) => route.abort());
   await seed(page, 'D', { pendingVisits: ['visit-D'] }); await channel(page);
   await expect(page.locator('.blessing-dendro-icon')).toHaveCount(1); await expect(page.locator('.blessing-scan')).toHaveCount(1);
   await expect(page.getByRole('button', { name: '浇灌梦中的树', exact: true })).toBeEnabled();

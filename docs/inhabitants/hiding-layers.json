@@ -2,12 +2,12 @@
   "source": "src/data/backgrounds.ts · hiding.cuts",
   "files": [
     {
-      "file": "public/asserts/backgrounds/forest/hiding-foreground.webp",
+      "file": "asserts/calibration/backgrounds/forest/hiding-foreground.webp",
       "bytes": 312032,
       "sha256": "d3efdfddfcaf7f21ab500aee004d24b6676412948c4a302db3609ce2e27a7320"
     },
     {
-      "file": "public/asserts/backgrounds/forest/hiding-back.webp",
+      "file": "asserts/calibration/backgrounds/forest/hiding-back.webp",
       "bytes": 129388,
       "sha256": "28bdf124472ff3ad6bb5240ed0bc4d70c5624a1a61ca660d5f2120e323db5677"
     },
@@ -42,27 +42,27 @@
       "sha256": "bc7b2641f32c6cec6dbdad00e50311b8bb6346fab8135697a46ed80eb979bf63"
     },
     {
-      "file": "public/asserts/backgrounds/forest/hiding-after-middle.webp",
+      "file": "asserts/calibration/backgrounds/forest/hiding-after-middle.webp",
       "bytes": 295284,
       "sha256": "c21cd6fadbe493a972c2264c143b4e819ce5ebc574678369fea328011f3e6a93"
     },
     {
-      "file": "public/asserts/backgrounds/forest/hiding-after-log.webp",
+      "file": "asserts/calibration/backgrounds/forest/hiding-after-log.webp",
       "bytes": 186068,
       "sha256": "09ec8d23049a872c461639ecb717e7092e63904463a9ad8d0dc651538cb25d39"
     },
     {
-      "file": "public/asserts/backgrounds/forest/hiding-after-near.webp",
+      "file": "asserts/calibration/backgrounds/forest/hiding-after-near.webp",
       "bytes": 138880,
       "sha256": "53f6b333d8d1ee4cd1f259bf072e3f04a7544d1fb3f078cacd6992d67d730d23"
     },
     {
-      "file": "public/asserts/backgrounds/canopy/hiding-foreground.webp",
+      "file": "asserts/calibration/backgrounds/canopy/hiding-foreground.webp",
       "bytes": 211868,
       "sha256": "869f512d5c0a2d72c1a7b0e805ae247ac9ce3521a677ed32a3d22992af056084"
     },
     {
-      "file": "public/asserts/backgrounds/canopy/hiding-back.webp",
+      "file": "asserts/calibration/backgrounds/canopy/hiding-back.webp",
       "bytes": 211740,
       "sha256": "d1aaef7de17b1f272833d5c355e9643d09497f077d2b1b9c26de4538fadb6c12"
     },
@@ -87,22 +87,22 @@
       "sha256": "b36bcce3f2daead44cab6825d8080cef6c86ef8c68375c48ba3ac57e46b19864"
     },
     {
-      "file": "public/asserts/backgrounds/canopy/hiding-after-middle.webp",
+      "file": "asserts/calibration/backgrounds/canopy/hiding-after-middle.webp",
       "bytes": 207938,
       "sha256": "95168acc8bea66efd2b09d94102be3a98860da02b0b2634902093d7cad14a79c"
     },
     {
-      "file": "public/asserts/backgrounds/canopy/hiding-after-near.webp",
+      "file": "asserts/calibration/backgrounds/canopy/hiding-after-near.webp",
       "bytes": 84166,
       "sha256": "f50f7534aead3bcc58da335c2327ceb21b03bd84d0018c9007041dd9d2a755d0"
     },
     {
-      "file": "public/asserts/backgrounds/sanctuary/hiding-foreground.webp",
+      "file": "asserts/calibration/backgrounds/sanctuary/hiding-foreground.webp",
       "bytes": 266024,
       "sha256": "025d646ba86d3994a252699c2e35f025ec2f932ac5ce0ab54871845fe4b12d21"
     },
     {
-      "file": "public/asserts/backgrounds/sanctuary/hiding-back.webp",
+      "file": "asserts/calibration/backgrounds/sanctuary/hiding-back.webp",
       "bytes": 181704,
       "sha256": "7d6f64b4f985ffe59fa8922b3fa9d273366c3adeab7d8664cd81b40588c350d1"
     },
@@ -127,22 +127,22 @@
       "sha256": "b2375040aa3d02bfc4d1ead360150ee21aea77da32e63a44d5493cd224b8ceaf"
     },
     {
-      "file": "public/asserts/backgrounds/sanctuary/hiding-after-middle.webp",
+      "file": "asserts/calibration/backgrounds/sanctuary/hiding-after-middle.webp",
       "bytes": 309696,
       "sha256": "6595480d27d2cea14aec4c82d26d8b90935d639f76f67342b69e5b949dd66348"
     },
     {
-      "file": "public/asserts/backgrounds/sanctuary/hiding-after-near.webp",
+      "file": "asserts/calibration/backgrounds/sanctuary/hiding-after-near.webp",
       "bytes": 302010,
       "sha256": "27d95fa44caa93eba7eedbd62e18f912110c6624f7042fbe5118fa544879a175"
     },
     {
-      "file": "public/asserts/backgrounds/embers/hiding-foreground.webp",
+      "file": "asserts/calibration/backgrounds/embers/hiding-foreground.webp",
       "bytes": 262466,
       "sha256": "108dc2a061c01f38c84c0bf4cda2c1d290f302af8fc0237f0937c7e7b8decced"
     },
     {
-      "file": "public/asserts/backgrounds/embers/hiding-back.webp",
+      "file": "asserts/calibration/backgrounds/embers/hiding-back.webp",
       "bytes": 164000,
       "sha256": "9416eccc3e035fe52b9bb055d32fb8c4f315fc52dc537ae8d5b20372a7e50007"
     },
@@ -167,22 +167,22 @@
       "sha256": "3a341ad21133acb8ba7d551513303e26127bc1c9435b18b5fc2485cd05a8ccdd"
     },
     {
-      "file": "public/asserts/backgrounds/embers/hiding-after-middle.webp",
+      "file": "asserts/calibration/backgrounds/embers/hiding-after-middle.webp",
       "bytes": 293676,
       "sha256": "a6816a32e996be958ac9adc87e514b584e2c11ffc4bacc175d36e1854b7dd60d"
     },
     {
-      "file": "public/asserts/backgrounds/embers/hiding-after-near.webp",
+      "file": "asserts/calibration/backgrounds/embers/hiding-after-near.webp",
       "bytes": 294518,
       "sha256": "93256ba3d0e3041a5397576ed345b1c9adbfd03329eb11e2bec2bbe477969fb2"
     },
     {
-      "file": "public/asserts/backgrounds/festival/hiding-foreground.webp",
+      "file": "asserts/calibration/backgrounds/festival/hiding-foreground.webp",
       "bytes": 171116,
       "sha256": "40b0b3fcfa73bc5f41ef504f6c17f2d0bc79701b57b75dc64ad19bec09ad95f0"
     },
     {
-      "file": "public/asserts/backgrounds/festival/hiding-back.webp",
+      "file": "asserts/calibration/backgrounds/festival/hiding-back.webp",
       "bytes": 116450,
       "sha256": "091d725ff86a766fdaf1b48ec1a2fe366b90b14d7383ac3e1adf39c0e6eba7b9"
     },
@@ -207,12 +207,12 @@
       "sha256": "81584f3c70ec7798bd4ac91eb8d0e8c736fdb0cc71bae785d7c8f8b7030c8de8"
     },
     {
-      "file": "public/asserts/backgrounds/festival/hiding-after-middle.webp",
+      "file": "asserts/calibration/backgrounds/festival/hiding-after-middle.webp",
       "bytes": 164684,
       "sha256": "dedb00787d20abdb16cf880871277c629ef5d5d2b7a76640abc78736b7a09f8f"
     },
     {
-      "file": "public/asserts/backgrounds/festival/hiding-after-near.webp",
+      "file": "asserts/calibration/backgrounds/festival/hiding-after-near.webp",
       "bytes": 111648,
       "sha256": "398e253dbf230b9f1946006cba60afd037d6388bbd99aba6e8c8a9beb6c44886"
     }

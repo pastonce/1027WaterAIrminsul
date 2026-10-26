@@ -1,5 +1,5 @@
 {
-  "revision": "50c2682da5867a27",
+  "revision": "11cf4171040df970",
   "files": [
     {
       "url": "/asserts/backgrounds/canopy/bg.png",
@@ -152,21 +152,6 @@
       "sha256": "c04f90e4b369a7c7da68fc7be8254060c106abea509943e6e113ed9fe3af6b80"
     },
     {
-      "url": "/asserts/backgrounds/canopy/hiding-after-middle.webp",
-      "bytes": 207938,
-      "sha256": "95168acc8bea66efd2b09d94102be3a98860da02b0b2634902093d7cad14a79c"
-    },
-    {
-      "url": "/asserts/backgrounds/canopy/hiding-after-near.webp",
-      "bytes": 84166,
-      "sha256": "f50f7534aead3bcc58da335c2327ceb21b03bd84d0018c9007041dd9d2a755d0"
-    },
-    {
-      "url": "/asserts/backgrounds/canopy/hiding-back.webp",
-      "bytes": 211740,
-      "sha256": "d1aaef7de17b1f272833d5c355e9643d09497f077d2b1b9c26de4538fadb6c12"
-    },
-    {
       "url": "/asserts/backgrounds/canopy/hiding-band-0.webp",
       "bytes": 211740,
       "sha256": "d1aaef7de17b1f272833d5c355e9643d09497f077d2b1b9c26de4538fadb6c12"
@@ -180,11 +165,6 @@
       "url": "/asserts/backgrounds/canopy/hiding-band-2.webp",
       "bytes": 84788,
       "sha256": "b36bcce3f2daead44cab6825d8080cef6c86ef8c68375c48ba3ac57e46b19864"
-    },
-    {
-      "url": "/asserts/backgrounds/canopy/hiding-foreground.webp",
-      "bytes": 211868,
-      "sha256": "869f512d5c0a2d72c1a7b0e805ae247ac9ce3521a677ed32a3d22992af056084"
     },
     {
       "url": "/asserts/backgrounds/canopy/medium_box.atlas",
@@ -382,21 +362,6 @@
       "sha256": "f8394775a58f908c1d1b911fbc8c63cc36f9ff3f0bb565e89958dcc959620d6b"
     },
     {
-      "url": "/asserts/backgrounds/embers/hiding-after-middle.webp",
-      "bytes": 293676,
-      "sha256": "a6816a32e996be958ac9adc87e514b584e2c11ffc4bacc175d36e1854b7dd60d"
-    },
-    {
-      "url": "/asserts/backgrounds/embers/hiding-after-near.webp",
-      "bytes": 294518,
-      "sha256": "93256ba3d0e3041a5397576ed345b1c9adbfd03329eb11e2bec2bbe477969fb2"
-    },
-    {
-      "url": "/asserts/backgrounds/embers/hiding-back.webp",
-      "bytes": 164000,
-      "sha256": "9416eccc3e035fe52b9bb055d32fb8c4f315fc52dc537ae8d5b20372a7e50007"
-    },
-    {
       "url": "/asserts/backgrounds/embers/hiding-band-0.webp",
       "bytes": 164000,
       "sha256": "9416eccc3e035fe52b9bb055d32fb8c4f315fc52dc537ae8d5b20372a7e50007"
@@ -410,11 +375,6 @@
       "url": "/asserts/backgrounds/embers/hiding-band-2.webp",
       "bytes": 247946,
       "sha256": "3a341ad21133acb8ba7d551513303e26127bc1c9435b18b5fc2485cd05a8ccdd"
-    },
-    {
-      "url": "/asserts/backgrounds/embers/hiding-foreground.webp",
-      "bytes": 262466,
-      "sha256": "108dc2a061c01f38c84c0bf4cda2c1d290f302af8fc0237f0937c7e7b8decced"
     },
     {
       "url": "/asserts/backgrounds/embers/poster.webp",
@@ -432,21 +392,6 @@
       "sha256": "07696c79f4610404c4687fe54b37faa518be2180a4ba2ddaa6fa2ecaf7d2506d"
     },
     {
-      "url": "/asserts/backgrounds/festival/hiding-after-middle.webp",
-      "bytes": 164684,
-      "sha256": "dedb00787d20abdb16cf880871277c629ef5d5d2b7a76640abc78736b7a09f8f"
-    },
-    {
-      "url": "/asserts/backgrounds/festival/hiding-after-near.webp",
-      "bytes": 111648,
-      "sha256": "398e253dbf230b9f1946006cba60afd037d6388bbd99aba6e8c8a9beb6c44886"
-    },
-    {
-      "url": "/asserts/backgrounds/festival/hiding-back.webp",
-      "bytes": 116450,
-      "sha256": "091d725ff86a766fdaf1b48ec1a2fe366b90b14d7383ac3e1adf39c0e6eba7b9"
-    },
-    {
       "url": "/asserts/backgrounds/festival/hiding-band-0.webp",
       "bytes": 116450,
       "sha256": "091d725ff86a766fdaf1b48ec1a2fe366b90b14d7383ac3e1adf39c0e6eba7b9"
@@ -460,11 +405,6 @@
       "url": "/asserts/backgrounds/festival/hiding-band-2.webp",
       "bytes": 116904,
       "sha256": "81584f3c70ec7798bd4ac91eb8d0e8c736fdb0cc71bae785d7c8f8b7030c8de8"
-    },
-    {
-      "url": "/asserts/backgrounds/festival/hiding-foreground.webp",
-      "bytes": 171116,
-      "sha256": "40b0b3fcfa73bc5f41ef504f6c17f2d0bc79701b57b75dc64ad19bec09ad95f0"
     },
     {
       "url": "/asserts/backgrounds/festival/image_2_01.png",
@@ -542,26 +482,6 @@
       "sha256": "b1a121bcffb3a05e2b73f07f4eb5c8af1f046aeef1c0ac5ebfaed8dbda72744a"
     },
     {
-      "url": "/asserts/backgrounds/forest/hiding-after-log.webp",
-      "bytes": 186068,
-      "sha256": "09ec8d23049a872c461639ecb717e7092e63904463a9ad8d0dc651538cb25d39"
-    },
-    {
-      "url": "/asserts/backgrounds/forest/hiding-after-middle.webp",
-      "bytes": 295284,
-      "sha256": "c21cd6fadbe493a972c2264c143b4e819ce5ebc574678369fea328011f3e6a93"
-    },
-    {
-      "url": "/asserts/backgrounds/forest/hiding-after-near.webp",
-      "bytes": 138880,
-      "sha256": "53f6b333d8d1ee4cd1f259bf072e3f04a7544d1fb3f078cacd6992d67d730d23"
-    },
-    {
-      "url": "/asserts/backgrounds/forest/hiding-back.webp",
-      "bytes": 129388,
-      "sha256": "28bdf124472ff3ad6bb5240ed0bc4d70c5624a1a61ca660d5f2120e323db5677"
-    },
-    {
       "url": "/asserts/backgrounds/forest/hiding-band-0.webp",
       "bytes": 129388,
       "sha256": "28bdf124472ff3ad6bb5240ed0bc4d70c5624a1a61ca660d5f2120e323db5677"
@@ -580,11 +500,6 @@
       "url": "/asserts/backgrounds/forest/hiding-band-3.webp",
       "bytes": 144136,
       "sha256": "ff7aead843a37512a1138f143364b4b16b83a634f5150927239764481c03d0b4"
-    },
-    {
-      "url": "/asserts/backgrounds/forest/hiding-foreground.webp",
-      "bytes": 312032,
-      "sha256": "d3efdfddfcaf7f21ab500aee004d24b6676412948c4a302db3609ce2e27a7320"
     },
     {
       "url": "/asserts/backgrounds/forest/hiding-light-1.webp",
@@ -712,21 +627,6 @@
       "sha256": "cb87856aa318b4b032a2bb301e73bc90dad138cb53faa2aeeb28df1f9e71c44c"
     },
     {
-      "url": "/asserts/backgrounds/sanctuary/hiding-after-middle.webp",
-      "bytes": 309696,
-      "sha256": "6595480d27d2cea14aec4c82d26d8b90935d639f76f67342b69e5b949dd66348"
-    },
-    {
-      "url": "/asserts/backgrounds/sanctuary/hiding-after-near.webp",
-      "bytes": 302010,
-      "sha256": "27d95fa44caa93eba7eedbd62e18f912110c6624f7042fbe5118fa544879a175"
-    },
-    {
-      "url": "/asserts/backgrounds/sanctuary/hiding-back.webp",
-      "bytes": 181704,
-      "sha256": "7d6f64b4f985ffe59fa8922b3fa9d273366c3adeab7d8664cd81b40588c350d1"
-    },
-    {
       "url": "/asserts/backgrounds/sanctuary/hiding-band-0.webp",
       "bytes": 181704,
       "sha256": "7d6f64b4f985ffe59fa8922b3fa9d273366c3adeab7d8664cd81b40588c350d1"
@@ -740,11 +640,6 @@
       "url": "/asserts/backgrounds/sanctuary/hiding-band-2.webp",
       "bytes": 239238,
       "sha256": "b2375040aa3d02bfc4d1ead360150ee21aea77da32e63a44d5493cd224b8ceaf"
-    },
-    {
-      "url": "/asserts/backgrounds/sanctuary/hiding-foreground.webp",
-      "bytes": 266024,
-      "sha256": "025d646ba86d3994a252699c2e35f025ec2f932ac5ce0ab54871845fe4b12d21"
     },
     {
       "url": "/asserts/backgrounds/sanctuary/loading_flowMap.jpg",
@@ -982,9 +877,9 @@
       "sha256": "98afa8d2a553ef3beaa67c15436af8cb0ad675bf93055cbc7ece2dd4d28b8f1d"
     },
     {
-      "url": "/asserts/effects/e-skill-frame.png",
-      "bytes": 122861,
-      "sha256": "98bb9de5b3471e2d6720f023ed01aaf35ae760a1fb787a14f90ec611f9029648"
+      "url": "/asserts/effects/e-skill-frame-clean-7e78729b722f.png",
+      "bytes": 84838,
+      "sha256": "7e78729b722f35fbcbb1ac618de8574941f5e9992bcd8791fc98f1ae95e90e4a"
     },
     {
       "url": "/asserts/expressions/0-53e10bb82cff.png",
@@ -1037,14 +932,14 @@
       "sha256": "5e1379064253bb564b391af8d89cd72177d0dc33d2edd273d9afa2c3dbec1cf7"
     },
     {
-      "url": "/asserts/fonts/irminsul-common-da6e9202346e.woff2",
-      "bytes": 205092,
-      "sha256": "da6e9202346e188f5089657758836c0eee79b9655af90925fd7080133769a90e"
+      "url": "/asserts/fonts/irminsul-common-689b69eda0be.woff2",
+      "bytes": 208748,
+      "sha256": "689b69eda0be34b4e15fb60db7253365b3b5c60616cf06748945049405d57e72"
     },
     {
-      "url": "/asserts/fonts/irminsul-extended-1ba61b21e073.woff2",
-      "bytes": 3320320,
-      "sha256": "1ba61b21e0731735178a17dbe598bbb4ce4533c65be70b4f879070bbe9ec159d"
+      "url": "/asserts/fonts/irminsul-extended-cb9b0f595ebd.woff2",
+      "bytes": 3313164,
+      "sha256": "cb9b0f595ebd4a545cbd8a6e8e23720f84ec60f79ca263085e943ab9ae6a7c13"
     },
     {
       "url": "/asserts/gifts/date-candy.png",
@@ -1902,14 +1797,14 @@
       "sha256": "30e0cb4524ea1d77210b55495cb3802cc5041e9ef49eecd00ce8b770c4b17dca"
     },
     {
-      "url": "/asserts/ui/leaf.svg",
-      "bytes": 263,
-      "sha256": "3243460cedf9dbcb5fac057976d2d3b5e71c021c6e51435b888dd2f66d1aafd4"
-    },
-    {
       "url": "/asserts/ui/music-button-5c2a85153f5e.png",
       "bytes": 7167,
       "sha256": "5c2a85153f5e6cc0d4d1d1049f9e9467e3e84f76da0943f959eb6448ef1453f2"
+    },
+    {
+      "url": "/asserts/ui/seed-7bdcd8bf652d.webp",
+      "bytes": 21644,
+      "sha256": "7bdcd8bf652d792e84f80e95cd64f3291d1a38e173aa742d9feb0ba303089fea"
     }
   ]
 }

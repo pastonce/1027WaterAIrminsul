@@ -10,14 +10,9 @@
   border: 0 !important;
 }
 
-.camera-controls {
-  right: max(8px, calc(env(safe-area-inset-right) + 4px));
-  top: 28%;
-  z-index: 5;
-  pointer-events: none;
-}
 
-.camera-controls .icon-button { pointer-events: auto; }
+
+
 
 .water-action {
   position: absolute;
@@ -242,7 +237,7 @@
 }
 
 @media (max-height: 600px) and (orientation: landscape) {
-  .camera-controls { top: max(94px, 24%); }
+
 
   .water-action {
     right: max(22px, calc(env(safe-area-inset-right) + 16px));

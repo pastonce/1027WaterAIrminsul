@@ -23,7 +23,7 @@ afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 
 function setup(patch: Partial<GameSave> = {}, initialRoll = 0.99, clock = new TestClock()) {
   const storage = new MemoryStorage();
-  storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(clock.now()), introSeen: true, dew: 20, ...patch }));
+  storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(clock.now()), introSeen: true, seedPlanted: true, dew: 20, ...patch }));
   let roll = initialRoll;
   const game = new GameController(new TimeGateService(clock), new SaveManager(storage), () => roll);
   startScene(game);

@@ -25,7 +25,12 @@ describe('E/F完整补绘不改变原生长动画', () => {
     for (let step = 0; step <= 51; step++) for (let frame = 0; frame <= 4; frame++) {
       const time = TREE_ANIMATIONS[step].duration * frame / 4;
       const original = createTreeModel(step, time); const restored = createTreeModel(step, time, true);
-      expect(restored.parts.filter((part) => !part.asset.startsWith('leaf')).map(({ id, asset, matrix }) => ({ id, asset, matrix }))).toEqual(treeAnimationPose(step, time).filter((part) => !part.asset.startsWith('leaf')));
+      const source = treeAnimationPose(step, time);
+      const seedling = source.some((part) => part.asset === 'tree01' || part.asset === 'tree1');
+      const wood = restored.parts.filter((part) => !part.asset.startsWith('leaf')).map(({ id, asset, matrix }) => ({ id, asset, matrix: seedling && id !== 'grass' ? [...matrix.slice(0, 5), matrix[5] - 16] : matrix }));
+      const expected = source.filter((part) => !part.asset.startsWith('leaf'));
+      expect(wood.map((part) => [part.id, part.asset])).toEqual(expected.map((part) => [part.id, part.asset]));
+      wood.forEach((part, index) => part.matrix.forEach((value, coordinate) => expect(value).toBeCloseTo(expected[index].matrix[coordinate], 9)));
       if (step < 34) expect(restored.parts).toHaveLength(original.parts.length);
       for (const part of restored.parts) {
         expect(part.x).toBeGreaterThanOrEqual(500 - TREE_MAX_HALF_WIDTH);
@@ -59,13 +64,13 @@ describe('E/F完整补绘不改变原生长动画', () => {
     }
     expect(treeGrowthDuration(1000, 1020)).toBe(667); expect(treeGrowthDuration(1020, 1027)).toBe(0);
   });
-  it.each(['A', 'B', 'C', 'D', 'E', 'F'] as const)('仅E/F开启完整补绘，当前阶段%s', (stage) => {
+  it.each(['A', 'B', 'C', 'D', 'E', 'F'] as const)('生长路径决定完整补绘，不被背景阶段%s重置', (stage) => {
     const markup = renderToStaticMarkup(createElement(TreeRenderer, { growth: 1027, stage, reduced: true, growing: false, onInteract() {} }));
-    expect(markup.includes('data-tree-art="tree9_growth"')).toBe(stage === 'E' || stage === 'F');
+    expect(markup).toContain('data-tree-art="tree9_growth"');
     expect(markup).not.toMatch(/trunk_column|graft/);
   });
   it('镜头 / 表情使用补冠后包络，但不重建超高树，F最后7点仍是同一造型', () => {
-    expect(getTreeHeight(1027, 'F')).toBeGreaterThan(getTreeHeight(1027));
+    expect(getTreeHeight(1027, 'F')).toBe(getTreeHeight(1027));
     expect(getTreeHeight(1027, 'F')).toBeLessThan(1100);
     expect(getTreeHeight(1027, 'F')).toBe(getTreeHeight(1020, 'F'));
   });

@@ -20,7 +20,7 @@ export class TestClock implements Clock {
 }
 
 export function testGame(patch: Partial<GameSave> = {}, clock = new TestClock(), storage = new MemoryStorage()) {
-  storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(clock.now()), introSeen: true, ...patch }));
+  storage.setItem(SAVE_KEYS.player, JSON.stringify({ ...createSave(clock.now()), introSeen: true, seedPlanted: true, ...patch }));
   const game = new GameController(new TimeGateService(clock), new SaveManager(storage), () => 0.99);
   return { game, clock, storage };
 }

@@ -1,4 +1,4 @@
-export type NoticeBlock = { kind: 'heading'; text: string } | { kind: 'paragraph'; text: string } | { kind: 'list'; items: string[] };
+export type NoticeBlock = { kind: 'heading' | 'paragraph' | 'tagline'; text: string } | { kind: 'list'; items: string[] };
 export interface NoticeDocument { title: string; blocks: NoticeBlock[] }
 
 export function parseNotice(source: string): NoticeDocument {
@@ -11,10 +11,12 @@ export function parseNotice(source: string): NoticeDocument {
     const line = raw.trim();
     const title = line.match(/^#\s+(.+)$/);
     const heading = line.match(/^#{2,6}\s+(.+)$/);
-    if (!line || title || heading) {
+    const tagline = line.match(/^>\s+(.+)$/);
+    if (!line || title || heading || tagline) {
       flushParagraph(); flushList();
       if (title) document.title = title[1];
       if (heading) document.blocks.push({ kind: 'heading', text: heading[1] });
+      if (tagline) document.blocks.push({ kind: 'tagline', text: tagline[1] });
     } else if (line.startsWith('- ')) {
       flushParagraph(); items.push(line.slice(2));
     } else {

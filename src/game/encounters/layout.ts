@@ -16,7 +16,7 @@ export interface CreatureActor extends HidingMotion {
   celebrated?: boolean; animationPhase?: number; burrow?: -1 | 1; depth?: string; edge?: 'left' | 'right' | 'top' | 'bottom';
   exitDistance?: number;
 }
-export interface CreatureViewport { width: number; height: number; scale: number; offset: number; root: number; treeHeight: number; seed: number; growth?: number }
+export interface CreatureViewport { width: number; height: number; scale: number; offset: number; root: number; treeHeight: number; seed: number; growth?: number; procedural?: boolean }
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
 
 export function creatureLayout(stage: DreamStageId, entries: ForestEncounter[], viewport: CreatureViewport, claimed: string[]): CreatureActor[] {
@@ -64,7 +64,7 @@ export function creatureLayout(stage: DreamStageId, entries: ForestEncounter[], 
       actors.push({ ...box, id: asset, asset, kind: 'fixed', claimed: claimed.includes(asset) });
     });
   }
-  if ((viewport.growth ?? 0) >= 100) for (const perch of crystalPerches(viewport.seed, viewport.growth ?? 0, stage === 'E' || stage === 'F')) {
+  if ((viewport.growth ?? 0) >= 100) for (const perch of crystalPerches(viewport.seed, viewport.growth ?? 0, undefined, viewport.procedural)) {
     if ((viewport.growth ?? 0) < perch.threshold) continue;
     const bounds = INHABITANT_ASSETS[perch.asset].bounds;
     const actorWidth = Math.max(30, perch.width * scale); const actorHeight = actorWidth * bounds.height / bounds.width;

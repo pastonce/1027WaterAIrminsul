@@ -12,7 +12,7 @@ import type { DreamStageId, GameSave } from '../src/types/game';
 import { MemoryStorage, startScene, TestClock } from './support';
 
 const games: GameController[] = [];
-const date = Date.parse('2026-10-27T10:27:00+08:00');
+const date = Date.parse('2026-10-27T13:27:00+08:00');
 function setup(stage: DreamStageId = 'A', patch: Partial<GameSave> = {}, storage = new MemoryStorage()) {
   const fixture = stageFixture(stage, date);
   const line = dialoguePool(`${stage}/nahida`)[0];

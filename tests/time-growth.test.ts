@@ -5,6 +5,8 @@ import { calculateWatering, getActiveStage, getTreeHeight } from '../src/game/gr
 import { TimeGateService } from '../src/game/time/TimeGateService';
 import { stageFixture } from '../src/dev/fixtures';
 import { TestClock } from './support';
+import { createTreeGrowthModel } from '../src/game/tree/presentation';
+import { TREE_WORLD } from '../src/game/tree/geometry';
 
 describe('北京时间开放表', () => {
   it('与任务书三批日期及六个成长上限一致', () => {
@@ -14,7 +16,7 @@ describe('北京时间开放表', () => {
       ['C', '2026-10-25T10:27:00+08:00', 520],
       ['D', '2026-10-26T10:27:00+08:00', 680],
       ['E', '2026-10-26T10:27:00+08:00', 840],
-      ['F', '2026-10-27T10:27:00+08:00', 1027],
+      ['F', '2026-10-27T13:27:00+08:00', 1027],
     ]);
   });
   it.each(SCHEDULE)('$stage 恰好在开放时间生效，上限 $cap', (entry) => {
@@ -28,8 +30,23 @@ describe('北京时间开放表', () => {
   });
 
   it('不同设备时区不影响 ISO +08:00 的绝对时间', () => {
-    const time = new TimeGateService(new TestClock(Date.parse('2026-10-27T02:27:00Z')));
+    const time = new TimeGateService(new TestClock(Date.parse('2026-10-27T05:27:00Z')));
     expect(time.getGate().cap).toBe(1027);
+  });
+
+  it('F和G共用27日13:27边界，旧10:27时刻仍不可提前进入', () => {
+    const clock = new TestClock(Date.parse('2026-10-27T10:27:00+08:00'));
+    const time = new TimeGateService(clock);
+    const finished = stageFixture('G', Date.parse(SCHEDULE[5].at));
+    expect(STAGES.F.unlockAt).toBe('2026-10-27T13:27:00+08:00');
+    expect(STAGES.G.unlockAt).toBe(STAGES.F.unlockAt);
+    expect(time.getGate().cap).toBe(840);
+    expect(getActiveStage(finished, time)).toBe('E');
+    clock.value = Date.parse(SCHEDULE[5].at) - 1;
+    expect(getActiveStage(finished, time)).toBe('E');
+    clock.value += 1;
+    expect(time.isOpen('F')).toBe(true);
+    expect(getActiveStage(finished, time)).toBe('G');
   });
 
   it('完成 F 后仍只有 G，晚间不再增加时间锁或阶段', () => {
@@ -69,7 +86,9 @@ describe('成长事务规则', () => {
       expect(getTreeHeight(stage.cap, stage.stage)).toBe(STAGES[stage.stage].height.end);
       if (stage.stage !== 'A') expect(getTreeHeight(STAGES[stage.stage].growth.start, stage.stage)).toBe(STAGES[stage.stage].height.start);
     }
-    expect(getTreeHeight(1027)).toBeLessThan(650);
+    const visibleHeight = Math.max(...createTreeGrowthModel(1027).parts.filter((part) => part.id !== 'grass').map((part) => TREE_WORLD.ground - part.y));
+    expect(getTreeHeight(1027)).toBe(visibleHeight);
+    expect(getTreeHeight(1027)).toBeLessThan(1100);
     expect(getTreeHeight(1027)).toBe(getTreeHeight(1020));
   });
 });

@@ -25,7 +25,8 @@ describe('可编辑的企划声明', () => {
     const content = parseNotice(source);
     expect(content.title).toBe(source.match(/^# (.+)$/m)?.[1]?.trim()); expect(source).toContain('独钓'); expect(source).toContain('1666417849'); expect(source).toContain('190497686');
     expect(source).toContain('非商业同人'); expect(source).toContain('不是官方'); expect(source).toContain('/asserts/sfx/CREDITS.txt');
-    expect(content.blocks.filter((block) => block.kind === 'heading')).toHaveLength(5);
+    expect(content.blocks.filter((block) => block.kind === 'heading').length).toBeGreaterThanOrEqual(5);
+    expect(content.blocks.at(-1)).toEqual({ kind: 'tagline', text: '曾有梦编织树荫，成为求知者的栖所。' });
   });
   it('G 底图不再额外放大 / 上移，也不挂载旧树影', () => {
     const html = renderToStaticMarkup(createElement(Atmosphere, { stage: STAGES.G, offset: 999, reduced: true, effects: [], night: false }));

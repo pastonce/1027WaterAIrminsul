@@ -142,12 +142,11 @@ describe('G 对白播放位置与单句一次表情', () => {
 });
 
 describe('树顶 / 头部的十点至十三点气泡', () => {
-  it.each([{ width: 1440, height: 900, scale: 1 }, { width: 844, height: 390, scale: .43 }, { width: 640, height: 360, scale: .37 }])('$width × $height 跟随真实树顶，保留间距且不夹回可见树干', ({ width, height, scale }) => {
+  it.each([{ width: 1440, height: 900, scale: 1 }, { width: 844, height: 390, scale: .43 }, { width: 640, height: 360, scale: .37 }])('$width × $height在可见冠部附近摆放，允许与树重叠', ({ width, height, scale }) => {
     for (const growth of [20, 180, 1027]) {
-      const initial = treeExpressionAnchor(width, 0, growth, scale);
-      const root = height * .6 - initial.y;
-      const anchor = treeExpressionAnchor(width, root, growth, scale);
-      expect(anchor.y).toBeCloseTo(height * .6);
+      const root = height - 40 - 100 * scale;
+      const anchor = treeExpressionAnchor(width, root, growth, scale, height);
+      expect(anchor.y).toBeGreaterThan(0); expect(anchor.y).toBeLessThan(height);
       for (const angle of [-60, -15, 30]) {
         const frame = expressionPosition(anchor, width, height, angle);
         expect(frame.visible).toBe(true); expect(frame.width).toBe(height <= 600 ? 70 : 96); expect(frame.width).toBe(frame.height);
@@ -158,9 +157,9 @@ describe('树顶 / 头部的十点至十三点气泡', () => {
         expect(clock).toBeGreaterThanOrEqual(-60.001); expect(clock).toBeLessThanOrEqual(30.001);
         const distance = Math.hypot(offset.x, offset.y);
         const extent = Math.hypot(anchor.radiusX * offset.x / distance, anchor.radiusY * offset.y / distance);
-        expect(distance - extent - frame.width * .7).toBeCloseTo(height <= 600 ? 16 : 22);
+        expect(distance - extent - frame.width * .7).toBeCloseTo(growth <= 680 ? height <= 600 ? 18 : 30 : height <= 600 ? 4 : 8);
       }
-      const hidden = treeExpressionAnchor(width, -4000, growth, scale);
+      const hidden = { ...anchor, y: -4000 };
       expect(hidden.y).toBeLessThan(0); expect(expressionPosition(hidden, width, height, 0).visible).toBe(false);
     }
   });

@@ -9,7 +9,7 @@ export function stageFixture(stage: StageId, now: number): GameSave {
   const index = stage === 'G' ? 6 : DREAM_STAGES.indexOf(stage);
   const completed = DREAM_STAGES.slice(0, index);
   return {
-    ...createSave(now), introSeen: true, sceneStage: stage,
+    ...createSave(now), introSeen: true, seedPlanted: true, sceneStage: stage,
     growth: stage === 'G' ? STAGES.F.growth.end : STAGES[stage].growth.start,
     completedStages: [...completed],
     completedVisits: completed.flatMap(stageVisitIds),

@@ -1,6 +1,7 @@
 import { chromium } from '@playwright/test';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { dirname } from 'node:path';
 
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? (process.platform === 'win32' ? 'chrome' : undefined), headless: true });
 const outputs = [];
@@ -50,18 +51,18 @@ try {
       } finally { scene.dispose(); graphics.getExtension('WEBGL_lose_context')?.loseContext(); }
     }, stage);
     if (result.error) throw new Error(`WebGL ${stage}: ${result.error}`);
-    outputs.push({ path: `public/asserts/backgrounds/${result.id}/hiding-foreground.webp`, data: result.foreground });
-    outputs.push({ path: `public/asserts/backgrounds/${result.id}/hiding-back.webp`, data: result.back });
+    outputs.push({ path: `asserts/calibration/backgrounds/${result.id}/hiding-foreground.webp`, data: result.foreground });
+    outputs.push({ path: `asserts/calibration/backgrounds/${result.id}/hiding-back.webp`, data: result.back });
     outputs.push({ path: `public/asserts/backgrounds/${result.id}/poster.webp`, data: result.poster });
     for (const band of result.bands) outputs.push({ path: `public/asserts/backgrounds/${result.id}/hiding-band-${band.band}.webp`, data: band.data });
     for (const light of result.lights) outputs.push({ path: `public/asserts/backgrounds/${result.id}/hiding-light-${light.band}.webp`, data: light.data });
-    for (const occluder of result.occluders) outputs.push({ path: `public/asserts/backgrounds/${result.id}/hiding-after-${occluder.id}.webp`, data: occluder.data });
+    for (const occluder of result.occluders) outputs.push({ path: `asserts/calibration/backgrounds/${result.id}/hiding-after-${occluder.id}.webp`, data: occluder.data });
     audit[stage] = result.contours;
     console.log(stage, JSON.stringify(result.contours));
   }
 } finally { await browser.close(); }
 const files = outputs.map((output) => {
-  const bytes = Buffer.from(output.data, 'base64'); writeFileSync(output.path, bytes); console.log(output.path);
+  const bytes = Buffer.from(output.data, 'base64'); mkdirSync(dirname(output.path), { recursive: true }); writeFileSync(output.path, bytes); console.log(output.path);
   return { file: output.path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') };
 });
 mkdirSync('docs/inhabitants', { recursive: true });

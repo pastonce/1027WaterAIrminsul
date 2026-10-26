@@ -7,8 +7,9 @@ import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 import { mockServerTime } from './time-support';
 import { openSettings } from './settings-support';
+import { TREE_BASE_DEPTH } from '../src/game/tree/scenePlacement';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const errors = new WeakMap<Page, string[]>();
 test.beforeEach(({ page }) => { const collected: string[] = []; errors.set(page, collected); page.on('pageerror', (error) => collected.push(error.message)); });
 test.afterEach(({ page }) => expect(errors.get(page)).toEqual([]));
@@ -48,6 +49,22 @@ async function inspect(page: Page) {
   await expect(expression(page).locator('.expression-outline path')).toHaveCSS('fill', 'rgb(255, 255, 255)');
   await expect(expression(page).locator('.expression-outline path')).toHaveAttribute('d', / A 48 48 0 1 1 .+ L .+ Z/u); await expect(expression(page).getByRole('button')).toHaveCount(0);
 }
+
+test('成熟固定视角的表情与对白靠近可见冠部，根部仍在画面中', async ({ page }, info) => {
+  await launch(page, info, 'F', { growth: 1020 }); await drain(page); await roll(page, 0);
+  await until(page, async () => await expression(page).count() > 0, 12000);
+  await expect(expression(page)).toHaveAttribute('data-ready', 'true'); await inspect(page);
+  const geometry = await page.locator('.dream-tree').evaluate((element, depth) => {
+    const matrix = (element as SVGSVGElement).getScreenCTM()!;
+    return { bottom: new DOMPoint(500, 3300 + depth).matrixTransform(matrix).y, height: innerHeight };
+  }, TREE_BASE_DEPTH);
+  expect(geometry.bottom).toBeGreaterThanOrEqual(geometry.height); expect(geometry.bottom).toBeLessThanOrEqual(geometry.height + 1.1);
+  await expect(page.getByTestId('dream-scene')).toHaveAttribute('data-camera-offset', '0');
+  await capture(page, info, 'fixed-root-mature');
+  await roll(page, .99); await page.getByRole('button', { name: '梦中的树', exact: true }).press('Enter');
+  await expect(bubble(page)).toBeVisible(); const bounds = (await bubble(page).boundingBox())!;
+  expect(bounds.y).toBeGreaterThanOrEqual(80); expect(bounds.y + bounds.height).toBeLessThan(geometry.height);
+});
 
 test('树累积十秒才作半概率判断，失败重计、成功只请求选中图片且不阻断操作', async ({ page }, info) => {
   const requests: string[] = []; page.on('request', (request) => { if (request.url().includes('/asserts/expressions/')) requests.push(request.url()); });

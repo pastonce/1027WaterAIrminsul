@@ -184,8 +184,8 @@ test('梦露避开树干、枝叶和固定按钮，根冠移动及窄屏仍可�
     await debug(page); await page.getByLabel(`调试切换到${stage}阶段`, { exact: true }).click(); await closeDebug(page);
     for (let iteration = 0; iteration < 7; iteration++) await page.clock.fastForward(2100);
     expect(await page.locator('.dew-particle:not(.is-collected):not(.is-expiring)').count()).toBeGreaterThan(0); await checkPositions();
-    await page.getByRole('button', { name: '回到树根', exact: true }).click(); await page.clock.fastForward(1500); await checkPositions();
-    await page.getByRole('button', { name: '返回树冠', exact: true }).click(); await page.clock.fastForward(1500); await checkPositions();
+    await page.clock.fastForward(1500); await checkPositions();
+    await page.clock.fastForward(1500); await checkPositions();
   }
   await page.setViewportSize({ width: 640, height: 360 }); await page.clock.fastForward(1500); await checkPositions();
 });
@@ -266,7 +266,7 @@ test('拖动树体只观树，不误触对白，随后点击正常', async ({ pa
   await enter(page); await debug(page); await page.getByLabel('调试切换到D阶段', { exact: true }).click(); await page.getByLabel('调试成长值', { exact: true }).fill('750'); await closeDebug(page);
   await settleAmbient(page); await page.clock.fastForward(3000);
   await page.screenshot({ path: `docs/screenshots/crown-${testInfo.project.name}.png`, animations: 'disabled' });
-  await page.getByRole('button', { name: '回到树根', exact: true }).click(); await page.clock.fastForward(2500);
+  await page.clock.fastForward(2500);
   await expect.poll(async () => Number(await page.getByTestId('dream-scene').getAttribute('data-camera-offset'))).toBe(0);
   const point = await treePoint(page);
   if (isMobile) {
@@ -278,10 +278,10 @@ test('拖动树体只观树，不误触对白，随后点击正常', async ({ pa
   } else {
     await page.mouse.move(point.x, point.y); await page.mouse.down(); await page.mouse.move(point.x, point.y + 65, { steps: 8 }); await page.mouse.up();
   }
-  await expect.poll(async () => Number(await page.getByTestId('dream-scene').getAttribute('data-camera-offset'))).toBeGreaterThan(50);
+  await expect.poll(async () => Number(await page.getByTestId('dream-scene').getAttribute('data-camera-offset'))).toBe(0);
   await expect(page.locator('.dialogue-bubble')).toHaveCount(0); await touchTree(page, isMobile);
   await expect(page.locator('.dialogue-bubble')).toBeVisible();
-  await expect(page.getByRole('button', { name: '返回树冠', exact: true })).toBeEnabled();
+  await expect(page.getByRole('button', { name: '返回树冠', exact: true })).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth === window.innerWidth && document.documentElement.scrollHeight === window.innerHeight)).toBe(true);
   expect(errors).toEqual([]);
 });

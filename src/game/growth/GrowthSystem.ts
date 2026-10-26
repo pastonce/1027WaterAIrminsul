@@ -37,6 +37,6 @@ export function calculateWatering(growth: number, dew: number, cap: number, adva
   return { ok: true, growth: nextGrowth, dew: dew - GAME_RULES.wateringCost, gained: nextGrowth - growth };
 }
 
-export function getTreeHeight(growth: number, stage?: StageId) {
-  return treeHeightAtGrowth(growth, stage === 'E' || stage === 'F');
+export function getTreeHeight(growth: number, _stage?: StageId) {
+  return treeHeightAtGrowth(growth);
 }

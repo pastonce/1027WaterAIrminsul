@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { Icon } from '../components/Icon';
+import { InteractionCue } from '../components/InteractionCue';
 import { MusicButton } from '../components/MusicButton';
 import { Settings } from '../components/Settings';
 import { Notice } from '../components/Notice';
@@ -10,7 +11,6 @@ import { WakingReveal } from '../components/WakingReveal';
 import { needsWakingReveal } from '../game/awakening/choreography';
 import { IntroScene } from '../scenes/IntroScene';
 import { DreamTreeScene } from '../scenes/DreamTreeScene';
-import type { CameraActions } from '../scenes/DreamTreeScene';
 import { RealityScene } from '../scenes/RealityScene';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useViewportSize } from '../hooks/useViewportSize';
@@ -30,6 +30,7 @@ import type { GameController } from '../game/core/GameController';
 import type { Clock } from '../game/time/TimeGateService';
 import type { ServerClock } from '../game/time/ServerClock';
 import { FirstVisitNotice } from '../game/notice/firstVisit';
+import type { SeedOrigin } from '../data/seed';
 
 const DebugPanel = PUBLIC_TESTING ? lazy(() => import('../dev/DebugPanel')) : null;
 
@@ -45,12 +46,17 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
   const [firstNoticePending, setFirstNoticePending] = useState(firstNotice.pending);
   const [secretNotice, setSecretNotice] = useState<{ text: string } | null>(testing ? { text: '本页测试已开启，刷新后回到原来的梦。' } : null);
   const noticeTimer = useRef(new PausableTimer());
+  const seedOrigin = useRef<SeedOrigin | null>(null);
   const [hidden, setHidden] = useState(document.hidden);
   const [music] = useState(() => new MusicManager(() => sound.getContext()));
   const musicState = useSyncExternalStore(music.subscribe, music.getSnapshot);
-  const cameraRef = useRef<CameraActions | null>(null);
   const reality = state.stage === 'G' && !state.reviewStage;
   const ready = state.mode === 'idle';
+  const enterDream = () => {
+    const bounds = document.querySelector('.intro-seed img')?.getBoundingClientRect();
+    seedOrigin.current = bounds ? { x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2, width: bounds.width } : null;
+    if (!game.enterDream()) seedOrigin.current = null;
+  };
   const panelOpen = Boolean(introPanel) || state.mode === 'journal' || state.mode === 'settings' || state.mode === 'notice' || state.mode === 'mail';
   const wakingCover = state.stageLoading && needsWakingReveal(state.stageLoading.from, state.stageLoading.to, state.save.sceneStage);
   const inputBlocked = Boolean(state.stageLoading || state.waking) || panelOpen || firstNoticePending;
@@ -68,7 +74,7 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
 
   const redeem = async (code: EasterCode) => {
     if (code === 'birthday') return Boolean(onBirthday && await onBirthday());
-    if (code === 'test') {
+    if (code === 'past') {
       if (!PUBLIC_TESTING || !onTesting || !await onTesting()) return false;
       setSecretNotice({ text: '本页测试已开启，刷新后回到原来的梦。' }); return true;
     }
@@ -157,8 +163,8 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
 
   return <OpeningReveal active={opening} reduced={reduced} paused={hidden || portraitBlocked} plan={openingPlan} onComplete={() => setOpening(false)}><div className={`game-app ${reduced ? 'reduced-motion' : ''} ${state.mode === 'ending' ? 'is-awakening' : ''}`} data-testing={testing} data-previewing={previewing} data-first-notice={firstNoticePending ? 'pending' : 'complete'} onPointerDownCapture={(event) => { game.activity(); unlockMusic(event.target); }} onClickCapture={(event) => { game.activity(); unlockMusic(event.target); }} onKeyDownCapture={(event) => { if (!event.repeat) { game.activity(); unlockMusic(event.target); } }}>
     <div className="game-content" inert={inputBlocked} aria-hidden={inputBlocked || undefined}>
-    {state.mode === 'intro' ? <><IntroScene message={state.message} onEnter={() => game.enterDream()} onSettings={() => setIntroPanel('settings')} onNotice={() => setIntroPanel('notice')}/>{introPanel === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem} onClose={() => setIntroPanel(null)}/>} {introPanel === 'notice' && <Notice reduced={reduced} onClose={() => setIntroPanel(null)}/>}</> : <>
-      {reality ? <RealityScene game={game} state={state} reduced={reduced} testing={testing} suspended={opening || hidden || portraitBlocked}/> : <DreamTreeScene game={game} state={state} reduced={reduced} cameraRef={cameraRef} testing={testing}/>}
+    {state.mode === 'intro' ? <><IntroScene message={state.message} unplanted={!state.save.seedPlanted} onEnter={enterDream} onSettings={() => setIntroPanel('settings')} onNotice={() => setIntroPanel('notice')}/>{introPanel === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem} onClose={() => setIntroPanel(null)}/>} {introPanel === 'notice' && <Notice reduced={reduced} onClose={() => setIntroPanel(null)}/>}</> : <>
+      {reality ? <RealityScene game={game} state={state} reduced={reduced} testing={testing} suspended={opening || hidden || portraitBlocked}/> : <DreamTreeScene game={game} state={state} reduced={reduced} seedOrigin={seedOrigin.current} testing={testing}/>}
       <header className="game-header" data-mail-open={state.mode === 'mail'}>
         <div className="game-brand"><Icon name="leaf" size={26}/><div><span><span>浇灌一棵世界树</span><BuildMarker/></span><small>WATER AN IRMINSUL</small></div></div>
         <div className="header-actions">
@@ -172,13 +178,15 @@ export function App({ game, clock, timeSync, testing = false, previewing = false
           <button className="icon-button header-tool-button fullscreen-button" onClick={() => void fullScreen()} aria-label="全屏横屏体验" title="全屏"><Icon name="fullscreen" size={20}/></button>
         </div>
       </header>
-      {!reality && (state.reviewStage ? <button className="primary-button water-action" onClick={() => game.review(null)} aria-label="回到现实">回到现实<Icon name="arrow" size={19}/></button> : <button className={`primary-button water-action ${state.save.dew < GAME_RULES.wateringCost ? 'needs-dew' : ''}`} onClick={() => game.water()} disabled={!ready} aria-label="浇灌梦中的树"><Icon name="dew" size={22}/><span>浇灌</span></button>)}
+      {!reality && (state.reviewStage ? <button className="primary-button water-action" onClick={() => game.review(null)} aria-label="回到现实">回到现实<Icon name="arrow" size={19}/></button> : <button className={`primary-button water-action ${state.save.dew < GAME_RULES.wateringCost ? 'needs-dew' : ''}`} onClick={() => game.water()} disabled={!ready || !state.save.seedPlanted} aria-label="浇灌梦中的树"><Icon name="dew" size={22}/><span>浇灌</span>
+        {state.save.seedPlanted && state.save.growth === 0 && state.save.dew >= GAME_RULES.wateringCost && <InteractionCue className="watering-guide" label="点击浇灌" paused={state.presentationPaused} reduced={reduced}/>}
+      </button>)}
       {state.saveStatus && <div className="save-warning" role="status">{state.saveStatus}</div>}
       {state.mode === 'settings' && <Settings game={game} state={state} timeSync={timeSync} testing={testing} previewing={previewing} redeem={redeem}/>}
       {state.mode === 'notice' && <Notice reduced={reduced} onClose={() => game.closePanel()}/>}
       <div className="awakening-light" aria-hidden="true"/>
     </>}
-    {DebugPanel && (import.meta.env.DEV || testing) && <Suspense fallback={null}><DebugPanel game={game} state={state} clock={clock} ephemeral={testing} onCamera={(target) => cameraRef.current?.goTo(target)}/></Suspense>}
+    {DebugPanel && (import.meta.env.DEV || testing) && <Suspense fallback={null}><DebugPanel game={game} state={state} clock={clock} ephemeral={testing}/></Suspense>}
     </div>
     {(wakingCover || state.waking) && <WakingReveal playback={state.waking} paused={opening || hidden || portraitBlocked} portrait={portraitBlocked}/>}
     {state.stageLoading && <StageLoadingScreen key={state.stageLoading.id} loading={state.stageLoading} paused={hidden || portraitBlocked} reduced={reduced} portrait={portraitBlocked} onArtReady={(id, artId) => game.stageArtworkReady(id, artId)}/>}

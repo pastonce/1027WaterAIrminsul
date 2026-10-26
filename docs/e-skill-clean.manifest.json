@@ -1,0 +1,285 @@
+{
+  "version": 2,
+  "sourceRoot": "asserts/E技能素材",
+  "sourceHashes": [
+    {
+      "file": "asserts/E技能素材/e_skill_frame.atlas",
+      "sha256": "c510a420c155c170df0edfad97087c062a8b0e118fa717232ccb8967bdbc09c8"
+    },
+    {
+      "file": "asserts/E技能素材/e_skill_frame.json",
+      "sha256": "322f9f332b1b196fb30eef89a6d5c82539bcd6c8dcc4797eac42125c7b1a44c0"
+    },
+    {
+      "file": "asserts/E技能素材/e_skill_frame.png",
+      "sha256": "98bb9de5b3471e2d6720f023ed01aaf35ae760a1fb787a14f90ec611f9029648"
+    }
+  ],
+  "generation": "docs/e-skill-clean-generation.json",
+  "masterSha256": "82a0c6594403ce6edda60fb3f663c072a499afc82cdc217bc82b88ad70ecffc8",
+  "masterCrop": [
+    115,
+    88,
+    1043,
+    1046
+  ],
+  "geometry": [
+    {
+      "name": "corner_tl",
+      "kind": "four-leaf",
+      "bounds": [
+        38,
+        38,
+        104,
+        104
+      ]
+    },
+    {
+      "name": "corner_tr",
+      "kind": "four-leaf",
+      "bounds": [
+        38,
+        38,
+        104,
+        104
+      ]
+    },
+    {
+      "name": "corner_bl",
+      "kind": "four-leaf",
+      "bounds": [
+        38,
+        38,
+        104,
+        104
+      ]
+    },
+    {
+      "name": "corner_br",
+      "kind": "four-leaf",
+      "bounds": [
+        38,
+        38,
+        104,
+        104
+      ]
+    },
+    {
+      "name": "chain_top_left",
+      "kind": "beads-and-ray",
+      "axis": 25,
+      "start": 25,
+      "end": 142,
+      "beads": [
+        {
+          "center": 50.5,
+          "radius": 14.5
+        },
+        {
+          "center": 89,
+          "radius": 11.5
+        },
+        {
+          "center": 128.5,
+          "radius": 5.5
+        }
+      ]
+    },
+    {
+      "name": "chain_top_right",
+      "kind": "beads-and-ray",
+      "axis": 25,
+      "start": 15,
+      "end": 132,
+      "beads": [
+        {
+          "center": 30,
+          "radius": 6
+        },
+        {
+          "center": 68.5,
+          "radius": 10.5
+        },
+        {
+          "center": 110.5,
+          "radius": 15.5
+        }
+      ]
+    },
+    {
+      "name": "chain_bottom_left",
+      "kind": "beads-and-ray",
+      "axis": 29,
+      "start": 25,
+      "end": 139,
+      "beads": [
+        {
+          "center": 48,
+          "radius": 14
+        },
+        {
+          "center": 88,
+          "radius": 11.5
+        },
+        {
+          "center": 127.5,
+          "radius": 7
+        }
+      ]
+    },
+    {
+      "name": "chain_bottom_right",
+      "kind": "beads-and-ray",
+      "axis": 29,
+      "start": 15,
+      "end": 132,
+      "beads": [
+        {
+          "center": 30.5,
+          "radius": 7
+        },
+        {
+          "center": 69,
+          "radius": 11
+        },
+        {
+          "center": 107.5,
+          "radius": 14.5
+        }
+      ]
+    },
+    {
+      "name": "chain_left_top",
+      "kind": "beads-and-ray",
+      "axis": 28,
+      "start": 25,
+      "end": 142,
+      "beads": [
+        {
+          "center": 57,
+          "radius": 14.5
+        },
+        {
+          "center": 98,
+          "radius": 11
+        },
+        {
+          "center": 134,
+          "radius": 6
+        }
+      ]
+    },
+    {
+      "name": "chain_left_bottom",
+      "kind": "beads-and-ray",
+      "axis": 28,
+      "start": 15,
+      "end": 132,
+      "beads": [
+        {
+          "center": 22.5,
+          "radius": 6
+        },
+        {
+          "center": 58.5,
+          "radius": 11
+        },
+        {
+          "center": 99,
+          "radius": 14.5
+        }
+      ]
+    },
+    {
+      "name": "chain_right_top",
+      "kind": "beads-and-ray",
+      "axis": 27,
+      "start": 25,
+      "end": 142,
+      "beads": [
+        {
+          "center": 58,
+          "radius": 15
+        },
+        {
+          "center": 97,
+          "radius": 11
+        },
+        {
+          "center": 133.5,
+          "radius": 5
+        }
+      ]
+    },
+    {
+      "name": "chain_right_bottom",
+      "kind": "beads-and-ray",
+      "axis": 27,
+      "start": 15,
+      "end": 132,
+      "beads": [
+        {
+          "center": 21.5,
+          "radius": 5
+        },
+        {
+          "center": 58,
+          "radius": 11
+        },
+        {
+          "center": 99,
+          "radius": 14
+        }
+      ]
+    },
+    {
+      "name": "line_top",
+      "kind": "ray",
+      "axis": 28,
+      "start": 29,
+      "end": 214,
+      "beads": []
+    },
+    {
+      "name": "line_bottom",
+      "kind": "ray",
+      "axis": 28,
+      "start": 33,
+      "end": 213,
+      "beads": []
+    },
+    {
+      "name": "line_left",
+      "kind": "ray",
+      "axis": 28,
+      "start": 29,
+      "end": 209,
+      "beads": []
+    },
+    {
+      "name": "line_right",
+      "kind": "ray",
+      "axis": 28,
+      "start": 29,
+      "end": 209,
+      "beads": []
+    }
+  ],
+  "outputs": [
+    {
+      "file": "asserts/E技能素材/clean-v2/e_skill_frame.atlas",
+      "sha256": "c510a420c155c170df0edfad97087c062a8b0e118fa717232ccb8967bdbc09c8",
+      "bytes": 654
+    },
+    {
+      "file": "asserts/E技能素材/clean-v2/e_skill_frame.json",
+      "sha256": "322f9f332b1b196fb30eef89a6d5c82539bcd6c8dcc4797eac42125c7b1a44c0",
+      "bytes": 39496
+    },
+    {
+      "file": "asserts/E技能素材/clean-v2/e_skill_frame.png",
+      "sha256": "7e78729b722f35fbcbb1ac618de8574941f5e9992bcd8791fc98f1ae95e90e4a",
+      "bytes": 84838
+    }
+  ]
+}

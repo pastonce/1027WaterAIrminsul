@@ -40,7 +40,8 @@ describe('五套对白外观', () => {
     const speech: SpeechPlayback = { entry: { ...entry, color: '#ff0000' }, anchor: entry.anchor!, sequence: 1, phase: 'holding', startedAt: 0, elapsedMs: 0, typingMs: 0 };
     const html = renderToStaticMarkup(createElement(DialogueBubble, { speech, position: { width: 420 }, reduced: true }));
     expect(html).toContain(`data-theme="${theme}"`); expect(html).toContain('role="status"'); expect(html).toContain('aria-live="polite"');
-    expect(html).toContain('class="bubble-decoration" aria-hidden="true"'); expect(html).toContain(entry.text); expect(html).not.toContain('<button'); expect(html).not.toContain('#ff0000');
+    const escaped = entry.text.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll("'", '&#x27;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+    expect(html).toContain('class="bubble-decoration" aria-hidden="true"'); expect(html).toContain(escaped); expect(html).not.toContain('<button'); expect(html).not.toContain('#ff0000');
     expect(html.includes(pageAssets.dialogue)).toBe(theme === 'nahida');
   });
   it('主题仅使用静态局部装饰，正文仍由既有两行量尺负责', () => {

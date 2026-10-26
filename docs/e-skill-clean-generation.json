@@ -1,0 +1,8 @@
+{
+  "tool": "built-in image_gen",
+  "source": "asserts/E技能素材/e_skill_frame.png",
+  "sourceSha256": "98bb9de5b3471e2d6720f023ed01aaf35ae760a1fb787a14f90ec611f9029648",
+  "prompt": "Use case: background-extraction / precise game UI sprite isolation. Edit target: the supplied 1024x640 Spine atlas. Select ONLY the complete upright green four-leaf sigil centered approximately at x=710,y=94 (the second green sigil along the top row, within the corner_tr region x=620,y=4,width=180,height=180). Extract that exact single sigil as a clean high-resolution transparent RGBA sprite. Keep its existing silhouette, four pointed rounded leaf lobes, pale ivory-white central cross/star, lime green rim, subtle green inner shading, proportions, upright orientation, and original game UI artwork identity. Remove every detached speck, surrounding straight light ray, connector, bead, background and atlas neighbor. Complete any tiny missing antialiased contour pixels while faithfully matching the original. All four tips must be fully present, with transparent breathing space on all sides. No circular aura, no broad glow, no added particles or lens flares, no redesign or new ornament, no text, no sheet or duplicated shapes. Exactly one isolated clean original-style four-leaf mark centered on genuine transparency. Its later four-corner composition is handled by code; do not include any lines or frame.",
+  "generated": "C:/Users/guoxu/.codex/generated_images/01a13e71-2378-7cf1-b0d5-392d6f3531bb/exec-a62d7a8d-9f51-45b0-a028-5ff98d08f19d.png",
+  "master": "asserts/E技能素材/clean-v2/four-leaf-master.png"
+}

@@ -27,6 +27,7 @@ export type FoliagePhase = 'bud' | 'leaf' | 'cluster';
 export interface FoliageSlot extends TreeSlot {
   foliage?: 'retained' | 'extension'; site?: string; phase?: FoliagePhase; motion?: LeafMotionKind;
 }
+export interface FoliagePlayback { pass: 'leaves' | 'clusters'; time: number }
 
 export const FOLIAGE_ATTACHMENTS = LEAF_ATTACHMENTS;
 const cutovers = [36, 42, 45, 50] as const;
@@ -93,10 +94,11 @@ function leafAngle(index: number, source: TreeSlot[], asset: TreeArtId) {
   return outward - canonical;
 }
 
-function extension(index: number, frame: number, elapsed: number, source: TreeSlot[]): FoliageSlot | undefined {
+function extension(index: number, frame: number, elapsed: number, source: TreeSlot[], playback?: FoliagePlayback): FoliageSlot | undefined {
   const site = FOLIAGE_SITES[index]; const birth = site.birth; const leafStep = foliageLeafStep(site);
   if (frame < birth) return;
   let phase: FoliagePhase = frame >= leafStep + 1 ? 'cluster' : frame >= leafStep ? 'leaf' : 'bud';
+  if (playback?.pass === 'leaves' && frame === leafStep + 1) phase = 'leaf';
   let event = phase === 'cluster' ? leafStep + 1 : phase === 'leaf' ? leafStep : birth;
   const delay = foliageEventDelay(frame);
   if (frame === event && elapsed < delay) {
@@ -109,12 +111,13 @@ function extension(index: number, frame: number, elapsed: number, source: TreeSl
   const point = branchPoint(seeds.length + index, source);
   const angle = phase === 'cluster' ? site.angle : leafAngle(seeds.length + index, source, asset);
   const settled = artwork(asset, point, width, angle);
-  const motion = frame === event ? kind : undefined;
-  const progress = leafMotionProgress(kind, elapsed, delay);
+  const active = !playback || (playback.pass === 'clusters' ? phase === 'cluster' : phase !== 'cluster');
+  const motion = frame === event && active ? kind : undefined;
+  const progress = leafMotionProgress(kind, playback?.pass === 'clusters' ? playback.time : elapsed, playback?.pass === 'clusters' ? 0 : delay);
   return { id: `crown-growth-${index}`, asset, matrix: motion ? applyLeafMotion(motion, progress, settled) : settled, foliage: 'extension', site: `crown-growth-${index}`, phase, motion };
 }
 
-export function continuousFoliage(step: number, time: number | undefined, source: TreeSlot[]): FoliageSlot[] {
+export function continuousFoliage(step: number, time: number | undefined, source: TreeSlot[], playback?: FoliagePlayback): FoliageSlot[] {
   const frame = boundedTreeStep(step);
   if (frame < FOLIAGE_START_STEP) return source;
   const duration = foliageDuration(frame);
@@ -126,7 +129,7 @@ export function continuousFoliage(step: number, time: number | undefined, source
     const motion = opened && frame === 35 ? 'leaf' as const : undefined;
     return { ...current, matrix: motion ? applyLeafMotion(motion, leafMotionProgress(motion, elapsed), settled) : settled, foliage: 'retained', site: seed.id, phase: current.asset.startsWith('leafbunch') ? 'cluster' : current.asset === 'leaf4' ? 'bud' : 'leaf', motion };
   });
-  FOLIAGE_SITES.forEach((_, index) => { const part = extension(index, frame, elapsed, source); if (part) leaves.push(part); });
+  FOLIAGE_SITES.forEach((_, index) => { const part = extension(index, frame, elapsed, source, playback); if (part) leaves.push(part); });
   const wood = source.filter((part) => !part.asset.startsWith('leaf'));
   const ground = wood.findIndex((part) => part.id === 'grass');
   return [...wood.slice(0, ground < 0 ? wood.length : ground), ...leaves, ...(ground < 0 ? [] : wood.slice(ground))];

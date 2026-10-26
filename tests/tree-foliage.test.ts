@@ -291,9 +291,9 @@ describe('E/F真实枝条附着与原生切图回弹', () => {
     expect(createTreeModel(playback.at(.25).step, playback.at(.25).time, true)).toEqual(createTreeModel(49, undefined, true));
   });
 
-  it('浇灌控制器与渲染播放使用相同真实秒数，等待所有新增枝叶回稳后才完结', () => {
+  it('原轨低层播放使用相同真实秒数，等待所有新增枝叶回稳后才完结', () => {
     for (let step = 35; step <= 51; step++) {
-      const milliseconds = treeGrowthDuration((step - 1) * 20, step * 20);
+      const milliseconds = Math.round(foliageDuration(step) * 1000);
       const playback = treePlayback({ step: step - 1, time: foliageDuration(step - 1) }, step, foliageDuration);
       expect(milliseconds).toBe(Math.round(foliageDuration(step) * 1000));
       expect(Math.round(playback.duration * 1000)).toBe(milliseconds);
@@ -307,7 +307,7 @@ describe('E/F真实枝条附着与原生切图回弹', () => {
 
   it('读档重建无需随机或额外存档，最后七点所有枝叶矩阵完全不变', () => {
     for (let step = 34; step <= 51; step++) {
-      const loaded = createTreeModel(treeGrowthStep(step * 20), undefined, true);
+      const loaded = createTreeModel(step, undefined, true);
       expect(loaded).toEqual(createTreeModel(step, foliageDuration(step), true));
       for (const progress of [0, .5, 1]) expect(createTreeModel(step, foliageDuration(step) * progress, true)).toEqual(createTreeModel(step, foliageDuration(step) * progress, true));
     }
@@ -328,7 +328,8 @@ describe('E/F真实枝条附着与原生切图回弹', () => {
     expect(violations).toEqual([]);
     const scene = renderToStaticMarkup(createElement(TreeRenderer, { stage: 'F', growth: 1020, reduced: true, growing: false, onInteract() {} }));
     expect(scene).toContain('data-tree-art="tree9_growth"'); expect(scene).not.toContain('data-tree-art="tree9_complete"');
-    expect(scene).not.toMatch(/pointer-events="all"|<canvas|<mask|data-tree-part="[^"]+-crown"/);
+    expect(scene).not.toMatch(/pointer-events="all"|<canvas|data-tree-part="[^"]+-crown"/);
+    expect(scene.match(/<mask /g)).toHaveLength(1);
   });
 
   it('设备仍只预载二十四张单档，不下载旧烘焙成熟冠与另一档', () => {
@@ -340,11 +341,21 @@ describe('E/F真实枝条附着与原生切图回弹', () => {
     }
   });
 
-  it('A/B保持原叶槽，C/D仅校正叶柄位置，E到F在同一成长值不重置身份或图形', () => {
-    for (let step = 0; step < 34; step++) expect(createTreeModel(step, undefined, true).parts.map(({ id, asset, matrix }) => ({ id, asset, matrix }))).toEqual(anchorTreeLeaves(step, treeAnimationPose(step)));
-    for (const stage of ['A', 'B', 'C', 'D'] as const) for (const growth of [680, 840, 1020]) {
-      const markup = renderToStaticMarkup(createElement(TreeRenderer, { stage, growth, reduced: true, growing: false, onInteract() {} }));
-      expect(markup).not.toContain('data-tree-foliage');
+  it('原轨早期保持原叶槽，连续枝叶前移后同成长值不因背景阶段重置身份或图形', () => {
+    for (let step = 0; step < 34; step++) {
+      const source = anchorTreeLeaves(step, treeAnimationPose(step));
+      const seedling = source.some((part) => part.asset === 'tree01' || part.asset === 'tree1');
+      const actual = createTreeModel(step, undefined, true).parts;
+      expect(actual.map((part) => [part.id, part.asset])).toEqual(source.map((part) => [part.id, part.asset]));
+      actual.forEach((part, index) => {
+        const expected = [...source[index].matrix];
+        if (seedling && part.id !== 'grass') expected[5] += 16;
+        expectMatrix(part.matrix, expected as TreeMatrix);
+      });
+    }
+    for (const growth of [340, 520, 580, 600, 680, 840, 1020]) {
+      const markup = renderToStaticMarkup(createElement(TreeRenderer, { stage: 'A', growth, reduced: true, growing: false, onInteract() {} }));
+      for (const stage of ['B', 'C', 'D', 'E', 'F'] as const) expect(renderToStaticMarkup(createElement(TreeRenderer, { stage, growth, reduced: true, growing: false, onInteract() {} }))).toBe(markup);
     }
     const markup = (stage: 'E' | 'F') => renderToStaticMarkup(createElement(TreeRenderer, { stage, growth: 840, reduced: true, growing: false, onInteract() {} }));
     expect(markup('E')).toBe(markup('F'));

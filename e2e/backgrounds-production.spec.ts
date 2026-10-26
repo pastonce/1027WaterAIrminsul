@@ -13,7 +13,7 @@ test('生产包实际播放森林入场、沙海和流雾，保留单画布与�
       return Reflect.apply(original, this, [kind, kind.startsWith('webgl') ? { ...options, preserveDrawingBuffer: true } : options]);
     } as typeof original;
   });
-  const server = await mockServerTime(page, '2026-10-27T10:27:00+08:00');
+  const server = await mockServerTime(page, '2026-10-27T13:27:00+08:00');
   await seedPlayer(page, stageFixture('A', server.now)); await page.goto('/'); await finishOpening(page);
   const signature = () => page.locator('.background-canvas').evaluate((element) => {
     const canvas = element as HTMLCanvasElement; const graphics = canvas.getContext('webgl')!;
@@ -55,7 +55,7 @@ for (const stage of ['E', 'F'] as const) {
     const resources: string[] = []; const errors: string[] = [];
     page.on('request', (request) => { if (request.url().includes('/backgrounds/')) resources.push(request.url()); });
     page.on('pageerror', (error) => errors.push(error.message));
-    const server = await mockServerTime(page, stage === 'E' ? '2026-10-26T10:27:00+08:00' : '2026-10-27T10:27:00+08:00');
+    const server = await mockServerTime(page, stage === 'E' ? '2026-10-26T10:27:00+08:00' : '2026-10-27T13:27:00+08:00');
     const save = stageFixture(stage, server.now); save.pendingVisits = [`visit-${stage}`];
     await seedPlayer(page, save);
     await page.goto('/');

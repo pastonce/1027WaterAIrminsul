@@ -26,6 +26,7 @@ import './styles/header.css';
 import './styles/notice.css';
 import './styles/birthday-mail.css';
 import './styles/tree.css';
+import './styles/planting.css';
 import './styles/cursors.generated.css';
 
 class DreamBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {

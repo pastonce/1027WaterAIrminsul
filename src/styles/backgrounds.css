@@ -22,13 +22,12 @@
 .intro-content,
 .intro-footer,
 .game-header,
-.camera-controls,
 .scene-footer-mark,
 .reality-copy,
 .night-dew { text-shadow: 0 1px 3px #15352d, 0 0 12px #15352d99; }
 .game-brand > svg,
-.header-actions .icon-button > svg,
-.camera-controls .icon-button > svg { filter: drop-shadow(0 1px 1px #15352ddd) drop-shadow(0 0 2px #15352d66); }
+.header-actions .icon-button > svg { filter: drop-shadow(0 1px 1px #15352ddd) drop-shadow(0 0 2px #15352d66); }
+
 .has-spine-background .forest-silhouette,
 .has-spine-background .sun-halo,
 .has-spine-background .light-rays { opacity: 0; }

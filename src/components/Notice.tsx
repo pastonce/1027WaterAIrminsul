@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import source from '../content/notice.md?raw';
 import { parseNotice, noticeLinkAllowed } from '../game/notice/markdown';
 import { Modal } from './Modal';
+import { Icon } from './Icon';
 
 const document = parseNotice(source);
 
@@ -19,6 +20,8 @@ function noticeText(text: string): ReactNode[] {
 
 export function Notice({ onClose, reduced }: { onClose: () => void; reduced: boolean }) {
   return <Modal title={document.title} subtitle={null} className="notice-modal" reduced={reduced} onClose={onClose} returnFocus="[data-notice-opener]:not(:disabled)">
-    <article className="notice-content">{document.blocks.map((block, index) => block.kind === 'heading' ? <h3 key={index}>{block.text}</h3> : block.kind === 'paragraph' ? <p key={index}>{noticeText(block.text)}</p> : <ul key={index}>{block.items.map((item, position) => <li key={position}>{noticeText(item)}</li>)}</ul>)}</article>
+    <article className="notice-content">{document.blocks.filter((block) => block.kind !== 'tagline').map((block, index) => block.kind === 'heading' ? <h3 key={index}>{block.text}</h3> : block.kind === 'paragraph' ? <p key={index}>{noticeText(block.text)}</p> : block.kind === 'list' ? <ul key={index}>{block.items.map((item, position) => <li key={position}>{noticeText(item)}</li>)}</ul> : null)}
+      {document.blocks.filter((block) => block.kind === 'tagline').map((block, index) => <footer className="notice-tagline" key={index}><Icon name="leaf" size={22}/><p>{'text' in block ? noticeText(block.text) : null}</p></footer>)}
+    </article>
   </Modal>;
 }

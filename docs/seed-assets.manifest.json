@@ -1,0 +1,15 @@
+{
+  "source": "asserts/seed.png",
+  "sourceSha256": "74d91d12e596c76423da739c41ab23c8f7f9e097262494213fa908147351f51e",
+  "cutout": "asserts/seed-cutout/seed.png",
+  "cutoutSha256": "a216bcad4b4c24bf45bffe001f5a8f4fa8ad6fde5541d0c5ba991d677ed4dad2",
+  "method": "built-in image_gen transparent background extraction; offline alpha-preserving WebP encoding",
+  "generated": "C:/Users/guoxu/.codex/generated_images/01a13e71-2378-7cf1-b0d5-392d6f3531bb/exec-d95c0e61-9b06-4a5c-9d34-e23649ed8304.png",
+  "prompt": "Use case: background-extraction. Edit target: the supplied local seed.png. Create a clean isolated transparent RGBA cutout of exactly the existing single brown elongated seed with its narrow green seam. Preserve the seed's artwork, identity, colors, shading, silhouette, diagonal orientation, and proportions precisely. Remove only the white backdrop and any detached background corner marks; the output must contain only this seed and fully transparent pixels around it. No redesign, no new leaves, no added glow, no shadow, no text, no props. Tight transparent padding around the seed. This is a small animated website sprite; do not bake animation effects into the asset.",
+  "src": "/asserts/ui/seed-7bdcd8bf652d.webp",
+  "bytes": 21644,
+  "sha256": "7bdcd8bf652d792e84f80e95cd64f3291d1a38e173aa742d9feb0ba303089fea",
+  "width": 256,
+  "height": 372,
+  "transparentFraction": 0.5702372231209873
+}

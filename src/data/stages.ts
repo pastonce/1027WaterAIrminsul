@@ -84,7 +84,7 @@ STAGES.G = {
   ...STAGES.F,
   id: 'G', name: '梦醒', subtitle: '生日快乐，纳西妲', theme: 'reality',
   description: '长梦散去，陪伴仍在。今天，把祝福亲口说给她听。',
-  history: '梦醒后，现实中的须弥庆典。', unlockAt: null,
+  history: '梦醒后，现实中的须弥庆典。', unlockAt: STAGES.F.unlockAt,
   transition: dialoguePool('G/nahida')[0],
   dialogue: dialoguePool('G/nahida'),
 };

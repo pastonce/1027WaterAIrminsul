@@ -16,18 +16,19 @@ import type { DewObstacle, DewViewport } from '../dew/placement';
 import { EncounterDirector } from '../encounters/EncounterDirector';
 import { ENCOUNTER_RULES, FESTIVAL_ARANARA } from '../../data/inhabitants';
 import { stageVisitIds, visitGrowth, visitGrowthCap } from '../../data/visits';
-import { treeGrowthDuration, treeGrowthStep } from '../tree/growth';
+import { treeGrowthDuration } from '../tree/growth';
 import { randomDewValue } from '../dew/value';
 import { DIALOGUE_RULES, dialogueEntry, transitionDialoguePool } from '../../data/dialogues';
 import { drawDialogue, drawUnplayedDialogue, dreamDialogueCategory } from '../dialogue/DialogueSystem';
 import { ExpressionDirector } from '../expressions/ExpressionDirector';
-import { pickExpression, REALITY_EXPRESSION_IDS, VISIT_EXPRESSION_CHOICES } from '../../data/expressions';
+import { EXPRESSION_ASSETS, pickExpression, REALITY_EXPRESSION_IDS, TREE_EXPRESSIONS, VISIT_EXPRESSION_CHOICES } from '../../data/expressions';
 import { WakingDirector } from '../awakening/WakingDirector';
 import { needsWakingReveal, WAKING_REDUCED_MS, WAKING_SEQUENCE } from '../awakening/choreography';
 import { BirthdayDirector } from '../awakening/BirthdayDirector';
 import type { InteractionSound } from '../../data/sounds';
 import { easterCode, EASTER_RULES } from '../secrets/codes';
 import { placeRainstorm } from '../dew/rainstorm';
+import { SEED_RULES } from '../../data/seed';
 
 export class GameController {
   private snapshot: GameSnapshot;
@@ -50,6 +51,7 @@ export class GameController {
   private expressions: ExpressionDirector;
   private awakening = new PausableTimer();
   private cultivation = new PausableTimer();
+  private planting = new PausableTimer();
   private panelResumeMode: 'idle' | 'watering' | 'growing' = 'idle';
   private dialogueIdle = new PausableTimer();
   private idleStage: StageId | null = null;
@@ -80,8 +82,8 @@ export class GameController {
     const wishing = save.pendingDialogues.some((entry) => entry.kind === 'wish');
     save.pendingDialogues = save.pendingDialogues.filter((entry) => entry.kind !== 'opening' && !(wishing && entry.kind === 'idle' && entry.stage === 'G'));
     this.snapshot = {
-      save, stage: getSceneStage(save, time), growth: 0, now: time.now(), mode: save.introSeen && time.isOpen('A') ? 'idle' : 'intro', stageLoading: null, waking: null, birthday: null,
-      dewParticles: [], event: null, speech: null, expression: null, companion: null, companionCanTalk: false, companionStage: null, companionPosition: 0, nahidaPlaceholder: false, blessing: null, encounters: [], rewardBursts: [], presentationPaused: false,
+      save, stage: getSceneStage(save, time), growth: 0, now: time.now(), mode: save.introSeen && time.isOpen('A') ? 'idle' : 'intro', stageLoading: null, waking: null, birthday: null, seedPhase: save.seedPlanted ? null : 'arriving',
+      dewParticles: [], event: null, speech: null, expression: null, companion: null, companionCanTalk: false, companionStage: null, companionPosition: 0, nahidaPlaceholder: false, proceduralTree: false, blessing: null, encounters: [], rewardBursts: [], presentationPaused: false,
       dewFeedback: null, dewFeedbackRevision: 0, message: '', effects: [], reviewStage: null, growthRevision: 0, saveStatus: saves.status,
     };
     this.expressions = new ExpressionDirector((expression) => this.update({ expression }), random);
@@ -158,7 +160,7 @@ export class GameController {
 
   private syncExpressions() {
     const state = this.snapshot;
-    const inactive = !this.active || !state.save.introSeen || Boolean(state.reviewStage) || ['intro', 'ending', 'loading', 'waking'].includes(state.mode) || state.stage === 'A' && !this.forestEntered;
+    const inactive = !this.active || !state.save.introSeen || !state.save.seedPlanted || Boolean(state.reviewStage) || ['intro', 'ending', 'loading', 'waking'].includes(state.mode) || state.stage === 'A' && !this.forestEntered;
     const paused = this.suspended || state.presentationPaused || ['journal', 'settings', 'notice', 'mail'].includes(state.mode);
     this.expressions?.configure(inactive ? null : state.stage, !inactive && !paused && state.mode === 'idle' && !state.speech && !state.blessing, inactive || paused, Boolean(state.speech || state.blessing || ['watering', 'growing'].includes(state.mode)));
   }
@@ -215,6 +217,7 @@ export class GameController {
     this.awakening.clear();
     this.waking.stop(); this.update({ waking: null });
     this.cultivation.clear(); this.panelResumeMode = 'idle';
+    this.planting.clear(); this.update({ seedPhase: this.snapshot.save.seedPlanted ? null : 'arriving' });
     this.dialogueIdle.clear(); this.idleStage = null;
     this.loading.stop(); this.update({ stageLoading: null });
     this.loadingSceneReady = false; this.loadingArtworkReady = false;
@@ -255,6 +258,7 @@ export class GameController {
     this.speech.setPaused(presentationPaused);
     this.awakening.setPaused(presentationPaused);
     this.cultivation.setPaused(!this.active || presentationPaused);
+    this.planting.setPaused(!this.active || presentationPaused);
     this.dewLifetimes.forEach((timer) => timer.setPaused(!this.active || presentationPaused));
     this.rewardLifetimes.forEach((timer) => timer.setPaused(!this.active || presentationPaused));
     this.dewFlights.forEach((timer) => timer.setPaused(!this.active || presentationPaused));
@@ -336,7 +340,24 @@ export class GameController {
   sceneEntranceReady(stage: StageId) {
     if (!this.active || stage !== 'A' || this.snapshot.stage !== stage || this.snapshot.mode === 'intro' || this.forestEntered) return;
     this.forestEntered = true;
+    if (!this.snapshot.save.seedPlanted) this.update({ seedPhase: 'waiting' });
     this.reconcile();
+  }
+
+  plantSeed() {
+    if (!this.active || this.suspended || this.snapshot.mode !== 'idle' || this.snapshot.stage !== 'A' || !this.time.isOpen('A') || !this.forestEntered || this.snapshot.save.seedPlanted || this.snapshot.seedPhase !== 'waiting') return false;
+    this.activity(); this.update({ seedPhase: 'falling' });
+    const reduced = this.systemReducedMotion || this.snapshot.save.settings.reducedMotion;
+    this.schedulePlanting(reduced);
+    return true;
+  }
+
+  private schedulePlanting(reduced: boolean) {
+    this.planting.schedule(() => {
+      if (!this.active || !this.time.isOpen('A') || this.snapshot.stage !== 'A' || this.snapshot.save.seedPlanted) return;
+      this.commit({ seedPlanted: true }); this.update({ seedPhase: null });
+      this.syncEncounters(); this.syncDialogueIdle(); this.reconcile();
+    }, reduced ? SEED_RULES.reducedFallMs : SEED_RULES.fallMs);
   }
 
   notify(message: string) { this.update({ message }); }
@@ -349,7 +370,7 @@ export class GameController {
 
   requestVisit() {
     const stage = this.snapshot.stage;
-    if (stage === 'G' || !this.time.isOpen(stage)) return;
+    if (stage === 'G' || !this.snapshot.save.seedPlanted || !this.time.isOpen(stage)) return;
     this.scheduleVisit(stage);
     this.reconcile();
   }
@@ -427,6 +448,15 @@ export class GameController {
 
   setSpeechSegments = (sequence: number, parts: string[]) => this.speech.setSegments(sequence, parts);
   revealExpression = (sequence: number, visible: number) => this.speech.revealExpression(sequence, visible);
+  previewExpression(asset?: number) {
+    const state = this.snapshot;
+    if (!this.active || !this.canExplore() || state.mode !== 'idle' || state.reviewStage || state.speech || state.blessing || state.stage === 'A' && !this.forestEntered) return false;
+    const selected = asset ?? pickExpression(state.stage === 'G' ? VISIT_EXPRESSION_CHOICES : TREE_EXPRESSIONS[state.stage] ?? [], this.random);
+    if (selected === undefined || !EXPRESSION_ASSETS[selected]) return false;
+    this.expressions.show(selected, state.stage === 'G' ? 'nahida' : 'tree');
+    return true;
+  }
+
   expressionReady = (id: number) => this.expressions.ready(id);
   dismissExpression = (id: number) => this.expressions.dismiss(id);
   hoverSpeech = (sequence: number, hovered: boolean) => { if (!hovered || this.canExplore()) this.speech.setHovered(sequence, hovered); };
@@ -447,7 +477,7 @@ export class GameController {
   }
 
   private syncDialogueIdle() {
-    if (!this.active || !this.snapshot.save.introSeen || this.snapshot.reviewStage || ['intro', 'ending', 'waking'].includes(this.snapshot.mode) || this.snapshot.stage === 'A' && !this.forestEntered) {
+    if (!this.active || !this.snapshot.save.introSeen || !this.snapshot.save.seedPlanted || this.snapshot.reviewStage || ['intro', 'ending', 'waking'].includes(this.snapshot.mode) || this.snapshot.stage === 'A' && !this.forestEntered) {
       this.dialogueIdle.clear(); this.idleStage = null;
       return;
     }
@@ -471,7 +501,7 @@ export class GameController {
       const save = this.snapshot.save;
       if (extra) this.secretBlessed.add(event.id);
       const growth = visitGrowth(event.stage, save.growth, this.time.getGate().cap);
-      const animated = treeGrowthStep(growth) > treeGrowthStep(this.snapshot.growth);
+      const animated = treeGrowthDuration(this.snapshot.growth, growth) > 0;
       this.commit({ growth, ...this.boundaryPatch(event.stage, growth), blessedVisits: extra ? save.blessedVisits : [...save.blessedVisits, event.id] });
       this.refreshProgress();
       if (animated) this.update({ growthRevision: this.snapshot.growthRevision + 1 });
@@ -479,7 +509,7 @@ export class GameController {
     this.update({ blessing: { id: event.id, stage: event.stage, phase } });
   }
 
-  private canExplore() { return !this.suspended && this.time.isOpen('A') && ['idle', 'watering', 'growing'].includes(this.snapshot.mode); }
+  private canExplore() { return !this.suspended && this.snapshot.save.seedPlanted && this.time.isOpen('A') && ['idle', 'watering', 'growing'].includes(this.snapshot.mode); }
 
   private enqueueWaterings() {
     for (const pending of this.snapshot.save.pendingWaterings) {
@@ -636,7 +666,7 @@ export class GameController {
   }
 
   water() {
-    if (this.snapshot.mode !== 'idle' || this.suspended || this.snapshot.reviewStage || this.snapshot.stage === 'G') return false;
+    if (this.snapshot.mode !== 'idle' || this.suspended || this.snapshot.reviewStage || this.snapshot.stage === 'G' || !this.snapshot.save.seedPlanted) return false;
     this.activity();
     const stage = this.snapshot.stage;
     if (getActiveStage(this.snapshot.save, this.time) !== stage) return false;
@@ -659,8 +689,8 @@ export class GameController {
     this.interruptTreeReplies();
     this.update({ mode: 'watering', message: '', dewFeedback: null });
     this.emitSound('water');
-    const animated = treeGrowthStep(result.growth) > treeGrowthStep(this.snapshot.growth);
     const growingMs = treeGrowthDuration(this.snapshot.growth, result.growth);
+    const animated = growingMs > 0;
     const count = (this.snapshot.save.wateringCounts[stage] ?? 0) + 1;
     const watering = { growth: result.growth, dew: result.dew, wateringCounts: { ...this.snapshot.save.wateringCounts, [stage]: count }, ...this.boundaryPatch(stage, result.growth, true) };
     this.respondDream(stage, watering);
@@ -726,7 +756,7 @@ export class GameController {
 
   private reconcile() {
     if (this.summonedAranara === this.snapshot.stage && this.active && this.canExplore() && (this.snapshot.stage !== 'A' || this.forestEntered) && this.encounters.spawn()) this.summonedAranara = null;
-    if (!this.active || this.snapshot.mode !== 'idle' || this.snapshot.reviewStage || this.suspended || !this.time.isOpen('A') || this.snapshot.stage === 'A' && !this.forestEntered) return;
+    if (!this.active || !this.snapshot.save.seedPlanted || this.snapshot.mode !== 'idle' || this.snapshot.reviewStage || this.suspended || !this.time.isOpen('A') || this.snapshot.stage === 'A' && !this.forestEntered) return;
     const choices = completeLoadingArtChoices(this.snapshot.save.loadingArtChoices);
     if (JSON.stringify(choices) !== JSON.stringify(this.snapshot.save.loadingArtChoices)) this.commit({ loadingArtChoices: choices });
     this.advanceBoundaries();
@@ -852,6 +882,7 @@ export class GameController {
 
   setSystemReducedMotion(reduced: boolean) {
     this.systemReducedMotion = reduced;
+    if (reduced && this.snapshot.seedPhase === 'falling') this.schedulePlanting(true);
     if (reduced && this.snapshot.waking && !this.snapshot.waking.reduced) this.waking.reduce();
     if (reduced) this.birthday.reduce();
   }
@@ -940,6 +971,7 @@ export class GameController {
     if (settings.textSpeed !== undefined || settings.reducedMotion !== undefined) this.speech.restartLine();
     if (settings.reducedMotion && this.snapshot.waking && !this.snapshot.waking.reduced) this.waking.reduce();
     if (settings.reducedMotion) this.birthday.reduce();
+    if (settings.reducedMotion && this.snapshot.seedPhase === 'falling') this.schedulePlanting(true);
   }
 
   secret(phrase: string) {
@@ -961,6 +993,11 @@ export class GameController {
     }
     const stage = this.snapshot.stage;
     if (stage === 'G' || this.snapshot.reviewStage || !this.time.isOpen(stage) || !['idle', 'watering', 'growing', 'journal', 'settings', 'notice'].includes(this.snapshot.mode)) return null;
+    if (code === 'irminsul') {
+      if (!this.snapshot.save.seedPlanted) return null;
+      this.update({ proceduralTree: !this.snapshot.proceduralTree });
+      return this.snapshot.proceduralTree ? '禁忌的枝叶，在梦中悄悄舒展。' : '世界树恢复了熟悉的模样。';
+    }
     if (code === 'aranara') {
       if (stage === 'B' || this.snapshot.encounters.length >= ENCOUNTER_RULES.maximum || this.summonedAranara) return null;
       if (!this.spawnAranara()) this.summonedAranara = stage;
@@ -1012,12 +1049,12 @@ export class GameController {
     this.forestEntered = false;
     this.resumeAfterUnlock = validated.introSeen && !this.time.isOpen('A');
     this.commit(validated);
-    this.update({ mode: validated.introSeen && this.time.isOpen('A') ? 'idle' : 'intro', event: null, dewParticles: [], rewardBursts: [], effects: [], reviewStage: null, growthRevision: this.snapshot.growthRevision + 1, message: '', dewFeedback: null });
+    this.update({ mode: validated.introSeen && this.time.isOpen('A') ? 'idle' : 'intro', event: null, dewParticles: [], rewardBursts: [], effects: [], reviewStage: null, growthRevision: this.snapshot.growthRevision + 1, message: '', dewFeedback: null, seedPhase: validated.seedPlanted ? null : 'arriving' });
     this.refreshProgress(true);
     this.syncPresentationPause();
     if (this.active) this.scheduleDew();
     this.reconcile();
   }
 
-  reset() { this.welcomed = false; this.firstEntry = true; this.update({ nahidaPlaceholder: false }); this.restore(createSave(this.time.now())); }
+  reset() { this.welcomed = false; this.firstEntry = true; this.update({ nahidaPlaceholder: false, proceduralTree: false }); this.restore(createSave(this.time.now())); }
 }

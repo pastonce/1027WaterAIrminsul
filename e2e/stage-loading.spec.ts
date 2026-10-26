@@ -11,7 +11,7 @@ import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 import { mockServerTime } from './time-support';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 function saveKey(info: TestInfo) { return info.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2'; }
 
 async function launch(page: Page, info: TestInfo, stage: DreamStageId = 'A', date = OPEN, growth = STAGES[stage].growth.end + 1) {
@@ -152,7 +152,7 @@ test('未解锁日期或未达成长不切换；日期开放也等待正在播�
     await page.getByRole('button', { name: '重新校时', exact: true }).click(); await expect(page.locator('.time-sync-setting')).toContainText('时间已校准');
     await page.getByRole('button', { name: '关闭', exact: true }).click();
   } else {
-    await page.locator('.debug-panel summary').click(); await page.getByLabel('模拟日期时间').fill('2026-10-27T10:27'); await page.getByRole('button', { name: '应用时间', exact: true }).click(); await page.locator('.debug-panel summary').click();
+    await page.locator('.debug-panel summary').click(); await page.getByLabel('模拟日期时间').fill('2026-10-27T13:27'); await page.getByRole('button', { name: '应用时间', exact: true }).click(); await page.locator('.debug-panel summary').click();
   }
   await expect(page.locator('.atmosphere')).toHaveClass(/scenery-canopy/); await expect(page.getByTestId('stage-loading')).toHaveCount(0);
   expect(await page.locator('.dialogue-bubble p .sr-only').textContent()).toBe(text);

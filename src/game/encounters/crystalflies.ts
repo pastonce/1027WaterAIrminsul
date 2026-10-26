@@ -1,15 +1,22 @@
 import { CRYSTALFLIES } from '../../data/inhabitants';
 import { seededRandom, TREE_WORLD } from '../tree/geometry';
-import { createTreeModel } from '../tree/model';
-import { treeGrowthStep } from '../tree/growth';
+import { createTreeGrowthModel } from '../tree/presentation';
+import { treeGrowthFrame, treeGrowthStep, TREE_GROWTH_STEPS, TREE_STEP_GROWTH } from '../tree/growth';
 import { FOLIAGE_ATTACHMENTS, FOLIAGE_START_STEP } from '../tree/foliage';
 import { transformTreePoint } from '../tree/timeline';
+import { proceduralPerch } from '../tree/procedural';
 
-const models = new Map<string, ReturnType<typeof createTreeModel>>();
-function modelAt(step: number, followBranches = false) {
-  const key = `${step}-${followBranches}`;
-  if (!models.has(key)) models.set(key, createTreeModel(step, undefined, followBranches));
+const models = new Map<number, ReturnType<typeof createTreeGrowthModel>>();
+function modelAtGrowth(growth: number) {
+  const key = treeGrowthFrame(growth).index;
+  if (!models.has(key)) models.set(key, createTreeGrowthModel(growth));
   return models.get(key)!;
+}
+
+let foliageGrowth: number | undefined;
+function foliageStartGrowth() {
+  foliageGrowth ??= Array.from({ length: TREE_GROWTH_STEPS + 1 }, (_, index) => index * TREE_STEP_GROWTH).find((growth) => treeGrowthStep(growth) >= FOLIAGE_START_STEP) ?? TREE_GROWTH_STEPS * TREE_STEP_GROWTH;
+  return foliageGrowth;
 }
 
 function buildPlan(seed: number) {
@@ -23,7 +30,7 @@ function buildPlan(seed: number) {
   const entries = Array.from({ length: 15 }, (_, index) => {
     if (index) threshold += intervals[index - 1] / total * 900;
     const unlockedAt = Math.min(1000, Math.ceil(threshold / 20) * 20);
-    const model = modelAt(treeGrowthStep(unlockedAt));
+    const model = modelAtGrowth(unlockedAt);
     const candidates = model.crown.filter((part) => !used.has(part.id));
     const leaves = candidates.length ? candidates : model.crown;
     const leaf = leaves[Math.floor(random() * leaves.length)] ?? model.body[0]; used.add(leaf.id);
@@ -40,12 +47,12 @@ function buildPlan(seed: number) {
 interface BranchBinding { site: string; origin: { x: number; y: number }; horizontal: number; elevation: number }
 interface CachedPlan extends ReturnType<typeof buildPlan> {
   bindings?: BranchBinding[];
-  steps: Map<number, ReturnType<typeof buildPlan>['entries']>;
+  frames: Map<number, ReturnType<typeof buildPlan>['entries']>;
 }
 const plans = new Map<number, CachedPlan>();
 function planFor(seed: number) {
   if (!plans.has(seed)) {
-    plans.set(seed, { ...buildPlan(seed), steps: new Map() });
+    plans.set(seed, { ...buildPlan(seed), frames: new Map() });
     if (plans.size > 8) plans.delete(plans.keys().next().value!);
   }
   return plans.get(seed)!;
@@ -54,21 +61,24 @@ export function crystalPlan(seed: number) {
   return planFor(seed).entries;
 }
 
-function anchorsAt(step: number) {
-  return modelAt(step, true).crown.filter((part) => part.site).map((part) => ({
+function anchorsAtGrowth(growth: number) {
+  return modelAtGrowth(growth).crown.filter((part) => part.site).map((part) => ({
     site: part.site!, point: transformTreePoint(part.artMatrix, ...FOLIAGE_ATTACHMENTS[part.asset]),
   }));
 }
 
-export function crystalPerches(seed: number, growth: number, followBranches = false) {
+export function crystalPerches(seed: number, growth: number, _followBranches?: boolean, procedural = false) {
+  if (procedural) return crystalPlan(seed).map((entry, index) => ({ ...entry, ...proceduralPerch(seed, growth, entry.threshold, index) }));
   const plan = planFor(seed); const step = treeGrowthStep(growth);
-  if (!followBranches || step <= FOLIAGE_START_STEP) return plan.entries;
-  if (plan.steps.has(step)) return plan.steps.get(step)!;
+  if (step < FOLIAGE_START_STEP) return plan.entries;
+  const frame = treeGrowthFrame(growth);
+  if (plan.frames.has(frame.index)) return plan.frames.get(frame.index)!;
+  const beginning = foliageStartGrowth();
   if (!plan.bindings) {
     const used = new Set<string>();
     plan.bindings = plan.entries.map((entry, index) => {
-      const anchors = anchorsAt(Math.max(FOLIAGE_START_STEP, treeGrowthStep(entry.threshold)));
-      const arriving = entry.threshold > FOLIAGE_START_STEP * 20;
+      const anchors = anchorsAtGrowth(Math.max(beginning, entry.threshold));
+      const arriving = entry.threshold > beginning;
       const available = arriving ? anchors.filter((anchor) => !used.has(anchor.site)) : anchors;
       const candidates = available.length ? available : anchors;
       const horizontal = entry.horizontal + TREE_WORLD.width / 2; const vertical = TREE_WORLD.ground - entry.elevation;
@@ -82,12 +92,12 @@ export function crystalPerches(seed: number, growth: number, followBranches = fa
       };
     });
   }
-  const current = new Map(anchorsAt(step).map((anchor) => [anchor.site, anchor.point]));
+  const current = new Map(anchorsAtGrowth(growth).map((anchor) => [anchor.site, anchor.point]));
   const entries = plan.entries.map((entry, index) => {
     if (growth < entry.threshold) return entry;
     const binding = plan.bindings![index]; const point = current.get(binding.site);
     return point ? { ...entry, horizontal: binding.horizontal + (point.x - binding.origin.x), elevation: binding.elevation - (point.y - binding.origin.y) } : entry;
   });
-  plan.steps.set(step, entries);
+  plan.frames.set(frame.index, entries);
   return entries;
 }

@@ -1,12 +1,20 @@
 # 工程架构 · 连续交互版
 
-本轮E/F：E/F从63扩为111个稳定枝位：保留原15处与原48处UV / 排程，另补48处真实外梢 / 二级枝端，不把簇继续堆在粗主干。新增48处在grow36实际cut后统一弹出正常嫩芽，再由leafAt在grow37～48每轮四处跨左右 / 高低舒叶，下一浇立即成簇；与旧48排程交错而非先两侧后中间。芽宽16～22、单叶36～54世界单位，新增小簇75～115；不出现超大单叶。foliagePlan.ts新增可选leafAt，旧48默认birth+1，新48均birth36后分批leafAt / leafAt+1切叶和簇；foliageLayout.ts仅追加48点，不改旧63。旧身份 / 原63点不变，四body追加点均按真实PNG alpha≥230及发布outline校准；叶柄 / 簇承接点始终绑定当前实际木枝UV，随原完整仿射回弹，仅原attachment切图时同步延伸。单site单当前附件、无opacity生长或长期双图；芽 / 叶原0.5秒、簇原0.25秒，完整保留cut后播放时间与唯一GSAP游标。C/D校正、A/B不改、480半宽、grow51保留111处与最后7点矩阵完全不变，无新图片 / 网络 / Canvas / GL / RAF / 存档。
+本轮：Notice支持Markdown“> ”tagline并移到正文底部；N01由原稿生成。proceduralTree是GameSnapshot临时标志，TreeRenderer保留原唯一GSAP游标，通过proceduralGrowthAtFrame按当前58拍映射同等成长，替换实绘SVG枝叶；presentedTreeBounds统一两种形态的对白 / 表情 / 施法，晶蝶只换稳定落点，不改解锁。E技能采用clean-v2派生哈希纹理，原骨骼 / atlas / 时序保留，见PROCEDURAL_TREE.md / E_SKILL_CLEAN.md。
+
+2026-10-26呈现：InteractionCue以小SVG / CSS取代三处可见提示文字，保留读屏说明与暂停 / 减少动态；watering提示嵌在实际按钮内，不另估算屏幕落点。model按当前附件给tree01 / tree1及附着叶片统一16单位落地修正，timeline源矩阵不动；TreeRenderer共享一个固定根领局部mask / clip，融合独立前景硬边，不用于叶片生长。开发预览走原ExpressionDirector，仅临时播放，不改存档 / 概率 / 配额；见TREE_GROUNDING.md。
+
+种植接入：GameController持有可暂停planting时钟和临时seedPhase，SaveManager仅持久化seedPlanted布尔收据。IntroScene种子进入DreamTreeScene时复用原背景onBackgroundFrame活动时间更新CSS变量，SeedPlanting用CSS完成垂直落下与末段渐隐，不增加RAF / 画布 / WebGL。canExplore、water、reconcile、requestVisit及闲置 / 表情均验证种植，落地后才进入原入场对白与收露流程。旧档迁移、刷新与引导详见SEED_PLANTING.md。
+
+最新固定场景层：useSceneViewport替代相机控制器，仅保留ResizeObserver和轻扫误触保护；不再创建额外视角时钟 / 滚轮 / 平移监听。scenePlacement.ts统一sceneRoot与treeCanopyFocus，维持原设备缩放，根 / 地面固定，可见冠中部用于气泡 / 表情 / 祝福；只读高层presentation及原A背景入口时钟保持。详见FIXED_TREE_VIEW.md。
+
+本轮将部分E/F演出前移：浇灌次数 / 每次20点 / 日期上限不变，C九浇终点为grow30、D八浇为grow41；E八浇结束于grow45成簇拍，F十浇仍完成grow51及最后7点无动画。原51条木质轨各完整一次，grow42～48分成芽 / 舒叶拍与0.25秒独立成簇拍，共58拍，不停住半次回弹。 growthRoute将预算与raw轨分离，presentation提供唯一实际帧模型；原111枝位与资源规格不变，实际验证见TEST_PLAN.md。
 
 ## 可组合世界树
 
-E/F枝位保留稳定身份，但不固定世界坐标：叶柄 / 簇承接点绑定当前实际显示body的同一语义枝端UV，随原完整仿射回弹；仅原attachment切图时与对应木枝同步切位，新芽等新枝cutTime才按模板弹出。不用共有旧叶位移归一化或跨树体插值提前搬向未来树顶，不随机重排。逐浇与换干核对见TREE_SEQUENCE_REVIEW.md。
+实际grow34起的111枝位保留稳定身份而非固定世界坐标；当前body语义UV随完整仿射回弹，原attachment cut才切位，新芽等真实cut后弹出，不提前搬往未来树顶。阶段标签不再控制枝叶接管，D580已接续15处，随后按原birth / leafAt排程长成111处；逐浇 / 分拍见TREE_SEQUENCE_REVIEW.md。
 
-tree/growth.ts将floor(growth / 20)映射到原51段。timeline.ts源数据不改，树干 / 根基仍按完整原轨迹；A/B至grow16不改。leafAnchors.ts把C/D含共享入口grow17的叶柄校正到当前body枝条，仅调整平移、保留原附件与线性回弹。E/F由foliage.ts接续校正后的15处小叶层次，foliagePlan.ts管理原12外枝 / 36内冠与新增48细梢的birth / leafAt，foliageLayout.ts保存四组111点语义UV。每site单当前附件、稳定身份沿枝延伸，原clip切图 / 回弹而非opacity或同site长期叠图。leafMotion.ts复用芽 / 叶0.5秒与簇0.25秒，foliageTiming.ts取max(原木质时长, delay+clip)而不压缩剩余时间；grow36 / 42 / 45为0.8333秒，原木质到尾保持。TreeRenderer、growthDuration、控制器和表情共用唯一GSAP段时长；grow49仍250ms复用原簇、末7点不播放。model.ts按当前附件 / 注册矩阵求真实alpha与冠部包络，480半宽、原稿 / 24张单档保持，无新Canvas / GL / RAF或存档，见TREE_SYSTEM.md。
+tree/growthRoute.ts把floor(growth / 20)作为预算索引查58拍路线，不再直接作为raw grow。TreeGrowthFrame的index / time对应beat，treeGrowthBeat给raw step / pass / duration，treeGrowthPlayback从实际帧串播全部剩余拍；growth.ts兼容导出step / duration。C/D部分一浇两轨按原秒数完整播放，42～48 leaves播放一次木质及芽 / 舒叶、保留待成簇旧叶，clusters在木质终态只播放完整0.25秒簇；不重复木质或冻结半回弹。presentation.ts的treeGrowthFrameModel / createTreeGrowthModel统一当前拍部件、真实alpha / 冠锚和只读终态，实际grow>=34接管，growth可重建、无新存档。原timeline / leafAnchors / 111点foliageLayout / 96新枝foliagePlan与模板0.5 / 0.25秒保持；full / leaves时长覆盖max(body,delay+clip)。唯一GSAP、控制器 / 表情等待 / 暂停与最后7点不变，树高 / 气泡 / 施法 / 晶蝶统一同一presentation，见TREE_SYSTEM.md。
 
 ## 声明与每页选图
 
@@ -28,9 +36,9 @@ Birthday 通过异步 session 工厂创建独立内存 SaveManager / 私有时�
 
 ## 首屏展现
 
-首屏右上设置与其左侧声明为局部面板开关，不改变GameController的intro权限或挂载未开放场景；校时自动恢复离开intro时清理开关。设置与正确代码反馈均Portal到body，反馈不受OpeningShell的隔离层压住。手机在开放前也能输入test，切入独立内存会话，不写正式存档；详见EASTER_EGGS.md。
+首屏右上设置与其左侧声明为局部面板开关，不改变GameController的intro权限或挂载未开放场景；校时自动恢复离开intro时清理开关。设置与正确代码反馈均Portal到body，反馈不受OpeningShell的隔离层压住。手机在开放前也能输入Past，切入独立内存会话，不写正式存档；详见EASTER_EGGS.md。
 
-IntroScene 仅修改静态邀请文案 / 入口与声明，不改 onEnter 权限判定。intro.css 在 backgrounds.css 之后加载，样式全部局限 .intro-* / .enter-dream，不改变游戏气泡、镜头 / 背景或其他按钮。清晰深绿文字替代浅字深阴影，深绿浅金入口与原叶徽统一；横屏预留提示 / 页脚空间，缺图浅绿底、强制色系统配色。新字符按原 TTF 重生常用 / 扩展 WOFF2，原稿与存档不动。
+IntroScene展示邀请 / 入口 / 声明与未种下的种子；App捕获实际种子包络后调用原onEnter权限判定，种植阶段独立于背景和树成长。intro.css 在 backgrounds.css 之后加载，样式全部局限 .intro-* / .enter-dream，不改变游戏气泡、镜头 / 背景或其他按钮。清晰深绿文字替代浅字深阴影，深绿浅金入口与原叶徽统一；横屏预留提示 / 页脚空间，缺图浅绿底、强制色系统配色。新字符按原 TTF 重生常用 / 扩展 WOFF2，原稿与存档不动。
 
 ## 依赖关系
 
@@ -58,7 +66,7 @@ flowchart TD
   Snapshot --> Creatures[兰那罗背景穿插 / 常驻与晶蝶画布 / 静态热点]
 ```
 
-`src/main.tsx` 注入时钟与存档。业务不依赖 React 闭包；React 通过 `useSyncExternalStore` 读取不可变快照。公开测试构建保留模拟时钟 / 面板的动态分块，不在正式会话主动加载；SessionHost 收到 test 后卸载旧 App 并创建独立内存会话，正式 ServerClock 与存档不被模拟工具改写。
+`src/main.tsx` 注入时钟与存档。业务不依赖 React 闭包；React 通过 `useSyncExternalStore` 读取不可变快照。公开测试构建保留模拟时钟 / 面板的动态分块，不在正式会话主动加载；SessionHost 收到 Past 后卸载旧 App 并创建独立内存会话，正式 ServerClock 与存档不被模拟工具改写。
 
 ## 音乐与字体
 
@@ -126,7 +134,7 @@ F最终浇灌到1027且有F完成收据、旧回应 / 来访 / 停留结束后�
 
 随机 / 手动资格写入 pendingVisits，位置与保底同时保存；已读对白逐句保存。SpeechDirector 仍管理同一可暂停的 1500 ms 施法和 900 ms 确认，施法分为 300 ms 角色轮廓光、500 ms 花叶、700 ms 素材扫描框，扫描结束才原子保存成长 / blessedVisits。演出结束移除待播资格，presence 仅补足对白后 3～7 秒总停留；树体 / 浇灌回应可继续。刷新跳过已读 / 已结算部分，旧完成不追赠，小数成长、所属阶段 / 服务器权限上限保持；最终梦醒等待完整序列。详见 NAHIDA_BLESSING.md。
 
-`DendroBlessing` 使用局部 SVG / CSS 花叶流与树侧单枚草元素图标 / 大扫描框；移除角色侧小框、小图标和数据电路。角色透明 Spine 容器 / poster 的 alpha drop-shadow 产生轮廓草光。E_SKILL_PATTERN 记录从用户 E 技能三件套经匹配 4.0 解析器导出的 16 块真实 setup 变换 / UV / 源渐入延迟，排除 center_emblem；原 PNG 逐字节复制，正常 alpha，来访露面时预载。运行时不播放完整原生 idle / show / hide，不新增 canvas / GL / RAF 或外链。落点与花叶轨迹复用背景 present 时钟，镜头 / 窗口同步，不跳未来树冠；扫描 clip 不裁角色，SVG 穿透 / aria-hidden，全部可暂停，减少动态保留静态外框与单图标。角色仍原 loop。 最新落点 / 发射点：全部角色原向，不翻转 Spine / poster；A / C / F 原左右位置保持，B / D / E 两处均在树左侧、第二处更靠左且略高。VISIT_EMITTERS 原向躯干锚点不反算 x；花叶按实际 NahidaAvatar 包络与既有背景时钟更新，不从透明边缘发射，无新 RAF。
+`DendroBlessing` 使用局部 SVG / CSS 花叶流与树侧单枚草元素图标 / 大扫描框；移除角色侧小框、小图标和数据电路。角色透明 Spine 容器 / poster 的 alpha drop-shadow 产生轮廓草光。E_SKILL_PATTERN 记录从用户 E 技能三件套经匹配 4.0 解析器导出的 16 块真实 setup 变换 / UV / 源渐入延迟，排除 center_emblem；clean-v2派生PNG按新哈希复制，正常 alpha，来访露面时预载。运行时不播放完整原生 idle / show / hide，不新增 canvas / GL / RAF 或外链。落点与花叶轨迹复用背景 present 时钟，镜头 / 窗口同步，不跳未来树冠；扫描 clip 不裁角色，SVG 穿透 / aria-hidden，全部可暂停，减少动态保留静态外框与单图标。角色仍原 loop。 最新落点 / 发射点：全部角色原向，不翻转 Spine / poster；A / C / F 原左右位置保持，B / D / E 两处均在树左侧、第二处更靠左且略高。VISIT_EMITTERS 原向躯干锚点不反算 x；花叶按实际 NahidaAvatar 包络与既有背景时钟更新，不从透明边缘发射，无新 RAF。
 
 每次树 / 现实角色点击都预约一句，不重置当前播放。梦境仍 60 秒闲置、G 改 20 秒，面板 / 后台 / 竖屏 / 加载暂停。G 的 wish 从预约到 U / N 两句及淡出全部完成均清空 idle timer；结束重启满 20 秒，不从点击祝福时计。刷新恢复 wish 同样抑制计时，开始祝福取消未播闲置。初入 opening 仅无档 A 页面播放，读档取消旧 opening 并改欢迎；不新增画布 / RAF。
 
@@ -144,11 +152,11 @@ G 不再有夜间彩蛋、月光入口或夜间日期权限。旧 v2 nightComple
 
 触摸 / 手写笔通过 pointerup 识别轻触，不依赖拖动后浏览器是否补发 click；鼠标仍使用 click，并避免同一次触摸双触发。子 SVG 元素转交隐式捕获时的 lostpointercapture 不会提前结束外层拖动，连续触摸移动可完整更新镜头。
 
-树大小完全由原骨骼和附件给出，仅统一0.2场景缩放；源终态最高小于650世界单位，不再有3100高度曲线或种子生成的旧枝。原动画存在等高添叶 / 回弹与末段藏叶，因此成长资格、growthRevision和表情等待按动画段 / 真实时长判断而非高度增加。相机只按真实包围高度及视口计算小范围位移，不再按D～F强制追高；面板暂停剩余原帧，手动拖动和最终梦醒锁定保持。
+树大小完全由原骨骼和附件给出，仅统一0.2场景缩放；源终态最高小于650世界单位，不再有3100高度曲线或种子生成的旧枝。原动画存在等高添叶 / 回弹与末段藏叶，因此成长资格、growthRevision和表情等待按动画段 / 真实时长判断而非高度增加。树根按固定地面包络贴底，不自动追冠、手动拖动或缩小树体；面板暂停剩余原帧，最终梦醒锁定保持。
 
 ## 梦露位置与反馈
 
-React场景通过setDewViewport传入真实视口 / 缩放。重绘树最大包络预留共享480世界单位半宽，再加26物理像素半径 / 间隔；贯穿屏幕的保守带兼容成长和根冠自由镜头，另避顶栏、调试、镜头按钮及底部操作。露珠保守带不能当成兰那罗藏点新禁区。
+React场景通过setDewViewport传入真实视口 / 缩放。重绘树最大包络预留共享480世界单位半宽，再加26物理像素半径 / 间隔；贯穿屏幕的保守带兼容成长和固定地面，另避顶栏、调试及底部操作。露珠保守带不能当成兰那罗藏点新禁区。
 
 普通梦露两侧随机采样保持至少 60 物理像素的粒子中心间距，拥挤时用网格兜底，没有空间则暂缓生成，不降级到树上。窗口变化后重排不安全粒子，保留编号、价值与资源数量。奖励用 44 px 命中 / 48 px 间距、混合至少 56 px 并可合并份额，详见“小生物与奖励生命周期”；两类都避开小生物热点。更换宽度更大的树美术时同步调整包络并复验。
 
@@ -158,9 +166,9 @@ React场景通过setDewViewport传入真实视口 / 缩放。重绘树最大包�
 
 ## 权限、恢复与生命周期
 
-A 的 forestEntered 为临时就绪闸门：DreamTreeScene 同时确认当前背景 onReady 与共享背景活动时钟完成约 3.39 秒入场，再调用 sceneEntranceReady。此前不预抽 / 播初入及欢迎对白、不运行闲置 / 表情 / 随机生物；面板、后台和竖屏暂停同一背景时钟，静态 / 无 GL 需实际回退完成。不用独立 timeout；重置 / stop / 权限撤销清理。
+A 的 forestEntered 为临时就绪闸门：DreamTreeScene 同时确认当前背景 onReady 与共享背景活动时钟完成约 3.39 秒入场，再调用 sceneEntranceReady。此前不预抽 / 播初入及欢迎对白、不运行闲置 / 表情 / 随机生物；新档还需种子垂落完成才开放这些行为；面板、后台和竖屏暂停同一背景时钟，静态 / 无 GL 需实际回退完成。不用独立 timeout；重置 / stop / 权限撤销清理。
 
-时间表集中在 `schedule.ts`，使用带 `+08:00` 的 ISO 字符串。控制器每秒及前台恢复时更新。未来存档的真实进度保留，但当前可见树形、现实场景、回访和对白归档仍受开放条件约束。 时间表以 project_prompt.md 最新交互修订（§七十四）为准：25 日 10:27 A→B→C（180 / 340 / 520），26 日 10:27 D→E（680 / 840），27 日 10:27 F（1027），G 在最终梦醒后进入。均为北京时间，同批权限仍逐段推进；整页权限上限为 0→520→840→1027，祝福不越所属段。
+时间表集中在 `schedule.ts`，使用带 `+08:00` 的 ISO 字符串。控制器每秒及前台恢复时更新。未来存档的真实进度保留，但当前可见树形、现实场景、回访和对白归档仍受开放条件约束。 时间表以 project_prompt.md 最新交互修订（§七十四）为准：25 日 10:27 A→B→C（180 / 340 / 520），26 日 10:27 D→E（680 / 840），27 日 13:27 F（1027），G 在最终梦醒后进入。均为北京时间，同批权限仍逐段推进；整页权限上限为 0→520→840→1027，祝福不越所属段。
 
 生产入口注入 `ServerClock`，开发入口仍动态加载 `DevelopmentClock`。`Clock.now()` 供时间戳使用；生产以已确认的服务器时间为锚点，用 `performance.now()` 单调计时，不依赖页面设备日期。可选的 `permissionNow()` 专供日期权限，生产只返回最近一次实际服务器确认的时间；`getGate()` 和 `isOpen()` 都走此入口，不能把自然走动的时间误当成新权限。
 
@@ -236,7 +244,7 @@ A～E 取景为 2500×1080，F 保留源 2400×1350；viewport 扩大 1.12 倍�
 
 `ForestInhabitants` 的原额外透明 4.0 画布只绘常驻 / 晶蝶。纹理按当前形象共享，实例独立时间 / 相位，恢复 setup 后采样 loop；普通尺寸 / 镜头更新不重下载，跨 1024 / 512 档重建。无变化的零时间透明帧不重画，manual 模式在背景清屏后必须每段重画，但每帧只推进一次活动时间。DOM 只有至少 44 px 无文字提示热点，晶蝶不接输入。骨骼失败时 manual 渲染器加载自身透明 poster，仍画在原深度；背景上下文丢失或减少动态则用真实背景静态分带在姿态前后交错，A 加色光单独 plus-lighter 合成，避免不透明暗色矩形。背景恢复后卸下分带，不丢同一实例 / 领奖记录；卸载中止请求、解码、RAF，释放所有纹理 / 程序 / 缓冲 / bitmap。
 
-`crystalflies.ts`以存档种子构造稳定计划：成长100首只，按随机成长阈值逐只至15，等高添叶段也可解锁；相邻新增形象 / 偏移 / 尺寸 / 相位错落。E/F将原解锁锚点接到同一稳定枝组的当前实际木枝，680前后交接位置一致，随后随枝条延伸而非留在旧树腰；seed / 阈值 / 形象 / 相位 / 所属枝组不重抽，A仍读共享地面位移。
+`crystalflies.ts`仍用存档种子构造成长100首只、随机阈值逐只至15的稳定计划，形象 / 尺寸 / 相位与同一枝组不重抽。实际grow34 / D580起接到当前真实木枝，位置 / 缓存按高层presentation的beat区分同grow两拍；随后随枝延伸，不滞留旧树腰，不额外出生 / 重排解锁，A共享地面位移保持。
 
 每次奖励12份，每份独立随机4～6点（共48～72点），最多十二个包，`DewParticle.portions` 保存各批次份额。`placeRewardDew` 从对应露头中心按径向环 / 黄金角寻找安全终点，拥挤时选最近安全网格；新粒子记录 launch 起点，850 ms 飞行结束才可收，`dewFlights` 与短时光点均使用可暂停计时器。拥挤合并份额，不创建重叠热点；每批 `rewardLifetimes` 独立六十秒，收取只扣实际可装入1027 的部分。某批过期只减自身份额，值归零才不可收并淡出；其他新批不续旧批。普通五秒 / 七颗保持，计时不作为日期权限。两类露珠均避开 DewObstacle；重排不丢价值，停止 / 重置 / 回访 / 梦醒清理所有飞行 / 寿命 / 散落计时。v2 四常驻领奖保存不变；未收短时奖励不写存档。
 

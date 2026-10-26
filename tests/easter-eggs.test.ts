@@ -10,7 +10,7 @@ import { MemoryStorage, TestClock, testGame, startScene } from './support';
 import type { GameSave, StageId } from '../src/types/game';
 import { openingSpinStop, OPENING_SPIN } from '../src/game/opening/choreography';
 
-const OPEN = Date.parse('2026-10-27T10:27:00+08:00');
+const OPEN = Date.parse('2026-10-27T13:27:00+08:00');
 const games: GameController[] = [];
 function setup(stage: StageId = 'A', patch: Partial<GameSave> = {}) {
   const clock = new TestClock(OPEN);
@@ -21,6 +21,14 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(() => { games.splice(0).forEach((game) => game.stop()); vi.clearAllTimers(); vi.useRealTimers(); vi.unstubAllGlobals(); });
 
 describe('隐藏彩蛋代码与隔离测试', () => {
+  it('Past是唯一测试入口代码，旧test代码不再兑换', () => {
+    expect(easterCode('pAsT')).toBe('past');
+    expect(easterCode('test')).toBeNull();
+    const stream = new CodeSequence();
+    expect([...'test'].flatMap((key) => stream.key(key) ?? [])).toEqual([]);
+    stream.clear();
+    expect([...'PaSt'].flatMap((key) => stream.key(key) ?? [])).toEqual(['past']);
+  });
   it.each(EASTER_CODES)('%s 大小写不敏感，连续键入一次只触发一次', (code) => {
     expect(easterCode(` ${code.toUpperCase()} `)).toBe(code);
     const stream = new CodeSequence();
@@ -87,7 +95,7 @@ describe('隐藏彩蛋代码与隔离测试', () => {
     expect(game.getSnapshot().companion).toBeNull(); expect(game.getSnapshot().encounters).toHaveLength(0);
     game.closePanel(); expect(game.getSnapshot().companion).not.toBeNull(); expect(game.getSnapshot().encounters).toHaveLength(1);
   });
-  it('test 在内存中复制当前进度，切段、重置、模拟时间不写正式或开发存储', () => {
+  it('Past 在内存中复制当前进度，切段、重置、模拟时间不写正式或开发存储', () => {
     const storage = new MemoryStorage(); const clock = new TestClock(OPEN);
     storage.setItem(SAVE_KEYS.player, JSON.stringify(stageFixture('D', OPEN)));
     const formal = new GameController(new TimeGateService(clock), new SaveManager(storage)); games.push(formal);

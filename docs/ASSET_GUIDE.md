@@ -1,10 +1,18 @@
 # 正式素材替换指南
 
-E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原15处与原48处UV / 排程，另补48处真实外梢 / 二级枝端，不把簇继续堆在粗主干。新增48处在grow36实际cut后统一弹出正常嫩芽，再由leafAt在grow37～48每轮四处跨左右 / 高低舒叶，下一浇立即成簇；与旧48排程交错而非先两侧后中间。芽宽16～22、单叶36～54世界单位，新增小簇75～115；不出现超大单叶。旧身份 / 原63点不变，四body追加点均按真实PNG alpha≥230及发布outline校准；叶柄 / 簇承接点始终绑定当前实际木枝UV，随原完整仿射回弹，仅原attachment切图时同步延伸。单site单当前附件、无opacity生长或长期双图；芽 / 叶原0.5秒、簇原0.25秒，完整保留cut后播放时间与唯一GSAP游标。C/D校正、A/B不改、480半宽、grow51保留111处与最后7点矩阵完全不变，无新图片 / 网络 / Canvas / GL / RAF / 存档。原31稿 / 62份哈希WebP与24张单档不变，校准点位不得通过透明光晕取代实际木枝。
+当前阶段已于2026-10-26收尾；最新日期、Past入口与清理边界以 [PHASE_HANDOFF](PHASE_HANDOFF.md) / [RELEASE_RESOURCES](RELEASE_RESOURCES.md) 为准。以下带日期的记录保留实现演变，不覆盖当前基线。
+
+本轮根部复核不重绘或替换位图：实际root前景为既有tree_overlay世界树重绘WebP，异常来自独立根颈和主干自带根直接叠接。现用原SVG内单个局部mask柔化上沿；早期树苗与叶片下移由model承担，源素材、注册元数据、31原稿 / 62发布副本保持。三处引导使用代码SVG，不新增图片，详见TREE_GROUNDING.md。
+
+种子来自asserts/seed.png（原图不改）；内置image_gen仅去除白底和背景角标，透明原稿保存在asserts/seed-cutout/seed.png。npm run assets:seed离线裁透明边并生成256×372、21644B单份WebP，发布路径由src/data/seedAssets.generated.json登记，精确提示词 / 来源及输出哈希见seed-assets.manifest.json。首次加载仅取压缩副本，不下载原大图，详见SEED_PLANTING.md。
+
+本轮不更换或缩放树素材；根部固定、允许冠出屏，现有111枝叶 / alpha及原设备比例保持。机制18句按唯一原稿发布，原字体分包与startup按新增字符重生，原始asserts与TTF不改。树气泡 / 表情 / 技能位置调整由scenePlacement统一计算，不新增位图或纹理。
+
+本轮将部分E/F演出前移：浇灌次数 / 每次20点 / 日期上限不变，C九浇终点为grow30、D八浇为grow41；E八浇结束于grow45成簇拍，F十浇仍完成grow51及最后7点无动画。原51条木质轨各完整一次，grow42～48分成芽 / 舒叶拍与0.25秒独立成簇拍，共58拍，不停住半次回弹。 本轮仅重排原演出，不改111枝位 / 美术、原31稿 / 62WebP与24张设备单档，不新增下载或存档；实际验证见TEST_PLAN.md。
 
 ## 世界树重绘
 
-最新枝叶复用原部件：C/D含grow17共享入口校正当前body叶柄，原附件 / 回弹保持；E/F为15继承点＋原48新枝＋新增48细梢，共111稳定site。原63UV / 旧48排程保持，新增点在grow36 cut后带芽、leafAt37～48每轮四处均匀舒叶，下一浇成簇。尺寸 / 排程在foliagePlan.ts，111点UV在foliageLayout.ts，模板与时长不变；无新图片 / 原稿修改或预载文件，逐浇 / 实测见TREE_SEQUENCE_REVIEW.md / TEST_PLAN.md。
+枝叶继续复用原部件：原17～34校正叶柄、15继承叶＋96新枝共111稳定site，原63UV / 原48排程与新增48 leafAt不动。实际grow34 / D580启用连续层；42～48各拆舒叶与成簇完整拍，新增点仍按原grow36 cut带芽 / 37～48舒叶，不能把原编号误作浇水次数。growthRoute / presentation控制路线与实际附件，foliagePlan / foliageLayout控制原形态与UV，逐浇 / 实测见TREE_SEQUENCE_REVIEW.md / TEST_PLAN.md。
 
 原24部件、旧长干及五张完整补绘均保留。为独立连续展叶，内置image_gen另从完整tree9生成去叶不改根干风格的tree9-growth.png（1,936,276B），原图不覆盖；提示词 / 输入 / 输出在tree-completion-generation.json，原稿及发布SHA在tree-assets.manifest.json。共31原稿 / 62份哈希WebP（4,551,386B），当前预载仍24张单档（桌面1,870,506B / 横屏1,131,772B），无叶成熟变体替代烘焙冠、其他叶图复用，不下载新旧两图。六份E/F透明变体共9,829,350B；本地assets:tree派生压缩、alpha / 中心线及根部注册，assets:tree-growth仅提取原轨迹，不加入云端prebuild，见TREE_SYSTEM.md。
 
@@ -16,7 +24,7 @@ E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原
 
 ## 全流程对白
 
-唯一正文来源 `asserts/对白整合.md`，原文件不改；`npm run assets:dialogues` 解析原编号生成 `src/data/dialogues.generated.json`，prebuild 自动执行。当前 371 ID / 31 范围，保留正文 / 标点，正文去 Markdown 加粗与 `[数字]` 标记，标题候选 / 句中位置另存表情元数据；源稿不改、数字不显示 / 读屏，不据数字切换 Spine 动作 / 配音；机制 X01～X18 仍为用户原稿占位。后续修改原稿再生成，不在 stages.ts 维护副本。源哈希、池数量、测试专用编号、概率 / 配额和恢复见 [DIALOGUE_SYSTEM.md](DIALOGUE_SYSTEM.md)。A～F 音乐 / 按钮和全站字体已另行接入，不改 Spine / 背景或新增运行时外链。
+唯一正文来源 `asserts/对白整合.md`，原文件不改；`npm run assets:dialogues` 解析原编号生成 `src/data/dialogues.generated.json`，prebuild 自动执行。当前 371 ID / 31 范围，保留正文 / 标点，正文去 Markdown 加粗与 `[数字]` 标记，标题候选 / 句中位置另存表情元数据；源稿不改、数字不显示 / 读屏，不据数字切换 Spine 动作 / 配音；机制 X01～X18 已按当前原稿完整发布，X11为最终13:27开放说明。后续修改原稿再生成，不在 stages.ts 维护副本。源哈希、池数量、测试专用编号、概率 / 配额和恢复见 [DIALOGUE_SYSTEM.md](DIALOGUE_SYSTEM.md)。A～F 音乐 / 按钮和全站字体已另行接入，不改 Spine / 背景或新增运行时外链。
 
 ## 当前资源清单
 
@@ -24,7 +32,7 @@ E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原
 
 最新：G 远 / 近树影 SVG 不再挂载，不删除 A～F 回退代码；祝福复用两张甜点图各 3 / 4 份，不增加下载 URL。新增来访竖琴与短雨声源 / 哈希 / 许可见 sfx-assets.manifest.json；本轮仅编码与更新清单，不作验证通过声明。
 
-两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 6 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 205,092 B / 扩展 3,320,320 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
+两张甜点由 image_gen 去蓝底，原图不改，透明派生在 public/asserts/gifts/，哈希 / 提示词见 gift-assets.manifest.json，开场只下载压缩文件、G送礼才解码展示；原 6 秒梦醒与彩雨不增画布 / GL / RAF。最新同字形 WOFF2 为常用 208,748 B / 扩展 3,313,164 B，仅当前两包；当前发布 371 句 / 两行量尺不变。七份音效为 AAC 150,375 B / JSON 发布包 200,687 B，源声 / 署名 / 授权与双哈希见 sfx-assets.manifest.json；传送社区素材上线前须确认许可。细节见 REALITY_CELEBRATION.md、INTERACTION_AUDIO.md，验证见 TEST_PLAN.md。
 
 | 资源 | 已使用路径 | 来源 / 状态 |
 | --- | --- | --- |
@@ -32,7 +40,7 @@ E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原
 | E 背景 | 复用 `sanctuary/`，`embers/poster.webp` | 背景专用调色 / 做旧 / 烟雾 / 余烬，不额外复制 D 图集 |
 | F 背景 | `backgrounds/festival/` | image_2 无 Role 派生、十四页环境图集、40 秒 loop 与真实花叶遮挡 |
 | 背景静态回退 | 六个目录的 `poster.webp` | 从当前管线生成，不含主树 / 独立角色 / UI；F 为无 Role 环境 |
-| 藏身静态分带 | A / C / D / E / F 的 `hiding-band-*`、A 的 `hiding-light-1.webp` | 从真实背景槽位导出，完整姿态交错绘制；43 份派生资源清单在 `docs/inhabitants/hiding-layers.json` |
+| 藏身静态分带 | A / C / D / E / F 的 `hiding-band-*`、A 的 `hiding-light-1.webp` | 从真实背景槽位导出，完整姿态交错绘制；43 条记录中22张为运行时分带 / poster、21张在本地校准目录，清单在 `docs/inhabitants/hiding-layers.json` |
 | 整理后的 Unity 壁纸 | `asserts/player/image_1/`～`image_4/` | 完整保留；image_2 无 Role 派生用于 F，见 PLAYER_SPINE.md |
 | 独立可移用角色 | `asserts/player-extracted/` | 四种纳西妲、十只兰那罗、三只晶蝶，共 17 套独立 JSON / atlas / PNG，含网页 / TS 示例 |
 | 旧 Unity 导出备份 | `asserts/player-source/` | 已按用户明确要求清空，保留空目录；完整成品及参考仍在 player/ |
@@ -44,18 +52,18 @@ E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原
 | 梦境纳西妲 | `public/asserts/inhabitants/nahida/`；B / E 为 `characters/dream/` | A / C / D / F 新四姿态 4.0.17，旧 shouye_caoshen 4.0.33 |
 | 兰那罗与晶蝶 | `public/asserts/inhabitants/aranara/`、`crystalfly/` | 用户当前十只兰那罗 / 三只晶蝶原样复制，另生成透明 poster |
 | 现实纳西妲 | `public/asserts/characters/reality/` | 用户原地替换的 naxida，Spine 4.0.33 |
-| E 技能取景框图案 | `asserts/E技能素材/`、`public/asserts/effects/e-skill-frame.png` | 已接入祝福外围与每次打开网页的揭幕；匹配 4.0 真实几何，normal 混合，原纹理逐字节复制 |
+| E 技能取景框图案 | `asserts/E技能素材/`、`public/asserts/effects/e-skill-frame-clean-7e78729b722f.png` | 已接入祝福外围与每次打开网页的揭幕；匹配 4.0 真实几何，normal 混合，clean-v2角花 / 光线独立、原世界几何与时序保留 |
 | 角色回退 | 新角色 / 小生物各自的同名 `.webp`；旧角色 `characters/nahida-placeholder.svg` | 按当前姿态透明回退，不把图集整体显示 |
 | 网站 / 按钮图标 | `ui/icon-128.*.png`、`ui/music-button-*.png`、Icon.tsx | favicon 来自 asserts/icon.png；音乐按钮来自 asserts/bgm/button.png 原字节，其他按钮保留矢量 |
 | 纳西妲草纹气泡底图 | `ui/dialogue-840.*.jpg` | dialog.jpg 原字节，约 66%～74% 浅层 / 墨绿字，仅草纹主题；G 用户 / 回复采用庆典框 |
 | 五套气泡装饰 | `DialogueOrnament.tsx`、`dialogue-themes.css` | 草元素徽记复用既有 effects/dendro.png，其余含糖果 / 缎带 / 花为小型静态 SVG，无新增图片 / 原稿改写 |
 | 十张表情气泡 | `public/asserts/expressions/`、expressionAssets.generated.json | asserts/表情包 0～9.png 原字节哈希副本，340px 透明图，合计 1,288,382 B，单次只请求选中单图；assets:expressions 再生成，独立 expression-assets.manifest.json |
-| 生长树 | `public/asserts/tree/`、`tree/timeline.ts`、`leafAnchors.ts`、`foliagePlan.ts`、`foliageTiming.ts`与`TreeRenderer.tsx` | 原木质轨迹；C/D叶柄校准，E/F15继承+96新枝共111site，原48排程与新增48末梢leafAt交错，沿枝延伸 / 原秒数回弹 / 单site单附件，真实alpha命中、24张单档，见TREE_SYSTEM.md |
+| 生长树 | `public/asserts/tree/`、`growthRoute.ts`、`presentation.ts`及原timeline / foliage / Renderer | 51条木质轨完整一次、58拍路线；C/D部分一浇两轨，42～48叶 / 簇分拍，111稳定枝位与24张单档保持，真实alpha按当前呈现附件命中，见TREE_SYSTEM.md |
 | 森林轮廓、梦露、花瓣 | React / CSS / Canvas | 自绘占位；小生物现用登记的真实素材 |
-| 树冠装饰 | 原智慧树叶 / 簇附件、C/D校准叶柄与E/F63语义枝位 | A/B至grow16不改，C/D保持原槽附件并贴枝；E/F按原秒数模板逐次切图 / 沿枝延伸，内外冠错落重叠，无额外程序花朵或同site长期叠图 |
+| 树冠装饰 | 原智慧树叶 / 簇附件、原叶柄校正与111语义枝位 | 实际grow34 / D580起接续15原叶及96新枝，原0.5秒叶 / 0.25秒簇完整，42～48簇独立一拍，沿枝延伸、单site单附件，无程序花朵或长期叠图 |
 | 交互音效 | `public/asserts/sfx/*-*.json`、sounds.generated.json、SoundManager.ts | 七份 AAC-LC / MP4、96 kb/s / 48 kHz 单声道，以 JSON / base64 兼容 IDM，约 196 KiB；水滴 / 浇水 / 叶声 / 弹跳 / 传送 / 来访竖琴 / 短暴雨，按动作请求，共用 BGM 上下文；来源 / 授权 / 双哈希见 sfx-assets.manifest.json，署名随 CREDITS.txt 发布 |
 | A～G 音乐 | `public/asserts/music/*.m4a`、music.generated.json | 同名 MP3 派生 AAC-LC 192 kb/s / 48 kHz 双声道，七首约 19.20 MB，仅当前场景流式加载；music-assets.manifest.json 登记哈希 |
-| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 205,092 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
+| 全站字体 | `public/asserts/fonts/*.woff2`、fonts.generated.json、fonts.css | 选择 asserts/字体/原神0.87.ttf，常用 208,748 B、其余输入按需；完整覆盖源映射，font-assets.manifest.json 登记 |
 
 背景与梦境角色从原始目录复制，现实角色直接使用用户在发布目录替换的 JSON / atlas / 打包纹理。没有复制 MP4、Spine 工程或散件图目录，没有引用远程资源站。此前原始目录保留；player 的旧 Unity 备份已按用户后续明确要求清空，完整成品 `asserts/player/` 保持哈希不变，另从中提取独立角色。
 
@@ -71,7 +79,7 @@ E/F本轮只改组合，不加图：E/F从63扩为111个稳定枝位：保留原
 
 ## E 技能取景框图案
 
-`asserts/E技能素材/` 是从用户给出的取景框截图转换的纯图案 Spine 4.0.33 三件套（JSON / atlas / PNG），按后续要求只保留图案，去除外发光和宽幅光晕。17 个槽全部使用 normal 混合；`idle`（4.0 s 循环）/ `show`（0.7 s）/ `hide`（0.45 s）已就绪。当前通过匹配的 4.0 解析器导出真实 setup 世界变换 / UV：祝福只画 16 块外围、中心仍用草元素图标；开场另外使用原 center_emblem、四叶印与源边线方窗。原 PNG 逐字节复制到 `public/asserts/effects/e-skill-frame.png`，页面预载后共用，不新增图片或 Spine 实例；SVG / CSS / Web Animations 编排不等于运行原生三段动画。发光只在运行时小范围另叠，不将图集改成 additive。来源与真实解析 / 像素验证见 [E_SKILL_PATTERN.md](E_SKILL_PATTERN.md)，揭幕见 [OPENING_ANIMATION.md](OPENING_ANIMATION.md)。
+`asserts/E技能素材/` 是从用户给出的取景框截图转换的纯图案 Spine 4.0.33 三件套（JSON / atlas / PNG），按后续要求只保留图案，去除外发光和宽幅光晕。17 个槽全部使用 normal 混合；`idle`（4.0 s 循环）/ `show`（0.7 s）/ `hide`（0.45 s）已就绪。当前通过匹配的 4.0 解析器导出真实 setup 世界变换 / UV：祝福只画 16 块外围、中心仍用草元素图标；开场另外使用原 center_emblem、四叶印与源边线方窗。clean-v2派生PNG按新哈希复制到 `public/asserts/effects/e-skill-frame-clean-7e78729b722f.png`，页面预载后共用，不新增图片或 Spine 实例；SVG / CSS / Web Animations 编排不等于运行原生三段动画。发光只在运行时小范围另叠，不将图集改成 additive。来源与真实解析 / 像素验证见 [E_SKILL_PATTERN.md](E_SKILL_PATTERN.md)，揭幕见 [OPENING_ANIMATION.md](OPENING_ANIMATION.md)。
 
 ## 替换步骤
 
@@ -129,13 +137,13 @@ F 保留源 2400×1350 设计，相机中心 `(0, 0)`，14 张纹理未重压；
 
 ## 树木美术接口
 
-来访当前按轮廓草光 → 花叶流 → 树侧用户 E 技能图案 / 草图标与扫描 → 成长播放，不使用角色侧小框 / 小图标或数据电路。外围由 npm run assets:e-skill-pattern 用匹配 4.0 解析器从 asserts/E技能素材 导出 16 块真实 setup 几何 / UV / 渐入延迟，排除 center_emblem；E_SKILL_PATTERN 登记三份固定哈希与导出数据。原 122861 B PNG 逐字节复制为 public/asserts/effects/e-skill-frame.png，正常 alpha，来访时预载；SVG / CSS 不增 GL / RAF，不播放原生完整 idle / show / hide。中心仍是 DENDRO_ICON 登记的 2164 B 真实草图标，镜像 / 权属见 NAHIDA_BLESSING.md；用户原三件套 / 角色 / poster / 背景 / 校准不改。接入与重生成说明见 E_SKILL_PATTERN.md。 最新落点 / 发射点：全部角色原向，不翻转 Spine / poster；A / C / F 原左右位置保持，B / D / E 两处均在树左侧、第二处更靠左且略高。VISIT_EMITTERS 原向躯干锚点不反算 x；花叶按实际 NahidaAvatar 包络与既有背景时钟更新，不从透明边缘发射，无新 RAF。
+来访当前按轮廓草光 → 花叶流 → 树侧用户 E 技能图案 / 草图标与扫描 → 成长播放，不使用角色侧小框 / 小图标或数据电路。外围由 npm run assets:e-skill-pattern 用匹配 4.0 解析器从 asserts/E技能素材 导出 16 块真实 setup 几何 / UV / 渐入延迟，排除 center_emblem；E_SKILL_PATTERN 登记三份固定哈希与导出数据。84838 B clean-v2 PNG复制为 public/asserts/effects/e-skill-frame-clean-7e78729b722f.png，正常 alpha，来访时预载；SVG / CSS 不增 GL / RAF，不播放原生完整 idle / show / hide。中心仍是 DENDRO_ICON 登记的 2164 B 真实草图标，镜像 / 权属见 NAHIDA_BLESSING.md；用户原三件套 / 角色 / poster / 背景 / 校准不改。接入与重生成说明见 E_SKILL_PATTERN.md。 最新落点 / 发射点：全部角色原向，不翻转 Spine / poster；A / C / F 原左右位置保持，B / D / E 两处均在树左侧、第二处更靠左且略高。VISIT_EMITTERS 原向躯干锚点不反算 x；花叶按实际 NahidaAvatar 包络与既有背景时钟更新，不从透明边缘发射，无新 RAF。
 
 不要用一张完整巨树图片在每个阶段缩小替换。保留真实高度、旧枝条 ID、历史印记和镜头关系，可把树干分段、枝叶簇与树冠改成手绘 SVG 或透明贴图。
 
-主树木质仍由treeGrowth.generated.json原骨骼 / 附件及完整轨迹控制；C/D的leafAnchors.ts仅校正叶柄平移，保留原附件与线性回弹。E/F由foliage.ts接续15处并新增96处，foliagePlan.ts管理birth / leafAt / 宽度、foliageLayout.ts管理四图111点UV，沿对应木枝延伸。嫩芽grow25 / leaf4_1、大叶grow35 / leaf1_3、簇1 grow37 / bunch1_3、簇2 grow38 / bunch2与宽簇3 grow46 / bunch3_1保留原0.5 / 0.25秒；foliageTiming.ts统一max(body,delay+clip)，不压缩换干后的回弹。单site单当前附件，model.ts统一真实alpha命中，TreeRenderer共享原GSAP游标；grow49无源轨，250ms复用原簇。换图后assets:tree、原骨架变化后assets:tree-growth，再复验逐浇 / 过程 / 叶柄连接、速度、透明穿透、表情 / 祝福和晶蝶；stages.height从实际包络派生，不反向拉伸树体。无新资源 / 存档，维护见TREE_SYSTEM.md。
+主树木质仍由treeGrowth.generated.json原57骨骼 / 56槽位和51条完整轨控制；growthRoute.ts组织58拍，presentation.ts统一同一grow的leaves / clusters真实模型，不能直接用raw终态代替叶拍。原leafAnchors校正及111点foliageLayout / 96新枝foliagePlan形态序列不改；实际grow34 / D580接管。芽grow25 / leaf4_1、叶grow35 / leaf1_3、簇grow37 / bunch1_3、grow38 / bunch2、grow46 / bunch3_1保持完整0.5 / 0.25秒；full / leaves按max(body,delay+clip)，clusters木质终态稳定仅对应簇0.25秒。命中 / 高度 / 施法 / 表情和晶蝶均读高层presentation，唯一GSAP / 暂停 / 最后7点不变。换图才assets:tree、原骨架变化才assets:tree-growth；本轮不需新资源 / 存档，详见TREE_SYSTEM.md。
 
-命中仅使用当前绘制的树干 / 根 / 枝叶 / 花朵，跟随动画高度；SVG 空白、光晕和未显现叶片穿透。替换美术时同步适配可见几何命中，不恢复全高矩形或加宽透明路径，不以缩裁视口改变树的视觉变换原点；保留键盘和拖动镜头。
+命中仅使用当前绘制的树干 / 根 / 枝叶 / 花朵，跟随动画高度；SVG 空白、光晕和未显现叶片穿透。替换美术时同步适配可见几何命中，不恢复全高矩形或加宽透明路径，不以缩裁视口改变树的视觉变换原点；保留键盘与轻扫误触保护，固定树根视角。
 
 梦露为重绘树保留共享半宽480世界单位及触摸间隔，常量在data/treeArt.ts，由game/dew/placement.ts使用。替换枝叶、树冠或增加横向摆动后同步校准包络，复验根冠和手机横屏。
 

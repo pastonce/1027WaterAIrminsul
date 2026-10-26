@@ -1,34 +1,35 @@
 import { describe, expect, it } from 'vitest';
-import { CameraController } from '../src/game/camera/CameraController';
 import { createTreeModel } from '../src/game/tree/model';
-import { getTreeHeight } from '../src/game/growth/GrowthSystem';
+import { createTreeGrowthModel } from '../src/game/tree/presentation';
+import { sceneRoot, treeCanopyFocus, TREE_BASE_DEPTH } from '../src/game/tree/scenePlacement';
+import { sceneScale } from '../src/hooks/useSceneViewport';
 
-describe('原智慧树组织与镜头', () => {
+describe('固定树根与原尺寸树体', () => {
   it('相同动画时刻恢复相同原始槽位，不再生成额外旧枝或接干', () => {
     expect(createTreeModel(40, .25)).toEqual(createTreeModel(40, .25));
     expect(createTreeModel(51).parts.map((part) => part.id)).toEqual(['tree9', 'grass', 'overlay9']);
   });
-  it('自由镜头有上下边界，重要演出锁定后不能手动移动', () => {
-    const camera = new CameraController(); camera.resize(1440, 900, 3100);
-    expect(camera.move(99999)).toBe(camera.maximum); camera.locked = true; expect(camera.move(-99999)).toBe(camera.maximum);
-    camera.locked = false; expect(camera.move(-99999)).toBe(0);
-  });
-  it('窗口尺寸变化后相机被夹回有效范围', () => {
-    const camera = new CameraController(); camera.resize(1440, 600, 3100); camera.move(99999); camera.resize(1440, 900, 400);
-    expect(camera.position).toBe(0); expect(camera.maximum).toBe(0); expect(camera.target).toBe(0);
-  });
-  it('桌面与手机比例都给完整树冠预留顶部空间', () => {
-    for (const viewport of [{ width: 1440, height: 900, scale: 1 }, { width: 844, height: 390, scale: 0.43 }]) {
-      const camera = new CameraController(); const physicalHeight = 1360 * viewport.scale;
-      camera.resize(viewport.width, viewport.height, physicalHeight, viewport.scale);
-      const crownAnchor = viewport.height - 40 - 100 * viewport.scale - physicalHeight + camera.maximum;
-      expect(crownAnchor - 125 * viewport.scale).toBeGreaterThanOrEqual(79);
+  it.each([{ width: 1440, height: 900 }, { width: 844, height: 390 }, { width: 640, height: 360 }, { width: 2560, height: 900 }])('$width×$height保持原设备比例，树根与底部始终在画面内', ({ width, height }) => {
+    const scale = sceneScale(height);
+    expect(scale).toBe(Math.min(1, Math.max(.35, (height - 170) / 510)));
+    for (const ground of [undefined, height / 2 + 360 * width / 2500]) {
+      const root = sceneRoot(height, scale, ground);
+      expect(root).toBeGreaterThan(0); expect(root + TREE_BASE_DEPTH * scale).toBe(height + 1);
+      for (const growth of [20, 180, 520, 680, 840, 1027]) {
+        const model = createTreeGrowthModel(growth);
+        const bottom = root + (Math.max(...model.roots.map((part) => part.y + part.height)) - 3300) * scale;
+        expect(bottom).toBeGreaterThanOrEqual(height); expect(bottom).toBeLessThanOrEqual(height + 1);
+        const focus = treeCanopyFocus(model, width, height, root, scale);
+        expect(focus.x).toBeGreaterThan(0); expect(focus.x).toBeLessThan(width);
+        expect(focus.y).toBeGreaterThanOrEqual(105); expect(focus.y).toBeLessThanOrEqual(height - 105);
+        expect(sceneRoot(height, scale, ground)).toBe(root);
+      }
     }
   });
-  it('新树形在桌面无需追逐超高树冠，手机也只有小范围镜头移动', () => {
-    const desktop = new CameraController(); desktop.resize(1440, 900, getTreeHeight(1027));
-    expect(desktop.maximum).toBe(0);
-    const mobile = new CameraController(); mobile.resize(844, 390, getTreeHeight(1000) * .43, .43);
-    expect(mobile.maximum).toBeLessThan(100);
+  it('后期允许树冠超出屏幕，而不缩小树体或自动抬高镜头', () => {
+    const scale = sceneScale(390); const root = sceneRoot(390, scale);
+    expect(treeCanopyFocus(createTreeGrowthModel(1027), 844, 390, root, scale).top).toBeLessThan(0);
+    expect(scale).toBeCloseTo(220 / 510);
+    expect(createTreeGrowthModel(1020).parts).toEqual(createTreeGrowthModel(1027).parts);
   });
 });

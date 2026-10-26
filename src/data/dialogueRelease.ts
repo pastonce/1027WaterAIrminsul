@@ -1,6 +1,6 @@
 import type { DialogueCatalog } from './dialogueSource';
 
-export const DEFERRED_DIALOGUE_POOLS: readonly string[] = ['shared/mechanism'];
+export const DEFERRED_DIALOGUE_POOLS: readonly string[] = [];
 export interface DialogueReleaseSnapshot { sha256: string; pools: DialogueCatalog; deferredPools?: Record<string, { sourceSha256: string }> }
 
 export function releaseDialoguePools(pools: DialogueCatalog, previous: DialogueReleaseSnapshot, deferred = DEFERRED_DIALOGUE_POOLS) {

@@ -3,12 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadRuntime, projectRoot, readSkeleton, relative, sha256 } from './player-spine-utils.mjs';
 
-const root = path.join(projectRoot, 'asserts/E技能素材');
-const expected = {
-  'e_skill_frame.atlas': 'c510a420c155c170df0edfad97087c062a8b0e118fa717232ccb8967bdbc09c8',
-  'e_skill_frame.json': '322f9f332b1b196fb30eef89a6d5c82539bcd6c8dcc4797eac42125c7b1a44c0',
-  'e_skill_frame.png': '98bb9de5b3471e2d6720f023ed01aaf35ae760a1fb787a14f90ec611f9029648',
-};
+const clean = JSON.parse(fs.readFileSync(path.join(projectRoot, 'docs/e-skill-clean.manifest.json'), 'utf8'));
+const root = path.join(projectRoot, 'asserts/E技能素材/clean-v2');
+const expected = Object.fromEntries(clean.outputs.map((entry) => [path.basename(entry.file), entry.sha256]));
+for (const source of clean.sourceHashes) assert.equal(sha256(path.join(projectRoot, source.file)), source.sha256);
 const sources = Object.entries(expected).map(([file, hash]) => {
   const source = path.join(root, file);
   assert.equal(sha256(source), hash, `Source changed: ${file}`);
@@ -58,10 +56,11 @@ const extent = Math.ceil(Math.max(...pieces.flatMap((piece) => {
   const [, , width, height] = piece.region;
   return [Math.abs(left), Math.abs(top), Math.abs(left + horizontal * width), Math.abs(top + vertical * height)];
 })));
-const result = { version: data.version, texture: '/asserts/effects/e-skill-frame.png', textureSize: [atlas.pages[0].width, atlas.pages[0].height], viewBox: [-extent, -extent, extent * 2, extent * 2], sources, omitted: ['center_emblem'], pieces, openingCenter, openingWindow };
+const texture = `/asserts/effects/e-skill-frame-clean-${expected['e_skill_frame.png'].slice(0, 12)}.png`;
+const result = { version: data.version, texture, separated: true, cleanManifest: 'docs/e-skill-clean.manifest.json', textureSize: [atlas.pages[0].width, atlas.pages[0].height], viewBox: [-extent, -extent, extent * 2, extent * 2], sources, originalSources: clean.sourceHashes, omitted: ['center_emblem'], pieces, openingCenter, openingWindow };
 fs.writeFileSync(path.join(projectRoot, 'src/data/eSkillPattern.generated.json'), JSON.stringify(result, null, 2) + '\n');
-const output = path.join(projectRoot, 'public/asserts/effects/e-skill-frame.png');
+const output = path.join(projectRoot, 'public', texture);
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.copyFileSync(path.join(root, 'e_skill_frame.png'), output);
 assert.equal(sha256(output), expected['e_skill_frame.png']);
-console.log(`Spine ${data.version}: ${pieces.length} blessing border pieces; original center and square window exported separately for startup; texture copied unchanged (${fs.statSync(output).size} bytes).`);
+console.log(`Spine ${data.version}: ${pieces.length} separated border pieces; original center and square window retained; clean texture ${fs.statSync(output).size} bytes.`);

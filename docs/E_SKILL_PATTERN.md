@@ -1,5 +1,7 @@
 # E 技能取景框图案素材
 
+当前使用clean-v2派生：四叶印已补齐并与光线 / 珠链分离；新PNG84838 B，原PNG / JSON / atlas保留，派生JSON与atlas字节相同，世界几何和时序不变。npm run assets:e-skill-pattern会先重建清理稿再导出运行数据；具体来源 / 精确提示词 / 新哈希见E_SKILL_CLEAN.md和e-skill-clean.manifest.json。以下提取阈值与像素误差为原套件制作记录，不表示当前清理图与旧图逐像素相同。
+
 本页记录用户提供的取景框截图转换为 Spine 三件套时的处理范围、结构与验证结果。按用户后续要求，**本次只提取图案，不还原原图的外发光与光晕**。
 
 ## 交付物
@@ -72,7 +74,7 @@
 ## 游戏接入（2026-10-19）
 
 - 动效顺序为角色真实 alpha 轮廓发光 300 ms → 花叶光流 500 ms → 树侧大扫描框 / 草元素图标与扫描 700 ms → 成长结算，随后 900 ms 确认 / 淡出。删除角色侧小扫描框 / 小图标和全部数据电路连结；保留对白后总共 3～7 秒停留与既有一次性结算。
-- `npm run assets:e-skill-pattern` 使用项目匹配的 4.0 解析器，校验本页三个固定 SHA-256，取 setup pose 的四角花、八珠链、四边线，逐块导出真实世界变换、图集区域及源 `show` 的渐入延迟。输出 `src/data/eSkillPattern.generated.json`，由 `E_SKILL_PATTERN` 登记；PNG 逐字节复制为 `public/asserts/effects/e-skill-frame.png`（122861 B）。源文件不改，不重切 / 重绘纹理。
+- `npm run assets:e-skill-pattern`先离线生成clean-v2，再用匹配4.0解析器导出四角、八珠链、四边线及源show延迟。世界变换 / UV / 方窗不变；PNG按派生哈希发布为public/asserts/effects/e-skill-frame-clean-7e78729b722f.png（84838 B）。原三件套保留，精确来源与几何见e-skill-clean.manifest.json / E_SKILL_CLEAN.md。
 - 原 `center_emblem` 仅从绘制清单排除，不修改源 JSON / atlas / PNG。树侧中心继续显示真实草元素图标、菱形细网和扫描；外围使用实际角花 / 珠链 / 边线，不再用代码四角线框代替。图案正常 alpha 合成，局部阴影与角色草元素外发光由运行时单独叠加，不将整纹理改为 additive。
 - 祝福运行时以 SVG 分块实现相同 setup 几何 / UV，用源渐入延迟和 0.93 → 1 缩放显现，确认后淡出；**不是运行原生 Spine `idle / show / hide` 整套动画**，祝福不展示原中心缓转。这样不增加 WebGL 上下文、画布或 RAF；页面启动预载单张本地图集，开场与角色露面时的预载均复用该 URL，不重复下载。素材失败仅缺少祝福外围图案，中心扫描和游戏结算不受阻。
 - 桌面外围最大 196 px，手机横屏至少 164 px，保持源图案比例；中心草元素图标为 52 px。落点沿用真实树干世界锚点与背景入场时钟，镜头移动 / 尺寸变化同步，不标记空处、不抢输入、不新增玩家数值或全屏色罩。

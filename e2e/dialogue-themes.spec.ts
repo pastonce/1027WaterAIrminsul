@@ -10,7 +10,7 @@ import { mockServerTime } from './time-support';
 import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const failures = new WeakMap<Page, string[]>();
 const initialized = new WeakSet<Page>();
 test.beforeEach(({ page }) => { const errors: string[] = []; failures.set(page, errors); page.on('pageerror', (error) => errors.push(error.message)); });
@@ -38,6 +38,28 @@ async function until(page: Page, condition: () => Promise<boolean>, duration = 6
   expect(await condition()).toBe(true);
 }
 async function drain(page: Page) { await until(page, async () => await bubble(page).count() === 0 && await page.locator('.nahida-companion').count() === 0); }
+
+test('最新机制对白使用红色框并按原规则分段完整播放', async ({ page }, info) => {
+  for (const id of ['X04', 'X11', 'X15']) {
+    await launch(page, info, 'D', { dialogueDecks: { 'shared/mechanism': [id] } });
+    await drain(page); await tree(page, .3);
+    await expect(bubble(page)).toHaveAttribute('data-theme', 'mechanism');
+    const entry = DIALOGUE_POOLS['shared/mechanism'].find((line) => line.id === id)!;
+    if (id === 'X11') expect(entry.text).toContain('2026-10-27 13:27');
+    const texts: string[] = [];
+    await until(page, async () => await bubble(page).getAttribute('data-phase') === 'holding');
+    const segments = Number(await bubble(page).getAttribute('data-segments'));
+    expect(segments).toBeLessThanOrEqual(2);
+    for (let segment = 1; segment <= segments; segment += 1) {
+      await until(page, async () => await bubble(page).getAttribute('data-segment') === String(segment) && await bubble(page).getAttribute('data-phase') === 'holding');
+      texts.push(await bubble(page).locator('.bubble-text > [aria-hidden]').innerText());
+      await inspect(page, 'mechanism');
+      if (segment < segments) await page.clock.fastForward(751);
+    }
+    expect(texts.join('').replaceAll('\n', '')).toBe(entry.text);
+    await capture(page, info, `mechanism-${id}`);
+  }
+});
 async function tree(page: Page, roll: number) { await page.evaluate((roll) => Reflect.set(window, '__themeRoll', roll), roll); await page.getByRole('button', { name: '梦中的树', exact: true }).press('Enter'); }
 async function capture(page: Page, info: TestInfo, name: string) {
   mkdirSync('artifacts/dialogue-themes', { recursive: true }); await page.screenshot({ path: `artifacts/dialogue-themes/${info.project.name}-${name}.png` });

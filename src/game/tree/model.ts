@@ -4,7 +4,7 @@ import { TREE_WORLD } from './geometry';
 import { boundedTreeStep, multiplyTreeMatrix, treeAnimationPose, transformTreePoint } from './timeline';
 import type { TreeMatrix } from './timeline';
 import { continuousFoliage, FOLIAGE_START_STEP } from './foliage';
-import type { FoliageSlot } from './foliage';
+import type { FoliagePlayback, FoliageSlot } from './foliage';
 import { anchorTreeLeaves } from './leafAnchors';
 
 type Point = [number, number];
@@ -18,9 +18,12 @@ const bounds = Object.fromEntries(Object.entries(contours).map(([name, loops]) =
   return [name, { left: Math.min(...points.map((point) => point[0])), right: Math.max(...points.map((point) => point[0])), top: Math.min(...points.map((point) => point[1])), bottom: Math.max(...points.map((point) => point[1])) }];
 })) as Record<TreeArtId, { left: number; right: number; top: number; bottom: number }>;
 
-export function createTreeModel(step: number, time?: number, restoreCrown = false) {
-  const source = anchorTreeLeaves(step, treeAnimationPose(step, time));
-  const visual = restoreCrown ? continuousFoliage(step, time, source) : source;
+export function createTreeModel(step: number, time?: number, restoreCrown = false, playback?: FoliagePlayback) {
+  const pose = treeAnimationPose(step, time);
+  const seedling = pose.some((part) => part.asset === 'tree01' || part.asset === 'tree1');
+  const grounded = seedling ? pose.map((part) => part.id === 'grass' ? part : { ...part, matrix: [...part.matrix.slice(0, 5), part.matrix[5] + 16] as TreeMatrix }) : pose;
+  const source = anchorTreeLeaves(step, grounded);
+  const visual = restoreCrown ? continuousFoliage(step, time, source, playback) : source;
   const parts: TreePart[] = visual.map((part) => {
     const art = treeArtVariant(part.asset, restoreCrown);
     const artMatrix = multiplyTreeMatrix(part.matrix, TREE_ART[art].registration as TreeMatrix);
@@ -48,7 +51,11 @@ export function treeBodyPath(parts: TreePart[]) {
 }
 
 export function treeTrunkCenter(step: number, elevation: number, restoreCrown = false) {
-  const body = createTreeModel(step, undefined, restoreCrown).body[0];
+  return treeTrunkCenterFromModel(createTreeModel(step, undefined, restoreCrown), elevation);
+}
+
+export function treeTrunkCenterFromModel(model: ReturnType<typeof createTreeModel>, elevation: number) {
+  const body = model.body[0];
   if (!body) return TREE_WORLD.width / 2;
   const vertical = TREE_WORLD.ground - Math.max(0, elevation);
   let nearest = { distance: Infinity, x: TREE_WORLD.width / 2 };

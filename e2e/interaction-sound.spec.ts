@@ -9,7 +9,7 @@ import { mockServerTime } from './time-support';
 import { openSettings } from './settings-support';
 import assets from '../src/data/sounds.generated.json' with { type: 'json' };
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const storageKey = (info: TestInfo) => info.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2';
 const requests = new WeakMap<Page, string[]>();
 test.beforeEach(({ page }) => {

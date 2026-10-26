@@ -7,6 +7,7 @@ import { mkdirSync } from 'node:fs';
 import { OPENING_RULES, openingBounces, openingGeometry } from '../src/game/opening/choreography';
 import { stageFixture } from '../src/dev/fixtures';
 import { mockServerTime } from './time-support';
+import { E_SKILL_PATTERN } from '../src/data/assets';
 
 async function pausedClock(page: Page) {
   const start = new Date('2026-10-22T02:27:00Z');
@@ -20,13 +21,13 @@ async function seek(page: Page, time: number) {
 }
 
 test.beforeEach(async ({ page }, testInfo) => {
-  if (testInfo.project.name.startsWith('production')) await mockServerTime(page, '2026-10-27T10:27:00+08:00');
+  if (testInfo.project.name.startsWith('production')) await mockServerTime(page, '2026-10-27T13:27:00+08:00');
 });
 
 test('黑屏、弹跳翻转、四角成框、真实页面揭示、等比扩框与中心淡出', async ({ page }, testInfo) => {
   const errors: string[] = []; const textures: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  page.on('request', (request) => { if (request.url().endsWith('/effects/e-skill-frame.png')) textures.push(request.url()); });
+  page.on('request', (request) => { if (request.url().endsWith(E_SKILL_PATTERN.texture)) textures.push(request.url()); });
   await pausedClock(page); await page.goto('/');
   const shell = page.locator('.opening-shell');
   await expect(shell).toHaveAttribute('data-opening-mode', 'playing');
@@ -124,7 +125,7 @@ test('黑屏、弹跳翻转、四角成框、真实页面揭示、等比扩框�
 test('演出锁定鼠标、触摸、键盘与游戏计时，每次刷新重播但不修改待访或进度', async ({ page }, testInfo) => {
   await pausedClock(page);
   const key = testInfo.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2';
-  const fixture = { ...stageFixture('A', Date.parse('2026-10-27T10:27:00+08:00')), growth: 26, pendingVisits: ['visit-A'], visitPositions: { 'visit-A': 1 as const } };
+  const fixture = { ...stageFixture('A', Date.parse('2026-10-27T13:27:00+08:00')), growth: 26, pendingVisits: ['visit-A'], visitPositions: { 'visit-A': 1 as const } };
   await page.addInitScript(({ key, fixture }) => { if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(fixture)); }, { key, fixture });
   await page.goto('/'); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'playing');
   await expect(page.getByTestId('dream-scene')).toHaveAttribute('data-paused', 'true');
@@ -184,11 +185,11 @@ test('系统与存档减少动态使用短淡入，竖屏开场不会锁住转�
 
 test('图集损坏或超过等待上限时自动解锁，不留下黑屏与输入拦截', async ({ page }) => {
   await pausedClock(page);
-  await page.route('**/effects/e-skill-frame.png', (route) => route.abort());
+  await page.route(`**${E_SKILL_PATTERN.texture}`, (route) => route.abort());
   await page.goto('/'); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'fallback');
   await finishOpening(page, true); await expect(page.getByRole('button', { name: '沉入梦乡' })).toBeEnabled();
-  await page.unroute('**/effects/e-skill-frame.png');
-  const held: Route[] = []; await page.route('**/effects/e-skill-frame.png', (route) => { held.push(route); });
+  await page.unroute(`**${E_SKILL_PATTERN.texture}`);
+  const held: Route[] = []; await page.route(`**${E_SKILL_PATTERN.texture}`, (route) => { held.push(route); });
   await page.reload({ waitUntil: 'domcontentloaded' }); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'loading');
   await page.clock.runFor(OPENING_RULES.assetWaitMs); await expect(page.locator('.opening-shell')).toHaveAttribute('data-opening-mode', 'fallback');
   await page.clock.runFor(11000); await finishOpening(page, true); await expect(page.locator('.opening-overlay')).toHaveCount(0);

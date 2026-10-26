@@ -5,9 +5,13 @@ import pattern from '../src/data/eSkillPattern.generated.json' with { type: 'jso
 import { PRESENTATION_RULES } from '../src/data/presentation';
 
 describe('用户 E 技能图案接入', () => {
-  it('原三件套哈希保持，发布纹理逐字节复制，不重绘 / 调色原图案', () => {
-    for (const source of pattern.sources) expect(createHash('sha256').update(readFileSync(source.file)).digest('hex')).toBe(source.sha256);
-    expect(readFileSync(`public${pattern.texture}`).equals(readFileSync('asserts/E技能素材/e_skill_frame.png'))).toBe(true);
+  it('原三件套保留，发布分离后的派生纹理，骨骼与图集区域不变', () => {
+    for (const source of [...pattern.sources, ...pattern.originalSources]) expect(createHash('sha256').update(readFileSync(source.file)).digest('hex')).toBe(source.sha256);
+    expect(pattern.separated).toBe(true);
+    expect(readFileSync(`public${pattern.texture}`).equals(readFileSync('asserts/E技能素材/clean-v2/e_skill_frame.png'))).toBe(true);
+    expect(readFileSync(`public${pattern.texture}`).equals(readFileSync('asserts/E技能素材/e_skill_frame.png'))).toBe(false);
+    expect(readFileSync('asserts/E技能素材/clean-v2/e_skill_frame.json').equals(readFileSync('asserts/E技能素材/e_skill_frame.json'))).toBe(true);
+    expect(readFileSync('asserts/E技能素材/clean-v2/e_skill_frame.atlas').equals(readFileSync('asserts/E技能素材/e_skill_frame.atlas'))).toBe(true);
     expect(pattern.textureSize).toEqual([1024, 640]); expect(pattern.version).toBe('4.0.33');
   });
 

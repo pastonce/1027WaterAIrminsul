@@ -1,13 +1,15 @@
 import { chromium } from '@playwright/test';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
+const plates = JSON.parse(readFileSync('docs/inhabitants/hiding-layers.json', 'utf8')).files.filter((file) => file.file.startsWith('asserts/calibration/backgrounds/'));
+const calibration = Object.fromEntries(plates.map((file) => [file.file.replace('asserts/calibration/backgrounds/', '/asserts/backgrounds/'), `data:image/webp;base64,${readFileSync(file.file).toString('base64')}`]));
 let result;
 try {
   const page = await browser.newPage(); await page.goto('http://127.0.0.1:5173');
-  result = await page.evaluate(async () => {
+  result = await page.evaluate(async (calibration) => {
     const [{ HIDING_PLACES, INHABITANT_ASSETS, ROAMING_ARANARA }, { getStageBackground }, { creatureLayout }] = await Promise.all([import('/src/data/inhabitants.ts'), import('/src/data/backgrounds.ts'), import('/src/game/encounters/layout.ts')]);
-    const image = async (url) => { const source = new Image(); source.src = url; await source.decode(); const canvas = document.createElement('canvas'); canvas.width = source.width; canvas.height = source.height; const context = canvas.getContext('2d'); context.drawImage(source, 0, 0); return { source, canvas, context, pixels: context.getImageData(0, 0, source.width, source.height).data }; };
+    const image = async (url) => { const source = new Image(); source.src = calibration[url] ?? url; await source.decode(); const canvas = document.createElement('canvas'); canvas.width = source.width; canvas.height = source.height; const context = canvas.getContext('2d'); context.drawImage(source, 0, 0); return { source, canvas, context, pixels: context.getImageData(0, 0, source.width, source.height).data }; };
     const portraits = Object.fromEntries(await Promise.all(ROAMING_ARANARA.map(async (id) => [id, await image(INHABITANT_ASSETS[id].poster)])));
     const fits = {}; const report = []; const previews = [];
     for (const [stage, anchors] of Object.entries(HIDING_PLACES)) {
@@ -80,7 +82,7 @@ try {
       previews.push({ stage, data: preview.toDataURL('image/webp', 0.92).split(',')[1] });
     }
     return { fits, report, previews };
-  });
+  }, calibration);
 } finally { await browser.close(); }
 mkdirSync('docs/inhabitants', { recursive: true }); mkdirSync('docs/screenshots/hiding', { recursive: true });
 writeFileSync('src/data/hiding.generated.json', JSON.stringify(result.fits, null, 2) + '\n');

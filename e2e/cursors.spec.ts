@@ -65,7 +65,7 @@ test('真实设置与开发测试面板的按钮、标签、日期和全部后�
   await page.goto('/'); await finishOpening(page);
   const desktop = await page.evaluate(() => matchMedia('(hover: hover) and (pointer: fine)').matches);
   const cursor = (role: string) => new RegExp(manifest.files.find((file) => file.role === role)!.src);
-  await page.keyboard.type('test'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
+  await page.keyboard.type('Past'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
   const summary = page.locator('.debug-panel > summary'); await expect(summary).toBeVisible();
   if (desktop) await expect(summary).toHaveCSS('cursor', cursor('pointer'));
   await summary.click();
@@ -77,8 +77,8 @@ test('真实设置与开发测试面板的按钮、标签、日期和全部后�
     const mismatches = await debug.evaluate((root) => [root, ...root.querySelectorAll('*')].filter((element) => !getComputedStyle(element).cursor.includes('/asserts/cursor/')).map((element) => `${element.tagName}.${element.className}`));
     expect(mismatches).toEqual([]);
   }
-  await page.getByLabel('模拟日期时间', { exact: true }).fill('2026-10-27T10:28');
-  await expect(page.getByLabel('模拟日期时间', { exact: true })).toHaveValue('2026-10-27T10:28');
+  await page.getByLabel('模拟日期时间', { exact: true }).fill('2026-10-27T13:28');
+  await expect(page.getByLabel('模拟日期时间', { exact: true })).toHaveValue('2026-10-27T13:28');
   await page.getByRole('button', { name: '调试切换到G阶段', exact: true }).click();
   if (desktop) await expect(debug.getByRole('button', { name: '触发纳西妲来访', exact: true })).toHaveCSS('cursor', cursor('unavailable'));
   await summary.click(); await page.getByRole('button', { name: '设置', exact: true }).click();

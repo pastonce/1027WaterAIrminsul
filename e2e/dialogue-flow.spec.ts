@@ -10,7 +10,7 @@ import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 import { mockServerTime } from './time-support';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const pageErrors = new WeakMap<Page, string[]>();
 test.beforeEach(({ page }) => { const errors: string[] = []; pageErrors.set(page, errors); page.on('pageerror', (error) => errors.push(error.message)); });
 test.afterEach(({ page }) => { expect(pageErrors.get(page)).toEqual([]); });

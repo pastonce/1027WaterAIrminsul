@@ -7,7 +7,7 @@ import type { GameSave, StageId } from '../src/types/game';
 import { finishOpening } from './opening-support';
 import { mockServerTime } from './time-support';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const CLOSED = '2026-10-24T10:27:00+08:00';
 const errors = new WeakMap<Page, string[]>();
 const saveKey = (info: TestInfo) => info.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2';

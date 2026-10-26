@@ -11,7 +11,7 @@ import { mockServerTime } from './time-support';
 import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const key = (info: TestInfo) => info.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2';
 async function saved(page: Page, info: TestInfo): Promise<GameSave> { return page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), key(info)); }
 

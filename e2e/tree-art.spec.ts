@@ -3,19 +3,21 @@ import type { Page, TestInfo } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { stageFixture } from '../src/dev/fixtures';
 import { TREE_ART } from '../src/data/treeArt';
-import { treeGrowthStep } from '../src/game/tree/growth';
+import { treeGrowthBeat, treeGrowthDuration, treeGrowthFrame, treeGrowthStep } from '../src/game/tree/growth';
 import { getTreeHeight } from '../src/game/growth/GrowthSystem';
 import { TREE_ANIMATIONS, treeAnimationPose } from '../src/game/tree/timeline';
-import { createTreeModel, treeBodyPath } from '../src/game/tree/model';
-import { FOLIAGE_ATTACHMENTS, foliageDuration } from '../src/game/tree/foliage';
+import { treeBodyPath } from '../src/game/tree/model';
+import { createTreeGrowthModel, treeGrowthFrameModel } from '../src/game/tree/presentation';
+import { FOLIAGE_ATTACHMENTS } from '../src/game/tree/foliage';
 import { FOLIAGE_SITES } from '../src/game/tree/foliagePlan';
+import { TREE_BASE_DEPTH } from '../src/game/tree/scenePlacement';
 import type { DreamStageId, GameSave } from '../src/types/game';
 import { stageVisitIds } from '../src/data/visits';
 import { finishOpening } from './opening-support';
 import { finishSceneEntrance } from './scene-support';
 import { mockServerTime } from './time-support';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const key = (info: TestInfo) => info.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2';
 async function launch(page: Page, info: TestInfo, stage: DreamStageId, growth: number, patch: Partial<GameSave> = {}, now = OPEN) {
   await mockServerTime(page, now); await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -34,6 +36,63 @@ async function launch(page: Page, info: TestInfo, stage: DreamStageId, growth: n
   await expect(page.locator('.dream-tree')).toBeVisible();
 }
 
+test('早期六次树苗落地、后期根部衔接与隔离表情预览', async ({ page }, info) => {
+  test.setTimeout(120000); const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
+  await launch(page, info, 'A', 20, { dew: 1027 });
+  mkdirSync('artifacts/tree-ground', { recursive: true });
+  for (const growth of [20, 40, 60, 80, 100, 120]) {
+    await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-animation', TREE_ANIMATIONS[treeGrowthStep(growth)].name);
+    const foot = await page.locator('.tree-hit-target').evaluate((path) => { const box = (path as SVGPathElement).getBBox(); return box.y + box.height; });
+    expect(foot).toBeGreaterThanOrEqual(3290); expect(foot).toBeLessThanOrEqual(3304);
+    await page.screenshot({ path: `artifacts/tree-ground/${info.project.name}-seedling-${growth / 20}.png` });
+    if (growth < 120) { await page.getByRole('button', { name: '浇灌梦中的树' }).click(); await page.clock.runFor(2000); }
+  }
+  for (const [stage, growth] of [['D', 580], ['E', 800], ['F', 1000]] as const) {
+    await page.evaluate((save) => sessionStorage.setItem('irminsul.e2e.next-tree-fixture', JSON.stringify(save)), { ...stageFixture(stage, Date.parse(OPEN)), growth, settings: { ...stageFixture(stage, Date.parse(OPEN)).settings, music: false } });
+    await page.reload(); await finishOpening(page, true); await page.clock.runFor(5000);
+    await expect(page.locator('[data-root-treatment=soft-neck]')).toHaveCount(1);
+    await expect(page.locator('[data-root-treatment=soft-neck]')).toHaveAttribute('mask', /^url\(#tree-root-/);
+    await expect(page.locator('[data-root-treatment=soft-neck]')).toHaveAttribute('clip-path', /^url\(#tree-root-/);
+    await expect(page.locator('[data-root-treatment=soft-neck] image')).toHaveAttribute('href', /tree_overlay[5-9]-(?:compact|full)-/);
+    await page.screenshot({ path: `artifacts/tree-ground/${info.project.name}-${stage}-root.png` });
+  }
+  const before = await page.evaluate((key) => localStorage.getItem(key), key(info));
+  await page.keyboard.type('Past'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
+  await page.clock.runFor(5000); await page.locator('.debug-panel > summary').click();
+  await page.getByRole('combobox', { name: '调试表情包' }).selectOption('0');
+  await expect(page.getByRole('button', { name: '触发表情包', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: '触发表情包', exact: true }).click();
+  await expect(page.locator('.expression-pop')).toHaveAttribute('data-expression', '0');
+  await expect(page.locator('.expression-pop')).toHaveAttribute('data-ready', 'true');
+  expect(await page.evaluate((key) => localStorage.getItem(key), key(info))).toBe(before);
+  await page.locator('.debug-panel > summary').click();
+  await page.screenshot({ path: `artifacts/tree-ground/${info.project.name}-expression-preview.png` });
+  expect(errors).toEqual([]);
+});
+
+test('固定树根不缩放树体，滚轮拖动与成长均不再移动镜头', async ({ page }, info) => {
+  await launch(page, info, 'D', 580, { dew: 1027 });
+  await expect(page.locator('.camera-controls')).toHaveCount(0);
+  const readRoot = () => page.locator('.dream-tree').evaluate((element, depth) => {
+    const matrix = (element as SVGSVGElement).getScreenCTM()!;
+    const root = new DOMPoint(500, 3300).matrixTransform(matrix);
+    const bottom = new DOMPoint(500, 3300 + depth).matrixTransform(matrix);
+    return { root: root.y, bottom: bottom.y, scale: Math.hypot(matrix.a, matrix.b), height: innerHeight };
+  }, TREE_BASE_DEPTH);
+  const initial = await readRoot();
+  expect(initial.bottom).toBeGreaterThanOrEqual(initial.height); expect(initial.bottom).toBeLessThanOrEqual(initial.height + 1.1);
+  expect(initial.scale).toBeCloseTo(Math.min(1, Math.max(.35, (initial.height - 170) / 510)), 5);
+  await page.mouse.move(400, 190); await page.mouse.wheel(0, 700);
+  await page.mouse.down(); await page.mouse.move(400, 310, { steps: 8 }); await page.mouse.up();
+  await expect(page.getByTestId('dream-scene')).toHaveAttribute('data-camera-offset', '0');
+  await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click(); await page.clock.runFor(3000);
+  expect(await readRoot()).toEqual(initial);
+  await expect(page.getByRole('button', { name: '返回树冠', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: '回到树根', exact: true })).toHaveCount(0);
+  mkdirSync('artifacts/fixed-root', { recursive: true });
+  await page.screenshot({ path: `artifacts/fixed-root/${info.project.name}-growth.png` });
+});
+
 test('各背景严格使用原槽位组合与紧凑尺寸，单档加载且不再人为接高', async ({ page, isMobile }, info) => {
   test.setTimeout(180000); const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
   await launch(page, info, 'A', 0);
@@ -43,17 +102,19 @@ test('各背景严格使用原槽位组合与紧凑尺寸，单档加载且不�
       await page.evaluate((save) => sessionStorage.setItem('irminsul.e2e.next-tree-fixture', JSON.stringify(save)), { ...stageFixture(stage, Date.parse(OPEN)), growth, seed: 1027 });
       await page.reload(); await finishOpening(page, true); await finishSceneEntrance(page, true); await page.clock.runFor(200);
     }
-    const model = createTreeModel(treeGrowthStep(growth), undefined, stage === 'E' || stage === 'F');
+    const model = createTreeGrowthModel(growth);
     const images = page.locator('.dream-tree image'); expect(await images.count()).toBe(model.parts.length);
     const sources = await images.evaluateAll((elements) => elements.map((element) => element.getAttribute('href')!));
     for (const source of sources) expect(Object.entries(TREE_ART).some(([name, asset]) => name !== 'trunk_column' && asset[isMobile ? 'compact' : 'full'] === source)).toBe(true);
     await expect(page.locator('.dream-tree')).toHaveAttribute('pointer-events', 'none');
     await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-animation', TREE_ANIMATIONS[treeGrowthStep(growth)].name);
+    await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-pass', model.pass);
     const slots = await page.locator('.tree-art [data-tree-part]').evaluateAll((parts) => parts.map((part) => part.getAttribute('data-tree-part')));
     expect(slots).toEqual(model.parts.map((part) => part.id));
     expect(await page.locator('.tree-hit-target').getAttribute('d')).toBe(treeBodyPath(model.body));
-    expect(getTreeHeight(growth)).toBeLessThan(650);
-    await expect(page.locator('.dream-tree .tree-branch, .dream-tree .tree-flower, .dream-tree mask')).toHaveCount(0);
+    expect(getTreeHeight(growth)).toBeLessThan(1100);
+    await expect(page.locator('.dream-tree .tree-branch, .dream-tree .tree-flower')).toHaveCount(0);
+    await expect(page.locator('.dream-tree mask')).toHaveCount(1);
     if (stage === 'F' && growth >= 1020) {
       const wood = await page.locator('.tree-art [data-tree-part]:not([data-tree-foliage])').evaluateAll((parts) => parts.map((part) => part.getAttribute('data-tree-part')));
       expect(wood).toEqual(['tree9', 'grass', 'overlay9']);
@@ -63,11 +124,11 @@ test('各背景严格使用原槽位组合与紧凑尺寸，单档加载且不�
       await expect(page.locator('[data-tree-foliage][opacity], [data-tree-part$="-crown"]')).toHaveCount(0);
       await expect(page.locator('[data-tree-graft]')).toHaveCount(0);
     }
-    await page.getByRole('button', { name: '返回树冠', exact: true }).click(); await page.clock.runFor(200);
+    await page.clock.runFor(200);
     expect(Number(await page.getByTestId('dream-scene').getAttribute('data-camera-offset'))).toBeLessThan(600);
     mkdirSync('artifacts/foliage', { recursive: true }); await page.screenshot({ path: `artifacts/foliage/${info.project.name}-${stage}-crown.png`, animations: 'disabled' });
     if (stage === 'E' || stage === 'F') await page.screenshot({ path: `artifacts/foliage/${info.project.name}-${stage}-${growth}-complete.png`, animations: 'disabled' });
-    await page.getByRole('button', { name: '回到树根', exact: true }).click(); await page.clock.runFor(200);
+    await page.clock.runFor(200);
     await page.screenshot({ path: `artifacts/foliage/${info.project.name}-${stage}-root.png`, animations: 'disabled' });
   }
   expect(errors).toEqual([]);
@@ -104,7 +165,7 @@ test('浇灌按原grow时间轴换干回弹，grow51仍保留已有枝位叶片'
 
 test('树的透明空隙穿透，叶片 / 木质轮廓可点击，键盘仍可对白', async ({ page, isMobile }, info) => {
   await launch(page, info, 'C', 500);
-  await page.getByRole('button', { name: '回到树根', exact: true }).click(); await page.clock.runFor(200);
+  await page.clock.runFor(200);
   const empty = await page.locator('.dream-tree').evaluate((element) => {
     const tree = element as SVGSVGElement; const point = new DOMPoint(835, 3260).matrixTransform(tree.getScreenCTM()!);
     const button = document.createElement('button'); button.dataset.underTree = '0'; button.textContent = '底层测试';
@@ -140,7 +201,7 @@ test('真实浇灌更新树体，设置中暂停剩余生长；旧藏点仍可�
   await page.getByRole('button', { name: '关闭', exact: true }).click(); await page.clock.runFor(1500);
   expect(await page.locator('.tree-art').innerHTML() === shape).toBe(false);
   expect(await page.locator('.creature-crystal').count()).toBeGreaterThan(0);
-  await page.keyboard.type('test'); await expect(page.locator('.debug-panel strong')).toHaveText('本页测试 · 内存存档，刷新后退出');
+  await page.keyboard.type('Past'); await expect(page.locator('.debug-panel strong')).toHaveText('本页测试 · 内存存档，刷新后退出');
   await expect(page.locator('.debug-panel > summary')).toBeVisible();
   await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const [stage, slot] of [['C', '3'], ['C', '5'], ['D', '5'], ['E', '5']] as const) {
@@ -150,6 +211,33 @@ test('真实浇灌更新树体，设置中暂停剩余生长；旧藏点仍可�
     await page.clock.runFor(1000); const creature = page.locator('.creature-roaming');
     await creature.locator('.creature-hit').click(); await expect(creature).toHaveAttribute('data-celebrated', 'true');
     expect(await page.locator('[data-dew-kind=reward]').count()).toBeGreaterThan(0);
+  }
+});
+
+test('C/D一次浇灌顺序播放多个完整原成长，不跳至目标终态或重放已完成段', async ({ page }, info) => {
+  test.setTimeout(90000);
+  for (const [stage, growth, expectedSteps] of [['C', 360, [19, 20]], ['D', 540, [32, 33]]] as const) {
+    if (stage === 'C') await launch(page, info, stage, growth, { dew: 1027 });
+    else {
+      const fixture = stageFixture(stage, Date.parse(OPEN));
+      await page.evaluate((save) => sessionStorage.setItem('irminsul.e2e.next-tree-fixture', JSON.stringify(save)), { ...fixture, growth, dew: 1027, completedVisits: [...fixture.completedVisits, ...stageVisitIds(stage)] });
+      await page.reload(); await finishOpening(page, true); await finishSceneEntrance(page, true); await page.clock.runFor(200);
+    }
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.clock.pauseAt(await page.evaluate(() => Date.now() + 200));
+    const observed: number[] = [];
+    await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
+    for (let elapsed = 0; elapsed <= treeGrowthDuration(growth, growth + 20) + 800; elapsed += 40) {
+      await page.clock.runFor(40);
+      const current = await page.locator('.dream-tree').evaluate((tree) => Number(tree.getAttribute('data-tree-animation')!.replace('grow', '')));
+      if (expectedSteps.some((step) => step === current) && observed.at(-1) !== current) observed.push(current);
+    }
+    expect(observed).toEqual(expectedSteps);
+    const model = createTreeGrowthModel(growth + 20);
+    await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-index', String(treeGrowthFrame(growth + 20).index));
+    expect(await page.locator('.tree-hit-target').getAttribute('d')).toBe(treeBodyPath(model.body));
+    const save = await page.evaluate((storageKey) => JSON.parse(localStorage.getItem(storageKey)!), key(info));
+    expect(save.growth).toBe(growth + 20); expect(save.dew).toBe(1007);
   }
 });
 
@@ -277,7 +365,7 @@ test('连续枝位沿枝延伸，原回弹切图可暂停续播且刷新不重�
     await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click(); await page.clock.runFor(1500);
     await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-animation', animation);
     const current = await sites(); expect(current).toHaveLength(original.length);
-    const model = createTreeModel(animation === 'grow50' ? 50 : 51, undefined, true);
+    const model = createTreeGrowthModel(animation === 'grow50' ? 1000 : 1020);
     current.forEach((part, index) => {
       expect(part.id).toBe(original[index].id);
       const expected = model.crown[index]; const [horizontal, vertical] = FOLIAGE_ATTACHMENTS[expected.asset];
@@ -321,7 +409,7 @@ for (const stage of ['C', 'D', 'E', 'F'] as const) test(`${stage}逐次真实浇
       clone.setAttribute('viewBox', `${box.x - 24} ${box.y - 24} ${box.width + 48} ${box.height + 48}`);
       clone.querySelectorAll('image').forEach((image) => image.setAttribute('href', new URL(image.getAttribute('href')!, location.href).href));
       return {
-        svg: clone.outerHTML, animation: tree.dataset.treeAnimation, time: Number(tree.dataset.treeTime),
+        svg: clone.outerHTML, animation: tree.dataset.treeAnimation, index: Number(tree.dataset.treeIndex), pass: tree.dataset.treePass, time: Number(tree.dataset.treeTime),
         parts: [...art.querySelectorAll('[data-tree-part]')].map((element) => {
           const part = element as SVGGElement;
           return { id: part.dataset.treePart, site: part.dataset.treeSite, asset: part.dataset.treeAsset, phase: part.dataset.treePhase, motion: part.dataset.treeMotion, alpha: Number(part.getAttribute('opacity') ?? 1), matrix: part.getAttribute('transform')!.slice(7, -1).split(' ').map(Number) };
@@ -330,6 +418,10 @@ for (const stage of ['C', 'D', 'E', 'F'] as const) test(`${stage}逐次真实浇
     });
     snapshots.push({ label, svg: capture.svg, endpoint, leaf });
     await expect(page.locator('[data-tree-foliage][opacity], [data-tree-part$="-crown"]')).toHaveCount(0);
+    const model = treeGrowthFrameModel({ index: capture.index, time: capture.time });
+    expect(capture.pass).toBe(model.pass);
+    expect(capture.parts.map((part) => part.id)).toEqual(model.parts.map((part) => part.id));
+    capture.parts.forEach((part, index) => part.matrix.forEach((value, coefficient) => expect(value).toBeCloseTo(model.parts[index].matrix[coefficient], 7)));
     const save = await page.evaluate((storageKey) => JSON.parse(localStorage.getItem(storageKey)!), key(info));
     metrics.push({ label, growth: save.growth, dew: save.dew, ...capture, svg: undefined });
     return capture;
@@ -338,23 +430,33 @@ for (const stage of ['C', 'D', 'E', 'F'] as const) test(`${stage}逐次真实浇
   let previous = original;
   for (let round = 1; round <= rounds; round++) {
     const growth = Math.min(cap, start + round * 20);
-    const step = treeGrowthStep(growth); const duration = growth === 1027 ? 0 : foliageDuration(step);
+    const step = treeGrowthStep(growth); const target = treeGrowthFrame(growth); const beat = treeGrowthBeat(target.index);
+    const duration = treeGrowthDuration(Math.min(cap, start + (round - 1) * 20), growth) / 1000;
     await page.getByRole('button', { name: '浇灌梦中的树', exact: true }).click();
     await page.clock.runFor(600);
     const cutover = [18, 23, 36, 42, 45, 50].includes(step);
     for (let frame = 1; frame <= 6; frame++) {
       await page.clock.runFor(duration ? Math.ceil(duration * 1000 / 6) : 40);
-      if (cutover && frame < 6) await snapshot(`${stage}${round} grow${step} frame${frame}`, false);
-      if (!cutover && duration && frame % 2 && step !== 51) await snapshot(`${stage}${round} grow${step} leaf${frame}`, false, true);
+      if (cutover && frame < 6) await snapshot(`${stage}${round} grow${step} ${beat.pass} frame${frame}`, false);
+      if (!cutover && duration && frame % 2 && step !== 51) await snapshot(`${stage}${round} grow${step} ${beat.pass} leaf${frame}`, false, true);
     }
     await page.clock.runFor(Math.max(100, 2500 - 600 - Math.ceil(duration * 1000 / 6) * 6));
     await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-animation', `grow${step}`);
-    const current = await snapshot(`${stage}${round} ${growth} grow${step}`, true);
-    const actual = createTreeModel(step, undefined, stage === 'E' || stage === 'F');
+    await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-index', String(target.index));
+    await expect(page.locator('.dream-tree')).toHaveAttribute('data-tree-pass', beat.pass);
+    const current = await snapshot(`${stage}${round} ${growth} grow${step} ${beat.pass}`, true);
+    const actual = createTreeGrowthModel(growth);
     expect(current.parts.map((part) => part.id)).toEqual(actual.parts.map((part) => part.id));
     const deviations = current.parts.flatMap((part, index) => part.matrix.flatMap((value, coefficient) => Math.abs(value - actual.parts[index].matrix[coefficient]) < .00000005 ? [] : [`${part.id} coefficient ${coefficient}: ${value} / ${actual.parts[index].matrix[coefficient]}`]));
     expect(deviations).toEqual([]);
-    expect(current.time).toBe(foliageDuration(step));
+    expect(current.time).toBe(beat.duration);
+    if (beat.pass === 'clusters') {
+      expect(current.parts.filter((part) => !part.site)).toEqual(previous.parts.filter((part) => !part.site));
+      expect(current.parts.map((part) => part.id)).toEqual(previous.parts.map((part) => part.id));
+      const upgrades = current.parts.filter((part, index) => part.asset !== previous.parts[index].asset);
+      expect(upgrades.length).toBeGreaterThan(0);
+      expect(upgrades.every((part) => part.phase === 'cluster')).toBe(true);
+    }
     for (const part of previous.parts.filter((part) => part.site)) expect(current.parts.some((present) => present.id === part.id && present.alpha === 1)).toBe(true);
     if (growth === 1027) expect(current.parts).toEqual(previous.parts);
     previous = current;

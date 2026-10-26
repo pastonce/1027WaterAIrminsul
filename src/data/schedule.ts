@@ -6,7 +6,7 @@ export const SCHEDULE: ReadonlyArray<{ stage: DreamStageId; at: string; cap: num
   { stage: 'C', at: '2026-10-25T10:27:00+08:00', cap: 520 },
   { stage: 'D', at: '2026-10-26T10:27:00+08:00', cap: 680 },
   { stage: 'E', at: '2026-10-26T10:27:00+08:00', cap: 840 },
-  { stage: 'F', at: '2026-10-27T10:27:00+08:00', cap: 1027 },
+  { stage: 'F', at: '2026-10-27T13:27:00+08:00', cap: 1027 },
 ];
 
 export const GAME_RULES = {

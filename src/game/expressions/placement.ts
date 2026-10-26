@@ -1,14 +1,16 @@
-import { treeCrown } from '../tree/model';
+import { presentedTreeBounds } from '../tree/presentation';
+import { treeCanopyFocus } from '../tree/scenePlacement';
 import { EXPRESSION_RULES } from '../../data/expressions';
 import type { DreamStageId } from '../../types/game';
-import { treeGrowthStep } from '../tree/growth';
 
-export interface ExpressionAnchor { x: number; y: number; radiusX: number; radiusY: number }
+export interface ExpressionAnchor { x: number; y: number; radiusX: number; radiusY: number; gap?: number }
 export interface ExpressionObstacle { left: number; top: number; width: number; height: number }
 
-export function treeExpressionAnchor(width: number, root: number, growth: number, scale: number, restoreCrown = false): ExpressionAnchor {
-  const crown = treeCrown(treeGrowthStep(growth), restoreCrown);
-  return { x: width / 2 + (crown.x - 500) * scale, y: root + (crown.y - 3300) * scale, radiusX: crown.radiusX * scale, radiusY: crown.radiusY * scale };
+export function treeExpressionAnchor(width: number, root: number, growth: number, scale: number, height = root + 40 + 100 * scale, stage?: DreamStageId, procedural = false, seed = 1027): ExpressionAnchor {
+  const focus = treeCanopyFocus(presentedTreeBounds(growth, procedural, seed), width, height, root, scale);
+  const compact = height <= 600;
+  const early = stage ? ['A', 'B', 'C', 'D'].includes(stage) : growth <= 680;
+  return { x: focus.x - Math.min(28, focus.radiusX * .12), y: Math.min(height - 80, focus.y + (compact ? 58 : 80)), radiusX: Math.min(compact ? 42 : 64, focus.radiusX * .22), radiusY: compact ? 16 : 22, gap: early ? compact ? 18 : 30 : compact ? 4 : 8 };
 }
 
 export function nahidaExpressionAnchor(character: ExpressionObstacle): ExpressionAnchor {
@@ -27,7 +29,7 @@ export function visitExpressionAnchor(character: ExpressionObstacle, stage: Drea
 export function expressionPosition(anchor: ExpressionAnchor, width: number, height: number, angle: number, obstacles: ExpressionObstacle[] = []) {
   const compact = height <= 600;
   const size = compact ? 70 : 96;
-  const gap = compact ? 16 : 22;
+  const gap = anchor.gap ?? (compact ? 16 : 22);
   const margin = 16;
   const toolbar = compact ? 58 : 82;
   const excluded = [{ left: 0, top: 0, width: compact ? 235 : 320, height: toolbar }, { left: width - (compact ? 260 : 350), top: 0, width: compact ? 260 : 350, height: toolbar }, ...obstacles];

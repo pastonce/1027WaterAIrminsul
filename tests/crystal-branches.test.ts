@@ -2,12 +2,11 @@ import { describe, expect, it, vi } from 'vitest';
 import { crystalPerches, crystalPlan } from '../src/game/encounters/crystalflies';
 import { FOLIAGE_ATTACHMENTS } from '../src/game/tree/foliage';
 import { TREE_WORLD } from '../src/game/tree/geometry';
-import { treeGrowthStep } from '../src/game/tree/growth';
-import * as treeModel from '../src/game/tree/model';
+import * as treePresentation from '../src/game/tree/presentation';
 import { transformTreePoint } from '../src/game/tree/timeline';
 
 function anchors(growth: number) {
-  return treeModel.createTreeModel(treeGrowthStep(growth), undefined, true).crown.filter((part) => part.site).map((part) => ({
+  return treePresentation.createTreeGrowthModel(growth).crown.filter((part) => part.site).map((part) => ({
     site: part.site!, point: transformTreePoint(part.artMatrix, ...FOLIAGE_ATTACHMENTS[part.asset]),
   }));
 }
@@ -15,19 +14,20 @@ const identity = ({ horizontal: _horizontal, elevation: _elevation, ...entry }: 
 const distance = (first: { x: number; y: number }, second: { x: number; y: number }) => Math.hypot(first.x - second.x, first.y - second.y);
 
 describe('晶蝶沿稳定枝组延伸', () => {
-  it('A～D完全复用原计划，680交接不改变任何位置', () => {
+  it('前移后的连续枝叶接管前复用原计划，580交接不改变任何位置', () => {
     const plan = crystalPlan(1027);
-    for (const growth of [0, 100, 180, 340, 520, 660, 680]) {
-      expect(crystalPerches(1027, growth)).toBe(plan);
-      expect(crystalPerches(1027, growth, false)).toBe(plan);
-      expect(crystalPerches(1027, growth, true)).toBe(plan);
+    for (const growth of [0, 100, 180, 340, 520, 560, 580]) {
+      expect(crystalPerches(1027, growth)).toEqual(plan);
+      expect(crystalPerches(1027, growth, false)).toEqual(plan);
+      expect(crystalPerches(1027, growth, true)).toEqual(plan);
+      if (growth < 580) expect(crystalPerches(1027, growth)).toBe(plan);
     }
   });
 
   it('旧晶蝶保持各自原偏移，换干后始终跟随同一叶柄，而非全冠缩放', () => {
-    const seed = 1027; const plan = crystalPlan(seed); const base = anchors(680);
-    const followed = plan.filter((entry) => entry.threshold <= 680).map((entry) => ({ entry, candidates: new Set(base.map((anchor) => anchor.site)) }));
-    for (const growth of [720, 840, 900, 1000, 1020]) {
+    const seed = 1027; const plan = crystalPlan(seed); const base = anchors(580);
+    const followed = plan.filter((entry) => entry.threshold <= 580).map((entry) => ({ entry, candidates: new Set(base.map((anchor) => anchor.site)) }));
+    for (const growth of [600, 680, 720, 840, 900, 1000, 1020]) {
       const current = new Map(anchors(growth).map((anchor) => [anchor.site, anchor.point]));
       const perches = crystalPerches(seed, growth, true);
       for (const followedEntry of followed) {
@@ -47,10 +47,10 @@ describe('晶蝶沿稳定枝组延伸', () => {
     expect(new Set(movement).size).toBeGreaterThan(3);
   });
 
-  it('E/F新出现的晶蝶在出生枝位绑定，之后新增枝叶不改变绑定', () => {
+  it('连续枝叶接管后新出现的晶蝶在出生枝位绑定，之后分拍不改变绑定', () => {
     const seed = 190497686; const plan = crystalPlan(seed);
     const occupied = new Set<string>();
-    for (const entry of plan.filter((perch) => perch.threshold > 680)) {
+    for (const entry of plan.filter((perch) => perch.threshold > 580)) {
       const birth = crystalPerches(seed, entry.threshold, true).find((perch) => perch.id === entry.id)!;
       expect(identity(birth)).toEqual(identity(entry));
       const origin = anchors(entry.threshold);
@@ -89,7 +89,7 @@ describe('晶蝶沿稳定枝组延伸', () => {
 
   it('同seed和成长步复用结果与模型，切换seed不重排原计划', () => {
     crystalPerches(318, 1000, true);
-    const model = vi.spyOn(treeModel, 'createTreeModel');
+    const model = vi.spyOn(treePresentation, 'createTreeGrowthModel');
     try {
       const first = crystalPerches(318, 1001, true);
       expect(crystalPerches(318, 1019, true)).toBe(first);

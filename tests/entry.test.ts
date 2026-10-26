@@ -26,10 +26,12 @@ describe('入梦门控与 A 实际镜头就绪', () => {
     expect(state.speech).toBeNull(); expect(state.expression).toBeNull(); expect(state.encounters).toEqual([]); expect(state.dewParticles).toEqual([]);
     expect(state.save.pendingDialogues).toEqual([]); expect(state.save.loadingArtChoices).toEqual({}); expect(storage.getItem(SAVE_KEYS.player)).toBeNull();
   });
-  it('无档在开放正点后仍需点击，镜头完成才预约并播放 A 入场句', () => {
+  it('无档在开放正点后仍需点击，镜头完成且种下种子才播放 A 入场句', () => {
     const { game, clock } = setup(false); clock.value += 1; game.tick(); expect(game.getSnapshot().mode).toBe('intro');
     expect(game.enterDream()).toBe(true); vi.advanceTimersByTime(5000); expect(game.getSnapshot().speech).toBeNull();
     game.sceneEntranceReady('B'); expect(game.getSnapshot().speech).toBeNull(); game.sceneEntranceReady('A');
+    expect(game.getSnapshot().speech).toBeNull(); expect(game.getSnapshot().save.pendingDialogues).toEqual([]);
+    expect(game.plantSeed()).toBe(true); vi.advanceTimersByTime(1200);
     expect(game.getSnapshot().save.pendingDialogues[0].kind).toBe('opening'); expect(game.getSnapshot().speech?.entry.id).toMatch(/^A\dZ$/u);
   });
   it('有档欢迎等待真实镜头信号，墙钟经过不能提前开播', () => {

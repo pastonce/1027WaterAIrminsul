@@ -198,7 +198,7 @@ describe('音效只跟随真实交互事务', () => {
     director.leave(id, true); director.clear(); expect(cue).toHaveBeenCalledExactlyOnceWith('aranara-appear');
   });
   it('随机 / F 常驻领取均只可爱跳出一次，已领取不会重响；音效异常不破坏奖励', () => {
-    const clock = new TestClock(Date.parse('2026-10-27T10:27:00+08:00'));
+    const clock = new TestClock(Date.parse('2026-10-27T13:27:00+08:00'));
     const { game } = testGame(stageFixture('F', clock.now()), clock); const cue = vi.fn(); game.subscribeSound(cue); game.start();
     game.spawnAranara(0); const id = game.getSnapshot().encounters[0].id; cue.mockClear();
     expect(game.interactAranara(id, { x: 20, y: 50 })).toBe(true); expect(game.interactAranara(id, { x: 20, y: 50 })).toBe(false);

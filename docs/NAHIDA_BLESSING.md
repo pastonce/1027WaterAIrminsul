@@ -1,8 +1,12 @@
 # 纳西妲来访与草元素祝福 · 2026-10-20
 
-E/F从63扩为111个稳定枝位：保留原15处与原48处UV / 排程，另补48处真实外梢 / 二级枝端，不把簇继续堆在粗主干。新增48处在grow36实际cut后统一弹出正常嫩芽，再由leafAt在grow37～48每轮四处跨左右 / 高低舒叶，下一浇立即成簇；与旧48排程交错而非先两侧后中间。芽宽16～22、单叶36～54世界单位，新增小簇75～115；不出现超大单叶。祝福仍走同一成长段与原0.5 / 0.25秒完整回弹、实际树体施法中心；1500ms结算、身体发射点、赠20 / 防重、最后7点无生长及原存档均不改。
+2026-10-26更新：外围使用clean-v2分离技能图集，原16块世界几何 / UV / 延迟及中心草图标不变。X05的Irminsul仅切换本页树形，扫描框 / 花叶终点按当前程序化冠部包络冻结与定位，发射点仍为原角色躯干；一次性赠长 / 来访配额和日期权限保持，见PROCEDURAL_TREE.md / E_SKILL_CLEAN.md。
 
-世界树木质保留原轨迹；C/D含grow17共享入口校正当前body叶柄，E/F接续15处原小叶层次并新增96处（原12外枝 / 36内冠，再增48细梢），共111稳定site。叶柄绑定当前body语义UV并随原仿射回弹 / attachment切图同步延伸，新芽等cutTime弹出；芽 / 叶原0.5秒、簇原0.25秒完整播放，段时长覆盖delay+clip、不压缩换干后回弹。单site单附件、无opacity生长；花叶落点仍取实际树体中心线 / 注册框 / 原矩阵，成熟用无叶tree9_growth，包络读取当前密冠。施法固定入场段参照、身体发射点、扫描 / 1500ms结算和祝福防重保持，见TREE_SYSTEM.md。
+最新技能落点：冻结来访开始时的真实presentation模型，treeCanopyFocus定位可见树冠中部，中心扫描框 / 草元素图标移至该处；不再要求中心命中木质树干。根部固定、冠可出屏时取可见冠中间并给图框留屏幕边距。角色轮廓→身体花叶→扫描框→原1500ms结算、暂停 / 防重 / 方向和发射点均不改。
+
+本轮将部分E/F演出前移：浇灌次数 / 每次20点 / 日期上限不变，C九浇终点为grow30、D八浇为grow41；E八浇结束于grow45成簇拍，F十浇仍完成grow51及最后7点无动画。原51条木质轨各完整一次，grow42～48分成芽 / 舒叶拍与0.25秒独立成簇拍，共58拍，不停住半次回弹。 祝福仍固定20并沿同一路线演出，1500ms结算、防重收据、角色身体发射点与F赠长封1020保持；无新存档，实际验证见TEST_PLAN.md。
+
+施法落点 / 中心线及树包络统一取高层presentation的实际附件，区分同grow leaves / clusters；不把原step终态套到仍保留旧叶的leaves拍。实际grow34 / D580接续15原叶与96新枝，111稳定site / 原UV / 形态排程与原0.5秒芽叶 / 0.25秒簇保持。C/D祝福20可触发两段原轨完整串播；后期独立成簇拍木质保持终态、只对应簇回弹。成熟无叶tree9、角色原向 / 身体发射点、入场参照固定、扫描 / 1500ms原子结算与防重不改，见TREE_SYSTEM.md。
 
 新增隐藏 Nahida 代码预约临时额外来访：不占自然概率、两次配额、保底或 blessedVisits 收据；台词 / 两位置 / 施法与固定20祝福仍复用原流程，阶段及日期上限不变。Nidaha 只切换本页角色显示。独立内存 test 不改正式存档，详见 EASTER_EGGS.md。
 
@@ -71,7 +75,7 @@ B / D / E 第二落点在窄屏受 20 px 安全边距与上边界限制，B / E 
 
 ## 素材与性能
 
-外围图案按 [E 技能素材接入说明](E_SKILL_PATTERN.md) 使用匹配的 Spine 4.0 解析器离线导出 16 块真实 setup 几何 / UV 与源渐入延迟，排除 `center_emblem`，但不修改源三件套。`E_SKILL_PATTERN` 登记导出数据与三份固定哈希，PNG 逐字节复制为 `public/asserts/effects/e-skill-frame.png`（1024×640、122861 B）；运行时 SVG / CSS 展现，不播放整套原生 idle / show / hide，也不新增画布、WebGL 上下文或 RAF。角色出现时预载图集，16 块共用同一图片；纹理失败只缺外围，中心与结算照常。
+外围图案按 [E 技能素材接入说明](E_SKILL_PATTERN.md) 使用匹配的 Spine 4.0 解析器离线导出 16 块真实 setup 几何 / UV 与源渐入延迟，排除 `center_emblem`，但不修改源三件套。`E_SKILL_PATTERN` 登记导出数据与三份固定哈希，clean-v2 PNG复制为 `public/asserts/effects/e-skill-frame-clean-7e78729b722f.png`（1024×640、84838 B）；运行时 SVG / CSS 展现，不播放整套原生 idle / show / hide，也不新增画布、WebGL 上下文或 RAF。角色出现时预载图集，16 块共用同一图片；纹理失败只缺外围，中心与结算照常。
 
 中心仍使用 `UI_Buff_Element_Grass.png`：来自 [Enka.Network 公开游戏资源镜像](https://enka.network/ui/UI_Buff_Element_Grass.png)，非官方托管，64×64 / 2164 B，SHA-256 为 `98afa8d2a553ef3beaa67c15436af8cb0ad675bf93055cbc7ece2dd4d28b8f1d`。补取源与 manifest 在 `asserts/reference-supplements/nahida/`，本地发布副本 `public/asserts/effects/dendro.png`，`DENDRO_ICON` 登记。图标归原权利人，不宣称开放许可，发布前由负责人确认使用条件。
 

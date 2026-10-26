@@ -89,7 +89,7 @@ describe('完整原始智慧树时间轴', () => {
     }
     expect([...used].sort()).toEqual(Object.keys(TREE_ART).filter((name) => name !== 'trunk_column' && name !== 'tree9_growth' && !name.endsWith('_complete')).sort());
   });
-  it('每20点推进一个完整动画，即使只添叶不长高也播放，最终7点不播放', () => {
+  it('每20点推进有效生长，即使只添叶不长高也播放，最终7点不播放', () => {
     expect(treeGrowthStep(0)).toBe(0); expect(treeGrowthStep(TREE_FINAL_GROWTH)).toBe(51);
     expect(treeGrowthStep(39)).toBe(1); expect(treeGrowthStep(-20)).toBe(0); expect(treeGrowthStep(NaN)).toBe(0);
     expect(getTreeHeight(60)).toBeCloseTo(getTreeHeight(80)); expect(treeGrowthDuration(60, 80)).toBeGreaterThan(0);

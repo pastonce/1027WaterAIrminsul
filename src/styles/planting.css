@@ -1,0 +1,40 @@
+.intro-seed { width: 44px; height: 64px; margin: 10px auto 0; pointer-events: none; }
+.intro-seed img, .plant-seed img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 7px #dfff9a99) drop-shadow(0 0 15px #d2f39d70); }
+.intro-seed img { animation: seed-hover 3s ease-in-out infinite; }
+.seed-onboarding { position: absolute; left: 50%; top: 50%; width: 0; height: 0; z-index: 25; pointer-events: none; }
+.seed-flight { position: relative; width: 64px; height: 93px; margin: -46.5px 0 0 -32px; transform: translate(var(--seed-entry-x, 0px), var(--seed-entry-y, 0px)) scale(var(--seed-entry-scale, 1)); }
+.plant-seed { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; pointer-events: auto; border-radius: 50%; }
+.plant-seed:disabled { opacity: 1; }
+.plant-seed:focus-visible { outline: 2px solid #eef8b8; outline-offset: 10px; }
+.seed-onboarding[data-phase=falling] .seed-flight { animation: seed-bury var(--seed-fall-duration) cubic-bezier(.42, 0, .88, .62) both; }
+.seed-onboarding[data-paused=true] .seed-flight { animation-play-state: paused; }
+.interaction-cue { position: absolute; width: 108px; height: 108px; pointer-events: none; z-index: 26; color: #f9f0bb; filter: drop-shadow(0 1px 2px #315e45bb) drop-shadow(0 0 6px #e7ffb67a); }
+.interaction-cue > svg { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.cue-wave { transform-origin: 46% 44%; animation: cue-ripple 2.8s ease-out infinite; }
+.cue-wave-late { animation-delay: -1.4s; }
+.cue-orbit { opacity: .7; stroke-width: 1; }
+.cue-leaf { fill: #dff3b8a1; stroke-width: 1.1; }
+.cue-touch { transform-origin: 67% 46%; animation: cue-tap 2.8s ease-in-out infinite; }
+.cue-touch > path:first-child { fill: #ecf7dbea; stroke: #edf3c6; stroke-width: 1.2; }
+.cue-touch-ray { stroke-width: 1.8; }
+.seed-click-hint { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.dew-collect-hint { width: 88px; height: 88px; transform: translate(-46%, -44%); }
+.watering-guide { width: 82px; height: 82px; left: 36px; top: 50%; transform: translate(-46%, -44%); }
+.interaction-cue[data-paused=true] :is(.cue-wave, .cue-touch) { animation-play-state: paused; }
+.interaction-cue[data-reduced=true] :is(.cue-wave, .cue-touch) { animation: none; opacity: .75; }
+.interaction-cue[data-reduced=true] .cue-wave-late { display: none; }
+.reduced-motion .intro-seed img { animation: none; }
+@keyframes seed-hover { 50% { transform: translateY(-4px); } }
+@keyframes seed-bury { 0% { transform: translate(0, 0); opacity: 1; } 75% { opacity: 1; } 100% { transform: translate(0, var(--seed-drop)); opacity: 0; } }
+@keyframes cue-ripple { 0% { transform: scale(.65); opacity: 0; } 18% { opacity: .9; } 80%, 100% { transform: scale(1.28); opacity: 0; } }
+@keyframes cue-tap { 0%, 100% { transform: translate(5px, 9px); opacity: 0; } 25% { opacity: .9; } 45%, 58% { transform: translate(0, 0); opacity: .95; } 77% { transform: translate(3px, 5px); opacity: .5; } }
+@media(max-height:600px) {
+  .intro-seed { width: 30px; height: 44px; margin-top: 5px; }
+  .intro-scene .enter-dream { margin-top: 12px; }
+  .seed-flight { width: 48px; height: 70px; margin: -35px 0 0 -24px; }
+  .seed-click-hint { width: 88px; height: 88px; }
+  .dew-collect-hint { width: 72px; height: 72px; }
+  .watering-guide { width: 68px; height: 68px; left: 30px; }
+}
+@media(prefers-reduced-motion:reduce) { .intro-seed img, .interaction-cue :is(.cue-wave, .cue-touch) { animation: none; opacity: .75; } .cue-wave-late { display: none; } }
+@media(forced-colors:active) { .interaction-cue { color: Highlight; filter: none; } .cue-touch > path:first-child { fill: Canvas; stroke: Highlight; } .plant-seed:focus-visible { outline-color: Highlight; } }

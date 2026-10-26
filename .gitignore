@@ -1,27 +1,48 @@
+# Dependencies and build outputs
 /node_modules/
 /dist/
 /coverage/
 /test-results/
-/.asset-work/
 /artifacts/
 /playwright-report/
+
+# Local tools, caches, calibration images and screenshots
+/.asset-work/
 /.vite/
 /.npm-cache/
 /.wrangler/
+/.codex/
+/.agents/
+/.idea/
+/.venv/
+__pycache__/
+*.py[cod]
 /docs/screenshots/
+
+# Raw artwork / audio / offline regeneration inputs stay local.
+# These two Markdown sources are required by prebuild on the deployment host.
 /asserts/*
 !/asserts/对白整合.md
 !/asserts/生日贺图/
 /asserts/生日贺图/*
 !/asserts/生日贺图/信与回复.md
+
+# Secrets and local configuration; the example is safe to publish.
 .env
 .env.*
 !.env.example
 .dev.vars
 .dev.vars.*
 *.local
+
+# Reports and temporary packaging (keep public/ and functions/ tracked).
 *.log
 *.tsbuildinfo
+*.tmp
+*.bak
+/*.zip
+/release/
+/releases/
 .DS_Store
 Thumbs.db
 desktop.ini

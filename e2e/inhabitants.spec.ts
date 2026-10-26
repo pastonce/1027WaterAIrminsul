@@ -85,10 +85,10 @@ test('晶蝶随树长高增添且锚在世界枝叶，根冠移动不重复下�
   await debug(page, () => page.getByLabel('调试成长值', { exact: true }).fill('1027'));
   await expect(page.locator('.creature-crystal')).toHaveCount(15);
   await expect(page.locator('.forest-inhabitants')).toHaveAttribute('data-renderer', 'ready', { timeout: 20000 });
-  await page.getByRole('button', { name: '回到树根', exact: true }).click(); await page.clock.runFor(1500);
+  await page.clock.runFor(1500);
   const initial = (await page.locator('[data-creature-id=crystal-0]').boundingBox())!; const before = requests.length;
   const offset = Number(await page.getByTestId('dream-scene').getAttribute('data-camera-offset'));
-  await page.getByRole('button', { name: '返回树冠', exact: true }).click(); await page.clock.runFor(1500);
+  await page.clock.runFor(1500);
   const moved = (await page.locator('[data-creature-id=crystal-0]').boundingBox())!;
   const difference = Number(await page.getByTestId('dream-scene').getAttribute('data-camera-offset')) - offset;
   expect(moved.y - initial.y).toBeCloseTo(difference, 0); expect(requests).toHaveLength(before);

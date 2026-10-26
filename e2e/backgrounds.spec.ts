@@ -77,8 +77,8 @@ test('背景播放不遮挡浇灌、树体和梦露，镜头移动不重新请�
   expect(await page.evaluate(() => (JSON.parse(localStorage.getItem('irminsul.development.v2')!) as GameSave).growth)).toBe(13);
   await page.clock.fastForward(1600);
   await expect(page.locator('.dialogue-bubble[data-speaker=tree]')).toBeVisible();
-  await page.getByRole('button', { name: '返回树冠', exact: true }).click();
-  await page.getByRole('button', { name: '回到树根', exact: true }).click();
+
+
   await page.clock.fastForward(2500);
   const particle = page.locator('.dew-particle:not(.is-collected):not(.is-expiring)').first(); await particle.click();
   await expect.poll(async () => Number(await page.getByTestId('dew-count').textContent())).toBeGreaterThan(0);

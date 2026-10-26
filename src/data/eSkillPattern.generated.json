@@ -1,6 +1,8 @@
 {
   "version": "4.0.33",
-  "texture": "/asserts/effects/e-skill-frame.png",
+  "texture": "/asserts/effects/e-skill-frame-clean-7e78729b722f.png",
+  "separated": true,
+  "cleanManifest": "docs/e-skill-clean.manifest.json",
   "textureSize": [
     1024,
     640
@@ -12,6 +14,20 @@
     704
   ],
   "sources": [
+    {
+      "file": "asserts/E技能素材/clean-v2/e_skill_frame.atlas",
+      "sha256": "c510a420c155c170df0edfad97087c062a8b0e118fa717232ccb8967bdbc09c8"
+    },
+    {
+      "file": "asserts/E技能素材/clean-v2/e_skill_frame.json",
+      "sha256": "322f9f332b1b196fb30eef89a6d5c82539bcd6c8dcc4797eac42125c7b1a44c0"
+    },
+    {
+      "file": "asserts/E技能素材/clean-v2/e_skill_frame.png",
+      "sha256": "7e78729b722f35fbcbb1ac618de8574941f5e9992bcd8791fc98f1ae95e90e4a"
+    }
+  ],
+  "originalSources": [
     {
       "file": "asserts/E技能素材/e_skill_frame.atlas",
       "sha256": "c510a420c155c170df0edfad97087c062a8b0e118fa717232ccb8967bdbc09c8"

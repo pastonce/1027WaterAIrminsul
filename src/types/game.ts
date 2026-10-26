@@ -93,6 +93,7 @@ export interface GameSave {
   dew: number;
   seed: number;
   introSeen: boolean;
+  seedPlanted: boolean;
   completedStages: DreamStageId[];
   completedVisits: string[];
   pendingVisits: string[];
@@ -162,6 +163,7 @@ export type QueuedEvent = {
 };
 
 export interface GameSnapshot {
+  seedPhase: 'arriving' | 'waiting' | 'falling' | null;
   stageLoading: StageLoading | null;
   waking: WakingPlayback | null;
   birthday: BirthdayPlayback | null;
@@ -179,6 +181,7 @@ export interface GameSnapshot {
   companionStage: DreamStageId | null;
   companionPosition: 0 | 1;
   nahidaPlaceholder: boolean;
+  proceduralTree: boolean;
   blessing: { id: string; stage: DreamStageId; phase: 'channel' | 'bloom' } | null;
   encounters: ForestEncounter[];
   rewardBursts: RewardBurst[];

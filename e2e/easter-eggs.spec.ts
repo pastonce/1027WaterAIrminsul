@@ -8,7 +8,7 @@ import { openSettings } from './settings-support';
 import { mkdirSync } from 'node:fs';
 import { OPENING_RULES } from '../src/game/opening/choreography';
 
-const OPEN = '2026-10-27T10:27:00+08:00';
+const OPEN = '2026-10-27T13:27:00+08:00';
 const keyFor = (info: TestInfo) => info.project.name.startsWith('production') ? 'irminsul.player.v2' : 'irminsul.development.v2';
 async function launch(page: Page, info: TestInfo, stage: StageId = 'C', patch: Partial<GameSave> = {}) {
   await mockServerTime(page, OPEN);
@@ -47,12 +47,13 @@ test('隐藏键盘代码、40颗额外梦露、形象开关、正确反馈和手
   expect(errors).toEqual([]);
 });
 
-test('test 切段和改时间只作用于内存，刷新后退出并恢复原进度', async ({ page }, info) => {
+test('Past 切段和改时间只作用于内存，刷新后退出并恢复原进度', async ({ page }, info) => {
   await launch(page, info, 'D');
   const before = await saved(page, info);
   const time = await page.evaluate(() => sessionStorage.getItem('irminsul.development.clock'));
   if (info.project.name.startsWith('production')) await expect(page.locator('.debug-panel')).toHaveCount(0);
-  await page.keyboard.type('tEsT'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
+  await page.keyboard.type('test'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'false');
+  await page.keyboard.type('pAsT'); await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
   await expect.poll(async () => { await page.clock.runFor(100); return page.locator('.debug-panel').count(); }).toBe(1);
   await page.locator('.debug-panel > summary').click();
   await expect(page.getByText('本页测试 · 内存存档，刷新后退出', { exact: true })).toBeVisible();
@@ -102,7 +103,7 @@ test('阶段限制不提示错误，G 形象开关保持，其余不适用代码
   await page.keyboard.type('nidaha'); await avatarReady(page);
 });
 
-test('开放前手机也可从首屏设置输入test，不提前入梦或覆盖正式进度', async ({ page }, info) => {
+test('开放前手机也可从首屏设置输入Past，不提前入梦或覆盖正式进度', async ({ page }, info) => {
   const date = '2026-10-24T10:27:00+08:00'; await mockServerTime(page, date);
   const now = new Date(date); await page.clock.install({ time: now }); await page.clock.pauseAt(new Date(now.getTime() + 1000));
   await page.addInitScript(({ key, fixture, date }) => {
@@ -112,7 +113,7 @@ test('开放前手机也可从首屏设置输入test，不提前入梦或覆盖�
   await page.goto('/'); await finishOpening(page, true); await openSettings(page);
   await expect(page.getByRole('dialog', { name: '设置' })).toBeVisible();
   await expect(page.getByTestId('dream-scene')).toHaveCount(0); await expect(page.locator('canvas')).toHaveCount(0);
-  await page.locator('.hidden-code-entry input').fill('test');
+  await page.locator('.hidden-code-entry input').fill('Past');
   await expect(page.locator('.game-app')).toHaveAttribute('data-testing', 'true');
   await expect(page.getByTestId('dream-scene')).toHaveCount(1);
   expect((await saved(page, info)).introSeen).toBe(false); expect((await saved(page, info)).growth).toBe(0);
