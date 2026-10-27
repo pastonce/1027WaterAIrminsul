@@ -1,6 +1,17 @@
 # 验收与测试 · 连续交互版
 
-## 2026-10-26 当前：完整预载、角色恢复、五场景藏点与平板框对齐
+## 2026-10-27 当前：2026生日贺图、邮件与回复
+
+- 按用户新asserts/生日贺图/26.png与信与回复.md重生发布数据，不反写原稿。2026标题「一起长大…」、邮件6段、回复4段，四年全部pending=false；原信封 / 四年循环 / contain完整显示、右页滚动、日期权限保持。
+- 制作期间26.png再次更新，最终以8,903,683B的最新源图重制768 / 1280两档WebP，共407,164B。全来信13份1,859,492B，对应原图 / 导航源47,232,683B；精确尺寸 / SHA见birthday-mail-assets.manifest.json。中间生成的两份旧26哈希删除并登记cleanup，原图不改。
+- 执行assets:birthday-art、assets:birthday-mail、assets:fonts及build中的assets:startup。新正文字符进入常用字体210720B，扩展3312000B；只删除对应两份旧字体。启动365文件 / 102086980B、revisiond75cd7b8dc5fd6bf，新图单档纳入真实开场预载。
+- `npm test -- --configLoader runner --reporter=dot tests/birthday-mail.test.ts`：**1文件18项通过**，包含当前原稿 / 源图哈希、2026双档和4张预载。初次校验捕获制作期间源26已改变，按最新文件重生后通过，不忽略源哈希失败。
+- `npm run build -- --configLoader runner`：**通过**，含tsc与322模块（artifacts/birthday2026-build-final.log）。`release:assets`及`release:audit`通过，无缺失 / 待审候选：373素材 / 102115319B，dist385文件 / 103887445B。
+- `npx playwright test e2e/birthday-mail.spec.ts --project=production --project=production-mobile-landscape --grep '四封来信在祝福上方'`：**2项通过（16.5秒）**。生产1366×768 / 手机844×390直接确认2026新图ready、完整标题 / 6+4段、循环年份、两档与640×360回退布局。截图artifacts/birthday-mail/*-2026.png；最新源图重制后已重跑这两项，未累计此前旧源图的重复检查。
+- 依用户要求仅相关最小验证，未跑全站单元 / E2E或真机。README、对应说明、AGENTS及任务书同步，未自动提交 / 部署；本次构建需由负责人重新部署后线上生效。
+
+
+## 2026-10-26 前轮：完整预载、角色恢复、五场景藏点与平板框对齐
 
 - 原加载器失败 / 超时仍把completed改成total并done=true，手机大计划因此可能未下载完就进入。现只有全部所选文件完整字节成功及所需runtime导入成功才100% / 揭幕。三路并发、30秒无进展检测，正常持续下载可超过60秒；每文件三次 / 800及1600ms间隔，耗尽后停止新派发、收束当前请求，保留加载页和可键盘操作的重试按钮，复用成功缓存。
 - 缓存open / match / 正文验证 / put800ms有界；截断200、空响应、204和HTML错误页不算成功。旧无标记缓存核对正文长度，坏条目剔除；完整响应移除Content-Encoding并写真实长度 / 完整标记。运行时取消不禁用有效缓存，不因坏缓存让后续场景永远等候。

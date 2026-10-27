@@ -25,9 +25,10 @@
     },
     {
       "file": "asserts/生日贺图/26.png",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "placeholder": true
+      "bytes": 8903683,
+      "sha256": "652370df43826456116ce7f5c7caba58fb644d5dde616d3fd55ad2d93daf7fac",
+      "width": 4000,
+      "height": 4000
     },
     {
       "file": "asserts/3.0/_other_resources/book_bg.93a06b3e.png",
@@ -125,6 +126,24 @@
       "source": "asserts/生日贺图/25.png"
     },
     {
+      "file": "public/asserts/birthday-mail/2026-768-0b4318889dd6.webp",
+      "src": "/asserts/birthday-mail/2026-768-0b4318889dd6.webp",
+      "bytes": 135738,
+      "sha256": "0b4318889dd64d6917ef146129004647f434be212886943bddca3876c33aa815",
+      "width": 768,
+      "height": 768,
+      "source": "asserts/生日贺图/26.png"
+    },
+    {
+      "file": "public/asserts/birthday-mail/2026-1280-77da6414aff8.webp",
+      "src": "/asserts/birthday-mail/2026-1280-77da6414aff8.webp",
+      "bytes": 271426,
+      "sha256": "77da6414aff8dddd5a5e670f1d557a1687e7bb98bf6ac7670f7d38047d406ab0",
+      "width": 1280,
+      "height": 1280,
+      "source": "asserts/生日贺图/26.png"
+    },
+    {
       "file": "public/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp",
       "src": "/asserts/birthday-mail/book-1103-1c6ef6e5fb14.webp",
       "bytes": 163782,
@@ -170,6 +189,6 @@
       "source": "asserts/reference-supplements/birthday-mail/point-active.png"
     }
   ],
-  "sourceBytes": 38329000,
-  "publishedBytes": 1452328
+  "sourceBytes": 47232683,
+  "publishedBytes": 1859492
 }

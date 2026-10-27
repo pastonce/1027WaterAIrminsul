@@ -666,5 +666,37 @@
       }
     ],
     "reason": "Superseded generated subsets after loading/retry text and character recovery. Original TTF retained."
+  },
+  "birthday2026FontRefresh": {
+    "date": "2026-10-27",
+    "removed": [
+      {
+        "path": "public/asserts/fonts/irminsul-common-1c964466395d.woff2",
+        "bytes": 208564,
+        "sha256": "1c964466395defb9a722d26f8b06fdeeb8b3bc575ee530225a64073eacd9fae6"
+      },
+      {
+        "path": "public/asserts/fonts/irminsul-extended-66c88ce988a2.woff2",
+        "bytes": 3313532,
+        "sha256": "66c88ce988a21c40689dea0fad47596371ed199aeb2c67ed2fed227f6f73072a"
+      }
+    ],
+    "reason": "Superseded generated subsets after publishing user-provided 2026 birthday mail and reply. Original source artwork, Markdown and TTF retained."
+  },
+  "birthday2026ArtRefresh": {
+    "date": "2026-10-27",
+    "removed": [
+      {
+        "path": "public/asserts/birthday-mail/2026-768-8cadec0ec559.webp",
+        "bytes": 133240,
+        "sha256": "8cadec0ec5591f1dd377713b2201d88a08548cef72de0b2c2ce08aa37c9ed205"
+      },
+      {
+        "path": "public/asserts/birthday-mail/2026-1280-344f29240e12.webp",
+        "bytes": 251030,
+        "sha256": "344f29240e12b9d7beec02d7c9da104474e3ad59973ead6be43cd33f419b2b77"
+      }
+    ],
+    "reason": "Intermediate generated 2026 artwork replaced after the user updated 26.png during preparation; latest source preserved."
   }
 }

@@ -1,5 +1,7 @@
 # 项目约定
 
+- 2026-10-27贺图正式补齐：2026年26.png及信与回复.md均使用用户当前原稿，原文不反写；四年生日来信全部pending=false，2026标题“一起长大…”、6段邮件 / 4段回复。768 / 1280等比WebP两档合计407164B，G书页原contain / 导航 / 暂停 / 日期权限不改，不再默认占位。assets:birthday-art/mail、字体210720 / 3312000B及startup同步；原图 / TTF保留，仅清理被替代字体并登记。用户要求最小验证，仅相关来信单元 / 两档实际显示和构建 / 资源审计，不跑全站回归，见TEST_PLAN。
+
 - 2026-10-26加载 / 藏点修复覆盖旧失败视为完成与60秒总放行：StartupLoader三路、完整字节成功+runtime成功才done，30秒无进展而非总下载限，三次 / 800及1600ms重试，耗尽后停止新派发并保留可键盘操作重试按钮；重试复用成功缓存且不重抽插图。缓存open/match/put800ms、旧正文长度校验，禁缓存截断/204/HTML并清理已解码正文Content-Encoding；取消不禁用有效缓存。正常角色每姿态poster必需、B/E与G补透明首帧，Nidaha SVG仅显式彩蛋；keyed生命周期和三次有限加载 / 30秒流进展 / 本地解码20秒与contextlost/online恢复，详见CHARACTER_LOADING。开屏active shell固定同一视口，content/overlay同host，几何取host真实rect+ResizeObserver，黑区/技能框四边同步，不改12轨/时长。藏点避真实当前树部件和真实UI，不再330全高走廊或误杀左右屏缘；各点仅选符合自身姿态/当前画幅的形象，cover外不搬造热点，详见INHABITANTS。
 
 - 2026-10-26平板修订：开场throw / loading / settling内容透明并用临时黑底覆盖，reveal才放行；方窗使用内容自身50%相对裁切，不按旧视口绝对像素归零，HTML技能预载从eSkillPattern哈希入口生成。梦露运行时按当前presentation部件投影避树，生长合并前一浇及沿途采样；程序化形态用实际冠 / 干 / 根包络，无几何调用才回退480半宽，普通 / 奖励 / Rainstorm统一且不改寿命 / 数值。B/E宽幅角色气泡按头部包络侧置，放不下才移到上方，角色位置 / 原向与发射点不动。树表情最新累计7000ms再作原.5判断，覆盖此前5000ms / 十秒；暂停 / G标记与60秒待机不改。见docs/TABLET_LAYOUT.md与最新TEST_PLAN。

@@ -53,8 +53,13 @@ test('四封来信在祝福上方，原书页 / 叶形按钮循环四年，正�
   await expect.poll(() => page.locator('.mail-art-frame > img').evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   await expect(book).toHaveAttribute('data-year', '2023'); await expect(book.getByRole('heading', { name: BIRTHDAY_LETTERS[0].title, exact: true })).toBeVisible(); await picture(page, info, '2023');
   for (const year of [2024, 2025, 2026, 2023]) { await next(page); await expect(book).toHaveAttribute('data-year', String(year)); }
-  await next(page, '上一年'); await expect(book).toHaveAttribute('data-year', '2026'); await expect(page.locator('.mail-art-placeholder')).toContainText('贺图尚未发布');
-  await expect(book).toContainText('这封生日邮件尚未公开。'); await picture(page, info, '2026-placeholder');
+  await next(page, '上一年'); await expect(book).toHaveAttribute('data-year', '2026');
+  await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
+  await expect(page.locator('.mail-art-frame > img')).toHaveAttribute('src', /2026-(768|1280)-.*\.webp$/);
+  await expect(page.locator('.mail-art-placeholder')).toHaveCount(0);
+  await expect(book.getByRole('heading', { name: BIRTHDAY_LETTERS[3].title, exact: true })).toBeVisible();
+  for (const paragraph of [...BIRTHDAY_LETTERS[3].mail, ...BIRTHDAY_LETTERS[3].reply]) await expect(page.locator('.mail-letter-scroll')).toContainText(paragraph);
+  await picture(page, info, '2026');
   await next(page, '2024 年'); await expect(book).toHaveAttribute('data-year', '2024');
   const text = page.locator('.mail-letter-scroll');
   for (const paragraph of [...BIRTHDAY_LETTERS[1].mail, ...BIRTHDAY_LETTERS[1].reply]) await expect(text).toContainText(paragraph);
@@ -81,7 +86,6 @@ test('反复缓存切年及切换分辨率后贺图保持原色，不被旧加�
   await page.evaluate(() => { (Reflect.get(window, '__releaseOldBirthdayImage') as (() => void) | undefined)?.(); });
   for (let cycle = 0; cycle < 3; cycle++) for (const year of [2025, 2026, 2023, 2024]) {
     await next(page); await expect(book).toHaveAttribute('data-year', String(year));
-    if (year === 2026) { await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'pending'); continue; }
     await expect(page.locator('.mail-art-page')).toHaveAttribute('data-image-state', 'ready');
     await expect(page.locator('.mail-art-frame > img')).toHaveCSS('opacity', '1');
     expect(await page.locator('.mail-art-frame > img').evaluate((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0)).toBe(true);

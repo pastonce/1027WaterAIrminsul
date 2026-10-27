@@ -58,7 +58,7 @@ npm run preview
 | 生日贺图 | `asserts/生日贺图/23.png`～`26.png` → `npm run assets:birthday-art` |
 | 其他素材、音乐、字体 | [素材维护](docs/ASSET_GUIDE.md)、[音频与字体](docs/AUDIO_AND_FONTS.md) |
 
-**2026贺图仍占位。** 你将新图放到 `asserts/生日贺图/26.png` 后，按 [交接清单](docs/PHASE_HANDOFF.md) 的步骤生成压缩发布图；只放入原图不会改变线上版本。正文新增字符还需执行 `npm run assets:fonts`，再重建启动目录与生产包。
+**2026贺图、生日邮件与回复已于2026-10-27接入。** G书页可显示「一起长大…」及完整邮件 / 回复，贺图提供768 / 1280两档压缩图。后续替换仍按 [交接清单](docs/PHASE_HANDOFF.md) 生成发布副本；仅放入源文件不会改变线上版本。
 
 ## 目录与资源边界
 

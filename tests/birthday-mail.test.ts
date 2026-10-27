@@ -14,7 +14,7 @@ import content from '../src/data/birthdayMail.generated.json' with { type: 'json
 import manifest from '../docs/birthday-mail-assets.manifest.json' with { type: 'json' };
 
 describe('生日来信正文与压缩素材', () => {
-  it('原稿按年份 / 两个正文块解析，保留原段落、标点与空白年份', () => {
+  it('四年原稿按年份 / 两个正文块解析，2026保留新邮件与回复', () => {
     const source = readFileSync('asserts/生日贺图/信与回复.md');
     expect(createHash('sha256').update(source).digest('hex')).toBe(content.sha256);
     expect(parseBirthdayMail(source.toString('utf8'))).toEqual(BIRTHDAY_LETTERS);
@@ -22,7 +22,10 @@ describe('生日来信正文与压缩素材', () => {
     expect(BIRTHDAY_LETTERS[0].title).toBe('闭上眼睛…');
     expect(BIRTHDAY_LETTERS[1].mail.join('\n')).toContain('当我早上睁开眼睛之后，能邀请你同游吗？');
     expect(BIRTHDAY_LETTERS[2].reply).toHaveLength(4);
-    expect(BIRTHDAY_LETTERS[3]).toEqual({ year: 2026, title: '', mail: [], reply: [], pending: true });
+    expect(BIRTHDAY_LETTERS[3]).toMatchObject({ year: 2026, title: '一起长大…', pending: false });
+    expect(BIRTHDAY_LETTERS[3].mail).toHaveLength(6); expect(BIRTHDAY_LETTERS[3].reply).toHaveLength(4);
+    expect(BIRTHDAY_LETTERS[3].mail.at(-1)).toBe('『祝我今天生日快乐。然后，我们要一起长大呀。』');
+    expect(BIRTHDAY_LETTERS[3].reply[0]).toBe('兰阐荼的怀里，暖暖的，你要不要也来摸摸看？');
   });
   it('兼容 CRLF，年份和章节缺失 / 重复时拒绝静默发布', () => {
     const source = readFileSync('asserts/生日贺图/信与回复.md', 'utf8');
@@ -31,14 +34,15 @@ describe('生日来信正文与压缩素材', () => {
     expect(() => parseBirthdayMail(source.replace('## 贺图回复', '## 其他'))).toThrow('章节缺失');
     expect(() => parseBirthdayMail('')).toThrow('四个年份');
   });
-  it('所有源图不改字节、派生哈希精确，空 26.png 不当作可请求图', () => {
+  it('四张源图不改字节、派生哈希精确，2026提供两种实际贺图', () => {
     for (const entry of [...manifest.inputs, ...manifest.files]) {
       const bytes = readFileSync(entry.file);
       expect(bytes.length).toBe(entry.bytes); expect(createHash('sha256').update(bytes).digest('hex')).toBe(entry.sha256);
     }
     expect(manifest.publishedBytes).toBeLessThan(manifest.sourceBytes / 20);
-    expect(birthdayArt(2026, false)).toBeNull(); expect(birthdayArt(1999, false)).toBeNull();
-    expect(manifest.files.filter((entry) => /20\d\d-/.test(entry.src))).toHaveLength(6);
+    expect(birthdayArt(2026, false)).toMatch(/2026-1280-.*\.webp$/);
+    expect(birthdayArt(2026, true)).toMatch(/2026-768-.*\.webp$/); expect(birthdayArt(1999, false)).toBeNull();
+    expect(manifest.files.filter((entry) => /20\d\d-/.test(entry.src))).toHaveLength(8);
     expect(manifest.files.every((entry) => entry.width <= 1280)).toBe(true);
   });
   it.each([[1440, 900], [844, 390], [640, 360]])('书页在 %i×%i 中保持原比例且不越屏', (width, height) => {
@@ -50,8 +54,8 @@ describe('生日来信正文与压缩素材', () => {
   it.each([[1440, 900, false], [844, 390, true]] as const)('启动 %i×%i 只下载单档贺图，无原图 / 空占位 / 预解码', (width, height, compact) => {
     const urls = startupPlan(completeLoadingArtChoices({}, () => .99), width, height, 1, false).files.map((file) => file.url);
     expect(urls).toContain(MAIL_ASSETS.book); expect(urls).toContain(MAIL_ASSETS.arrowHover);
-    for (const year of [2023, 2024, 2025]) { expect(urls).toContain(birthdayArt(year, compact)); expect(urls).not.toContain(birthdayArt(year, !compact)); }
-    expect(urls.filter((url) => /birthday-mail\/20/.test(url))).toHaveLength(3);
+    for (const year of [2023, 2024, 2025, 2026]) { expect(urls).toContain(birthdayArt(year, compact)); expect(urls).not.toContain(birthdayArt(year, !compact)); }
+    expect(urls.filter((url) => /birthday-mail\/20/.test(url))).toHaveLength(4);
   });
 });
 

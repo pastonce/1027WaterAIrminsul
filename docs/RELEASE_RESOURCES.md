@@ -10,7 +10,7 @@
 
 后续交互优化因新增测试退出反馈重生两份字体，清理对应旧哈希（另记interactionRefinementsFontRefresh），前轮369个发布素材 / 101,608,089字节；没有重新加入此前移出的校准板或旧技能图集。
 
-本轮加载修复新增B/E与G两张正确透明角色poster共99,270B，并更新当前两份字体，清理旧生成子集（loadingRecoveryFontRefresh）。当前371素材 / 101,707,531B；原源图 / TTF / 音频未改，startup共363文件。
+本轮加载修复新增B/E与G两张正确透明角色poster共99,270B，并更新当前两份字体，清理旧生成子集（loadingRecoveryFontRefresh）。前轮371素材 / 101,707,531B；原源图 / TTF / 音频未改，startup共363文件。
 
 ## 保留理由
 
@@ -32,3 +32,5 @@ npm run release:audit
 `assets:hiding-layers`现在把运行时分带写入public、校准辅助图写入本地asserts；`assets:hiding-calibration`从本地清单读取辅助图并传入离线浏览器，不再通过公开URL加载。原43条校准 / 发布记录保持可核对。
 
 其他构建物、测试截图、缓存和临时打包由.gitignore排除；本轮不清空node_modules或本地验证历史，不把忽略规则当成删除操作。所有保留在public中的文件正常上传，Functions与服务端源码仍是发布必需。
+
+2026-10-27补齐四年生日贺图后，当前373发布素材 / 102,115,319B；启动365文件 / 102,086,980B。2026两档407,164B，完整来信13份1,859,492B，当前字体210,720 / 3,312,000B。仅移除被替代的生成字体与26图制作中间副本，原稿保留，见cleanup.manifest.json。
