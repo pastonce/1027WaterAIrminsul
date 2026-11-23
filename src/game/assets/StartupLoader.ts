@@ -1,6 +1,7 @@
 import { assetCache, pruneAssetCaches } from './cache';
 import { boundedAsset, bufferedAsset, CACHE_IO_MS, readCachedAsset, validAssetResponse } from './requests';
 import type { StartupPlan } from './startupPlan';
+import { siteUrl } from '../../siteUrl';
 
 export const STARTUP_RULES = { concurrency: 3, fileIdleMs: 30000, attempts: 3, retryMs: 800, runtimeTimeoutMs: 30000 } as const;
 export interface StartupProgress { progress: number; completed: number; total: number; failed: number; done: boolean; blocked?: boolean }
@@ -26,9 +27,10 @@ export class StartupLoader {
     const workers = Array.from({ length: STARTUP_RULES.concurrency }, async () => {
       while (cursor < plan.files.length && !this.cancelled && !blocked) {
         const file = plan.files[cursor++];
+        const url = siteUrl(file.url);
         let succeeded = false;
         if (cache) {
-          try { succeeded = Boolean(await readCachedAsset(cache, file.url, file.bytes, this.controller.signal)); }
+          try { succeeded = Boolean(await readCachedAsset(cache, url, file.bytes, this.controller.signal)); }
           catch { cache = null; }
         }
         for (let attempt = 0; !succeeded && attempt < STARTUP_RULES.attempts && !this.cancelled; attempt++) {
@@ -46,7 +48,7 @@ export class StartupLoader {
           let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
           try {
             touch();
-            const response = await boundedAsset(this.download(file.url, { signal: request.signal, cache: attempt ? 'reload' : /[-.][a-f\d]{8,}\./i.test(file.url) ? 'force-cache' : 'reload' }), STARTUP_RULES.fileIdleMs, request.signal);
+            const response = await boundedAsset(this.download(url, { signal: request.signal, cache: attempt ? 'reload' : /[-.][a-f\d]{8,}\./i.test(file.url) ? 'force-cache' : 'reload' }), STARTUP_RULES.fileIdleMs, request.signal);
             if (!validAssetResponse(response)) throw new Error('startup-download');
             let body: Uint8Array<ArrayBuffer>;
             if (response.body) {
@@ -69,7 +71,7 @@ export class StartupLoader {
               if (body.byteLength !== file.bytes) throw new Error('startup-size');
             }
             if (cache) {
-              try { await boundedAsset(cache.put(file.url, bufferedAsset(body, response)), CACHE_IO_MS, request.signal); }
+              try { await boundedAsset(cache.put(url, bufferedAsset(body, response)), CACHE_IO_MS, request.signal); }
               catch { cache = null; }
             }
             succeeded = true;

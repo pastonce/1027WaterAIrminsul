@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import type { ReactNode } from 'react';
 import source from '../content/notice.md?raw';
 import { parseNotice, noticeLinkAllowed } from '../game/notice/markdown';
@@ -11,7 +12,7 @@ function noticeText(text: string): ReactNode[] {
   let cursor = 0;
   for (const match of text.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
     nodes.push(text.slice(cursor, match.index));
-    nodes.push(noticeLinkAllowed(match[2]) ? <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer">{match[1]}</a> : match[1]);
+    nodes.push(noticeLinkAllowed(match[2]) ? <a key={match.index} href={siteUrl(match[2])} target="_blank" rel="noopener noreferrer">{match[1]}</a> : match[1]);
     cursor = match.index + match[0].length;
   }
   nodes.push(text.slice(cursor));

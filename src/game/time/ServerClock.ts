@@ -1,4 +1,5 @@
 import { SCHEDULE } from '../../data/schedule';
+import { siteUrl } from '../../siteUrl';
 import { TIME_PROTOCOL_VERSION, TIME_SYNC_RULES } from './protocol';
 import type { ServerTimeMessage } from './protocol';
 import type { Clock } from './TimeGateService';
@@ -86,7 +87,7 @@ export class ServerClock implements Clock {
     const timeout = setTimeout(() => controller.abort(), TIME_SYNC_RULES.timeoutMs);
     try {
       const requestId = this.requestId();
-      const response = this.fetchTime(`${TIME_SYNC_RULES.endpoint}?requestId=${encodeURIComponent(requestId)}`, {
+      const response = this.fetchTime(`${siteUrl(TIME_SYNC_RULES.endpoint)}?requestId=${encodeURIComponent(requestId)}`, {
         method: 'GET', cache: 'no-store', credentials: 'same-origin',
         headers: { Accept: 'application/json' }, signal: controller.signal,
       }).then(async (result) => {

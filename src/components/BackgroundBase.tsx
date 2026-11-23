@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import type { BackgroundAsset } from '../data/assets';
 import { useViewportSize } from '../hooks/useViewportSize';
 import { backgroundBasePlane } from '../game/backgrounds/projection';
@@ -8,7 +9,7 @@ export function BackgroundBase({ asset, intro = false }: { asset: BackgroundAsse
   const plane = backgroundBasePlane(asset, viewport.width, viewport.height, 0, BACKGROUND_RULES.overscan);
   const failed = (event: React.SyntheticEvent<HTMLImageElement>) => { event.currentTarget.hidden = true; };
   return <>
-    <img className={`background-base ${intro ? 'intro-landscape' : ''}`} src={asset.base.src} alt="" draggable="false" onError={failed}/>
-    {plane && <img className="background-base-plane" src={asset.base.src} alt="" draggable="false" style={plane} onError={failed}/>}
+    <img className={`background-base ${intro ? 'intro-landscape' : ''}`} src={siteUrl(asset.base.src)} alt="" draggable="false" onError={failed}/>
+    {plane && <img className="background-base-plane" src={siteUrl(asset.base.src)} alt="" draggable="false" style={plane} onError={failed}/>}
   </>;
 }

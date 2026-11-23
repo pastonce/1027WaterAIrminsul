@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import type { DialogueTheme } from '../game/dialogue/dialogueTheme';
 import { DENDRO_ICON } from '../data/assets';
 
@@ -8,7 +9,7 @@ export function DialogueOrnament({ theme }: { theme: DialogueTheme }) {
       {theme === 'forest' && <><path d="M16 25V12m0 8-7-6m7 3 6-6M7 14c-1-5 3-8 6-7 0 5-2 8-6 7Zm12-1c-1-5 2-8 6-7 0 4-2 7-6 7ZM10 24q6-3 12 0"/><path d="M16 15c-4-4-4-7 0-10 4 3 4 6 0 10Z"/></>}
       {theme === 'story' && <><path d="m16 5 3.3 7.7L27 16l-7.7 3.3L16 27l-3.3-7.7L5 16l7.7-3.3Z"/><path d="m16 11 5 5-5 5-5-5Zm-8-3 2 2m12 12 2 2M8 24l2-2M22 10l2-2"/></>}
       {theme === 'mechanism' && <><path d="m16 7 8 4.5v9L16 25l-8-4.5v-9Zm-8 4.5 8 5 8-5m-8 5V25M11 5H5v6m16 16h6v-6"/><circle cx="16" cy="16.5" r="2"/><path d="M12 4h2m6 24h-2"/></>}
-      {theme === 'nahida' && <image className="bubble-dendro" href={DENDRO_ICON.src} x="6" y="6" width="20" height="20"/>}
+      {theme === 'nahida' && <image className="bubble-dendro" href={siteUrl(DENDRO_ICON.src)} x="6" y="6" width="20" height="20"/>}
       {theme === 'celebration' && <><path className="seal-petal-mint" d="m9 12-6-2 1 6-1 6 6-2m14-8 6-2-1 6 1 6-6-2"/><circle className="seal-petal-rose" cx="16" cy="16" r="8"/><path className="seal-petal-gold" d="M11 10c9-3 15 9 7 13M9 14c7-5 15 5 10 8"/><path d="m16 3 1 3m-7 19-1 3m15-4 2 2"/></>}
     </svg>
     <svg className="bubble-flourish" viewBox="0 0 108 48" fill="none" stroke="currentColor" strokeWidth=".85" strokeLinecap="round" strokeLinejoin="round" focusable="false">

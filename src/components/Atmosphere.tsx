@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useRef } from 'react';
 import type { SecretEffect, StageConfig } from '../types/game';
 import { ASSETS, getStageBackground } from '../data/assets';
@@ -64,7 +65,7 @@ export function Atmosphere({ stage, offset, reduced, effects, night, paused = fa
   }, [reduced, paused]);
 
   return <div className={`atmosphere theme-${stage.theme} ${moon ? 'is-moonlit' : ''} ${background ? `has-spine-background scenery-${background.id}` : ''}`} aria-hidden="true">
-    {!background && <img ref={landscape} className={`landscape-image ${stage.id === 'G' ? 'reality-landscape' : ''}`} src={stage.id === 'G' ? ASSETS.realityBackground.src : ASSETS.dreamBackground.src} alt="" onLoad={() => onBackgroundReady?.(null)} onError={(event) => { event.currentTarget.hidden = true; onBackgroundReady?.(null); }} style={stage.id === 'G' ? undefined : { transform: `translateY(${Math.min(offset * 0.045, 120)}px) scale(1.16)` }}/>}
+    {!background && <img ref={landscape} className={`landscape-image ${stage.id === 'G' ? 'reality-landscape' : ''}`} src={siteUrl(stage.id === 'G' ? ASSETS.realityBackground.src : ASSETS.dreamBackground.src)} alt="" onLoad={() => onBackgroundReady?.(null)} onError={(event) => { event.currentTarget.hidden = true; onBackgroundReady?.(null); }} style={stage.id === 'G' ? undefined : { transform: `translateY(${Math.min(offset * 0.045, 120)}px) scale(1.16)` }}/>}
     {stage.id !== 'G' && <SpineBackground asset={background} offset={offset} paused={paused} reduced={reduced} onFrame={onBackgroundFrame} onReady={onBackgroundReady} inhabitants={inhabitants}/>}
     <div className="sun-halo" style={{ transform: `translateY(${offset * 0.07}px)` }}/>
     <div className="light-rays"/>

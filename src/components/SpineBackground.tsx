@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { BackgroundAsset } from '../data/assets';
 import { BackgroundDirector } from '../game/backgrounds/BackgroundDirector';
@@ -19,7 +20,8 @@ export function SpineBackground({ asset, offset, paused, reduced, onFrame, onRea
   const [posterReady, setPosterReady] = useState<string | null>(null);
   const [stats, setStats] = useState<BackgroundStats>({ layers: 0, textureBytes: 0 });
   const [height, setHeight] = useState(0);
-  const poster = asset?.poster ?? asset?.base.src;
+  const poster = asset && siteUrl(asset.poster ?? asset.base.src);
+  const baseSource = asset && siteUrl(asset.base.src);
   const entranceBackdrop = asset?.baseEntrance && !reduced && status !== 'fallback';
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export function SpineBackground({ asset, offset, paused, reduced, onFrame, onRea
   return <div ref={host} className={`background-scenery ${asset ? 'is-authored' : 'is-prototype'}`} data-renderer={reduced ? 'static' : status} data-paused={paused || reduced} data-layer-count={stats.layers} data-texture-bytes={stats.textureBytes}>
     <div className="background-parallax" style={{ transform: `translateY(${reduced ? 0 : backgroundParallax(offset, height)}px) scale(${BACKGROUND_RULES.overscan})` }}>
       {entranceBackdrop && <BackgroundBase asset={asset}/>}
-      {poster && <img key={poster} className="background-poster" src={poster} alt="" draggable="false" style={{ opacity: entranceBackdrop ? 0 : 1 }} onLoad={() => setPosterReady(poster)} onError={(event) => { if (asset && event.currentTarget.src !== new URL(asset.base.src, window.location.href).href) event.currentTarget.src = asset.base.src; else { event.currentTarget.hidden = true; setPosterReady(poster); } }}/>}
+      {poster && <img key={poster} className="background-poster" src={poster} alt="" draggable="false" style={{ opacity: entranceBackdrop ? 0 : 1 }} onLoad={() => setPosterReady(poster)} onError={(event) => { if (baseSource && event.currentTarget.src !== new URL(baseSource, window.location.href).href) event.currentTarget.src = baseSource; else { event.currentTarget.hidden = true; setPosterReady(poster); } }}/>}
       <canvas className="background-canvas" ref={canvas} style={{ transition: asset?.baseEntrance ? 'none' : undefined }}/>
       <canvas className="background-previous" ref={previous} hidden/>
     </div>

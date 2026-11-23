@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { getLoadingArt, loadingArtSource, LOADING_COLORS, LOADING_ICON, LOADING_ICON_CENTERS, STAGE_LOADING_RULES } from '../data/stageLoading';
 import type { StageLoading } from '../types/game';
@@ -34,10 +35,10 @@ export function StageLoadingScreen({ loading, paused, reduced, portrait, onArtRe
     return () => { queueMicrotask(() => { if (previous instanceof HTMLElement && previous.isConnected && !previous.closest('[inert]')) previous.focus({ preventScroll: true }); }); };
   }, [portrait]);
   return <div ref={panel} className="stage-loading-screen" data-testid="stage-loading" data-phase={loading.phase} data-paused={paused} data-reduced={reduced} data-art={loading.to} tabIndex={-1} role="status" aria-label="梦境正在展开" aria-busy="true">
-    {art && !failedArt && <div className="stage-loading-artwork"><img className="stage-loading-art" data-illustration={artwork?.id} src={art} alt="" decoding="async" fetchPriority="high" onLoad={(event) => { void event.currentTarget.decode().catch(() => {}).then(report); }} onError={() => { setFailedArt(true); report(); }}/></div>}
+    {art && !failedArt && <div className="stage-loading-artwork"><img className="stage-loading-art" data-illustration={artwork?.id} src={siteUrl(art)} alt="" decoding="async" fetchPriority="high" onLoad={(event) => { void event.currentTarget.decode().catch(() => {}).then(report); }} onError={() => { setFailedArt(true); report(); }}/></div>}
     <svg className="element-loading-bar" viewBox="0 0 1024 128" data-progress={loading.progress.toFixed(4)} role="presentation" aria-hidden="true">
       <defs>
-        <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="128" style={{ maskType: 'luminance' }}>{failedIcon ? LOADING_ICON_CENTERS.map((center) => <circle key={center} cx={center} cy="64" r="20" fill="#fff"/>) : <image href={LOADING_ICON} width="1024" height="128" onError={() => setFailedIcon(true)}/>}</mask>
+        <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="128" style={{ maskType: 'luminance' }}>{failedIcon ? LOADING_ICON_CENTERS.map((center) => <circle key={center} cx={center} cy="64" r="20" fill="#fff"/>) : <image href={siteUrl(LOADING_ICON)} width="1024" height="128" onError={() => setFailedIcon(true)}/>}</mask>
         <clipPath id={clip}><rect className="element-loading-progress" width={1024 * loading.progress} style={{ width: 1024 * loading.progress }} height="128"/></clipPath>
         <linearGradient id={gradient} gradientUnits="userSpaceOnUse" x1="0" x2="1024" y1="0" y2="0">{LOADING_COLORS.flatMap((color, index) => [<stop key={`${index}-start`} offset={`${index / 7 * 100}%`} stopColor={color}/>, <stop key={`${index}-end`} offset={`${(index + 1) / 7 * 100}%`} stopColor={color}/>])}</linearGradient>
       </defs>

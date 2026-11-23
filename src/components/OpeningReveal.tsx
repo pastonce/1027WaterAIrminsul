@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { E_SKILL_PATTERN as pattern } from '../data/assets';
@@ -78,7 +79,7 @@ export function OpeningReveal({ children, active, reduced, paused, plan, onCompl
       if (cancelled) return;
       cancelled = true; clearTimeout(timeout); setMode(next);
     };
-    image.src = pattern.texture;
+    image.src = siteUrl(pattern.texture);
     void image.decode().then(() => settle('playing'), () => settle('fallback'));
     return () => { cancelled = true; clearTimeout(timeout); image.src = ''; };
   }, [active, reduced]);

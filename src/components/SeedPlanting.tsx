@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import type { CSSProperties, RefObject } from 'react';
 import { SEED_ART, SEED_RULES } from '../data/seed';
@@ -17,7 +18,7 @@ export function SeedPlanting({ phase, width, height, root, scale, origin, frameR
   }, [frameRef, phase, origin, width, height]);
   useEffect(() => { if (phase === 'waiting' && !paused) button.current?.focus({ preventScroll: true }); }, [phase, paused]);
   return <div ref={frameRef} className="seed-onboarding" data-phase={phase} data-paused={paused} data-reduced={reduced} style={{ '--seed-drop': `${root + 16 * scale - height / 2}px`, '--seed-fall-duration': `${reduced ? SEED_RULES.reducedFallMs : SEED_RULES.fallMs}ms` } as CSSProperties}>
-    <div className="seed-flight"><button ref={button} className="plant-seed" disabled={phase !== 'waiting' || paused} onClick={onPlant} aria-label="种下这颗种子" data-no-drag><img src={SEED_ART.src} alt="" draggable={false}/></button>
+    <div className="seed-flight"><button ref={button} className="plant-seed" disabled={phase !== 'waiting' || paused} onClick={onPlant} aria-label="种下这颗种子" data-no-drag><img src={siteUrl(SEED_ART.src)} alt="" draggable={false}/></button>
       {phase === 'waiting' && <InteractionCue className="seed-click-hint" label="点击种下种子" paused={paused} reduced={reduced}/>}
     </div>
   </div>;

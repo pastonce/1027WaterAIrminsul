@@ -1,14 +1,15 @@
 import { assetCache } from '../assets/cache';
+import { siteUrl } from '../../siteUrl';
 
 export interface MusicSource { src: string; release(): void }
 
 export async function cachedMusicSource(src: string, openCache = assetCache, objects = URL): Promise<MusicSource> {
-  const direct = { src, release: () => {} };
+  const direct = { src: siteUrl(src), release: () => {} };
   let expired = false;
   let timeout: ReturnType<typeof setTimeout> | undefined;
   const cached = async () => {
     try {
-      const response = await (await openCache())?.match(src);
+      const response = await (await openCache())?.match(direct.src);
       if (expired || !response?.ok || response.headers.get('Content-Type')?.includes('text/html') || typeof objects.createObjectURL !== 'function') return direct;
       const blob = await response.blob();
       if (expired || !blob.size || blob.size > 8 * 1024 * 1024) return direct;

@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useRef, useState } from 'react';
 import { ASSETS, CHARACTER_ASSETS } from '../data/assets';
 import type { CharacterVariant } from '../data/assets';
@@ -30,7 +31,7 @@ function CharacterPresentation({ action = 'idle', className = '', variant, pause
   useEffect(() => { adapter.current?.setPaused(paused); }, [paused, variant, reduced, placeholder]);
   return <div className={`nahida-avatar ${className}`} data-action={action} data-character={variant} data-renderer={placeholder ? 'placeholder' : status} data-paused={paused || reduced} style={{ aspectRatio: CHARACTER_ASSETS[variant].bounds.width / CHARACTER_ASSETS[variant].bounds.height }} role="img" aria-label="纳西妲">
     <div className="spine-host" ref={ref} aria-hidden="true"/>
-    {(placeholder || status !== 'ready') && (failed ? <div className="character-fallback" aria-hidden="true">✧<span>纳西妲</span></div> : <img className="character-static" src={placeholder ? ASSETS.nahida.src : CHARACTER_ASSETS[variant].poster} alt="" draggable="false" onError={() => setFailed(true)}/>)}
+    {(placeholder || status !== 'ready') && (failed ? <div className="character-fallback" aria-hidden="true">✧<span>纳西妲</span></div> : <img className="character-static" src={siteUrl(placeholder ? ASSETS.nahida.src : CHARACTER_ASSETS[variant].poster)} alt="" draggable="false" onError={() => setFailed(true)}/>)}
     <span className="character-shadow"/>
   </div>;
 }

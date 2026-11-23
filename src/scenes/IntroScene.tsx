@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { BACKGROUND_ASSETS } from '../data/assets';
 import { Icon } from '../components/Icon';
 import { BackgroundBase } from '../components/BackgroundBase';
@@ -17,7 +18,7 @@ export function IntroScene({ onEnter, onSettings, onNotice, message, unplanted =
       <h1>有一颗种子，<br/>在你的梦里醒来。</h1>
       <p className="intro-invitation">植物的生长，需要水，需要风，需要养料与阳光。<br/>梦景的天成，源于形，源于声，源于喧嚣与幽思。</p>
       <button className="primary-button enter-dream" onClick={onEnter}>沉入梦乡 <Icon name="arrow" size={20}/></button>
-      {unplanted && <div className="intro-seed" aria-hidden="true"><img src={SEED_ART.src} alt="" draggable={false}/></div>}
+      {unplanted && <div className="intro-seed" aria-hidden="true"><img src={siteUrl(SEED_ART.src)} alt="" draggable={false}/></div>}
     </div>
     {message && <div className="intro-notice" role="status">{message}</div>}
     <footer className="intro-footer"><span>10.27 · 献给纳西妲</span><span>非商业同人生贺企划 · 不代表任何官方立场</span></footer>

@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { CSSProperties } from 'react';
@@ -32,7 +33,7 @@ function BirthdayMailArt({ source, year }: { source: string | null; year: number
   }, [source]);
   return <div className="mail-art-page mail-page-content" data-image-state={source ? status : 'pending'}>
     <figure className="mail-art-frame">
-      {source && status !== 'error' ? <img ref={image} src={source} alt={`${year} 年纳西妲生日贺图`} draggable={false} decoding="async"/> : <div className="mail-art-placeholder"><Icon name="leaf" size={60}/><b>{year}</b><span>{source ? '贺图暂时未能展开' : '贺图尚未发布'}</span></div>}
+      {source && status !== 'error' ? <img ref={image} src={siteUrl(source)} alt={`${year} 年纳西妲生日贺图`} draggable={false} decoding="async"/> : <div className="mail-art-placeholder"><Icon name="leaf" size={60}/><b>{year}</b><span>{source ? '贺图暂时未能展开' : '贺图尚未发布'}</span></div>}
       <figcaption>{year}<span> · </span>花与梦的回信</figcaption>
     </figure>
   </div>;
@@ -87,7 +88,7 @@ export function BirthdayMailBook({ origin, paused, reduced, onReturning, onCompl
     '--mail-flight-x': `${viewport.width / 2 - bounds.left - bounds.width / 2}px`,
     '--mail-flight-y': `${viewport.height / 2 - bounds.top - bounds.height / 2}px`,
     '--mail-direction': frame.direction,
-    '--mail-arrow': `url("${MAIL_ASSETS.arrow}")`, '--mail-arrow-hover': `url("${MAIL_ASSETS.arrowHover}")`,
+    '--mail-arrow': `url("${siteUrl(MAIL_ASSETS.arrow)}")`, '--mail-arrow-hover': `url("${siteUrl(MAIL_ASSETS.arrowHover)}")`,
     ...Object.fromEntries(Object.entries(MAIL_TIMING).map(([phase, duration]) => [`--mail-${phase}`, `${frame.reduced ? Math.min(120, duration) : duration}ms`])),
   } as CSSProperties;
   return createPortal(<div className="mail-overlay" ref={dialog} role="dialog" aria-modal="true" aria-label="生日来信" tabIndex={-1} aria-hidden={portrait || undefined} data-testid="birthday-mail" data-phase={frame.phase} data-year={letter.year} data-paused={paused || portrait} data-reduced={frame.reduced} data-portrait={portrait} style={style}>
@@ -102,7 +103,7 @@ export function BirthdayMailBook({ origin, paused, reduced, onReturning, onCompl
       if (Math.abs(delta) > 40 && Math.abs(delta) > Math.abs(vertical) * 1.5) director.move(delta < 0 ? 1 : -1);
     }}>
       <div className="mail-book" data-paper-failed={paperFailed}>
-        {!paperFailed && <img className="mail-book-paper" src={MAIL_ASSETS.book} alt="" draggable={false} onError={() => setPaperFailed(true)}/>}
+        {!paperFailed && <img className="mail-book-paper" src={siteUrl(MAIL_ASSETS.book)} alt="" draggable={false} onError={() => setPaperFailed(true)}/>}
         <BirthdayMailArt key={source ?? letter.year} source={source} year={letter.year}/>
         <div className="mail-letter-page mail-page-content">
           <div className="mail-year-mark" aria-hidden="true"><span/>{letter.year}<span/></div>
@@ -115,7 +116,7 @@ export function BirthdayMailBook({ origin, paused, reduced, onReturning, onCompl
         </div>
         <nav className="mail-navigation" aria-label="年份切换">
           <button className="mail-arrow mail-arrow-left" onClick={() => director.move(-1)} disabled={!reading} aria-label="上一年" title="上一年"/>
-          <div className="mail-diamonds">{BIRTHDAY_LETTERS.map((item, index) => <button key={item.year} onClick={() => director.select(index)} aria-label={`${item.year} 年`} aria-current={frame.index === index ? 'page' : undefined} title={`${item.year} 年`} disabled={!reading}><img src={frame.index === index ? MAIL_ASSETS.pointActive : MAIL_ASSETS.point} alt="" draggable={false}/></button>)}</div>
+          <div className="mail-diamonds">{BIRTHDAY_LETTERS.map((item, index) => <button key={item.year} onClick={() => director.select(index)} aria-label={`${item.year} 年`} aria-current={frame.index === index ? 'page' : undefined} title={`${item.year} 年`} disabled={!reading}><img src={siteUrl(frame.index === index ? MAIL_ASSETS.pointActive : MAIL_ASSETS.point)} alt="" draggable={false}/></button>)}</div>
           <button className="mail-arrow mail-arrow-right" onClick={() => director.move(1)} disabled={!reading} aria-label="下一年" title="下一年"/>
         </nav>
       </div>

@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { preload } from 'react-dom';
 import type { CSSProperties } from 'react';
@@ -74,7 +75,7 @@ export function DialogueBubble({ speech, position, reduced, testing = false, sid
     return () => clearTimeout(timer);
   }, [speech.sequence, speech.startedAt, speech.elapsedMs, speech.phase, reduced]);
 
-  return <div ref={bubble} className={`dialogue-bubble bubble-${side} ${speech.phase === 'fading' ? 'bubble-fading' : ''}`} style={{ ...position, ...(theme === 'nahida' ? { '--bubble-texture': `url("${NAHIDA_DIALOGUE_BACKGROUND}")` } : {}) } as CSSProperties} role="status" aria-live="polite" aria-atomic="true" data-no-drag data-speaker={speech.anchor} data-theme={theme} data-segment={(speech.segment ?? 0) + 1} data-segments={speech.segments ?? 1} data-phase={speech.phase} onPointerEnter={(event) => { if (event.pointerType === 'mouse') onHover?.(speech.sequence, true); }} onPointerLeave={(event) => { if (event.pointerType === 'mouse') onHover?.(speech.sequence, false); }}>
+  return <div ref={bubble} className={`dialogue-bubble bubble-${side} ${speech.phase === 'fading' ? 'bubble-fading' : ''}`} style={{ ...position, ...(theme === 'nahida' ? { '--bubble-texture': `url("${siteUrl(NAHIDA_DIALOGUE_BACKGROUND)}")` } : {}) } as CSSProperties} role="status" aria-live="polite" aria-atomic="true" data-no-drag data-speaker={speech.anchor} data-theme={theme} data-segment={(speech.segment ?? 0) + 1} data-segments={speech.segments ?? 1} data-phase={speech.phase} onPointerEnter={(event) => { if (event.pointerType === 'mouse') onHover?.(speech.sequence, true); }} onPointerLeave={(event) => { if (event.pointerType === 'mouse') onHover?.(speech.sequence, false); }}>
     <DialogueOrnament theme={theme}/>
     {(import.meta.env.DEV || testing) && <span className="bubble-dialogue-id" aria-hidden="true">{speech.entry.id}</span>}
     <strong className="bubble-name">{speech.entry.speaker}</strong>

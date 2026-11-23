@@ -7,7 +7,7 @@
 | 文档 | 用途 |
 | --- | --- |
 | [PHASE_HANDOFF](PHASE_HANDOFF.md) | 当前规则、F/G 13:27开放、2026贺图补入、交付边界 |
-| [DEPLOYMENT](DEPLOYMENT.md) | 本地构建、GitHub筛选、校时Function与手动部署 |
+| [DEPLOYMENT](DEPLOYMENT.md) | 本地构建、Pages 校时 Function、博客子目录 Worker 与上线检查 |
 | [RELEASE_RESOURCES](RELEASE_RESOURCES.md) | 发布 / 本地源稿 / 校准资源边界、清理记录与审计 |
 | [ASSET_GUIDE](ASSET_GUIDE.md) | 各素材来源与生成入口 |
 | [NOTICE](NOTICE.md) | 手动编辑公告、署名、标语 |

@@ -1,5 +1,6 @@
 import { loadingArtSource } from '../../data/stageLoading';
 import type { LoadingArt } from '../../data/stageLoading';
+import { siteUrl } from '../../siteUrl';
 
 export class StageArtPrefetcher {
   private idle: number | null = null;
@@ -22,7 +23,7 @@ export class StageArtPrefetcher {
       this.idle = null; this.timer = null;
       if (!this.allowed()) { this.source = null; return; }
       const link = document.createElement('link');
-      link.rel = 'prefetch'; link.as = 'image'; link.type = 'image/webp'; link.href = source; link.fetchPriority = 'low';
+      link.rel = 'prefetch'; link.as = 'image'; link.type = 'image/webp'; link.href = siteUrl(source); link.fetchPriority = 'low';
       this.link = link; document.head.append(link);
     };
     if ('requestIdleCallback' in window) this.idle = window.requestIdleCallback(request, { timeout: 5000 });

@@ -1,5 +1,6 @@
 import catalog from '../../data/startupAssets.generated.json' with { type: 'json' };
 import { boundedAsset, CACHE_IO_MS, readCachedAsset } from './requests';
+import { siteUrl } from '../../siteUrl';
 
 export const ASSET_CACHE_NAME = `irminsul-assets-${catalog.revision}`;
 const files: Record<string, number> = catalog.files;
@@ -23,14 +24,16 @@ export async function pruneAssetCaches() {
 
 export async function fetchAsset(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   const path = typeof input === 'string' ? input : input instanceof URL ? input.pathname : input.url;
-  if (!files[path] || init?.method && init.method !== 'GET') return fetch(input, init);
+  const url = typeof input === 'string' ? siteUrl(input) : input;
+  if (!files[path] || init?.method && init.method !== 'GET') return fetch(url, init);
+  const cacheKey = typeof url === 'string' ? url : path;
   const check = () => { if (init?.signal?.aborted) throw new DOMException('Asset cancelled', 'AbortError'); };
   check();
   try {
     const cache = await assetCache();
-    const cached = cache ? await readCachedAsset(cache, path, files[path], init?.signal ?? undefined) : null;
+    const cached = cache ? await readCachedAsset(cache, cacheKey, files[path], init?.signal ?? undefined) : null;
     check();
     if (cached) return cached;
   } catch { check(); storage = Promise.resolve(null); }
-  return fetch(input, { cache: 'no-cache', ...init });
+  return fetch(url, { cache: 'no-cache', ...init });
 }

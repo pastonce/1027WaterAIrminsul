@@ -1,6 +1,6 @@
 # 本地构建与手动部署
 
-本项目已完成当前阶段的本地开发与清理，未代为提交、上传或发布。当前规则与后续贺图接入见 [PHASE_HANDOFF](PHASE_HANDOFF.md)，文件边界见 [RELEASE_RESOURCES](RELEASE_RESOURCES.md)。
+项目已部署至 [Cloudflare Pages](https://nahida-1027.pages.dev/)。当前游戏规则见 [PHASE_HANDOFF](PHASE_HANDOFF.md)，发布文件边界见 [RELEASE_RESOURCES](RELEASE_RESOURCES.md)。
 
 ## 本地运行
 
@@ -47,6 +47,15 @@ npm run preview
 Pages Git集成构建命令为 `npm run build`、输出为 `dist`，保留项目根目录的Functions和全部引用源码。使用Wrangler时也须从项目根目录部署；只把dist拖到控制台不会自动具备本项目Function。参考 [Pages Functions](https://developers.cloudflare.com/pages/functions/get-started/)。实际账号、项目选择和发布由负责人手动完成。
 
 生产权限只读取服务器确认时间；本轮F/G已改为 **2026-10-27 13:27:00 +08:00**，G还须完成F与梦醒。接口失败不回退本机时间，不使用静态JSON替代。Birthday和Past都是隔离的本页预览 / 测试，不修改正式时钟或存档。
+
+## 挂载到博客的 /nahida1027/
+
+1. 按现有 Pages 流程发布新版，构建命令仍为 `npm run build`，输出目录仍为 `dist`。Vite 生成相对路径的入口、样式与分块，运行时素材和校时请求从页面所在目录解析。同一份构建同时支持 Pages 根路径和博客子目录。
+2. 在现有 Worker 代码编辑器中粘贴并部署 [cloudflare-nahida1027.mjs](../server/cloudflare-nahida1027.mjs) 的全文。Worker 把 `/nahida1027` 跳转到 `/nahida1027/`，再去掉前缀，把静态资源和校时请求连同查询参数转发至 Pages。
+3. 在 Worker 的 **Settings → Domains & Routes** 设置 `博客实际主机名/nahida1027*`，例如 `blog.example.com/nahida1027*`。博客主机名的 Cloudflare DNS 记录须开启代理。末尾通配符同时覆盖无斜杠入口、带斜杠入口、资源及查询参数。Worker 会将通配符匹配到的其他同前缀路径交还博客源站。参考 [Workers Routes](https://developers.cloudflare.com/workers/configuration/routing/routes/)。
+4. 打开博客的 `/nahida1027`，确认地址变成 `/nahida1027/`。在开发者工具 Network 检查 JS、CSS 和素材请求均以 `/nahida1027/` 开头，再访问 `/nahida1027/api/time?requestId=deployment-check`，确认返回 JSON，包含同名 `requestId` 和有效服务器时间。Pages 根路径也可按下方清单复验。
+
+Pages 与博客是不同的浏览器源，存档分别保存在各自域名下。
 
 ## 配置与缓存
 

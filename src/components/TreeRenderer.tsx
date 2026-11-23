@@ -1,3 +1,4 @@
+import { siteUrl } from '../siteUrl';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { TREE_WORLD } from '../game/tree/geometry';
@@ -19,7 +20,7 @@ function ArtPart({ part, compact, interactive, onError, failed, rootBlend }: { p
   const shape = TREE_ART[part.art].outline;
   return <g transform={`matrix(${part.matrix.join(' ')})`} data-tree-part={part.id} data-tree-asset={part.asset} data-tree-art={part.art} data-tree-foliage={part.foliage} data-tree-site={part.site} data-tree-phase={part.phase} data-tree-motion={part.motion}>
     <g transform={`matrix(${TREE_ART[part.art].registration.join(' ')})`} data-root-treatment={part.id.startsWith('overlay') ? 'soft-neck' : undefined} mask={part.id.startsWith('overlay') ? `url(#${rootBlend})` : undefined} clipPath={part.id.startsWith('overlay') ? `url(#${rootBlend}-clip)` : undefined}>
-      {failed ? <path d={shape} fill="url(#irminsul-leaf)" fillRule="evenodd" pointerEvents="none"/> : <image href={treeArtSource(part.art, compact)} width="1000" height="1000" preserveAspectRatio="none" pointerEvents="none" onError={() => onError(part.art)}/>}
+      {failed ? <path d={shape} fill="url(#irminsul-leaf)" fillRule="evenodd" pointerEvents="none"/> : <image href={siteUrl(treeArtSource(part.art, compact))} width="1000" height="1000" preserveAspectRatio="none" pointerEvents="none" onError={() => onError(part.art)}/>}
       {interactive && <path className="tree-part-hit" d={shape} fill="#fff" fillOpacity="0" fillRule="evenodd" pointerEvents="visibleFill"/>}
     </g>
   </g>;
